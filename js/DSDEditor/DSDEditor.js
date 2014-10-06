@@ -163,7 +163,7 @@ function ($, jqx, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DS
     DSDEditor.prototype.createDSDGridCols = function () {
         var me = this;
         var toRet = [
-        /*{ text: mlRes['edit'], dataField: 'edit', columntype: 'button', cellsrenderer: function () { return mlRes['edit']; }, buttonclick: function (row) { me.rowClicked(row, 'edit'); } },
+        { text: mlRes['edit'], dataField: 'edit', columntype: 'button', cellsrenderer: function () { return mlRes['edit']; }, buttonclick: function (row) { me.rowClicked(row, 'edit'); } },
         { text: 'id', dataField: 'id', displayField: 'id', hidden: true },
         { text: mlRes['title'], dataField: 'MLTitle' },
         { text: mlRes['subject'], dataField: 'tmp_subject' },
@@ -171,23 +171,10 @@ function ($, jqx, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DS
         { text: mlRes['datatype'], dataField: 'dataType' },
         { text: mlRes['domain'], dataField: 'tmp_domain' },
         { text: mlRes['supplemental'], dataField: 'MLSupplemental' },
-        { text: mlRes['delete'], dataField: 'delete', columntype: 'button', cellsrenderer: function () { return mlRes['delete']; }, buttonclick: function (row) { me.rowClicked(row, 'delete'); } }*/
+        { text: mlRes['delete'], dataField: 'delete', columntype: 'button', cellsrenderer: function () { return mlRes['delete']; }, buttonclick: function (row) { me.rowClicked(row, 'delete'); } }
         //{ text: 'Link' }
         //{ text: 'Transposed' };
         //{ text: 'Virtual' };
-
-
-        {text: 'edit', dataField: 'edit', columntype: 'button', cellsrenderer: function () { return 'edit'; }, buttonclick: function (row) { me.rowClicked(row, 'edit'); } },
-        { text: 'id', dataField: 'id', displayField: 'id', hidden: true },
-        { text: 'title', dataField: 'MLTitle' },
-        { text: 'subject', dataField: 'tmp_subject' },
-        { text: 'key', dataField: 'key', columntype: 'checkbox' },
-        { text: 'datatype', dataField: 'dataType' },
-        { text: 'domain', dataField: 'tmp_domain' },
-        { text: 'supplemental', dataField: 'MLSupplemental' },
-        { text: 'delete', dataField: 'delete', columntype: 'button', cellsrenderer: function () { return 'delete'; }, buttonclick: function (row) { me.rowClicked(row, 'delete'); } }
-
-
         ];
 
         return toRet;
