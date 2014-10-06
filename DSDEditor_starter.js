@@ -1,10 +1,13 @@
-﻿// Place third party dependencies in the lib folder
+﻿var locale = localStorage.getItem('locale' || 'en-us');
+// Place third party dependencies in the lib folder
 requirejs.config({
+    config: { i18n: { locale: locale} },
     "baseUrl": "lib",
     "paths": {
         config: "../config",
         js: "../js",
-        templates: "../templates"
+        templates: "../templates",
+        multiLang: "../multiLang"
     }
 });
 
@@ -20,40 +23,20 @@ require([
 
     function DSDEditor_starter() {
        DSDEditorWr = new DSDEditorWr();
-        DSDEditorWr.render($('#mainContainer'));
+       DSDEditorWr.render($('#mainContainer'));
 
+       $('#btnEN').click(function () { setLang('en'); });
+       $('#btnFR').click(function () { setLang('fr'); });
     }
+
+    /*Multilang test*/
+    function setLang(lang) {
+        var loc = localStorage.getItem('locale');
+        if (loc && loc.toUpperCase() == lang)
+            return;
+        localStorage.setItem('locale', lang.toLowerCase());
+        location.reload();
+    }
+    /*ENd multilang test*/
+
 });
-
-
-/*
-
-require([
-'jquery',
-'views/DSDEditor/DSDEditorWr',
-'text!root/z_tmp/testDSD.json',
-'domReady!'
-], function ($, DSDEditorWr, testDSD) {
-    startDSD_Edit();
-
-    function startDSD_Edit() {
-        DSDEditorWr = new DSDEditorWr();
-        DSDEditorWr.render($('#mainContainer'));
-
-        $('#btnLangEN').click(function (args) { setLang('EN'); });
-        $('#btnLangFR').click(function (args) { setLang('FR'); });
-
-        */
-        /*
-        var tM = {};
-        tM.meta = JSON.parse(testDSD);
-        tM.data = {};
-        */
-/*
-        //tM.meta.dsd.columns[0].title = null;
-        //DSDEditor.setColumns(tM.meta.dsd.columns);
-
-
-
-        //DSDEditor.reset();
-    }*/

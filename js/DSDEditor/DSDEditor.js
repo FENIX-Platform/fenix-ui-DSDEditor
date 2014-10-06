@@ -1,12 +1,13 @@
 ﻿define([
 'jquery',
  'jqxall',
+ 'i18n!multiLang/DSDEditor/nls/ML_DSDEdit',
  'js/DSDEditor/helpers/ColumnIDGenerator',
   'js/DSDEditor/simpleEditors/ColumnEditor',
   'js/DSDEditor/helpers/DSDColumnValidator',
   'text!templates/DSDEditor/DSDEdit.htm'
   ],
-function ($, jqx, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DSDEditHTML) {
+function ($, jqx, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DSDEditHTML) {
     var DSDEditor = function () {
         this.widgetName = "DSDEditor";
         this.$container;
@@ -368,11 +369,11 @@ function ($, jqx, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DSDEditHT
     }
 
     DSDEditor.prototype.doML = function () {
-        /*this.$container.find('#DSDEdit_btnAddCol').attr('value', mlRes.add);
-        this.$container.find('#btnColsEditDone').attr('value', mlRes.done);
+        this.$container.find('#DSDEdit_btnAddCol').html(mlRes.add);
+        this.$container.find('#btnColsEditDone').html(mlRes.done);
 
-        $('#windowColEdit').find('#bntColEditOk').attr('value', mlRes.ok);
-        $('#windowColEdit').find('#bntColEditCanc').attr('value', mlRes.cancel);*/
+        this.$divColEdit.find('#bntColEditOk').html(mlRes.ok);
+        this.$divColEdit.find('#bntColEditCanc').html(mlRes.cancel);
     }
     //END Multilang
 
