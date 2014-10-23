@@ -1,0 +1,12 @@
+/*  FENIX COMMONS */
+
+body{
+  color: $fenix-dark-blue;
+  font: $standard-text;
+}
+
+/* Reset Jqwidget content font */
+
+.jqx-widget, .jqx-widget-content, .jqx-fill-state-normal{
+  font: $standard-text;
+}
