@@ -1,19 +1,11 @@
-/* Fenix UI  DSD Editor  CSS */
+/* Fenix UI  DSD Editor  CSS
+PUT THIS AFTER BOOTSTRAP */
 
 @import 'fx-mixins';
 @import 'fx-colors';
+@import 'typography';
+
+@import 'fx-commons';
+
 @import 'fx-grid';
 
-
-.tran-test{
-  height: 200px;
-  width: 200px;
-  background-color: red;
-  @include fx-transfor3d-me(rotateY(0deg));
-
-  @include fx-transition(all,3s, linear, 0);
-}
-
-.animazione {
-  @include fx-transfor3d-me(rotateY(155deg));
-}
