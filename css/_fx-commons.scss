@@ -33,3 +33,14 @@ h1, h2, h3{
   }
 
 }
+
+.fx-validation{
+  @include animate;
+  width: 150px;
+}
+
+.fx-red-cell{
+  background-color: orangered;
+  color: white;
+  width: 200px;
+}
