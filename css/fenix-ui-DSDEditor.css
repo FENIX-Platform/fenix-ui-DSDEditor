@@ -22,40 +22,49 @@ a {
 
 /*  FENIX COMMONS */
 body {
-  color: #4c647f;
+  color: #666666;
   font: normal normal 300 14px/normal "Roboto Condensed"; }
 
 /* Reset Jqwidget content font */
 .jqx-widget, .jqx-widget-content, .jqx-fill-state-normal {
   font: normal normal 300 14px/normal "Roboto Condensed"; }
 
+h1, h2, h3 {
+  font-family: Roboto;
+  color: #35a6dc;
+  font-weight: 100;
+  color: #0076ff; }
+
+#colEditTbl tbody td {
+  padding: 10px;
+  border: 0; }
+#colEditTbl tbody #colEditTitle > div {
+  border: 1px solid #c7c7c7 !important; }
+
 /* FENIX GRID STYLE - Versione 0.1.0 */
-.jqx-widget-fenix {
-  font-family: Roboto; }
+.jqx-grid-column-header, .jqx-grid-columngroup-header {
+  font-weight: 300; }
 
 .jqx-widget-content-fenix {
   color: #222;
   text-shadow: none;
   border-color: #c7c7c7;
-  background: #fff;
-  font-family: Roboto; }
+  background: #fff; }
 
 .jqx-widget-header-fenix, .jqx-grid-fenix .jqx-widget-header-fenix {
-  color: #fff;
   text-shadow: none;
   border-color: transparent;
-  background-color: #90aec3;
-  background-image: -moz-linear-gradient(top, #90aec3, #90aec3);
-  background-image: -ms-linear-gradient(top, #90aec3, #90aec3);
-  background-image: -o-linear-gradient(top, #90aec3, #90aec3);
-  background-image: -webkit-gradient(linear, center top, center bottom, from(#90aec3), to(#90aec3));
-  background-image: -webkit-linear-gradient(top, #90aec3, #90aec3);
-  background-image: linear-gradient(top, #90aec3, #90aec3);
-  background-image: linear-gradient(to bottom, #90aec3, #90aec3);
+  background-color: #f1edec;
+  background-image: -moz-linear-gradient(top, #f1edec, #f1edec);
+  background-image: -ms-linear-gradient(top, #f1edec, #f1edec);
+  background-image: -o-linear-gradient(top, #f1edec, #f1edec);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#f1edec), to(#f1edec));
+  background-image: -webkit-linear-gradient(top, #f1edec, #f1edec);
+  background-image: linear-gradient(top, #f1edec, #f1edec);
+  background-image: linear-gradient(to bottom, #f1edec, #f1edec);
   -moz-background-clip: padding;
   background-clip: padding-box;
-  -webkit-background-clip: padding-box;
-  font-family: Roboto; }
+  -webkit-background-clip: padding-box; }
 
 .jqx-grid-column-menubutton-fenix, .jqx-widget-fenix.jqx-grid-column-menubutton-fenix {
   border-color: transparent; }
@@ -79,8 +88,7 @@ body {
   background-image: linear-gradient(to bottom, #efefef, #efefef);
   -moz-background-clip: padding;
   background-clip: padding-box;
-  -webkit-background-clip: padding-box;
-  font-family: Roboto; }
+  -webkit-background-clip: padding-box; }
 
 .jqx-button-fenix {
   color: #222;
@@ -96,8 +104,7 @@ body {
   background-image: linear-gradient(to bottom, #efefef, #efefef);
   -moz-background-clip: padding;
   background-clip: padding-box;
-  -webkit-background-clip: padding-box;
-  font-family: Roboto; }
+  -webkit-background-clip: padding-box; }
 
 .jqx-grid-selectionarea-fenix {
   border-color: #e6e6e6;
@@ -127,14 +134,13 @@ body {
   background-image: linear-gradient(to bottom, #e8e8e8, #e8e8e8);
   -moz-background-clip: padding;
   background-clip: padding-box;
-  -webkit-background-clip: padding-box;
-  font-family: Roboto; }
+  -webkit-background-clip: padding-box; }
 
 .jqx-fill-state-pressed-fenix, .jqx-widget-fenix .jqx-grid-cell-selected-fenix {
-  color: #222;
+  color: #666666;
   text-shadow: none;
   border-color: #999;
-  background-color: #d1d1d1;
+  background-color: #f1edec;
   background-image: -moz-linear-gradient(top, #d1d1d1, #d1d1d1);
   background-image: -ms-linear-gradient(top, #d1d1d1, #d1d1d1);
   background-image: -o-linear-gradient(top, #d1d1d1, #d1d1d1);
@@ -144,8 +150,7 @@ body {
   background-image: linear-gradient(to bottom, #d1d1d1, #d1d1d1);
   -moz-background-clip: padding;
   background-clip: padding-box;
-  -webkit-background-clip: padding-box;
-  font-family: Roboto; }
+  -webkit-background-clip: padding-box; }
 
 .jqx-switchbutton-label-on-fenix {
   color: #222;
@@ -418,11 +423,14 @@ body {
   border-color: #111;
   background-color: white; }
 
-.jqx-widget-fenix .jqx-grid-cell-fenix, .jqx-listitem-state-normal-fenix, .jqx-menu-item-normal-fenix, .jqx-tree-item-normal-fenix, .jqx-calendar-cell-fenix, .jqx-grid-cell-fenix, .jqx-menu-vertical-fenix .jqx-menu-item-top-normal-fenix, .jqx-input-popup-fenix .jqx-fill-state-normal-fenix {
-  font-family: Roboto; }
+.jqx-fill-state-normal {
+  background-color: #f1edec; }
 
-.jqx-widget-fenix .jqx-grid-cell-hover-fenix, .jqx-listitem-state-hover-fenix, .jqx-menu-item-hover-fenix, .jqx-tree-item-hover-fenix, .jqx-calendar-cell-hover-fenix, .jqx-grid-cell-hover-fenix, .jqx-menu-vertical-fenix .jqx-menu-item-top-hover-fenix, .jqx-input-popup-fenix .jqx-fill-state-hover-fenix, .jqx-input-button-header-fenix, .jqx-input-popup-fenix .jqx-fill-state-pressed-fenix, .jqx-input-button-header-fenix {
-  font-family: Roboto; }
+.jqx-rc-all {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  border-radius: 0; }
 
-.jqx-widget-fenix .jqx-grid-cell-selected-fenix, .jqx-listitem-state-selected-fenix, .jqx-menu-item-selected-fenix, .jqx-tree-item-selected-fenix, .jqx-calendar-cell-selected-fenix, .jqx-grid-cell-selected-fenix, .jqx-menu-vertical-fenix .jqx-menu-item-top-selected-fenix, .jqx-grid-selectionarea-fenix {
-  font-family: Roboto; }
+.jqx-widget .jqx-grid-cell, .jqx-widget .jqx-grid-column-header, .jqx-widget .jqx-grid-group-cell {
+  border-color: #eaeaea; }

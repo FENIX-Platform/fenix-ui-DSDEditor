@@ -1,7 +1,11 @@
 /* FENIX GRID STYLE - Versione 0.1.0 */
 
 .jqx-widget-fenix {
-  font-family: Roboto
+
+}
+
+.jqx-grid-column-header, .jqx-grid-columngroup-header{
+  font-weight: 300;
 }
 
 .jqx-widget-content-fenix {
@@ -9,25 +13,22 @@
   text-shadow: none;
   border-color: #c7c7c7;
   background: #fff;
-  font-family: Roboto
 }
 
 .jqx-widget-header-fenix, .jqx-grid-fenix .jqx-widget-header-fenix {
-  color: #fff;
   text-shadow: none;
   border-color: transparent;
-  background-color: #90aec3;
-  background-image: -moz-linear-gradient(top, #90aec3, #90aec3);
-  background-image: -ms-linear-gradient(top, #90aec3, #90aec3);
-  background-image: -o-linear-gradient(top, #90aec3, #90aec3);
-  background-image: -webkit-gradient(linear, center top, center bottom, from(#90aec3), to(#90aec3));
-  background-image: -webkit-linear-gradient(top, #90aec3, #90aec3);
-  background-image: linear-gradient(top, #90aec3, #90aec3);
-  background-image: linear-gradient(to bottom, #90aec3, #90aec3);
+  background-color: #f1edec;
+  background-image: -moz-linear-gradient(top, #f1edec, #f1edec);
+  background-image: -ms-linear-gradient(top, #f1edec, #f1edec);
+  background-image: -o-linear-gradient(top, #f1edec, #f1edec);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#f1edec), to(#f1edec));
+  background-image: -webkit-linear-gradient(top, #f1edec, #f1edec);
+  background-image: linear-gradient(top, #f1edec, #f1edec);
+  background-image: linear-gradient(to bottom, #f1edec, #f1edec);
   -moz-background-clip: padding;
   background-clip: padding-box;
   -webkit-background-clip: padding-box;
-  font-family: Roboto
 }
 
 .jqx-grid-column-menubutton-fenix, .jqx-widget-fenix.jqx-grid-column-menubutton-fenix {
@@ -55,7 +56,6 @@
   -moz-background-clip: padding;
   background-clip: padding-box;
   -webkit-background-clip: padding-box;
-  font-family: Roboto
 }
 
 .jqx-button-fenix {
@@ -73,7 +73,6 @@
   -moz-background-clip: padding;
   background-clip: padding-box;
   -webkit-background-clip: padding-box;
-  font-family: Roboto
 }
 
 
@@ -110,14 +109,14 @@
   -moz-background-clip: padding;
   background-clip: padding-box;
   -webkit-background-clip: padding-box;
-  font-family: Roboto
+
 }
 
-.jqx-fill-state-pressed-fenix, .jqx-widget-fenix .jqx-grid-cell-selected-fenix {
-  color: #222;
+ .jqx-fill-state-pressed-fenix, .jqx-widget-fenix .jqx-grid-cell-selected-fenix {
+  color: #666666;
   text-shadow: none;
   border-color: #999;
-  background-color: #d1d1d1;
+  background-color: #f1edec;
   background-image: -moz-linear-gradient(top, #d1d1d1, #d1d1d1);
   background-image: -ms-linear-gradient(top, #d1d1d1, #d1d1d1);
   background-image: -o-linear-gradient(top, #d1d1d1, #d1d1d1);
@@ -128,8 +127,8 @@
   -moz-background-clip: padding;
   background-clip: padding-box;
   -webkit-background-clip: padding-box;
-  font-family: Roboto
 }
+
 
 .jqx-switchbutton-label-on-fenix {
   color: #222;
@@ -442,16 +441,27 @@
   background-color: #fff
 }
 
+.jqx-fill-state-normal{
+  background-color: #f1edec;
+}
+
+.jqx-rc-all{
+  @include fx-border-radius(0);
+}
+
+.jqx-widget .jqx-grid-cell, .jqx-widget .jqx-grid-column-header, .jqx-widget .jqx-grid-group-cell{
+  border-color: #eaeaea;
+}
 
 
 .jqx-widget-fenix .jqx-grid-cell-fenix, .jqx-listitem-state-normal-fenix, .jqx-menu-item-normal-fenix, .jqx-tree-item-normal-fenix, .jqx-calendar-cell-fenix, .jqx-grid-cell-fenix, .jqx-menu-vertical-fenix .jqx-menu-item-top-normal-fenix, .jqx-input-popup-fenix .jqx-fill-state-normal-fenix {
-  font-family: Roboto
+
 }
 
 .jqx-widget-fenix .jqx-grid-cell-hover-fenix, .jqx-listitem-state-hover-fenix, .jqx-menu-item-hover-fenix, .jqx-tree-item-hover-fenix, .jqx-calendar-cell-hover-fenix, .jqx-grid-cell-hover-fenix, .jqx-menu-vertical-fenix .jqx-menu-item-top-hover-fenix, .jqx-input-popup-fenix .jqx-fill-state-hover-fenix, .jqx-input-button-header-fenix, .jqx-input-popup-fenix .jqx-fill-state-pressed-fenix, .jqx-input-button-header-fenix {
-  font-family: Roboto
+
 }
 
 .jqx-widget-fenix .jqx-grid-cell-selected-fenix, .jqx-listitem-state-selected-fenix, .jqx-menu-item-selected-fenix, .jqx-tree-item-selected-fenix, .jqx-calendar-cell-selected-fenix, .jqx-grid-cell-selected-fenix, .jqx-menu-vertical-fenix .jqx-menu-item-top-selected-fenix, .jqx-grid-selectionarea-fenix {
-  font-family: Roboto
+
 }
