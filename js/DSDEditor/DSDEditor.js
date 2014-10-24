@@ -72,6 +72,7 @@ function ($, jqx, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DS
 
         this.$DSDGrid.jqxGrid({
             source: this.dataAdapter,
+            theme: 'fenix',
             editable: false,
             autorowheight: true,
             autoheight: true,
