@@ -4,6 +4,9 @@
 'text!config/DSDEditor/Subjects.json',
 'text!config/DSDEditor/Datatypes.json',
 'text!config/DSDEditor/Codelists.json'
+
+
+        
 ],
 function ($, DSDEditor, subjects, dataTypes, codelists) {
     var DSDEditorWr = function () {

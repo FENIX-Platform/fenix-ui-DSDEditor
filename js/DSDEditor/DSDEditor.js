@@ -30,10 +30,11 @@ function ($, jqx, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DS
         this.$divDSDGrid = this.$container.find('#divDSDGrid');
         this.$divColEdit = this.$container.find('#divColEdit');
 
+
         this.colEditor = new ColumnEditor();
         this.$container.find('#divColEdit').show();
         this.colEditor.render(this.$container.find('#cntColEdit'));
-        this.$container.find('#divColEdit').hide();
+        //this.$container.find('#divColEdit').hide();
 
         var me = this;
         this.$container.find('#bntColEditOk').click(function () {
@@ -44,7 +45,7 @@ function ($, jqx, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DS
             me.colEditor.showValidationResults(valRes);
 
             if (!valRes || valRes.length == 0) {
-                me.switchVisibility();
+                me.colEditor.reset();
                 if (newCol.id == "") {
                     //CreateID
                     me.cols.push(newCol);
@@ -60,6 +61,7 @@ function ($, jqx, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DS
             }
         });
         this.$container.find('#bntColEditCanc').click(function () { me.switchVisibility(); });
+        this.$container.find('#bntColReset').click(function () { me.colEditor.reset(); });
 
 
         this.$DSDGrid = this.$container.find('#cntDSDGrid');
@@ -70,12 +72,15 @@ function ($, jqx, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DS
 
         this.$DSDGrid.jqxGrid({
             source: this.dataAdapter,
+            theme: 'fenix',
             editable: false,
             autorowheight: true,
             autoheight: true,
 
+
             columns: this.createDSDGridCols(),
-            width: w,
+            width: '100%',
+            //height: '100%',
             rendered: function () { me.validateDSD(); }
         });
         this.$DSDGrid.on('initialized', function () {
@@ -86,6 +91,7 @@ function ($, jqx, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DS
         this.$container.find('#btnColsEditDone').click(function () { me.ColsEditDone(); });
 
         this.doML();
+//        this.$DSDGrid.jqxGrid('autoresizecolumns');
     }
 
     DSDEditor.prototype.switchVisibility = function () {
@@ -163,15 +169,15 @@ function ($, jqx, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DS
     DSDEditor.prototype.createDSDGridCols = function () {
         var me = this;
         var toRet = [
-        { text: mlRes['edit'], dataField: 'edit', columntype: 'button', cellsrenderer: function () { return mlRes['edit']; }, buttonclick: function (row) { me.rowClicked(row, 'edit'); } },
-        { text: 'id', dataField: 'id', displayField: 'id', hidden: true },
-        { text: mlRes['title'], dataField: 'MLTitle' },
-        { text: mlRes['subject'], dataField: 'tmp_subject' },
-        { text: mlRes['key'], dataField: 'key', columntype: 'checkbox' },
-        { text: mlRes['datatype'], dataField: 'dataType' },
-        { text: mlRes['domain'], dataField: 'tmp_domain' },
-        { text: mlRes['supplemental'], dataField: 'MLSupplemental' },
-        { text: mlRes['delete'], dataField: 'delete', columntype: 'button', cellsrenderer: function () { return mlRes['delete']; }, buttonclick: function (row) { me.rowClicked(row, 'delete'); } }
+        { text: mlRes['edit'], dataField: 'edit', width: '10%' , columntype: 'button', cellsrenderer: function () { return mlRes['edit']; }, buttonclick: function (row) { me.rowClicked(row, 'edit'); } },
+        { text: 'id', dataField: 'id', displayField: 'id', hidden: true  },
+        { text: mlRes['title'], dataField: 'MLTitle', width: '10%' },
+        { text: mlRes['subject'], dataField: 'tmp_subject', width: '10%' },
+        { text: mlRes['key'], dataField: 'key', columntype: 'checkbox', width: '10%' },
+        { text: mlRes['datatype'], dataField: 'dataType', width: '10%' },
+        { text: mlRes['domain'], dataField: 'tmp_domain' , width: '10%'},
+        { text: mlRes['supplemental'], dataField: 'MLSupplemental', width: '20%' },
+        { text: mlRes['delete'], dataField: 'delete', columntype: 'button', width: '20%', cellsrenderer: function () { return mlRes['delete']; }, buttonclick: function (row) { me.rowClicked(row, 'delete'); } }
         //{ text: 'Link' }
         //{ text: 'Transposed' };
         //{ text: 'Virtual' };
@@ -185,7 +191,7 @@ function ($, jqx, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DS
         if (action == 'edit') {
             var col = findColById(this.cols, colId);
             this.colEditor.setColumn(col);
-            this.switchVisibility();
+            //this.switchVisibility();
         }
         else if (action == 'delete') {
             var res = confirm("Delete");
@@ -288,7 +294,7 @@ function ($, jqx, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DS
         var newCol = {};
         newCol.id = "";
         this.colEditor.setColumn(newCol);
-        this.switchVisibility();
+        //this.switchVisibility();
     }
 
     DSDEditor.prototype.ColumnAddDeleteEnabled = function (enabled) {
@@ -359,7 +365,7 @@ function ($, jqx, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DS
         this.$container.find('#DSDEdit_btnAddCol').html(mlRes.add);
         this.$container.find('#btnColsEditDone').html(mlRes.done);
 
-        this.$divColEdit.find('#bntColEditOk').html(mlRes.ok);
+        this.$divColEdit.find('#bntColEditOk').html(mlRes.add);
         this.$divColEdit.find('#bntColEditCanc').html(mlRes.cancel);
     }
     //END Multilang
