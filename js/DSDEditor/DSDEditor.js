@@ -264,7 +264,7 @@ function ($, jqx, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DS
         changeCellBackgroundColor(tds[index], color);
     }
     function changeCellBackgroundColor(htmlCell, color) {
-        $(htmlCell).css("background-color", color);
+        $(htmlCell).addClass("fx-red-cell");
     }
     //END Validation
 

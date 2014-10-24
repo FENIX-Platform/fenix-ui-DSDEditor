@@ -41,6 +41,19 @@ h1, h2, h3 {
 #colEditTbl tbody #colEditTitle > div {
   border: 1px solid #c7c7c7 !important; }
 
+.fx-validation {
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  width: 150px; }
+
+.fx-red-cell {
+  background-color: orangered;
+  color: white;
+  width: 200px; }
+
 /* FENIX GRID STYLE - Versione 0.1.0 */
 .jqx-grid-column-header, .jqx-grid-columngroup-header {
   font-weight: 300; }

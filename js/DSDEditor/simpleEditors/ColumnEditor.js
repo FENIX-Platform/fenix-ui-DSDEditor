@@ -128,25 +128,25 @@ function ($, jqx, MLTextEditor, DomainEditor, LimitedDDL, SubjectSelector, colum
             for (var i = 0; i < valRes.length; i++) {
                 switch (valRes[i].field) {
                     case 'title':
-                        this.$container.find('#lTD_Title').css('background-color', '#f00');
+                        this.$container.find('#lTD_Title').addClass("fx-red-cell");
                         break;
                     case 'dimension':
-                        this.$container.find('#lTD_Dimension').css('background-color', '#f00');
+                        this.$container.find('#lTD_Dimension').addClass("fx-red-cell");
                         break;
                     case 'dataType':
-                        this.$container.find('#lTD_DataType').css('background-color', '#f00');
+                        this.$container.find('#lTD_DataType').addClass("fx-red-cell");
                         break;
                     case 'domain':
-                        this.$container.find('#lTD_Domain').css('background-color', '#f00');
+                        this.$container.find('#lTD_Domain').addClass("fx-red-cell");
                 }
             }
     }
 
     ColumnEditor.prototype.resetValidationResults = function () {
-        this.$container.find('#lTD_Title').css('background-color', '');
-        this.$container.find('#lTD_Dimension').css('background-color', '');
-        this.$container.find('#lTD_DataType').css('background-color', '');
-        this.$container.find('#lTD_Domain').css('background-color', '');
+        this.$container.find('#lTD_Title').removeClass("fx-red-cell");
+        this.$container.find('#lTD_Dimension').removeClass("fx-red-cell");
+        this.$container.find('#lTD_DataType').removeClass("fx-red-cell");
+        this.$container.find('#lTD_Domain').removeClass("fx-red-cell");
     }
 
     ColumnEditor.prototype.setDomain = function (dataType, domain) {
