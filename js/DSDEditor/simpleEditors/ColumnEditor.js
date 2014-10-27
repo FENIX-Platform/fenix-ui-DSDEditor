@@ -33,7 +33,7 @@ function ($, jqx, MLTextEditor, DomainEditor, LimitedDDL, SubjectSelector, colum
         this.$container = container;
         this.$container.html(columnEditorHTML);
         this.mlEditorTitle.render(this.$container.find('#colEditTitle'));
-        this.mlEditorTitle.setWidth(350);
+        this.mlEditorTitle.setWidth('100%');
 
         var $dataType = this.$container.find('#colEditDataType');
         this.dataTypeSelector.render($dataType);
@@ -44,7 +44,7 @@ function ($, jqx, MLTextEditor, DomainEditor, LimitedDDL, SubjectSelector, colum
         this.domainEditor.render(this.$container.find('#colEditDomain'));
 
         this.mlEditorSupplemental.render(this.$container.find('#colEditSupplemental'));
-        this.mlEditorSupplemental.setWidth(350);
+        this.mlEditorSupplemental.setWidth('100%');
 
         //Link here
 
