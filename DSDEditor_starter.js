@@ -8,33 +8,43 @@ requirejs.config({
         js: "../js",
         templates: "../templates",
         multiLang: "../multiLang",
-        bootstrap : "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min"
+        bootstrap: "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min"
     },
     shim: {
-    "bootstrap" : {
-        deps : ["jquery"]
-    }
+        "bootstrap": {
+            deps: ["jquery"]
+        }
     }
 });
 
 require([
-'jquery',
-'js/DSDEditor/DSDEditorWr',
+    'jquery',
+    'js/DSDEditor/DSDEditorWr',
     'bootstrap',
 //'text!templates/fileUpload/fileUpload.htm',
 //'text!config/fileUpload/fileUpload_cfg.json',
-'domReady!',
+    'domReady!'
 
-], function ($,DSDEditorWr) {
+], function ($, DSDEditorWr) {
 
     DSDEditor_starter();
 
     function DSDEditor_starter() {
-       DSDEditorWr = new DSDEditorWr();
-       DSDEditorWr.render($('#mainContainer'));
+        var $mainContainer = $('#mainContainer');
+        DSDEditorWr = new DSDEditorWr();
+        DSDEditorWr.render($mainContainer);
 
-       $('#btnEN').click(function () { setLang('en'); });
-       $('#btnFR').click(function () { setLang('fr'); });
+
+        $mainContainer.on('columnEditDone.DSDEditor.fenix', function (evt, param) {
+            console.log(JSON.stringify(DSDEditorWr.getColumns()));
+        });
+
+        $('#btnEN').click(function () {
+            setLang('en');
+        });
+        $('#btnFR').click(function () {
+            setLang('fr');
+        });
     }
 
     /*Multilang test*/
@@ -45,6 +55,7 @@ require([
         localStorage.setItem('locale', lang.toLowerCase());
         location.reload();
     }
+
     /*ENd multilang test*/
 
 });
