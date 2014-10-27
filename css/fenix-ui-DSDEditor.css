@@ -54,6 +54,21 @@ h1, h2, h3 {
   color: white;
   width: 200px; }
 
+.obj-box {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background-color: #FFFFFF;
+  border-color: #D8D8D8;
+  border-image: none;
+  border-radius: 3px 3px 3px 3px;
+  border-style: solid;
+  border-width: 1px 1px 2px;
+  margin: 10px 0 20px;
+  padding: 20px;
+  width: auto; }
+
 /* FENIX GRID STYLE - Versione 0.1.0 */
 .jqx-grid-column-header, .jqx-grid-columngroup-header {
   font-weight: 300; }
