@@ -158,8 +158,8 @@
                             rec[i].MLTitle = mlLabelToString(col.title);
 
                             if (col.domain) {
-                                if (col.domain.codeSystem)
-                                    rec[i].tmp_domain = col.domain.codeSystem.system + " " + col.domain.codeSystem.version;
+                                if (col.domain.codes)
+                                    rec[i].tmp_domain = col.domain.codes.idCodelist + " " + col.domain.codes.version;
                                 else if (col.domain.period)
                                     rec[i].tmp_domain = periodToString(col.domain.period);
                             } else

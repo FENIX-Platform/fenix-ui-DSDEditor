@@ -128,8 +128,15 @@ define([
             toRet.key = $('#colEditKey').is(':checked');
             toRet.dataType = this.dataTypeSelector.getSelectedValue();
             toRet.domain = this.domainEditor.getDomain();
-            toRet.subject = this.subjectSelector.getSelectedSubject().val;
+
+            if (this.subjectSelector.getSelectedSubject())
+                toRet.subject = this.subjectSelector.getSelectedSubject().val;
+            else
+                toRet.subject = null;
+
             toRet.supplemental = this.mlEditorSupplemental.getLabels();
+            if ($.isEmptyObject(toRet.supplemental))
+                toRet.supplemental = null;
 
             //Link here
             return toRet;
