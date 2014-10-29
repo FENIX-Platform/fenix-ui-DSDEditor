@@ -42,58 +42,58 @@ overflow: hidden;
   margin-bottom: 35px;
 }
 
-//
-//.fx-gray-leftBorder{
-//  background-color: $fenix-dark-bg;
-//  color: white !important;
-//
-//  *{
-//    color: white !important;
-//    background-color: transparent !important;
-//    border-color: white !important;
-//    background: transparent;
-//  }
-//
-//  .jqx-widget-header-fenix, .jqx-grid-fenix .jqx-widget-header-fenix{
-//    color: white !important;
-//    background-color: transparent !important;
-//    border-color: white !important;
-//    background: transparent;
-//  }
-//
-//  *:hover{
-//    color: white !important;
-//    background-color: transparent !important;
-//    border-color: white !important;
-//    background: transparent;
-//  }
-//
-//  .jqx-widget-header-fenix:hover, .jqx-grid-fenix:hover .jqx-widget-header-fenix:hover{
-//    color: white !important;
-//    background-color: transparent !important;
-//    border-color: white !important;
-//    background: transparent;
-//  }
-//
-//  .jqx-fill-state-hover-fenix, .jqx-widget-fenix .jqx-grid-cell-hover-fenix{
-//    color: white !important;
-//    background-color: transparent !important;
-//    border-color: white !important;
-//    background: transparent;
-//  }
-//
-//
-//  .jqx-fill-state-pressed-fenix, .jqx-widget-fenix .jqx-grid-cell-selected-fenix{
-//    color: white !important;
-//    background-color: transparent !important;
-//    border-color: white !important;
-//    background: transparent;
-//  }
-//
-//  .fx-bullet-number{
-//    background-color: white !important;
-//    color: $fenix-dark-bg !important;
-//  }
-//
-//
-//}
+
+.fx-gray-leftBorder{
+  background-color: $fenix-dark-bg;
+  color: white !important;
+
+  *{
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent;
+  }
+
+  .jqx-widget-header-fenix, .jqx-grid-fenix .jqx-widget-header-fenix{
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent;
+  }
+
+  *:hover{
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent;
+  }
+
+  .jqx-widget-header-fenix:hover, .jqx-grid-fenix:hover .jqx-widget-header-fenix:hover{
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent;
+  }
+
+  .jqx-fill-state-hover-fenix, .jqx-widget-fenix .jqx-grid-cell-hover-fenix{
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent;
+  }
+
+
+  .jqx-fill-state-pressed-fenix, .jqx-widget-fenix .jqx-grid-cell-selected-fenix{
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent;
+  }
+
+  .fx-bullet-number{
+    background-color: white !important;
+    color: $fenix-dark-bg !important;
+  }
+
+
+}
