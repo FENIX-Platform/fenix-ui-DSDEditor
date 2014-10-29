@@ -35,6 +35,9 @@ h1, h2, h3 {
   font-weight: 100;
   color: #0076ff; }
 
+h3 {
+  font-size: 20px; }
+
 #colEditTbl tbody td {
   padding: 10px;
   border: 0; }
@@ -54,7 +57,7 @@ h1, h2, h3 {
   color: white;
   width: 200px; }
 
-.obj-box {
+.obj-box, .obj-box-radius10 {
   -moz-border-bottom-colors: none;
   -moz-border-left-colors: none;
   -moz-border-right-colors: none;
@@ -71,6 +74,28 @@ h1, h2, h3 {
   margin: 10px 0 20px;
   padding: 20px;
   width: auto; }
+
+.obj-box-radius10 {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px; }
+
+.fx-bullet-number {
+  display: inline-block;
+  font-size: 15px;
+  height: 20px;
+  width: 20px;
+  font-style: normal;
+  background-color: #0076ff;
+  text-align: center;
+  padding-top: 2px;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  border-radius: 100%;
+  color: white;
+  margin-right: 10px; }
 
 /* FENIX GRID STYLE - Versione 0.1.0 */
 .jqx-grid-column-header, .jqx-grid-columngroup-header {
@@ -465,3 +490,31 @@ h1, h2, h3 {
 
 .jqx-widget .jqx-grid-cell, .jqx-widget .jqx-grid-column-header, .jqx-widget .jqx-grid-group-cell {
   border-color: #eaeaea; }
+
+/* Fenix Data Editor Component */
+body {
+  background-color: #e8eaef; }
+
+.contentcolEditTitle {
+  width: 100%; }
+
+.fx-bootstrap-equalheight-container {
+  overflow: hidden; }
+
+.fx-bootstrap-equalheight-column {
+  margin-bottom: -100%;
+  padding-bottom: 100%; }
+
+#cntDSDGrid {
+  margin-bottom: 35px; }
+
+#mainContainer {
+  padding: 0 20px; }
+  #mainContainer > .row {
+    margin: 0 -21px; }
+
+#mainContainer.obj-box, #mainContainer.obj-box-radius10 {
+  overflow: hidden; }
+
+.fx-dsdedit-addcolumn-btn {
+  margin-bottom: 35px; }

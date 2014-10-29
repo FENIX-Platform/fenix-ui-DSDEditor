@@ -18,6 +18,10 @@ h1, h2, h3{
   color: $fx-cool-blue;
 }
 
+h3{
+  font-size: 20px;
+}
+
 #colEditTbl{
   tbody{
     td{
@@ -59,4 +63,23 @@ h1, h2, h3{
   margin: 10px 0 20px;
   padding: 20px;
   width: auto;
+}
+
+.obj-box-radius10 {
+  @extend .obj-box;
+  @include fx-border-radius(10px);
+}
+
+.fx-bullet-number{
+  display: inline-block;
+  font-size: 15px;
+  height: 20px;
+  width: 20px;
+  font-style: normal;
+  background-color: $fx-cool-blue;
+  text-align: center;
+  padding-top: 2px;
+  @include fx-border-radius(100%);
+  color: white;
+  margin-right: 10px;
 }
