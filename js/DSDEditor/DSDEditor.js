@@ -157,9 +157,10 @@
                         if (col) {
                             rec[i].MLTitle = mlLabelToString(col.title);
 
+                            //TODO: Handle multiple codes elements
                             if (col.domain) {
-                                if (col.domain.codes)
-                                    rec[i].tmp_domain = col.domain.codes.idCodelist + " " + col.domain.codes.version;
+                                if (col.domain.codes && col.domain.codes[0])
+                                    rec[i].tmp_domain = col.domain.codes[0].idCodelist + " " + col.domain.codes[0].version;
                                 else if (col.domain.period)
                                     rec[i].tmp_domain = periodToString(col.domain.period);
                             } else

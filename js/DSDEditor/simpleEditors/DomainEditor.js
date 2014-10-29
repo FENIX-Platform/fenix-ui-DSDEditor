@@ -93,7 +93,9 @@
         DomainEditor.prototype.setDomain = function (domain) {
             switch (this.mode) {
                 case MODES.code:
-                    this.codelistSelector.setDomain(domain.codes);
+                    //Handles a one element array, TODO: add multiple domains!
+                    if (domain.codes && domain.codes[0])
+                    this.codelistSelector.setDomain(domain.codes[0]);
                     break;
                 case MODES.year:
                 case MODES.month:
@@ -106,8 +108,9 @@
         DomainEditor.prototype.getDomain = function () {
             switch (this.mode) {
                 case MODES.code:
+                    //Handles a one element array, TODO: add multiple domains!
                     if (this.codelistSelector.getDomain())
-                        return  {codes: this.codelistSelector.getDomain().codes};
+                        return  {codes:[ this.codelistSelector.getDomain().codes]};
                     else return null;
                     break;
                 case MODES.year:

@@ -52,13 +52,16 @@ function () {
         if (!toVal.dataType)
             return;
         if (toVal.dataType == 'code') {
+            //TODO:Handle multiple code elements
             if (!toVal.domain)
                 return { field: 'domain', level: 'error', message: 'empty' };
             if (!toVal.domain.codes)
                 return { field: 'domain', level: 'error', message: 'empty' };
-            if (!toVal.domain.codes.idCodelist)
+            if (!toVal.domain.codes[0])
+                return { field: 'domain', level: 'error', message: 'empty' };
+            if (!toVal.domain.codes[0].idCodelist)
                 return { field: 'domain', level: 'error', message: 'empty codelist idCodelist' };
-            if (!toVal.domain.codes.version)
+            if (!toVal.domain.codes[0].version)
                 return { field: 'domain', level: 'error', message: 'empty codelist version' };
         }
     }
