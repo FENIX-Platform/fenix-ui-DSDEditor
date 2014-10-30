@@ -1,14 +1,26 @@
 /*  FENIX COMMONS */
 
 body{
-  color: #666666;
+  background-color: $fenix-light-bg;
   font: $standard-text;
+
+  /* Font Smoothing */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: antialiased;
+
 }
 
 /* Reset Jqwidget content font */
-
 .jqx-widget, .jqx-widget-content, .jqx-fill-state-normal{
   font: $standard-text;
+}
+
+a {
+  color: $fenix-gray-text;
+  &:hover {
+    color: $fenix-standard-blue !important;
+    @include animate;
+  }
 }
 
 h1, h2, h3{
@@ -18,35 +30,22 @@ h1, h2, h3{
   color: $fx-cool-blue;
 }
 
+h1{
+  font-size: 32px;
+}
+
 h3{
   font-size: 20px;
 }
 
-#colEditTbl{
-  tbody{
-    td{
-      padding: 10px;
-      border: 0;
-    }
-    #colEditTitle{
-      >div{
-        border: 1px solid #c7c7c7 !important;
-
-      }
-    }
-  }
-
-}
 
 .fx-validation{
   @include animate;
-  width: 150px;
 }
 
 .fx-red-cell{
   background-color: orangered;
   color: white;
-  width: 200px;
 }
 
 .obj-box {
@@ -71,14 +70,15 @@ h3{
 }
 
 .fx-bullet-number{
-  display: inline-block;
+  display: block;
+  float: left;
   font-size: 15px;
   height: 20px;
   width: 20px;
+  line-height: 20px;
+  text-align: center;
   font-style: normal;
   background-color: $fx-cool-blue;
-  text-align: center;
-  padding-top: 2px;
   @include fx-border-radius(100%);
   color: white;
   margin-right: 10px;

@@ -9,7 +9,20 @@ PUT THIS AFTER BOOTSTRAP */
 /* Animations */
 /* Fenix UI  DSD Editor  CSS - Colors */
 /* Fenix Colors */
-/* Typography */
+/* Specials */
+/* Fenix Typography */
+/*  FENIX COMMONS */
+body {
+  background-color: #e8eaef;
+  font: normal normal 300 14px/normal "Roboto Condensed";
+  /* Font Smoothing */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: antialiased; }
+
+/* Reset Jqwidget content font */
+.jqx-widget, .jqx-widget-content, .jqx-fill-state-normal {
+  font: normal normal 300 14px/normal "Roboto Condensed"; }
+
 a {
   color: #666666; }
   a:hover {
@@ -20,42 +33,28 @@ a {
     -o-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s; }
 
-/*  FENIX COMMONS */
-body {
-  color: #666666;
-  font: normal normal 300 14px/normal "Roboto Condensed"; }
-
-/* Reset Jqwidget content font */
-.jqx-widget, .jqx-widget-content, .jqx-fill-state-normal {
-  font: normal normal 300 14px/normal "Roboto Condensed"; }
-
 h1, h2, h3 {
   font-family: Roboto;
   color: #35a6dc;
   font-weight: 100;
   color: #0076ff; }
 
+h1 {
+  font-size: 32px; }
+
 h3 {
   font-size: 20px; }
-
-#colEditTbl tbody td {
-  padding: 10px;
-  border: 0; }
-#colEditTbl tbody #colEditTitle > div {
-  border: 1px solid #c7c7c7 !important; }
 
 .fx-validation {
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -ms-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
-  width: 150px; }
+  transition: all 0.3s ease 0s; }
 
 .fx-red-cell {
   background-color: orangered;
-  color: white;
-  width: 200px; }
+  color: white; }
 
 .obj-box, .obj-box-radius10 {
   -moz-border-bottom-colors: none;
@@ -82,14 +81,15 @@ h3 {
   border-radius: 10px; }
 
 .fx-bullet-number {
-  display: inline-block;
+  display: block;
+  float: left;
   font-size: 15px;
   height: 20px;
   width: 20px;
+  line-height: 20px;
+  text-align: center;
   font-style: normal;
   background-color: #0076ff;
-  text-align: center;
-  padding-top: 2px;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
   -ms-border-radius: 100%;
@@ -161,6 +161,10 @@ h3 {
   -moz-background-clip: padding;
   background-clip: padding-box;
   -webkit-background-clip: padding-box; }
+
+#contentcntDSDGrid .jqx-grid-cell {
+  margin: 0;
+  overflow: hidden; }
 
 .jqx-grid-selectionarea-fenix {
   border-color: #e6e6e6;
@@ -492,8 +496,11 @@ h3 {
   border-color: #eaeaea; }
 
 /* Fenix Data Editor Component */
-body {
-  background-color: #e8eaef; }
+#colEditTbl tbody td {
+  padding: 10px;
+  border: 0; }
+#colEditTbl tbody #colEditTitle > div {
+  border: 1px solid #c7c7c7 !important; }
 
 .contentcolEditTitle {
   width: 100%; }
@@ -516,42 +523,43 @@ body {
 #mainContainer.obj-box, #mainContainer.obj-box-radius10 {
   overflow: hidden; }
 
-.fx-dsdedit-addcolumn-btn {
-  margin-bottom: 35px; }
+.fx-dsdedit-addcolumn-btn button {
+  margin-bottom: 35px;
+  margin-right: 8px; }
 
-.fx-gray-leftBorder {
+.fx-dark-bg {
   background-color: #666666;
   color: white !important; }
-  .fx-gray-leftBorder * {
+  .fx-dark-bg * {
     color: white !important;
     background-color: transparent !important;
     border-color: white !important;
     background: transparent; }
-  .fx-gray-leftBorder .jqx-widget-header-fenix, .fx-gray-leftBorder .jqx-grid-fenix .jqx-widget-header-fenix {
+  .fx-dark-bg .jqx-widget-header-fenix, .fx-dark-bg .jqx-grid-fenix .jqx-widget-header-fenix {
     color: white !important;
     background-color: transparent !important;
     border-color: white !important;
     background: transparent; }
-  .fx-gray-leftBorder *:hover {
+  .fx-dark-bg *:hover {
     color: white !important;
     background-color: transparent !important;
     border-color: white !important;
     background: transparent; }
-  .fx-gray-leftBorder .jqx-widget-header-fenix:hover, .fx-gray-leftBorder .jqx-grid-fenix:hover .jqx-widget-header-fenix:hover {
+  .fx-dark-bg .jqx-widget-header-fenix:hover, .fx-dark-bg .jqx-grid-fenix:hover .jqx-widget-header-fenix:hover {
     color: white !important;
     background-color: transparent !important;
     border-color: white !important;
     background: transparent; }
-  .fx-gray-leftBorder .jqx-fill-state-hover-fenix, .fx-gray-leftBorder .jqx-widget-fenix .jqx-grid-cell-hover-fenix {
+  .fx-dark-bg .jqx-fill-state-hover-fenix, .fx-dark-bg .jqx-widget-fenix .jqx-grid-cell-hover-fenix {
     color: white !important;
     background-color: transparent !important;
     border-color: white !important;
     background: transparent; }
-  .fx-gray-leftBorder .jqx-fill-state-pressed-fenix, .fx-gray-leftBorder .jqx-widget-fenix .jqx-grid-cell-selected-fenix {
+  .fx-dark-bg .jqx-fill-state-pressed-fenix, .fx-dark-bg .jqx-widget-fenix .jqx-grid-cell-selected-fenix {
     color: white !important;
     background-color: transparent !important;
     border-color: white !important;
     background: transparent; }
-  .fx-gray-leftBorder .fx-bullet-number {
+  .fx-dark-bg .fx-bullet-number {
     background-color: white !important;
     color: #666666 !important; }

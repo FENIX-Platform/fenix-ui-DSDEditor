@@ -1,7 +1,20 @@
 /* Fenix Data Editor Component */
 
-body{
-  background-color: $fenix-light-bg;
+#colEditTbl{
+  tbody{
+    td{
+      padding: 10px;
+
+      border: 0;
+    }
+    #colEditTitle{
+      >div{
+        border: 1px solid #c7c7c7 !important;
+
+      }
+    }
+  }
+
 }
 
 .contentcolEditTitle{
@@ -24,8 +37,6 @@ body{
 }
 
 
-
-
 #mainContainer{
   padding: 0 20px;
 
@@ -39,11 +50,14 @@ overflow: hidden;
 }
 
 .fx-dsdedit-addcolumn-btn{
-  margin-bottom: 35px;
+  button{
+    margin-bottom: 35px;
+    margin-right: 8px ;
+  }
 }
 
 
-.fx-gray-leftBorder{
+.fx-dark-bg{
   background-color: $fenix-dark-bg;
   color: white !important;
 
