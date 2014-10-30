@@ -518,3 +518,40 @@ body {
 
 .fx-dsdedit-addcolumn-btn {
   margin-bottom: 35px; }
+
+.fx-gray-leftBorder {
+  background-color: #666666;
+  color: white !important; }
+  .fx-gray-leftBorder * {
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent; }
+  .fx-gray-leftBorder .jqx-widget-header-fenix, .fx-gray-leftBorder .jqx-grid-fenix .jqx-widget-header-fenix {
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent; }
+  .fx-gray-leftBorder *:hover {
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent; }
+  .fx-gray-leftBorder .jqx-widget-header-fenix:hover, .fx-gray-leftBorder .jqx-grid-fenix:hover .jqx-widget-header-fenix:hover {
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent; }
+  .fx-gray-leftBorder .jqx-fill-state-hover-fenix, .fx-gray-leftBorder .jqx-widget-fenix .jqx-grid-cell-hover-fenix {
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent; }
+  .fx-gray-leftBorder .jqx-fill-state-pressed-fenix, .fx-gray-leftBorder .jqx-widget-fenix .jqx-grid-cell-selected-fenix {
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent; }
+  .fx-gray-leftBorder .fx-bullet-number {
+    background-color: white !important;
+    color: #666666 !important; }
