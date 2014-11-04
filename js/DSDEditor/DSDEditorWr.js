@@ -1,12 +1,9 @@
 ﻿define([
 'jquery',
-'js/DSDEditor/DSDEditor',
-'text!config/DSDEditor/Subjects.json',
-'text!config/DSDEditor/Datatypes.json',
-'text!config/DSDEditor/Codelists.json'
-
-
-        
+'fx-DSDEditor/js/DSDEditor/DSDEditor',
+'text!fx-DSDEditor/config/DSDEditor/Subjects.json',
+'text!fx-DSDEditor/config/DSDEditor/Datatypes.json',
+'text!fx-DSDEditor/config/DSDEditor/Codelists.json'
 ],
 function ($, DSDEditor, subjects, dataTypes, codelists) {
     var DSDEditorWr = function () {

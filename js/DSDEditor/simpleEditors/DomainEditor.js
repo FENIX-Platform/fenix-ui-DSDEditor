@@ -1,11 +1,11 @@
 ﻿define([
 'jquery',
  'jqxall',
- 'js/DSDEditor/simpleEditors/CodelistSelector',
- 'js/DSDEditor/simpleEditors/CodesSelectionEditor',
- 'js/DSDEditor/simpleEditors/DatesRangeSelector',
- 'js/DSDEditor/helpers/DataServices',
- 'text!templates/DSDEditor/simpleEditors/DomainEditor.htm'
+ 'fx-DSDEditor/js/DSDEditor/simpleEditors/CodelistSelector',
+ 'fx-DSDEditor/js/DSDEditor/simpleEditors/CodesSelectionEditor',
+ 'fx-DSDEditor/js/DSDEditor/simpleEditors/DatesRangeSelector',
+ 'fx-DSDEditor/js/DSDEditor/helpers/DataServices',
+ 'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/DomainEditor.htm'
   ],
 function ($, jqx, CodelistSelector, CodesSelectionEditor, DatesRangeSelector, DataServices, domainEditorHTML) {
 

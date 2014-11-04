@@ -1,10 +1,10 @@
 ﻿define([
 'jquery',
  'jqxall',
- 'js/DSDEditor/simpleEditors/datesRange/RangeYears',
- 'js/DSDEditor/simpleEditors/datesRange/RangeMonths',
- 'js/DSDEditor/simpleEditors/datesRange/RangeDates',
- 'text!templates/DSDEditor/simpleEditors/DatesRangeSelector.htm'
+ 'fx-DSDEditor/js/DSDEditor/simpleEditors/datesRange/RangeYears',
+ 'fx-DSDEditor/js/DSDEditor/simpleEditors/datesRange/RangeMonths',
+ 'fx-DSDEditor/js/DSDEditor/simpleEditors/datesRange/RangeDates',
+ 'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/DatesRangeSelector.htm'
   ],
 function ($, jqx, RangeYears, RangeMonths, RangeDates, datesRangeSelectorHTML) {
     var DatesRangeSelector = function () {

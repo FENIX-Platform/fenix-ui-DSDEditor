@@ -1,7 +1,7 @@
 ﻿define([
 'jquery',
  'jqxall',
- 'text!templates/DSDEditor/simpleEditors/datesRange/RangeYears.htm'
+ 'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/datesRange/RangeYears.htm'
   ],
 function ($, jqx, rangeYearsHTML) {
     var RangeYears = function () {

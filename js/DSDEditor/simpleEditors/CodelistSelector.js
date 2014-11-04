@@ -1,8 +1,8 @@
 ﻿define([
 'jquery',
  'jqxall',
- 'js/DSDEditor/simpleEditors/ColumnEditorComponents/LimitedDDL',
- 'text!templates/DSDEditor/simpleEditors/CodelistSelector.htm'
+ 'fx-DSDEditor/js/DSDEditor/simpleEditors/ColumnEditorComponents/LimitedDDL',
+ 'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/CodelistSelector.htm'
   ],
 function ($, jqx, LimitedDDL, codelistSelectorHTML) {
 

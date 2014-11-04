@@ -4,11 +4,11 @@ define([
 'jquery',
 //'i18n!nls/ML_DSDEdit',
  'jqxall',
-  'js/DSDEditor/simpleEditors/MLTextEditor',
-  'js/DSDEditor/simpleEditors/DomainEditor',
-  'js/DSDEditor/simpleEditors/ColumnEditorComponents/LimitedDDL',
-  'js/DSDEditor/simpleEditors/ColumnEditorComponents/SubjectSelector',
-  'text!templates/DSDEditor/ColumnEditor.htm'
+  'fx-DSDEditor/js/DSDEditor/simpleEditors/MLTextEditor',
+  'fx-DSDEditor/js/DSDEditor/simpleEditors/DomainEditor',
+  'fx-DSDEditor/js/DSDEditor/simpleEditors/ColumnEditorComponents/LimitedDDL',
+  'fx-DSDEditor/js/DSDEditor/simpleEditors/ColumnEditorComponents/SubjectSelector',
+  'text!fx-DSDEditor/templates/DSDEditor/ColumnEditor.htm'
 ],
 function ($, jqx, MLTextEditor, DomainEditor, LimitedDDL, SubjectSelector, columnEditorHTML) {
     function ColumnEditor() {
