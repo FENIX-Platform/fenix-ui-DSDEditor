@@ -1,201 +1,37 @@
 ﻿[
     {
-        "val": "CS_FoodSupply|1.0",
+        "val": "UAE_GAUL",
         "text": {
-            "EN": "Food Supply"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CS_Fertilizers|1.0",
-        "text": {
-            "EN": "Fertilizers"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CS_Fisheries|1.0",
-        "text": {
-            "EN": "Fisheries"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CS_Pesticides|1.0",
-        "text": {
-            "EN": "Pesticides"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CS_WPI|1.0",
-        "text": {
-            "EN": "WPI"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CS_Water|1.0",
-        "text": {
-            "EN": "Water"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CS_ValueAdded|1.0",
-        "text": {
-            "EN": "Value Added"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CS_Prod_Trade|1.0",
-        "text": {
-            "EN": "Production Trade"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CS_Prices|1.0",
-        "text": {
-            "EN": "Prices"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CS_PPI|1.0",
-        "text": {
-            "EN": "PPI"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CS_Population|1.0",
-        "text": {
-            "EN": "Population"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CS_Machinery|1.0",
-        "text": {
-            "EN": "Machinery"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CS_Land|1.0",
-        "text": {
-            "EN": "land"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CS_Labour|1.0",
-        "text": {
-            "EN": "Labour"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CS_Forestry|1.0",
-        "text": {
-            "EN": "Forestry"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CS_CPI|1.0",
-        "text": {
-            "EN": "CPI"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CSTAT_HS|1.0",
-        "text": {
-            "EN": "HS"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "CS_Flags|1.0",
-        "text": {
-            "EN": "Flags"
-        },
-        "subject": "flag"
-    },
-    {
-        "val": "GAUL|1.0",
-        "text": {
-            "EN": "Gaul"
+            "EN": "UAE GAUL"
         },
         "subject": "geo"
     },
-
-
-
-	{
-        "val": "UNECA_Areas|test",
+    {
+        "val": "UAE_Elements",
         "text": {
-            "EN": "UNECA Areas"
+            "EN": "UAE Elements"
         },
         "subject": "item"
     },
-	{
-        "val": "UNECA_DataSource|test",
+    {
+        "val": "UAE_DOMAINS",
         "text": {
-            "EN": "UNECA Data source"
+            "EN": "UAE DOMAINS"
         },
         "subject": "item"
     },
-	{
-        "val": "UNECA_DimA|test",
+    {
+        "val": "UAE_Commodity",
         "text": {
-            "EN": "UNECA DimA"
+            "EN": "UAE Commodity"
         },
         "subject": "item"
     },
-	{
-        "val": "UNECA_DimB|test",
+    {
+        "val": "UAE_UM",
         "text": {
-            "EN": "UNECA DimB"
+            "EN": "UAE UM"
         },
-        "subject": "item"
-    },
-	{
-        "val": "UNECA_DimC|test",
-        "text": {
-            "EN": "UNECA DimC"
-        },
-        "subject": "item"
-    },
-	{
-        "val": "UNECA_DomainTopic|test",
-        "text": {
-            "EN": "UNECA Domain Topic"
-        },
-        "subject": "item"
-    },
-	{
-        "val": "UNECA_Indicators|test",
-        "text": {
-            "EN": "UNECA Indicators"
-        },
-        "subject": "item"
-    },
-	{
-        "val": "UNECA_PopulationAgeRange|test",
-        "text": {
-            "EN": "UNECA Population Age Range"
-        },
-        "subject": "item"
-    },
-	{
-        "val": "UNECA_Unit|test",
-        "text": {
-            "EN": "UNECA Unit"
-        },
-        "subject": "item"
+        "subject": "um"
     }
 ]

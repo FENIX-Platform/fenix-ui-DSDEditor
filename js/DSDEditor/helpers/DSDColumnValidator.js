@@ -58,8 +58,8 @@ function () {
                 return { field: 'domain', level: 'error', message: 'empty' };
             if (!toVal.domain.codeSystem.system)
                 return { field: 'domain', level: 'error', message: 'empty codesystem system' };
-            if (!toVal.domain.codeSystem.version)
-                return { field: 'domain', level: 'error', message: 'empty codesystem version' };
+            /*if (!toVal.domain.codeSystem.version)
+                return { field: 'domain', level: 'error', message: 'empty codesystem version' };*/
         }
     }
 
