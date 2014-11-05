@@ -96,7 +96,7 @@
             this.$container.find('#DSDEdit_btnAddCol').click(function () {
                 me.newColumn();
             });
-            this.$container.find('#btnColsEditDone').click(function () {
+            $('#btnColsEditDone').on('click', function () {
                 me.ColsEditDone();
             });
 
@@ -346,10 +346,12 @@
         //EVTS
         DSDEditor.prototype.ColsEditDone = function () {
             var valRes = this.validateDSD();
-            if (valRes && valRes.length > 0)
+            if (valRes && valRes.length > 0) {
                 return;
-            else
-                this.$container.trigger("columnEditDone." + this.widgetName + ".fenix");
+            } else {
+                this.$container.trigger("columnEditDone." + this.widgetName + ".fenix", {payload: this.getColumns()});
+            }
+
         }
 
         //Helpers
