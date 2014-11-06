@@ -34,7 +34,6 @@
             this.colEditor = new ColumnEditor();
             this.$container.find('#divColEdit').show();
             this.colEditor.render(this.$container.find('#cntColEdit'));
-            //this.$container.find('#divColEdit').hide();
 
             var me = this;
             this.$container.find('#bntColEditOk').click(function () {
@@ -84,7 +83,6 @@
 
                 columns: this.createDSDGridCols(),
                 width: '100%',
-                //height: '100%',
                 rendered: function () {
                     me.validateDSD();
                 }
@@ -101,7 +99,9 @@
             });
 
             this.doML();
-//        this.$DSDGrid.jqxGrid('autoresizecolumns');
+
+            if (callB)
+            callB();
         }
 
         DSDEditor.prototype.switchVisibility = function () {
@@ -224,7 +224,6 @@
             if (action == 'edit') {
                 var col = findColById(this.cols, colId);
                 this.colEditor.setColumn(col);
-                //this.switchVisibility();
             }
             else if (action == 'delete') {
                 var res = confirm("Delete");

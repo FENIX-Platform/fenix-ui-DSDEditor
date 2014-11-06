@@ -15,8 +15,8 @@ function ($, DSDEditor, subjects, dataTypes, codelists) {
     };
 
     //Render - creation
-    DSDEditorWr.prototype.render = function (container, langCode) {
-        this.DSDEditor.render(container, langCode);
+    DSDEditorWr.prototype.render = function (container,  callB) {
+        this.DSDEditor.render(container,  callB);
         this.DSDEditor.setSubjects(JSON.parse(subjects));
         this.DSDEditor.setDataTypes(JSON.parse(dataTypes));
         this.DSDEditor.setCodelists(JSON.parse(codelists));

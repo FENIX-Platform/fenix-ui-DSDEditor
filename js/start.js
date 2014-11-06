@@ -1,4 +1,3 @@
-
 define([
     'jquery',
     'fx-DSDEditor/js/DSDEditor/DSDEditorWr',
@@ -9,14 +8,7 @@ define([
 
     function DSDEditor_starter() {
         DSDEditorWr = new DSDEditorWr();
-        DSDEditorWr.render($('#mainContainer'));
-
-        $('#btnEN').click(function () {
-            setLang('en');
-        });
-        $('#btnFR').click(function () {
-            setLang('fr');
-        });
+        DSDEditorWr.render($('#mainContainer'), null);
     }
 
     /*Multilang test*/
@@ -27,6 +19,7 @@ define([
         localStorage.setItem('locale', lang.toLowerCase());
         location.reload();
     }
+
     /*End multilang test*/
 
     return {
