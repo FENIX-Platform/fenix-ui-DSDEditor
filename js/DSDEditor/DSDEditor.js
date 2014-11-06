@@ -158,8 +158,11 @@
                             rec[i].MLTitle = mlLabelToString(col.title);
 
                             if (col.domain) {
-                                if (col.domain.codeSystem)
-                                    rec[i].tmp_domain = col.domain.codeSystem.system + " " + col.domain.codeSystem.version;
+                                if (col.domain.codes && col.domain.codes[0]) {
+                                    rec[i].tmp_domain = col.domain.codes[0].idCodeList;
+                                    if (col.domain.codes[0].version)
+                                        rec[i].tmp_domain += col.domain.codes[0].version;
+                                }
                                 else if (col.domain.period)
                                     rec[i].tmp_domain = periodToString(col.domain.period);
                             } else
@@ -351,7 +354,7 @@
             } else {
                 this.$container.trigger("columnEditDone." + this.widgetName + ".fenix", {payload: this.getColumns()});
             }
-
+            //console.log(JSON.stringify(this.getColumns()));
         }
 
         //Helpers

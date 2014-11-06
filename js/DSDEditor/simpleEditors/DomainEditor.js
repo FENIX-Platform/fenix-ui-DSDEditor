@@ -104,7 +104,7 @@ function ($, jqx, CodelistSelector, CodesSelectionEditor, DatesRangeSelector, Da
     DomainEditor.prototype.getDomain = function () {
         switch (this.mode) {
             case MODES.code:
-                return { codeSystem: this.codelistSelector.getDomain() };
+                return this.codelistSelector.getDomain();
                 break;
             case MODES.year:
             case MODES.month:

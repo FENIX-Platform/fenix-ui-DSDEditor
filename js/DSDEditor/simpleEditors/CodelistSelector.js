@@ -50,7 +50,12 @@
         }
 
         CodelistSelector.prototype.setDomain = function (domain) {
-            var clValue = domain.codeSystem.system + "|" + domain.codeSystem.version;
+            //TOTO Make it multielement
+            if (domain.codes[0].version)
+            var clValue = domain.codes[0].idCodeList + "|" + domain.codes[0].version;
+            else
+                var clValue = domain.codes[0].idCodeList;
+
             this.codelistsDDL.setSelectedValue(clValue);
         }
         CodelistSelector.prototype.getDomain = function () {
@@ -59,9 +64,14 @@
                 return null;
             var split = selVal.split('|');
             if (split[1])
-                return { system: split[0], version: split[1] };
+            //return { domain: split[0], version: split[1] };
+                return  {codes: [
+                    {idCodeList: split[0], version: split[1]}
+                ]}
             else
-                return { system: split[0]};
+                return {codes: [
+                    {idCodeList: split[0]}
+                ]}
         }
 
         return CodelistSelector;

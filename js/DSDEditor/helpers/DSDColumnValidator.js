@@ -54,12 +54,11 @@ function () {
         if (toVal.dataType == 'code') {
             if (!toVal.domain)
                 return { field: 'domain', level: 'error', message: 'empty' };
-            if (!toVal.domain.codeSystem)
+            if (!toVal.domain.codes)
                 return { field: 'domain', level: 'error', message: 'empty' };
-            if (!toVal.domain.codeSystem.system)
-                return { field: 'domain', level: 'error', message: 'empty codesystem system' };
-            /*if (!toVal.domain.codeSystem.version)
-                return { field: 'domain', level: 'error', message: 'empty codesystem version' };*/
+            //TODO Make it multiElement
+            if (!toVal.domain.codes[0].idCodeList)
+                return { field: 'domain', level: 'error', message: 'empty idCodeList' };
         }
     }
 
