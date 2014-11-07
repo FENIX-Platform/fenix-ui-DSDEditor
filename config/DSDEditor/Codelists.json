@@ -1,36 +1,78 @@
 ﻿[
     {
-        "val": "UAE_GAUL",
+        "val": "UNECA_ISO-3",
         "text": {
-            "EN": "UAE GAUL"
+            "EN": "UNECA ISO-3"
         },
         "subject": "geo"
     },
     {
-        "val": "UAE_Elements",
+        "val": "UNECA_AgeRange",
         "text": {
-            "EN": "UAE Elements"
+            "EN": "UNECA AgeRange"
         },
         "subject": "item"
     },
     {
-        "val": "UAE_DOMAINS",
+        "val": "UNECA_Domains_Indicator",
         "text": {
-            "EN": "UAE DOMAINS"
+            "EN": "UNECA Domains Indicator"
         },
         "subject": "item"
     },
     {
-        "val": "UAE_Commodity",
+        "val": "UNECA_EnergySource",
         "text": {
-            "EN": "UAE Commodity"
+            "EN": "UNECA EnergySource"
         },
         "subject": "item"
     },
     {
-        "val": "UAE_UM",
+        "val": "UNECA_Gender",
         "text": {
-            "EN": "UAE UM"
+            "EN": "UNECA Gender"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "UNECA_Levels",
+        "text": {
+            "EN": "UNECA Levels"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "UNECA_Producer",
+        "text": {
+            "EN": "UNECA Producer"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "UNECA_Products",
+        "text": {
+            "EN": "UNECA Products"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "UNECA_Residence",
+        "text": {
+            "EN": "UNECA Residence"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "UNECA_Sectors",
+        "text": {
+            "EN": "UNECA Sectors"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "UNECA_UnitOfMeasure",
+        "text": {
+            "EN": "UNECA Unit Of Measure"
         },
         "subject": "um"
     }
