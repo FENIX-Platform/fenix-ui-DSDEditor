@@ -11,7 +11,6 @@ define(['jquery'],
         }
 
 
-
         //Get resource: http://faostat3.fao.org:7799/v2/msd/resources/dan2/1.0
         //or
         //Get resource: http://faostat3.fao.org:7799/v2/msd/resources/uid/dan2
@@ -34,9 +33,10 @@ define(['jquery'],
         //METADATA
         Connector.prototype.getMetadata = function (uid, version, callB) {
             var addr = this.address.serverAddress;
-            addr = addr + "/" + uid;
             if (version)
-                addr = addr + "/" + version;
+                addr = addr + "/" + uid + "/" + version;
+            else
+                addr = addr + "/uid/" + uid;
             $.get(addr, {dsd: true}, function (data, textStatus, jqXHR) {
                 if (callB)
                     callB(data);
@@ -49,76 +49,83 @@ define(['jquery'],
 
         //Use this if the resource does not exist
         /*Connector.prototype.postMetadata = function (toPost, callB) {
-            var addr = this.address.serverAddress;
-            $.ajax({
-                contentType: "application/json; charset=utf-8",
-                url: addr,
-                dataType: 'json',
-                type: 'POST',
-                data: JSON.stringify(toPost),
-                crossDomain: true,
-                success: function (data, textStatus, jqXHR) {
-                    if (callB)
-                        callB(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("error on post");
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                }
-            });
-        }*/
+         var addr = this.address.serverAddress;
+         $.ajax({
+         contentType: "application/json; charset=utf-8",
+         url: addr,
+         dataType: 'json',
+         type: 'POST',
+         data: JSON.stringify(toPost),
+         crossDomain: true,
+         success: function (data, textStatus, jqXHR) {
+         if (callB)
+         callB(data);
+         },
+         error: function (jqXHR, textStatus, errorThrown) {
+         console.log("error on post");
+         console.log(textStatus);
+         console.log(errorThrown);
+         }
+         });
+         }*/
 
         //Use this to patch the metadata
         /*Connector.prototype.patchMetadata = function (existingMeta, toPatch, callB) {
-            var addr = this.address.serverAddress;
+         var addr = this.address.serverAddress;
 
-            toPatch.rid = existingMeta.rid;
+         toPatch.rid = existingMeta.rid;
 
-            $.ajax({
-                contentType: "application/json; charset=utf-8",
-                url: addr,
-                dataType: 'json',
-                type: 'PATCH',
-                data: JSON.stringify(toPatch),
-                crossDomain: true,
-                success: function (data, textStatus, jqXHR) {
-                    if (callB)
-                        callB(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("error on patch");
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                }
-            });
-        }*/
+         $.ajax({
+         contentType: "application/json; charset=utf-8",
+         url: addr,
+         dataType: 'json',
+         type: 'PATCH',
+         data: JSON.stringify(toPatch),
+         crossDomain: true,
+         success: function (data, textStatus, jqXHR) {
+         if (callB)
+         callB(data);
+         },
+         error: function (jqXHR, textStatus, errorThrown) {
+         console.log("error on patch");
+         console.log(textStatus);
+         console.log(errorThrown);
+         }
+         });
+         }*/
 
         /*Connector.prototype.deleteMetadata = function (uid, version, callB) {
-            var addr = this.address.serverAddress;
-            addr = addr + "/" + uid;
-            if (version)
-                addr = addr + "/" + version;
-            $.ajax({
-                url: addr,
-                type: 'DELETE',
-                crossDomain: true,
-                success: function (data, textStatus, jqXHR) {
-                    if (callB)
-                        callB(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("error on delete");
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                    return null;
-                }
-            });
-        }*/
+         var addr = this.address.serverAddress;
+         addr = addr + "/" + uid;
+         if (version)
+         addr = addr + "/" + version;
+         $.ajax({
+         url: addr,
+         type: 'DELETE',
+         crossDomain: true,
+         success: function (data, textStatus, jqXHR) {
+         if (callB)
+         callB(data);
+         },
+         error: function (jqXHR, textStatus, errorThrown) {
+         console.log("error on delete");
+         console.log(textStatus);
+         console.log(errorThrown);
+         return null;
+         }
+         });
+         }*/
 
-        Connector.prototype.addDSD = function (existingMeta, DSD, callB) {
+        Connector.prototype.updateDSD = function (existingMeta, DSD, callB) {
             if (!existingMeta)
                 throw "existing meta is null";
+
+            DSD.datasource = "CountrySTAT";
+            DSD.contextSystem = "CountrySTAT";
+
+            console.log(JSON.stringify(DSD));
+            console.log("returnu");
+            return;
 
             //DSD exists and has a rid
             if (existingMeta.dsd && existingMeta.dsd.rid) {

@@ -12,12 +12,12 @@ define([
         DSDEditorWr.render($('#mainContainer'), null);
 
         /*var colsAdapter = {
-            //source: "http://faostat3.fao.org:7799/v2/msd/resources/metadata/dan2/1.0?dsd=true",
-            //data: null
-            serviceAddress: "http://faostat3.fao.org:7799/v2/msd/resources/metadata/dan2/1.0?dsd=true",
-            data: null}
+         //source: "http://faostat3.fao.org:7799/v2/msd/resources/metadata/dan2/1.0?dsd=true",
+         //data: null
+         serviceAddress: "http://faostat3.fao.org:7799/v2/msd/resources/metadata/dan2/1.0?dsd=true",
+         data: null}
 
-        DSDEditorWr.load(colsAdapter);*/
+         DSDEditorWr.load(colsAdapter);*/
     }
 
     /*Multilang test*/
@@ -31,12 +31,22 @@ define([
 
     /*End multilang test*/
 
-    function updateDSD(uid, version, dsd)
-    {
-        console.log("in unpdateDSD");
-        console.log(uid);
+    function updateDSD(uid, version, dsd) {
+        var conn = new Connector();
+        conn.getMetadata(uid, version, function(meta){
+            if (!meta)
+                throw new Error("Cannot find metadata with UID " + uid + " and version " + version);
+            conn.updateDSD(meta,dsd);
+        });
+
+
+
+//new Connector().updateDSD(uid, version,dsd);
+
     }
+
     return {
-        init: DSDEditor_starter, updateDSD:updateDSD
+        init: DSDEditor_starter,
+        updateDSD: updateDSD
     }
 });

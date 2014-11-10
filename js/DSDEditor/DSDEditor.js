@@ -121,7 +121,7 @@
             toRet.datafields = [
                 { name: 'id', type: 'string' },
                 { name: 'MLTitle', type: 'string' },
-                { name: 'tmp_subject', type: 'string' },
+                { name: 'subject', type: 'string' },
                 { name: 'key', type: 'bool' },
                 { name: 'dataType', type: 'string' },
                 { name: 'tmp_domain', type: 'string' },
@@ -149,13 +149,13 @@
                             } else
                                 rec[i].tmp_domain = "";
 
-                            if (col.subject) {
+                            /*if (col.subject) {
                                 if (col.subject.uid == "")
                                     rec[i].tmp_subject = "";
                                 else
                                 //Just duplicate, seems a bug in JQXGrid, if empty "[Object][object]" was shown
                                     rec[i].tmp_subject = col.subject.uid;
-                            }
+                            }*/
 
                             rec[i].MLSupplemental = mlLabelToString(col.supplemental);
                         }
@@ -182,7 +182,7 @@
                 } },
                 { text: 'id', dataField: 'id', displayField: 'id', hidden: true  },
                 { text: mlRes['title'], dataField: 'MLTitle', width: '10%' },
-                { text: mlRes['subject'], dataField: 'tmp_subject', width: '10%' },
+                { text: mlRes['subject'], dataField: 'subject', width: '10%' },
                 { text: mlRes['key'], dataField: 'key', columntype: 'checkbox', width: '10%' },
                 { text: mlRes['datatype'], dataField: 'dataType', width: '10%' },
                 { text: mlRes['domain'], dataField: 'tmp_domain', width: '10%'},
