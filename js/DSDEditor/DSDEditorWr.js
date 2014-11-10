@@ -3,10 +3,9 @@
         'fx-DSDEditor/js/DSDEditor/DSDEditor',
         'text!fx-DSDEditor/config/DSDEditor/Subjects.json',
         'text!fx-DSDEditor/config/DSDEditor/Datatypes.json',
-        'text!fx-DSDEditor/config/DSDEditor/Codelists.json',
-        'fx-DSDEditor/js/DSDEditor/dataConnectors/D3S_Connector'
+        'text!fx-DSDEditor/config/DSDEditor/Codelists.json'
     ],
-    function ($, DSDEditor, subjects, dataTypes, codelists, connector) {
+    function ($, DSDEditor, subjects, dataTypes, codelists) {
         var DSDEditorWr = function () {
             this.subjects;
             this.dataTypes;
@@ -58,11 +57,6 @@
 
         DSDEditorWr.prototype.ColumnAddDeleteEnabled = function (enabled) {
             this.DSDEditor.ColumnAddDeleteEnabled(enabled);
-        }
-
-        //Move the calls to the D3S?
-        DSDEditorWr.prototype.updateDSD = function (uid, version, dsd) {
-
         }
 
         return DSDEditorWr;

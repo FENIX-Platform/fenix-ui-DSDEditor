@@ -1,10 +1,11 @@
 define([
     'jquery',
     'fx-DSDEditor/js/DSDEditor/DSDEditorWr',
+    'fx-DSDEditor/js/DSDEditor/dataConnectors/D3S_Connector',
     'bootstrap',
     'domReady!'
 
-], function ($, DSDEditorWr) {
+], function ($, DSDEditorWr, Connector) {
 
     function DSDEditor_starter() {
         DSDEditorWr = new DSDEditorWr();
@@ -30,7 +31,12 @@ define([
 
     /*End multilang test*/
 
+    function updateDSD(uid, version, dsd)
+    {
+        console.log("in unpdateDSD");
+        console.log(uid);
+    }
     return {
-        init: DSDEditor_starter
+        init: DSDEditor_starter, updateDSD:updateDSD
     }
 });
