@@ -24,12 +24,10 @@
 
         //Render - creation
         DSDEditor.prototype.render = function (container, callB) {
-
             this.$container = container;
             this.$container.html(DSDEditHTML);
             this.$divDSDGrid = this.$container.find('#divDSDGrid');
             this.$divColEdit = this.$container.find('#divColEdit');
-
 
             this.colEditor = new ColumnEditor();
             this.$container.find('#divColEdit').show();
@@ -58,9 +56,6 @@
                     }
                     me.refreshColumns();
                 }
-            });
-            this.$container.find('#bntColEditCanc').click(function () {
-                me.switchVisibility();
             });
             this.$container.find('#bntColReset').click(function () {
                 me.colEditor.reset();
@@ -91,9 +86,6 @@
                 me.ColumnAddDeleteEnabled(me.colAddDelEnabled);
             });
 
-            this.$container.find('#DSDEdit_btnAddCol').click(function () {
-                me.newColumn();
-            });
             $('#btnColsEditDone').on('click', function () {
                 me.ColsEditDone();
             });
@@ -102,17 +94,6 @@
 
             if (callB)
             callB();
-        }
-
-        DSDEditor.prototype.switchVisibility = function () {
-            if (this.$divDSDGrid.is(':visible')) {
-                this.$divDSDGrid.hide();
-                this.$divColEdit.show();
-            }
-            else {
-                this.$divDSDGrid.show();
-                this.$divColEdit.hide();
-            }
         }
 
         DSDEditor.prototype.setSubjects = function (subjects) {
@@ -329,19 +310,14 @@
             var newCol = {};
             newCol.id = "";
             this.colEditor.setColumn(newCol);
-            //this.switchVisibility();
         }
 
         DSDEditor.prototype.ColumnAddDeleteEnabled = function (enabled) {
             this.colAddDelEnabled = enabled;
-            if (enabled) {
-                this.$container.find('#DSDEdit_btnAddCol').show();
+            if (enabled)
                 this.$DSDGrid.jqxGrid('showcolumn', 'delete');
-            }
-            else {
-                this.$container.find('#DSDEdit_btnAddCol').hide();
+            else
                 this.$DSDGrid.jqxGrid('hidecolumn', 'delete');
-            }
         }
 
 
@@ -399,11 +375,8 @@
         }
 
         DSDEditor.prototype.doML = function () {
-            this.$container.find('#DSDEdit_btnAddCol').html(mlRes.add);
             this.$container.find('#btnColsEditDone').html(mlRes.done);
-
             this.$divColEdit.find('#bntColEditOk').html(mlRes.add);
-            this.$divColEdit.find('#bntColEditCanc').html(mlRes.cancel);
         }
         //END Multilang
 
