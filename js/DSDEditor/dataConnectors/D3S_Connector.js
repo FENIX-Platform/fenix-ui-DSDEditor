@@ -140,6 +140,11 @@ define(['jquery'],
                     data: JSON.stringify(DSD),
                     crossDomain: true,
                     success: function (data, textStatus, jqXHR) {
+
+                        console.log("Success updateDSD 1")
+                        console.log(callB)
+                        console.log(data)
+
                         if (callB)
                             callB(data);
                     },
@@ -167,6 +172,11 @@ define(['jquery'],
                     data: JSON.stringify(toPatch),
                     crossDomain: true,
                     success: function (data, textStatus, jqXHR) {
+
+                        console.log("Success updateDSD 2")
+                        console.log(callB)
+                        console.log(data)
+
                         if (callB)
                             callB(data);
                     },
@@ -198,6 +208,10 @@ define(['jquery'],
                     data: JSON.stringify(toPut),
                     crossDomain: true,
                     success: function (data, textStatus, jqXHR) {
+
+                        console.log("Success putData")
+                        console.log(callB)
+                        console.log(data)
                         if (callB)
                             callB(data);
                     },
