@@ -1,78 +1,43 @@
 ﻿[
     {
-        "val": "UNECA_ISO-3",
+        "val": "ECO_GAUL",
         "text": {
-            "EN": "UNECA ISO-3"
+            "EN": "ECO GAUL"
         },
         "subject": "geo"
     },
     {
-        "val": "UNECA_AgeRange",
+        "val": "ECO_Elements",
         "text": {
-            "EN": "UNECA AgeRange"
+            "EN": "ECO Elements"
         },
         "subject": "item"
     },
     {
-        "val": "UNECA_Domains_Indicator",
+        "val": "ECO_FLAG",
         "text": {
-            "EN": "UNECA Domains Indicator"
+            "EN": "ECO FLAG"
+        },
+        "subject": "flag"
+    },
+    {
+        "val": "ECO_DOMAINS",
+        "text": {
+            "EN": "ECO DOMAINS"
         },
         "subject": "item"
     },
     {
-        "val": "UNECA_EnergySource",
+        "val": "ECO_Commodity",
         "text": {
-            "EN": "UNECA EnergySource"
+            "EN": "ECO Commodity"
         },
         "subject": "item"
     },
     {
-        "val": "UNECA_Gender",
+        "val": "ECO_UM",
         "text": {
-            "EN": "UNECA Gender"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "UNECA_Levels",
-        "text": {
-            "EN": "UNECA Levels"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "UNECA_Producer",
-        "text": {
-            "EN": "UNECA Producer"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "UNECA_Products",
-        "text": {
-            "EN": "UNECA Products"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "UNECA_Residence",
-        "text": {
-            "EN": "UNECA Residence"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "UNECA_Sectors",
-        "text": {
-            "EN": "UNECA Sectors"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "UNECA_UnitOfMeasure",
-        "text": {
-            "EN": "UNECA Unit Of Measure"
+            "EN": "ECO UM"
         },
         "subject": "um"
     }

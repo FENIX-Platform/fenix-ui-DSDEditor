@@ -2,7 +2,7 @@ define(['jquery'],
     function ($) {
         var Connector = function () {
             this.address = {
-                serverAddress: "http://faostat3.fao.org:7799/v2/msd/resources/metadata"
+                serverAddress: "http://faostat3.fao.org/d3s2/v2/msd/resources/metadata"
             };
         };
 
@@ -16,7 +16,7 @@ define(['jquery'],
         //Get resource: http://faostat3.fao.org:7799/v2/msd/resources/uid/dan2
         //RESOURCES
         Connector.prototype.getResource = function (uid, version, callB) {
-            var addr = "http://faostat3.fao.org:7799/v2/msd/resources";
+            var addr = "http://faostat3.fao.org/d3s2/v2/msd/resources";
             addr = addr + "/" + uid;
             if (version)
                 addr = addr + "/" + version;
@@ -123,13 +123,12 @@ define(['jquery'],
             DSD.datasource = "CountrySTAT";
             DSD.contextSystem = "CountrySTAT";
 
-            console.log(JSON.stringify(DSD));
-            console.log("returnu");
-            return;
+            //console.log(JSON.stringify(DSD));
+            //return;
 
             //DSD exists and has a rid
             if (existingMeta.dsd && existingMeta.dsd.rid) {
-                var addr = "http://faostat3.fao.org:7799/v2/msd/resources/dsd";
+                var addr = "http://faostat3.fao.org/d3s2/v2/msd/resources/dsd";
                 //Put (overwrite)
                 DSD.rid = existingMeta.dsd.rid;
 
@@ -183,7 +182,7 @@ define(['jquery'],
 
         //DATA
         Connector.prototype.putData = function (existingMeta, data, callB) {
-            var addr = "http://faostat3.fao.org:7799/v2/msd/resources"
+            var addr = "http://faostat3.fao.org/d3s2/v2/msd/resources"
             if (existingMeta.dsd && existingMeta.dsd.rid) {
 
                 var toPut = {
