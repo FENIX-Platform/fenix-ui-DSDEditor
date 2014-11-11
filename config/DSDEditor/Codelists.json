@@ -42,6 +42,13 @@
         "subject": "item"
     },
     {
+        "val": "HS|2012",
+        "text": {
+            "EN": "ECO AgeRange"
+        },
+        "subject": "item"
+    },
+    {
         "val": "ECO_UM",
         "text": {
             "EN": "ECO UM"
