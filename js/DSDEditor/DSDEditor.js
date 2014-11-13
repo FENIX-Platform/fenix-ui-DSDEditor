@@ -1,14 +1,25 @@
 ﻿define([
         'jquery',
         'jqxall',
+        'fx-DSDEditor/js/DSDEditor/dataConnectors/DSDEditorBridge',
         'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit',
         'fx-DSDEditor/js/DSDEditor/helpers/ColumnIDGenerator',
         'fx-DSDEditor/js/DSDEditor/simpleEditors/ColumnEditor',
         'fx-DSDEditor/js/DSDEditor/helpers/DSDColumnValidator',
         'text!fx-DSDEditor/templates/DSDEditor/DSDEdit.htm'
-    ],
-    function ($, jqx, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DSDEditHTML) {
-        var DSDEditor = function () {
+],
+    function ($, jqx, DSDEditorBridge, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DSDEditHTML) {
+
+        var defConfig = {
+            "subjects": "../config/DSDEditor/Subjects.json",
+            "datatypes": "../config/DSDEditor/Datatypes.json",
+            "codelists": "../config/DSDEditor/Codelists.json"
+        };
+
+        var DSDEditor = function (config) {
+            this.config = {};
+            $.extend(true, this.config, defConfig, config);
+
             this.widgetName = "DSDEditor";
             this.$container;
             this.$DSDGrid;
@@ -23,14 +34,15 @@
         };
 
         //Render - creation
-        DSDEditor.prototype.render = function (container, callB) {
+        DSDEditor.prototype.render = function (container, config, callB) {
+            $.extend(true, this.config, config);
+
             this.$container = container;
             this.$container.html(DSDEditHTML);
             this.$divDSDGrid = this.$container.find('#divDSDGrid');
             this.$divColEdit = this.$container.find('#divColEdit');
 
             this.colEditor = new ColumnEditor();
-            this.$container.find('#divColEdit').show();
             this.colEditor.render(this.$container.find('#cntColEdit'));
 
             var me = this;
@@ -51,7 +63,6 @@
                     }
                     else {
                         var colIdx = findColIndexById(me.cols, newCol.id);
-                        //if (colIdx==-1)
                         me.cols[colIdx] = newCol;
                     }
                     me.refreshColumns();
@@ -92,8 +103,19 @@
 
             this.doML();
 
-            if (callB)
-            callB();
+            var me = this;
+            var bridge=new DSDEditorBridge();
+            bridge.getSubjects(me.config.subjects, function (data) {
+                me.setSubjects(data);
+                bridge.getDataTypes(me.config.datatypes, function (data) {
+                    me.setDataTypes(data);
+                    bridge.getCodelists(me.config.codelists, function (data) {
+                        me.setCodelists(data);
+                        if (callB)
+                            callB();
+                    });
+                });
+            });
         }
 
         DSDEditor.prototype.setSubjects = function (subjects) {
@@ -132,41 +154,33 @@
 
         var createDSDGridDataAdapter = function (datasource, cols) {
             var toRet = new $.jqx.dataAdapter(datasource,
-                { beforeLoadComplete: function (rec) {
-                    for (var i = 0; i < rec.length; i++) {
-                        var col = findColById(cols, rec[i].id);
-                        if (col) {
-                            rec[i].MLTitle = mlLabelToString(col.title);
+                {
+                    beforeLoadComplete: function (rec) {
+                        for (var i = 0; i < rec.length; i++) {
+                            var col = findColById(cols, rec[i].id);
+                            if (col) {
+                                rec[i].MLTitle = mlLabelToString(col.title);
 
-                            if (col.domain) {
-                                if (col.domain.codes && col.domain.codes[0]) {
-                                    rec[i].tmp_domain = col.domain.codes[0].idCodeList;
-                                    if (col.domain.codes[0].version)
-                                        rec[i].tmp_domain += col.domain.codes[0].version;
-                                }
-                                else if (col.domain.period)
-                                    rec[i].tmp_domain = periodToString(col.domain.period);
-                            } else
+                                if (col.domain) {
+                                    if (col.domain.codes && col.domain.codes[0]) {
+                                        rec[i].tmp_domain = col.domain.codes[0].idCodeList;
+                                        if (col.domain.codes[0].version)
+                                            rec[i].tmp_domain += col.domain.codes[0].version;
+                                    }
+                                    else if (col.domain.period)
+                                        rec[i].tmp_domain = periodToString(col.domain.period);
+                                } else
+                                    rec[i].tmp_domain = "";
+                                rec[i].MLSupplemental = mlLabelToString(col.supplemental);
+                            }
+                            else {
+                                rec[i].MLTitle = "";
+                                rec[i].MLSupplemental = "";
                                 rec[i].tmp_domain = "";
-
-                            /*if (col.subject) {
-                                if (col.subject.uid == "")
-                                    rec[i].tmp_subject = "";
-                                else
-                                //Just duplicate, seems a bug in JQXGrid, if empty "[Object][object]" was shown
-                                    rec[i].tmp_subject = col.subject.uid;
-                            }*/
-
-                            rec[i].MLSupplemental = mlLabelToString(col.supplemental);
+                            }
                         }
-                        else {
-                            rec[i].MLTitle = "";
-                            rec[i].MLSupplemental = "";
-                            rec[i].tmp_domain = "";
-                        }
+                        return rec;
                     }
-                    return rec;
-                }
                 });
 
             return toRet;
@@ -175,23 +189,27 @@
         DSDEditor.prototype.createDSDGridCols = function () {
             var me = this;
             var toRet = [
-                { text: mlRes['edit'], dataField: 'edit', width: '10%', columntype: 'button', cellsrenderer: function () {
-                    return mlRes['edit'];
-                }, buttonclick: function (row) {
-                    me.rowClicked(row, 'edit');
-                } },
-                { text: 'id', dataField: 'id', displayField: 'id', hidden: true  },
+                {
+                    text: mlRes['edit'], dataField: 'edit', width: '10%', columntype: 'button', cellsrenderer: function () {
+                        return mlRes['edit'];
+                    }, buttonclick: function (row) {
+                        me.rowClicked(row, 'edit');
+                    }
+                },
+                { text: 'id', dataField: 'id', displayField: 'id', hidden: true },
                 { text: mlRes['title'], dataField: 'MLTitle', width: '10%' },
                 { text: mlRes['subject'], dataField: 'subject', width: '10%' },
                 { text: mlRes['key'], dataField: 'key', columntype: 'checkbox', width: '10%' },
                 { text: mlRes['datatype'], dataField: 'dataType', width: '10%' },
-                { text: mlRes['domain'], dataField: 'tmp_domain', width: '10%'},
+                { text: mlRes['domain'], dataField: 'tmp_domain', width: '10%' },
                 { text: mlRes['supplemental'], dataField: 'MLSupplemental', width: '20%' },
-                { text: mlRes['delete'], dataField: 'delete', columntype: 'button', width: '20%', cellsrenderer: function () {
-                    return mlRes['delete'];
-                }, buttonclick: function (row) {
-                    me.rowClicked(row, 'delete');
-                } }
+                {
+                    text: mlRes['delete'], dataField: 'delete', columntype: 'button', width: '20%', cellsrenderer: function () {
+                        return mlRes['delete'];
+                    }, buttonclick: function (row) {
+                        me.rowClicked(row, 'delete');
+                    }
+                }
                 //{ text: 'Link' }
                 //{ text: 'Transposed' };
                 //{ text: 'Virtual' };
@@ -327,7 +345,7 @@
             if (valRes && valRes.length > 0) {
                 return;
             } else {
-                this.$container.trigger("columnEditDone." + this.widgetName + ".fenix", {payload: this.getColumns()});
+                this.$container.trigger("columnEditDone." + this.widgetName + ".fenix", { payload: this.getColumns() });
             }
             //console.log(JSON.stringify(this.getColumns()));
         }
