@@ -1,23 +1,24 @@
 ﻿define([
         'jquery',
         'jqxall',
+        'require',
         'fx-DSDEditor/js/DSDEditor/dataConnectors/DSDEditorBridge',
         'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit',
         'fx-DSDEditor/js/DSDEditor/helpers/ColumnIDGenerator',
         'fx-DSDEditor/js/DSDEditor/simpleEditors/ColumnEditor',
         'fx-DSDEditor/js/DSDEditor/helpers/DSDColumnValidator',
-        'text!fx-DSDEditor/templates/DSDEditor/DSDEdit.htm'
+        'text!fx-DSDEditor/templates/DSDEditor/DSDEdit.htm',
 ],
-    function ($, jqx, DSDEditorBridge, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DSDEditHTML) {
+    function ($, jqx, require, DSDEditorBridge, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DSDEditHTML) {
 
-        var defConfig = {
-            "subjects": "../config/DSDEditor/Subjects.json",
-            "datatypes": "../config/DSDEditor/Datatypes.json",
-            "codelists": "../config/DSDEditor/Codelists.json"
-        };
+        var defConfig = {};
+
+        defConfig["subjects"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Subjects.json");
+        defConfig["datatypes"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Datatypes.json");
+        defConfig["codelists"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Codelists.json");
 
         var DSDEditor = function (config) {
-            
+
             this.config = {};
             $.extend(true, this.config, defConfig, config);
 
