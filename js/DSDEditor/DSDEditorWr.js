@@ -40,7 +40,7 @@
                 crossDomain: true,
                 dataType: "json",
                 success: function (data) {
-                    me.dataLoaded(data);
+                    me.dataLoaded(JSON.parse(data));
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     throw new Error(jqXHR, textStatus, errorThrown);

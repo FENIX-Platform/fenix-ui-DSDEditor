@@ -8,7 +8,7 @@ function ($, jqx, rangeYearsHTML) {
         this.$container;
         this.$from;
         this.$to;
-        this.yMin = 1000;
+        this.yMin = 0;
         this.yMax = 3000;
     };
 
@@ -40,10 +40,6 @@ function ($, jqx, rangeYearsHTML) {
 
         var f = rng.from;
         var t = rng.to;
-        if (f.length > 4)
-            f = f.substring(0, 4);
-        if (t.length > 4)
-            t = t.substring(0, 4);
 
         this.$from.jqxNumberInput({ value: f });
         this.$to.jqxNumberInput({ value: t });

@@ -10,8 +10,8 @@ function ($, jqx, rangeDatesHTML) {
         this.$from;
         this.$to;
 
-        this.dateMin = new Date(1900, 0, 1);
-        this.dateMax = new Date(2015, 11, 31);
+        this.dateMin = new Date(0, 0, 1);
+        this.dateMax = new Date(3000, 11, 31);
     };
 
     RangeYears.prototype.render = function (container) {
@@ -20,6 +20,7 @@ function ($, jqx, rangeDatesHTML) {
 
         this.$from = this.$container.find('#divRngFrom');
         this.$to = this.$container.find('#divRngTo');
+
         this.$from.jqxCalendar({ min: this.dateMin, max: this.dateMax });
         this.$to.jqxCalendar({ min: this.dateMin, max: this.dateMax });
         this.reset();

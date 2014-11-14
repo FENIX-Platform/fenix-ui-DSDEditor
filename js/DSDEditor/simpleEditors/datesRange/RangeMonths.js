@@ -13,7 +13,7 @@ function ($, jqx, rangeMonthsHTML) {
         this.$mTo;
         this.$yTo;
 
-        this.yMin = 1000;
+        this.yMin = 0;
         this.yMax = 3000;
     };
 

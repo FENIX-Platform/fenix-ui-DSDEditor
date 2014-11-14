@@ -5,9 +5,10 @@
  'fx-DSDEditor/js/DSDEditor/simpleEditors/CodesSelectionEditor',
  'fx-DSDEditor/js/DSDEditor/simpleEditors/DatesRangeSelector',
  'fx-DSDEditor/js/DSDEditor/helpers/DataServices',
+ 'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DomainEditor',
  'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/DomainEditor.htm'
   ],
-function ($, jqx, CodelistSelector, CodesSelectionEditor, DatesRangeSelector, DataServices, domainEditorHTML) {
+function ($, jqx, CodelistSelector, CodesSelectionEditor, DatesRangeSelector, DataServices, mlRes,domainEditorHTML) {
 
     var DomainEditor = function () {
         this.$container;
@@ -42,6 +43,7 @@ function ($, jqx, CodelistSelector, CodesSelectionEditor, DatesRangeSelector, Da
         this.$divDomainEditor.hide();
 
         var me = this;
+        this.doML();
         //this.$divDomainEditor.on('codelistChange', function () { me.$container.trigger('domainChange'); return false; });
     }
     DomainEditor.prototype.reset = function () {
@@ -119,6 +121,12 @@ function ($, jqx, CodelistSelector, CodesSelectionEditor, DatesRangeSelector, Da
     DomainEditor.prototype.setCodelistSubject = function (subject) {
         if (this.mode == MODES.code)
             this.codelistSelector.limitOnSubject(subject);
+    }
+
+    DomainEditor.prototype.doML=function()
+    {
+        this.$container.find('#domEdit_noDatatype').html(mlRes.selectADataType);
+        this.$container.find('#domEdit_noDomain').html(mlRes.noLimitForThisDataType);
     }
 
     return DomainEditor;
