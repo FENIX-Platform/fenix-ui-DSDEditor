@@ -17,6 +17,7 @@
         };
 
         var DSDEditor = function (config) {
+            
             this.config = {};
             $.extend(true, this.config, defConfig, config);
 
@@ -104,7 +105,7 @@
             this.doML();
 
             var me = this;
-            var bridge=new DSDEditorBridge();
+            var bridge = new DSDEditorBridge();
             bridge.getSubjects(me.config.subjects, function (data) {
                 me.setSubjects(data);
                 bridge.getDataTypes(me.config.datatypes, function (data) {

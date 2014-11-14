@@ -16,8 +16,8 @@ define([
         /*DSDEditor = new DSDEditor(config);
         DSDEditor.render($('#mainContainer'), callB);*/
 
-        DSDEditor = new DSDEditor({ "codelists": "../config/DSDEditor/Codelists_UNECA.json" });
-        DSDEditor.render($('#mainContainer'), null, );
+        DSDEditor = new DSDEditor(config);
+        DSDEditor.render($('#mainContainer'), null, callB);
 
         /*
         var subjects;
@@ -66,17 +66,17 @@ define([
 
     /*End multilang test*/
 
-    function updateDSD(uid, version, dsd) {
+    function updateDSD(uid, version, dsd, datasource, contextSys) {
          var conn = new Connector();
          conn.getMetadata(uid, version, function (meta) {
              if (!meta)
                  throw new Error("Cannot find metadata with UID " + uid + " and version " + version);
-             conn.updateDSD(meta, dsd);
+             conn.updateDSD(meta, dsd, datasource, contextSys);
          });
     }
 
     function setColumns(cols) {
-        DSDEditorWr.setColumns(cols);
+        DSDEditor.setColumns(cols);
     }
 
     return {
