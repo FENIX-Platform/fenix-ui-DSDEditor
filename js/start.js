@@ -18,8 +18,8 @@ define([
         /*bridge = new DSDEditorBridge();
         bridge.getDSD("http://faostat3.fao.org/d3s2/v2/msd/resources/metadata", "dan3", null, function (data) { console.log(data); });*/
 
-        //$('#btnEN').click(function () { setLang('EN'); });
-        //$('#btnFR').click(function () { setLang('FR'); });
+        $('#btnEN').click(function () { setLang('EN'); });
+        $('#btnFR').click(function () { setLang('FR'); });
 
         /*var colsAdapter = {
          //source: "http://faostat3.fao.org:7799/v2/msd/resources/metadata/dan2/1.0?dsd=true",

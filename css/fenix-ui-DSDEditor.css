@@ -601,3 +601,19 @@ body {
   .fx-dark-bg .fx-bullet-number {
     background-color: white !important;
     color: #666666 !important; }
+
+//Added to make the Date picker samller
+.fx-dsdedit-tblDateFromTo table td {
+    width:100px;
+  /*padding:1px !important;
+    background-color:aqua;*/
+}
+
+#divRngFrom table{
+    
+}
+#divRngFrom table td {
+    padding:0px !important;
+    background-color:aqua;
+    
+}

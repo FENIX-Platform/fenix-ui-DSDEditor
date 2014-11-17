@@ -1,9 +1,10 @@
 ﻿define([
 'jquery',
  'jqxall',
- 'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/datesRange/RangeMonths.htm'
+ 'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/datesRange/RangeMonths.htm',
+ 'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DomainEditor'
   ],
-function ($, jqx, rangeMonthsHTML) {
+function ($, jqx, rangeMonthsHTML, mlRes) {
     var RangeMonths = function () {
         this.ignoreRangeEvents = false;
         this.$container;
@@ -37,6 +38,8 @@ function ($, jqx, rangeMonthsHTML) {
         this.$yFrom.on('change', function () { me.checkFromTo('f'); });
         this.$mTo.on('change', function () { me.checkFromTo('t'); });
         this.$yTo.on('change', function () { me.checkFromTo('t'); });
+
+        this.doMl();
     }
     RangeMonths.prototype.reset = function () {
         var d = new Date();
@@ -95,6 +98,11 @@ function ($, jqx, rangeMonthsHTML) {
             }
         }
         this.ignoreRangeEvents = false;
+    }
+
+    RangeMonths.prototype.doMl = function () {
+        this.$container.find('#tdMonthFrom').html(mlRes.from);
+        this.$container.find('#tdMonthTo').html(mlRes.to);
     }
 
     return RangeMonths;

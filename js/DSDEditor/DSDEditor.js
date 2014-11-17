@@ -12,13 +12,11 @@
     function ($, jqx, require, DSDEditorBridge, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DSDEditHTML) {
 
         var defConfig = {};
-
         defConfig["subjects"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Subjects.json");
         defConfig["datatypes"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Datatypes.json");
         defConfig["codelists"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Codelists.json");
 
         var DSDEditor = function (config) {
-
             this.config = {};
             $.extend(true, this.config, defConfig, config);
 
@@ -45,7 +43,7 @@
             this.$divColEdit = this.$container.find('#divColEdit');
 
             this.colEditor = new ColumnEditor();
-            this.colEditor.render(this.$container.find('#cntColEdit'));
+            this.colEditor.render(this.$divColEdit);
 
             var me = this;
             this.$container.find('#bntColEditOk').click(function () {

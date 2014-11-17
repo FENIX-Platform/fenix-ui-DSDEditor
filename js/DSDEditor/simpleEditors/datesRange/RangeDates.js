@@ -1,10 +1,11 @@
 ﻿define([
 'jquery',
  'jqxall',
- 'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/datesRange/RangeDates.htm'
-  ],
-function ($, jqx, rangeDatesHTML) {
-    var RangeYears = function () {
+  'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/datesRange/RangeDates.htm',
+  'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DomainEditor'
+],
+function ($, jqx, rangeDatesHTML, mlRes) {
+    var RangeDates = function () {
         this.$container;
 
         this.$from;
@@ -14,7 +15,7 @@ function ($, jqx, rangeDatesHTML) {
         this.dateMax = new Date(3000, 11, 31);
     };
 
-    RangeYears.prototype.render = function (container) {
+    RangeDates.prototype.render = function (container) {
         this.$container = container;
         this.$container.html(rangeDatesHTML);
 
@@ -28,13 +29,15 @@ function ($, jqx, rangeDatesHTML) {
         var me = this;
         this.$from.on('change', function () { me.checkFromTo('f'); });
         this.$to.on('change', function () { me.checkFromTo('t'); });
+
+        this.doMl();
     }
-    RangeYears.prototype.reset = function () {
+    RangeDates.prototype.reset = function () {
         var d = new Date();
         this.$from.jqxCalendar('setDate', d);
         this.$to.jqxCalendar('setDate', d);
     }
-    RangeYears.prototype.setRange = function (rng) {
+    RangeDates.prototype.setRange = function (rng) {
         this.reset();
         if (!rng)
             return;
@@ -42,12 +45,12 @@ function ($, jqx, rangeDatesHTML) {
         this.$from.jqxCalendar('setDate', D3SDateToDate(rng.from));
         this.$to.jqxCalendar('setDate', D3SDateToDate(rng.to));
     }
-    RangeYears.prototype.getRange = function () {
+    RangeDates.prototype.getRange = function () {
         var f = this.$from.jqxCalendar('getDate');
         var t = this.$to.jqxCalendar('getDate');
         return { from: dateToD3SDate(f), to: dateToD3SDate(t) };
     }
-    RangeYears.prototype.checkFromTo = function (changed) {
+    RangeDates.prototype.checkFromTo = function (changed) {
         var f = this.$from.jqxCalendar('getDate');
         var t = this.$to.jqxCalendar('getDate');
         if (changed == 't') {
@@ -72,5 +75,10 @@ function ($, jqx, rangeDatesHTML) {
         return new Date(d.substring(0, 4), d.substring(4, 6) - 1, d.substring(6, 8));
     }
 
-    return RangeYears;
+    RangeDates.prototype.doMl = function () {
+        this.$container.find('#tdDateFrom').html(mlRes.from);
+        this.$container.find('#tdDateTo').html(mlRes.to);
+    }
+
+    return RangeDates;
 });
