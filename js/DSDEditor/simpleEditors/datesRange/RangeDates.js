@@ -5,25 +5,30 @@
   'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DomainEditor'
 ],
 function ($, jqx, rangeDatesHTML, mlRes) {
-    var RangeDates = function () {
-        this.$container;
+    var defConfig = {};
+    defConfig.dateMin = new Date(0, 0, 1);
+    defConfig.dateMax = new Date(3000, 11, 31);
 
+    var RangeDates = function (config) {
+        this.$container;
         this.$from;
         this.$to;
 
-        this.dateMin = new Date(0, 0, 1);
-        this.dateMax = new Date(3000, 11, 31);
+        this.config = {};
+        $.extend(true, this.config, defConfig, config);
     };
 
-    RangeDates.prototype.render = function (container) {
+    RangeDates.prototype.render = function (container, config) {
+        $.extend(true, this.config, config);
+
         this.$container = container;
         this.$container.html(rangeDatesHTML);
 
         this.$from = this.$container.find('#divRngFrom');
         this.$to = this.$container.find('#divRngTo');
 
-        this.$from.jqxCalendar({ min: this.dateMin, max: this.dateMax });
-        this.$to.jqxCalendar({ min: this.dateMin, max: this.dateMax });
+        this.$from.jqxCalendar({ min: this.config.dateMin, max: this.config.dateMax });
+        this.$to.jqxCalendar({ min: this.config.dateMin, max: this.config.dateMax });
         this.reset();
 
         var me = this;

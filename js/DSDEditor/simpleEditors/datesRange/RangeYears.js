@@ -5,23 +5,28 @@
  'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DomainEditor'
 ],
 function ($, jqx, rangeYearsHTML, mlRes) {
-    var RangeYears = function () {
+    var defConfig = { yMin: 0, yMax: 3000 };
+
+    var RangeYears = function (config) {
         this.$container;
         this.$from;
         this.$to;
-        this.yMin = 0;
-        this.yMax = 3000;
+
+        this.config = {};
+        $.extend(true, this.config, defConfig, config);
     };
 
-    RangeYears.prototype.render = function (container) {
+    RangeYears.prototype.render = function (container, config) {
+        $.extend(true, this.config, config);
+
         this.$container = container;
         this.$container.html(rangeYearsHTML);
 
         this.$from = this.$container.find('#divRngYearsFrom');
         this.$to = this.$container.find('#divRngYearsTo');
 
-        this.$from.jqxNumberInput({ width: 40, min: this.yMin, max: this.yMax, decimalDigits: 0, digits: 4, groupSeparator: '', promptChar: ' ' });
-        this.$to.jqxNumberInput({ width: 40, min: this.yMin, max: this.yMax, decimalDigits: 0, digits: 4, groupSeparator: '', promptChar: ' ' });
+        this.$from.jqxNumberInput({ width: 40, min: this.config.yMin, max: this.config.yMax, decimalDigits: 0, digits: 4, groupSeparator: '', promptChar: ' ' });
+        this.$to.jqxNumberInput({ width: 40, min: this.config.yMin, max: this.config.yMax, decimalDigits: 0, digits: 4, groupSeparator: '', promptChar: ' ' });
         this.reset();
 
         var me = this;
