@@ -1,22 +1,24 @@
-﻿define([
+﻿//TODO:Accept a configuration and pass it to the timeRange selectors
+define([
 'jquery',
- 'jqxall',
- 'fx-DSDEditor/js/DSDEditor/simpleEditors/datesRange/RangeYears',
- 'fx-DSDEditor/js/DSDEditor/simpleEditors/datesRange/RangeMonths',
- 'fx-DSDEditor/js/DSDEditor/simpleEditors/datesRange/RangeDates',
- 'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/DatesRangeSelector.htm'
-  ],
+'jqxall',
+'fx-DSDEditor/js/DSDEditor/simpleEditors/datesRange/RangeYears',
+'fx-DSDEditor/js/DSDEditor/simpleEditors/datesRange/RangeMonths',
+'fx-DSDEditor/js/DSDEditor/simpleEditors/datesRange/RangeDates',
+'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/DatesRangeSelector.htm'
+],
 function ($, jqx, RangeYears, RangeMonths, RangeDates, datesRangeSelectorHTML) {
+
+    var MODE_DATE = 'date';
+    var MODE_MONTH = 'month';
+    var MODE_YEAR = 'year';
+
     var DatesRangeSelector = function () {
         this.$container;
 
         this.$datesRangeSelector;
         this.$chkLimit;
         this.mode = '';
-
-        this.modeDate = 'date';
-        this.modeMonth = 'month';
-        this.modeYear = 'year';
 
         this.rangeSelector;
     };
@@ -46,15 +48,15 @@ function ($, jqx, RangeYears, RangeMonths, RangeDates, datesRangeSelectorHTML) {
     DatesRangeSelector.prototype.setMode = function (mode) {
         this.mode = mode;
         switch (mode) {
-            case this.modeYear:
+            case MODE_YEAR:
                 this.rangeSelector = new RangeYears();
                 this.rangeSelector.render(this.$datesRangeSelector);
                 break;
-            case this.modeMonth:
+            case MODE_MONTH:
                 this.rangeSelector = new RangeMonths();
                 this.rangeSelector.render(this.$datesRangeSelector);
                 break;
-            case this.modeDate:
+            case MODE_DATE:
                 this.rangeSelector = new RangeDates();
                 this.rangeSelector.render(this.$datesRangeSelector);
                 break;
@@ -72,7 +74,7 @@ function ($, jqx, RangeYears, RangeMonths, RangeDates, datesRangeSelectorHTML) {
             this.rangeSelector.setRange(rng);
         }
     }
-    DatesRangeSelector.prototype.getRange = function (rng) {
+    DatesRangeSelector.prototype.getRange = function () {
         if (!this.$chkLimit.prop('checked'))
             return null;
         return this.rangeSelector.getRange();

@@ -5,17 +5,50 @@ function () {
     function DSDColumnValidator() { };
 
     DSDColumnValidator.prototype.validateColumns = function (cols) {
-        if (!cols)
-            return null;
         var toRet = [];
-        for (var i = 0; i < cols.length; i++) {
+
+        var colsValRes=this.validateColumns(cols);
+        if (colsValRes.length > 0)
+            for (var i = 0; i < cols.length; i++) {
+                toRet.push({ validationResults: colsValRes });
+            }
+        if (!cols)
+            return;
+        for (i = 0; i < cols.length; i++) {
             var colValRes = this.validateColumn(cols[i]);
             if (colValRes.length > 0)
                 toRet.push({ colId: cols[i].id, validationResults: colValRes });
         }
         return toRet;
     }
+    DSDColumnValidator.prototype.validateColumns = function (cols)
+    {
+        var toRet=[];
+        if (!cols) {
+            toRet.push({ level: 'error', message: 'nullColumns' });
+            return toRet;
+        }
+        if (cols.length < 3) {
+            toRet.push({ level: 'error', message: 'atLeast2Cols' });
+            return toRet;
+        }
+        //At least a key and a value?
+        var keyCount=0;
+        var valCount=0;
+        for (var i = 0; i < cols.length; i++)
+        {
+            if (cols[i].key)
+                keyCount++;
+            if (cols[i].dataType == 'number')
+                valCount++;
+        }
+        if (keyCount<1)
+            toRet.push({ level: 'error', message: 'atLeastOneKey' });
+        if (valCount < 1)
+            toRet.push({ level: 'error', message: 'atLeastOneValue' });
+        return toRet;
 
+    }
     DSDColumnValidator.prototype.validateColumn = function (col) {
         var toRet = [];
         if (!col) {

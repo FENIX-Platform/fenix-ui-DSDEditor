@@ -1,16 +1,14 @@
-﻿//276 Lines
-
-define([
+﻿define([
         'jquery',
-//'i18n!nls/ML_DSDEdit',
         'jqxall',
         'fx-DSDEditor/js/DSDEditor/simpleEditors/MLTextEditor',
         'fx-DSDEditor/js/DSDEditor/simpleEditors/DomainEditor',
         'fx-DSDEditor/js/DSDEditor/simpleEditors/ColumnEditorComponents/LimitedDDL',
         'fx-DSDEditor/js/DSDEditor/simpleEditors/ColumnEditorComponents/SubjectSelector',
+        'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit',
         'text!fx-DSDEditor/templates/DSDEditor/ColumnEditor.htm'
-    ],
-    function ($, jqx, MLTextEditor, DomainEditor, LimitedDDL, SubjectSelector, columnEditorHTML) {
+],
+    function ($, jqx, MLTextEditor, DomainEditor, LimitedDDL, SubjectSelector, mlRes, columnEditorHTML) {
         function ColumnEditor() {
             this.$container;
 
@@ -18,37 +16,22 @@ define([
 
             this.mlEditorTitle = new MLTextEditor();
             this.subjectSelector = new SubjectSelector();
-
             this.dataTypeSelector = new LimitedDDL();
-
             this.$dimension;
-
             this.domainEditor = new DomainEditor();
             this.mlEditorSupplemental = new MLTextEditor();
-
-            //Link here
         };
 
         ColumnEditor.prototype.render = function (container) {
             this.$container = container;
             this.$container.html(columnEditorHTML);
             this.mlEditorTitle.render(this.$container.find('#colEditTitle'));
-
             var $dataType = this.$container.find('#colEditDataType');
             this.dataTypeSelector.render($dataType);
             var $subject = this.$container.find('#colEditSubject');
             this.subjectSelector.render($subject);
-
-
             this.domainEditor.render(this.$container.find('#colEditDomain'));
-
             this.mlEditorSupplemental.render(this.$container.find('#colEditSupplemental'));
-           // this.mlEditorSupplemental.setWidth('100%');
-
-            //Link here
-
-            //this.doML();
-
             //Evts
             var me = this;
             $subject.on('changed.subjectSelector.fenix', function (evt, param) {
@@ -57,6 +40,7 @@ define([
             $dataType.on('change', function (evt) {
                 me.dataTypeChanged(evt.args.item.value);
             });
+            this.doML();
         }
 
         ColumnEditor.prototype.setSubjects = function (subjects) {
@@ -80,22 +64,17 @@ define([
             return this.domainEditor.getCodelsits();
         }
 
-        ColumnEditor.prototype.setCodelists = function (codelists) {
-            this.domainEditor.setCodelists(codelists);
-        }
-
         ColumnEditor.prototype.reset = function () {
             this.validationActive = false;
             this.colId = "";
             this.mlEditorTitle.reset();
-            this.dimensionEnabled(true);
+            this.keyEnabled(true);
             $('#colEditKey').prop('checked', false);
             this.dataTypeSelector.clearSelection();
             this.dataTypeSelector.limitItems(null);
             this.subjectSelector.setSelectedValue('');
             this.domainEditor.reset();
             this.mlEditorSupplemental.reset();
-            //Link here
             this.resetValidationResults();
             this.validationActive = true;
         }
@@ -117,7 +96,6 @@ define([
                 $('#colEditKey').prop('checked', col.key);
             if (col.supplemental)
                 this.mlEditorSupplemental.setLabels(col.supplemental);
-            //Link here
             this.validationActive = true;
         }
         ColumnEditor.prototype.getColumn = function () {
@@ -173,8 +151,11 @@ define([
         }
 
         //Evts
-        ColumnEditor.prototype.dimensionChanged = function () {
+        ColumnEditor.prototype.subjectChanged = function (newSubj) {
+            this.limitDataTypes(newSubj);
+            this.limitCodelists(newSubj);
         }
+
         ColumnEditor.prototype.dataTypeChanged = function (newDataType) {
             this.domainEditor.setMode(newDataType);
             var subj = this.subjectSelector.getSelectedSubject();
@@ -183,15 +164,12 @@ define([
 
             var dT = this.dataTypeSelector.getSelectedItem();
             if (dT)
-                this.dimensionEnabled(dT.canBeDimension);
+                this.keyEnabled(dT.canBeDimension);
             else
-                this.dimensionEnabled(true);
+                this.keyEnabled(true);
         }
-        ColumnEditor.prototype.subjectChanged = function (newSubj) {
-            this.limitDataTypes(newSubj);
-            this.limitCodelists(newSubj);
-        }
-        ColumnEditor.prototype.dimensionEnabled = function (enabled) {
+
+        ColumnEditor.prototype.keyEnabled = function (enabled) {
             if (enabled)
                 $('#colEditKey').removeAttr('disabled');
             else {
@@ -214,14 +192,14 @@ define([
         }
 
         //Multilang
-        /*ColumnEditor.prototype.doML = function () {
-         this.$container.find('#lTD_Title').html(mlRes.title);
-         this.$container.find('#lTD_Subject').html(mlRes.subject);
-         this.$container.find('#lTD_DataType').html(mlRes.datatype);
-         this.$container.find('#lTD_Domain').html(mlRes.domain);
-         this.$container.find('#lTD_key').html(mlRes.key);
-         this.$container.find('#lTD_Supplemental').html(mlRes.supplemental);
-         }*/
+        ColumnEditor.prototype.doML = function () {
+            this.$container.find('#lTD_Title').html(mlRes.title);
+            this.$container.find('#lTD_Subject').html(mlRes.subject);
+            this.$container.find('#lTD_DataType').html(mlRes.datatype);
+            this.$container.find('#lTD_Domain').html(mlRes.domain);
+            this.$container.find('#lTD_key').html(mlRes.key);
+            this.$container.find('#lTD_Supplemental').html(mlRes.supplemental);
+        }
         //END Multilang
 
         return ColumnEditor;
