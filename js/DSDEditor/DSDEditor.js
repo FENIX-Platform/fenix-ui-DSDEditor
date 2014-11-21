@@ -2,7 +2,6 @@
         'jquery',
         'jqxall',
         'require',
-        'fx-DSDEditor/js/DSDEditor/dataConnectors/DSDEditorBridge',
         'fx-DSDEditor/js/DSDEditor/helpers/ColumnIDGenerator',
         'fx-DSDEditor/js/DSDEditor/simpleEditors/ColumnEditor',
         'fx-DSDEditor/js/DSDEditor/simpleEditors/DSDTable',
@@ -10,10 +9,10 @@
         'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit',
         'text!fx-DSDEditor/templates/DSDEditor/DSDEdit.htm'
 ],
-    function ($, jqx, require, DSDEditorBridge, ColumnIDGenerator, ColumnEditor, DSDTable, DSDColumnValidator, mlRes, DSDEditHTML) {
+    function ($, jqx, require, ColumnIDGenerator, ColumnEditor, DSDTable, DSDColumnValidator, mlRes, DSDEditHTML) {
 
         var widgetName = "DSDEditor";
-        var evtColumnsEditDone="columnEditDone." + widgetName + ".fenix"
+        var evtColumnsEditDone = "columnEditDone." + widgetName + ".fenix"
 
         var defConfig = {};
         defConfig["subjects"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Subjects.json");
@@ -63,7 +62,7 @@
                         me.cols[me.cols.length - 1].id = idGen.generate(me.cols, me.cols.length - 1);
                     }
                     else {
-                        for (var i = 0; i < me.cols.length; i++) 
+                        for (var i = 0; i < me.cols.length; i++)
                             if (me.cols[i].id == newCol.id)
                                 me.cols[i] = newCol;
                     }
@@ -80,26 +79,28 @@
             this.DSDTable.render(this.$cntDSDGrid);
             this.DSDTable.setColumns(this.cols);
 
-            
+
             $('#btnColsEditDone').on('click', function () {
                 me.ColsEditDone();
             });
-            
+
             this.doML();
 
             var me = this;
-            var bridge = new DSDEditorBridge();
-            bridge.getSubjects(me.config.subjects, function (data) {
+            var subjErr = "Cannot find subjects definition at " + this.config.subjects;
+            var datatypeErr = "Cannot find datatypes definition at " + this.config.datatypes;
+            var codelistsErr = "Cannot find codelists definition at " + this.config.codelists;
+
+            ajaxGET(me.config.subjects, function (data) {
                 me.setSubjects(data);
-                bridge.getDataTypes(me.config.datatypes, function (data) {
+                ajaxGET(me.config.datatypes, function (data) {
                     me.setDataTypes(data);
-                    bridge.getCodelists(me.config.codelists, function (data) {
+                    ajaxGET(me.config.codelists, function (data) {
                         me.setCodelists(data);
-                        if (callB)
-                            callB();
-                    });
-                });
-            });
+                        if (callB) callB();
+                    }, codelistsErr);
+                }, datatypeErr);
+            }, subjErr);
 
             this.$cntDSDGrid.on("edit.DSDTable.fenix", function (evt, col) {
                 for (var i = 0; i < me.cols.length; i++) {
@@ -175,16 +176,16 @@
 
         //EVTS
         DSDEditor.prototype.ColsEditDone = function () {
-           /* DSDEditor.prototype.validateDSD = function () {
-                //validate the columns
-                var val = new DSDColumnValidator();
-                valRes = val.validateColumns(this.cols);
-                return valRes();
-                //this.showValidationResults(valRes);
-
-
-                return valRes;
-            }*/
+            /* DSDEditor.prototype.validateDSD = function () {
+                 //validate the columns
+                 var val = new DSDColumnValidator();
+                 valRes = val.validateColumns(this.cols);
+                 return valRes();
+                 //this.showValidationResults(valRes);
+ 
+ 
+                 return valRes;
+             }*/
             //Validate 
             var validator = new DSDColumnValidator();
             valRes = validator.validateColumns(this.cols);
@@ -194,7 +195,7 @@
             else
                 this.$container.trigger(evtColumnsEditDone, { payload: this.getColumns() });
 
-           // console.log(JSON.stringify(this.cols));
+            // console.log(JSON.stringify(this.cols));
         }
 
         DSDEditor.prototype.doML = function () {
@@ -202,6 +203,21 @@
             this.$container.find('#bntColReset').html(mlRes.reset);
         }
         //END Multilang
+
+        //AJAX
+        var ajaxGET = function (url, callB, errorMessage) {
+            $.ajax({
+                url: url,
+                crossDomain: true,
+                dataType: 'json',
+                success: function (data) {
+                    if (callB) callB(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    throw new Error("Cannot find DSD at " + url);
+                }
+            });
+        }
 
         return DSDEditor;
     });

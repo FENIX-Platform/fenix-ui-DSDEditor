@@ -4,16 +4,6 @@
         var DSDEditorBridge = function () {
         };
 
-        DSDEditorBridge.prototype.getSubjects = function (url, callB) {
-            ajaxGET(url, callB, "Cannot find subjects definition at " + url);
-        }
-        DSDEditorBridge.prototype.getDataTypes = function (url, callB) {
-            ajaxGET(url, callB, "Cannot find data types definition at " + url);
-        }
-        DSDEditorBridge.prototype.getCodelists = function (url, callB) {
-            ajaxGET(url, callB, "Cannot find code lists definition at " + url);
-        }
-
         DSDEditorBridge.prototype.getDSD = function (url, uid, version, callB) {
             var addr = url;
             if (!version)
