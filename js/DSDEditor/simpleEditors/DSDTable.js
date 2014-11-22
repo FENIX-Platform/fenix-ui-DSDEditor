@@ -138,15 +138,14 @@
             if (valRes.length == 0)
                 return;
 
-            
-
             var rows = this.$container.jqxGrid('getdisplayrows');
             var htmlRows = this.$container.find("div[role='row']");
             for (var i = 0; i < valRes.length; i++) {
+
                 if (valRes[i].colId) {
                     var rIdx = getRowIndexByID(rows, valRes[i].colId);
                     if (rIdx != -1)
-                        changeRowBackgroundColor(htmlRows[rIdx], "Red");
+                        changeRowBackgroundColor(htmlRows[rIdx], "error");
                 }
                 else {
                     //TODO: show the validation results somewhere on the interface
@@ -158,7 +157,7 @@
             var htmlRows = this.$container.find("div[role='row']");
             if (htmlRows)
                 for (var r = 0; r < htmlRows.length; r++)
-                    changeRowBackgroundColor(htmlRows[r], "");
+                    changeRowBackgroundColor(htmlRows[r], "normal");
         }
 
         var getRowIndexByID = function (rows, id) {
@@ -183,7 +182,10 @@
         }
 
         function changeCellBackgroundColor(htmlCell, color) {
-            $(htmlCell).addClass("fx-red-cell");
+            if (color == "error")
+                $(htmlCell).addClass("fx-red-cell");
+            else if (color == "normal")
+                $(htmlCell).removeClass("fx-red-cell");
         }
 
         //END Validation

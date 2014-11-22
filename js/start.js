@@ -41,9 +41,13 @@ define([
         DSDEditor.setColumns(cols);
     }
 
+    function getColumns()
+    { return DSDEditor.getColumns(); }
+
     return {
         init: DSDEditor_starter,
         updateDSD: updateDSD,
-        setColumns: setColumns
+        setColumns: setColumns,
+        getColumns:getColumns
     }
 });

@@ -149,6 +149,11 @@
         DSDEditor.prototype.setColumns = function (columns) {
             this.cols = columns;
             this.DSDTable.setColumns(this.cols);
+
+            var val = new DSDColumnValidator();
+            var valRes = val.validateColumns(this.cols);
+            this.DSDTable.showValidationResults(valRes);
+
         }
         DSDEditor.prototype.getColumns = function () {
             //VALIDATE
