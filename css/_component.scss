@@ -1,4 +1,20 @@
 /* Fenix Data Editor Component */
+.fx-validation{
+  @include animate;
+}
+
+.fx-red-cell{
+  background-color: orangered;
+  color: white;
+}
+
+
+#DSDEditorContainer{
+  .obj-box {
+    padding: 0;
+  }
+}
+
 
 #colEditTbl{
   tbody{
