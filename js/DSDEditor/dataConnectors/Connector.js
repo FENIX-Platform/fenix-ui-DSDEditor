@@ -13,34 +13,28 @@ define(['jquery'],
             ajaxGET(addr, queryParam, callB, "Cannot find Metadata at " + url);
         }
 
-        Connector.prototype.updateDSD = function (url, existingMeta, newDSD, callB) {
-            if (!existingMeta)
-                throw new Error("existing meta cannot be null");
+        Connector.prototype.putDSD = function (url, newDSD, callB) {
             if (!newDSD)
                 throw new Error("DSD cannot be null");
             if (!newDSD.contextSystem)
                 throw new Error("DSD. contextSystem cannot be null");
             if (!newDSD.datasource)
                 throw new Error("DSD. datasource cannot be null");
+            ajaxPUT(url, newDSD, "Error updating the DSD(PUT) with rid " + newDSD.rid,callB);
 
-            //The existing meta has a dsd with a his rid
-            if (existingMeta.dsd && existingMeta.dsd.rid) {
-                newDSD.rid = existingMeta.dsd.rid;
-                ajaxPUT(url, newDSD, "Error updating the DSD(PUT) with rid " + newDSD.rid);
-            }
-                //The existing meta does'ns have a rid for the DSD part
-            else {
-                var toPatch = { uid: existingMeta.uid };
-                if (existingMeta.version)
-                    toPatch.version = existingMeta.version;
-                toPatch.DSD = newDSD;
-                ajaxPATCH(url, toPatch, "Error updating the DSD(PATCH) with rid " + newDSD.rid);
-            }
+        }
+        Connector.prototype.patchDSD = function (url, toPatch, callB) {
+            if (!toPatch)
+                throw new Error("Object to be sent cannot be null");
+            if (!toPatch.dsd.contextSystem)
+                throw new Error("DSD. contextSystem cannot be null");
+            if (!toPatch.dsd.datasource)
+                throw new Error("DSD. datasource cannot be null");
+            ajaxPATCH(url, toPatch, "Error updating the DSD(PATCH) with rid " + toPatch.rid);
         }
 
         //DATA
         Connector.prototype.putData = function (url, existingMeta, data, callB) {
-
             var toPut = { metadata: { uid: existingMeta.uid } };
             if (existingMeta.version)
                 toPut.metadata.version = existingMeta.version;
@@ -72,7 +66,6 @@ define(['jquery'],
         }
 
         var ajaxPUT_PATCH = function (url, JSONtoSend, errorMessage, method, callB) {
-            console.log(JSONtoSend);
             $.ajax({
                 contentType: "application/json",
                 url: url,

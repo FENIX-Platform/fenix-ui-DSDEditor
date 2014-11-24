@@ -194,10 +194,10 @@
             //Validate 
             var validator = new DSDColumnValidator();
             valRes = validator.validateColumns(this.cols);
-            if (valRes && valRes.length > 0) {
+            /*if (valRes && valRes.length > 0) {
                 this.DSDTable.showValidationResults(valRes);
             }
-            else
+            else*/
                 this.$container.trigger(evtColumnsEditDone, { payload: this.getColumns() });
 
             // console.log(JSON.stringify(this.cols));

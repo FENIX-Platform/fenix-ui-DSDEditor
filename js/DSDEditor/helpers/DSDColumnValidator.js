@@ -28,7 +28,7 @@ function () {
             toRet.push({ level: 'error', message: 'nullColumns' });
             return toRet;
         }
-        if (cols.length < 3) {
+        if (cols.length < 2) {
             toRet.push({ level: 'error', message: 'atLeast2Cols' });
             return toRet;
         }
