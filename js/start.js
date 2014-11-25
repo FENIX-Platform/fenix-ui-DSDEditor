@@ -6,34 +6,20 @@ define([
     'domReady!'
 ], function ($, DSDEditor, Connector) {
 
-    function DSDEditor_starter(config, callB) {
+    this.config = {};
+
+    function init(containerID, config, callB) {
+        this.config = config;
         DSDEditor = new DSDEditor(config);
-        DSDEditor.render($('#mainContainer'), null, callB);
-
-        $('#btnEN').click(function () { setLang('EN'); });
-        $('#btnFR').click(function () { setLang('FR'); });
+        DSDEditor.render($(containerID), null, callB);
     }
-
-    /*Multilang test*/
-    function setLang(lang) {
-        var loc = localStorage.getItem('locale');
-        if (loc && loc.toUpperCase() == lang)
-            return;
-        localStorage.setItem('locale', lang.toLowerCase());
-        location.reload();
-    }
-
-    /*End multilang test*/
 
     function updateDSD(uid, version, dsd, datasource, contextSys, callB) {
-        /*var conn = new Connector();
-        conn.getMetadata(uid, version, function (meta) {
-            if (!meta)
-                throw new Error("Cannot find metadata with UID " + uid + " and version " + version);
-            conn.updateDSD(meta, dsd, datasource, contextSys, callB);
-        });*/
-
-        var conn = new Connector();
+        var conn;
+        if (this.config.servicesUrls)
+            conn = new Connector(this.config.servicesUrls);
+        else
+            conn = new Connector();
         conn.updateDSD(uid, version, dsd, datasource, contextSys, callB);
     }
 
@@ -45,9 +31,9 @@ define([
     }
 
     return {
-        init: DSDEditor_starter,
+        init: init,
         updateDSD: updateDSD,
         setColumns: setColumns,
-        getColumns:getColumns
+        getColumns: getColumns
     }
 });

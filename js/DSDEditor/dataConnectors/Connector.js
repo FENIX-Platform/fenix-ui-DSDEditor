@@ -3,7 +3,7 @@ define(['jquery'],
         var Connector = function () {
         };
 
-        Connector.prototype.getMetadata = function (url, uid, version, callB) {
+        /*Connector.prototype.getMetadata = function (url, uid, version, callB) {
             var addr = url;
             if (!version)
                 addr += "/uid/" + uid
@@ -11,9 +11,9 @@ define(['jquery'],
                 addr += "/" + uid + "/" + version;
             var queryParam = { dsd: true };
             ajaxGET(addr, queryParam, callB, "Cannot find Metadata at " + url);
-        }
+        }*/
 
-        Connector.prototype.putDSD = function (url, newDSD, callB) {
+       /* Connector.prototype.putDSD = function (url, newDSD, callB) {
             if (!newDSD)
                 throw new Error("DSD cannot be null");
             if (!newDSD.contextSystem)
@@ -31,20 +31,20 @@ define(['jquery'],
             if (!toPatch.dsd.datasource)
                 throw new Error("DSD. datasource cannot be null");
             ajaxPATCH(url, toPatch, "Error updating the DSD(PATCH) with rid " + toPatch.rid);
-        }
+        }*/
 
         //DATA
-        Connector.prototype.putData = function (url, existingMeta, data, callB) {
+/*        Connector.prototype.putData = function (url, existingMeta, data, callB) {
             var toPut = { metadata: { uid: existingMeta.uid } };
             if (existingMeta.version)
                 toPut.metadata.version = existingMeta.version;
             toPut.data = data;
             ajaxPUT(url, toPut, "Error executing data update", callB);
-        }
+        }*/
 
 
         //AJAX Methods
-        var ajaxGET = function (url, queryParam, callB, errorMessage) {
+        var ajaxGET = function (url, queryParam, callB) {
             $.ajax({
                 url: url,
                 crossDomain: true,
@@ -52,20 +52,21 @@ define(['jquery'],
                 data: queryParam,
                 success: function (data) {
                     if (callB) callB(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    throw new Error("Cannot find DSD at " + url);
                 }
+                /*error: function (jqXHR, textStatus, errorThrown) {
+                    //throw new Error("Cannot find DSD at " + url);
+                    
+                }*/
             });
         }
-        var ajaxPUT = function (url, JSONToPut, errorMessage, callB) {
-            ajaxPUT_PATCH(url, JSONToPut, errorMessage, 'PUT', callB);
+        var ajaxPUT = function (url, JSONToPut, callB) {
+            ajaxPUT_PATCH(url, JSONToPut, 'PUT', callB);
         }
-        var ajaxPATCH = function (url, JSONToPatch, errorMessage, callB) {
-            ajaxPUT_PATCH(url, JSONToPatch, errorMessage, 'PATCH', callB);
+        var ajaxPATCH = function (url, JSONToPatch, callB) {
+            ajaxPUT_PATCH(url, JSONToPatch, 'PATCH', callB);
         }
 
-        var ajaxPUT_PATCH = function (url, JSONtoSend, errorMessage, method, callB) {
+        var ajaxPUT_PATCH = function (url, JSONtoSend, method, callB) {
             $.ajax({
                 contentType: "application/json",
                 url: url,
@@ -75,10 +76,10 @@ define(['jquery'],
                 crossDomain: true,
                 success: function (data, textStatus, jqXHR) {
                     if (callB) callB;
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    throw new Error(errorMessage);
                 }
+                /*error: function (jqXHR, textStatus, errorThrown) {
+                    throw new Error(errorMessage);
+                }*/
             });
         }
 
