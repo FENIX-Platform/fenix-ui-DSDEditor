@@ -40,6 +40,9 @@ define([
     function setColumns(cols) {
         DSDEditor.setColumns(cols);
     }
+    function getColumns() {
+        return DSDEditor.getColumns();
+    }
 
     return {
         init: DSDEditor_starter,
