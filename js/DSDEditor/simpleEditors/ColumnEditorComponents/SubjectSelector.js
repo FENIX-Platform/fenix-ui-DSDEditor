@@ -1,11 +1,15 @@
 ﻿define(['jquery', 'jqxall'],
 function ($, jqx) {
-    var SubjectSelector = function () {
-        this.widgetName = 'subjectSelector';
+    var widgetName = 'subjectSelector';
+    var evtSubjectChanged = "changed." + widgetName + ".fenix";
+
+    var SubjectSelector = function (lang) {
         this.$container;
         this.subjects;
 
-        this.lang = 'EN';
+        this.lang='EN';
+        if (lang)
+            this.lang = lang;
     };
 
     SubjectSelector.prototype.render = function (container, lang) {
@@ -16,7 +20,6 @@ function ($, jqx) {
         this.updateDDL();
 
         var me = this;
-
         this.$container.on('change', function (evt) { me.subjectChanged(evt.args.item.value); });
     }
 
@@ -25,8 +28,6 @@ function ($, jqx) {
         this.updateDDL();
     }
     SubjectSelector.prototype.updateDDL = function () {
-        if (!this.$container)
-            return;
         if (!this.subjects)
             return;
 
@@ -40,12 +41,12 @@ function ($, jqx) {
 
     SubjectSelector.prototype.subjectChanged = function (val) {
         var subj = getSubjectByVal(val, this.subjects);
-        this.$container.trigger("changed." + this.widgetName + ".fenix", subj);
+        this.$container.trigger(evtSubjectChanged, subj);
     }
 
     SubjectSelector.prototype.getSelectedSubject = function () {
         if (!this.$container.jqxDropDownList('getSelectedItem'))
-            return getSubjectByVal(null, this.subjects);
+            return null;
         var val = this.$container.jqxDropDownList('getSelectedItem').value;
         return getSubjectByVal(val, this.subjects);
     }

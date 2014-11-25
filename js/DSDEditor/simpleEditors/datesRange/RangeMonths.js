@@ -1,10 +1,13 @@
 ﻿define([
 'jquery',
  'jqxall',
- 'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/datesRange/RangeMonths.htm'
+ 'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/datesRange/RangeMonths.htm',
+ 'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DomainEditor'
   ],
-function ($, jqx, rangeMonthsHTML) {
-    var RangeMonths = function () {
+function ($, jqx, rangeMonthsHTML, mlRes) {
+    var defConfig = { yMin: 0, yMax: 3000 };
+
+    var RangeMonths = function (config) {
         this.ignoreRangeEvents = false;
         this.$container;
 
@@ -13,11 +16,13 @@ function ($, jqx, rangeMonthsHTML) {
         this.$mTo;
         this.$yTo;
 
-        this.yMin = 0;
-        this.yMax = 3000;
+        this.config = {};
+        $.extend(true, this.config, defConfig, config);
     };
 
-    RangeMonths.prototype.render = function (container) {
+    RangeMonths.prototype.render = function (container, config) {
+        $.extend(true, this.config, config);
+
         this.$container = container;
         this.$container.html(rangeMonthsHTML);
 
@@ -27,9 +32,9 @@ function ($, jqx, rangeMonthsHTML) {
         this.$yTo = this.$container.find('#divRngMonthsYTo');
 
         this.$mFrom.jqxNumberInput({ width: 40, min: 1, max: 12, decimalDigits: 0, digits: 2, groupSeparator: '', promptChar: ' ' });
-        this.$yFrom.jqxNumberInput({ width: 40, min: this.yMin, max: this.yMax, decimalDigits: 0, digits: 4, groupSeparator: '', promptChar: ' ' });
+        this.$yFrom.jqxNumberInput({ width: 40, min: this.config.yMin, max: this.config.yMax, decimalDigits: 0, digits: 4, groupSeparator: '', promptChar: ' ' });
         this.$mTo.jqxNumberInput({ width: 40, min: 1, max: 12, decimalDigits: 0, digits: 2, groupSeparator: '', promptChar: ' ' });
-        this.$yTo.jqxNumberInput({ width: 40, min: this.yMin, max: this.yMax, decimalDigits: 0, digits: 4, groupSeparator: '', promptChar: ' ' });
+        this.$yTo.jqxNumberInput({ width: 40, min: this.config.yMin, max: this.config.yMax, decimalDigits: 0, digits: 4, groupSeparator: '', promptChar: ' ' });
         this.reset();
 
         var me = this;
@@ -37,6 +42,8 @@ function ($, jqx, rangeMonthsHTML) {
         this.$yFrom.on('change', function () { me.checkFromTo('f'); });
         this.$mTo.on('change', function () { me.checkFromTo('t'); });
         this.$yTo.on('change', function () { me.checkFromTo('t'); });
+
+        this.doMl();
     }
     RangeMonths.prototype.reset = function () {
         var d = new Date();
@@ -95,6 +102,11 @@ function ($, jqx, rangeMonthsHTML) {
             }
         }
         this.ignoreRangeEvents = false;
+    }
+
+    RangeMonths.prototype.doMl = function () {
+        this.$container.find('#tdMonthFrom').html(mlRes.from);
+        this.$container.find('#tdMonthTo').html(mlRes.to);
     }
 
     return RangeMonths;
