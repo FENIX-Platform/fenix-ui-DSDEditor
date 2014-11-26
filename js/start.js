@@ -10,11 +10,14 @@ define([
 
     function init(containerID, config, callB) {
         this.config = config;
-        DSDEditor = new DSDEditor(config);
+        //DSDEditor = new DSDEditor(config);
+        DSDEditor = new DSDEditor();
         DSDEditor.render($(containerID), null, callB);
     }
 
     function updateDSD(uid, version, dsd, datasource, contextSys, callB) {
+
+        console.log(this.config);
         var conn;
         if (this.config.servicesUrls)
             conn = new Connector(this.config.servicesUrls);
