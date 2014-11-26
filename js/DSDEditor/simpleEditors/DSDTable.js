@@ -140,8 +140,11 @@
 
             var rows = this.$container.jqxGrid('getdisplayrows');
             var htmlRows = this.$container.find("div[role='row']");
-            for (var i = 0; i < valRes.length; i++) {
 
+            var errMsg = " ";
+            for (var i = 0; i < valRes.length; i++) {
+                /*
+                UNCOMMENT THIS WHEN THE ERROR COLOR IS WORKING AGAIN
                 if (valRes[i].colId) {
                     var rIdx = getRowIndexByID(rows, valRes[i].colId);
                     if (rIdx != -1)
@@ -149,10 +152,20 @@
                 }
                 else {
                     //TODO: show the validation results somewhere on the interface
-                    alert(valRes[i].message);
-                }
+
+
+                    //alert(valRes[i].message);
+                    alert(mlRes[valRes[i].message]);
+                }*/
+
+                if (!valRes[i].field)
+                    errMsg = errMsg + mlRes[valRes[i].message] + "\n";
+                else
+                    errMsg = errMsg + valRes[i].field + " " + mlRes[valRes[i].message] + "\n";
             }
+            alert(errMsg);
         }
+
         DSDTable.prototype.resetValidationResults = function () {
             var htmlRows = this.$container.find("div[role='row']");
             if (htmlRows)

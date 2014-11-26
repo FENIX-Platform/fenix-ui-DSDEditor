@@ -10,8 +10,7 @@ define([
 
     function init(containerID, config, callB) {
         this.config = config;
-        //DSDEditor = new DSDEditor(config);
-        DSDEditor = new DSDEditor();
+        DSDEditor = new DSDEditor(config);
         DSDEditor.render($(containerID), null, callB);
     }
 
@@ -32,11 +31,16 @@ define([
     function getColumns() {
         return DSDEditor.getColumns();
     }
+    function validate()
+    {
+        return DSDEditor.validate();
+    }
 
     return {
         init: init,
         updateDSD: updateDSD,
         setColumns: setColumns,
-        getColumns: getColumns
+        getColumns: getColumns,
+        validate:validate
     }
 });

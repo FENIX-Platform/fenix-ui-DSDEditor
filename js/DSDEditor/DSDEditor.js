@@ -150,9 +150,10 @@
             this.cols = columns;
             this.DSDTable.setColumns(this.cols);
 
-            var val = new DSDColumnValidator();
+            /*var val = new DSDColumnValidator();
             var valRes = val.validateColumns(this.cols);
-            this.DSDTable.showValidationResults(valRes);
+            this.DSDTable.showValidationResults(valRes);*/
+            this.validate();
 
         }
         DSDEditor.prototype.getColumns = function () {
@@ -176,6 +177,13 @@
 
         DSDEditor.prototype.ColumnAddDeleteEnabled = function (enabled) {
             this.DSDTable.ColumnAddDeleteEnabled(enabled);
+        }
+
+        DSDEditor.prototype.validate = function (enabled) {
+            var val = new DSDColumnValidator();
+            var valRes = val.validateColumns(this.cols);
+            this.DSDTable.showValidationResults(valRes);
+            return valRes;
         }
 
 
