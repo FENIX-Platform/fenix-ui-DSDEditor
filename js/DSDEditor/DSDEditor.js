@@ -1,4 +1,13 @@
-﻿define([
+﻿/*
+config format:
+{
+subjects:'urlToSubjectsJSON'
+datatypes:'urlToDatatypesJSON'
+codelists:'urlToCodelistsJSON'
+langs:['EN','FR']
+}
+*/
+define([
         'jquery',
         'jqxall',
         'require',
@@ -12,7 +21,7 @@
     function ($, jqx, require, ColumnIDGenerator, ColumnEditor, DSDTable, DSDColumnValidator, mlRes, DSDEditHTML) {
 
         var widgetName = "DSDEditor";
-        var evtColumnsEditDone = "columnEditDone." + widgetName + ".fenix"
+        // var evtColumnsEditDone = "columnEditDone." + widgetName + ".fenix"
 
         var defConfig = {};
         defConfig["subjects"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Subjects.json");
@@ -80,9 +89,9 @@
             this.DSDTable.setColumns(this.cols);
 
 
-            $('#btnColsEditDone').on('click', function () {
+            /*$('#btnColsEditDone').on('click', function () {
                 me.ColsEditDone();
-            });
+            });*/
 
             this.doML();
 
@@ -150,13 +159,13 @@
             this.cols = columns;
             this.DSDTable.setColumns(this.cols);
 
-            var val = new DSDColumnValidator();
-            var valRes = val.validateColumns(this.cols);
-            this.DSDTable.showValidationResults(valRes);
+            /*var val = new DSDColumnValidator();
+            var valRes = val.validateColumns(this.cols);*/
+            this.DSDTable.showValidationResults(this.validate());
 
         }
         DSDEditor.prototype.getColumns = function () {
-            //VALIDATE
+            this.DSDTable.showValidationResults(this.validate());
             return this.cols;
         }
 
@@ -173,34 +182,12 @@
             newCol.id = "";
             this.colEditor.setColumn(newCol);
         }
-
         DSDEditor.prototype.ColumnAddDeleteEnabled = function (enabled) {
             this.DSDTable.ColumnAddDeleteEnabled(enabled);
         }
-
-
-        //EVTS
-        DSDEditor.prototype.ColsEditDone = function () {
-            /* DSDEditor.prototype.validateDSD = function () {
-                 //validate the columns
-                 var val = new DSDColumnValidator();
-                 valRes = val.validateColumns(this.cols);
-                 return valRes();
-                 //this.showValidationResults(valRes);
- 
- 
-                 return valRes;
-             }*/
-            //Validate 
-            var validator = new DSDColumnValidator();
-            valRes = validator.validateColumns(this.cols);
-            /*if (valRes && valRes.length > 0) {
-                this.DSDTable.showValidationResults(valRes);
-            }
-            else*/
-                this.$container.trigger(evtColumnsEditDone, { payload: this.getColumns() });
-
-            // console.log(JSON.stringify(this.cols));
+        DSDEditor.prototype.validate = function () {
+            var val = new DSDColumnValidator();
+            return val.validateColumns(this.cols);
         }
 
         DSDEditor.prototype.doML = function () {

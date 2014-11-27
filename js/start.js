@@ -10,29 +10,10 @@ define([
         DSDEditor = new DSDEditor(config);
         DSDEditor.render($('#mainContainer'), null, callB);
 
-        $('#btnEN').click(function () { setLang('EN'); });
-        $('#btnFR').click(function () { setLang('FR'); });
+        testMode();
     }
-
-    /*Multilang test*/
-    function setLang(lang) {
-        var loc = localStorage.getItem('locale');
-        if (loc && loc.toUpperCase() == lang)
-            return;
-        localStorage.setItem('locale', lang.toLowerCase());
-        location.reload();
-    }
-
-    /*End multilang test*/
 
     function updateDSD(uid, version, dsd, datasource, contextSys, callB) {
-        /*var conn = new Connector();
-        conn.getMetadata(uid, version, function (meta) {
-            if (!meta)
-                throw new Error("Cannot find metadata with UID " + uid + " and version " + version);
-            conn.updateDSD(meta, dsd, datasource, contextSys, callB);
-        });*/
-
         var conn = new Connector();
         conn.updateDSD(uid, version, dsd, datasource, contextSys, callB);
     }
@@ -42,6 +23,15 @@ define([
     }
     function getColumns() {
         return DSDEditor.getColumns();
+    }
+
+    function testMode()
+    {
+        console.log("-- DSDEditor test mode active -- ");
+        $('#btnColsEditDone').click(function () {
+            DSDEditor.validate();
+            console.log(DSDEditor.getColumns());
+        });
     }
 
     return {
