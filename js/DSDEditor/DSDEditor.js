@@ -154,7 +154,6 @@ define([
             this.DSDTable.showValidationResults(this.validate());
         }
         DSDEditor.prototype.getColumns = function () {
-            this.DSDTable.showValidationResults(this.validate());
             return this.cols;
         }
 
