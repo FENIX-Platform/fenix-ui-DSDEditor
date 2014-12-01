@@ -175,8 +175,10 @@ define([
             this.DSDTable.ColumnAddDeleteEnabled(enabled);
         }
         DSDEditor.prototype.validate = function () {
-            var val = new DSDColumnValidator();
-            return val.validateColumns(this.cols);
+            //var val = new DSDColumnValidator();
+            var valRes = new DSDColumnValidator().validateColumns(this.cols);
+            this.DSDTable.showValidationResults(valRes);
+            return valRes;
         }
 
         DSDEditor.prototype.doML = function () {
