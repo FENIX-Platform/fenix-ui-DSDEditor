@@ -1,19 +1,29 @@
-﻿define([
+﻿/*
+config format:
+{langs:['EN','FR']}
+*/
+define([
     'jquery',
     'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/MLTextEditor.htm'
 ],
     function ($, MLTextEditorHTML) {
-        function MLTextEditor() {
-            this.$container;
-            this.langs = ['EN', 'FR'];
 
+        var defConfig = { langs: ['EN', 'FR'] };
+
+        function MLTextEditor(config) {
+            this.config = {};
+            $.extend(true, this.config, defConfig, config);
+            this.$container;
             this.txtFields = [];
         };
 
-        MLTextEditor.prototype.render = function (container, langCodes) {
+        MLTextEditor.prototype.render = function (container, config) {
+            $.extend(true, this.config, config);
+
+            for (var i = 0; i < this.config.langs.length; i++)
+                this.config.langs[i] = this.config.langs[i].toUpperCase();
+
             this.$container = container;
-            if (langCodes)
-                this.langs = langCodes;
             this.$container.html(MLTextEditorHTML);
             this.createGrid();
         }
@@ -46,11 +56,11 @@
             this.txtFields = [];
             var idPrefix = 'MLTextEditor_';
             var $tbody = this.$container.find('tbody');
-            for (var i = 0; i < this.langs.length; i++) {
-                var $row = $('<tr><td>' + this.langs[i] + '</td><td>' + '<input type="text" name="' + idPrefix + this.langs[i] + '" value=""' + '</td></tr>');
+            for (var i = 0; i < this.config.langs.length; i++) {
+                var $row = $('<tr><td>' + this.config.langs[i] + '</td><td>' + '<input type="text" name="' + idPrefix + this.config.langs[i] + '" value=""' + '</td></tr>');
                 $tbody.append($row);
-                txtArea = $row.find('input[name=' + idPrefix + this.langs[i] + ']');
-                this.txtFields.push({ code: this.langs[i], txtArea: txtArea });
+                txtArea = $row.find('input[name=' + idPrefix + this.config.langs[i] + ']');
+                this.txtFields.push({ code: this.config.langs[i], txtArea: txtArea });
             }
         }
         //END Grid creation

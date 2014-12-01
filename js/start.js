@@ -26,6 +26,13 @@ define([
     }
 
     function setColumns(cols) {
+
+    function getColumns() { return DSDEditor.getColumns(); }
+
+    function testMode() {
+        console.log("-- DSDEditor test mode active -- ");
+        $('#btnColsEditDone').click(function () {
+            DSDEditor.validate();
         DSDEditor.setColumns(cols);
     }
     function getColumns() {

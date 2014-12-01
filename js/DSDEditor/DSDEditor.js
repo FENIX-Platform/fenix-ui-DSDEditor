@@ -1,4 +1,13 @@
-﻿define([
+﻿/*
+config format:
+{
+subjects:'urlToSubjectsJSON'
+datatypes:'urlToDatatypesJSON'
+codelists:'urlToCodelistsJSON'
+langs:['EN','FR']
+}
+*/
+define([
         'jquery',
         'jqxall',
         'require',
@@ -12,7 +21,7 @@
     function ($, jqx, require, ColumnIDGenerator, ColumnEditor, DSDTable, DSDColumnValidator, mlRes, DSDEditHTML) {
 
         var widgetName = "DSDEditor";
-        var evtColumnsEditDone = "columnEditDone." + widgetName + ".fenix"
+        // var evtColumnsEditDone = "columnEditDone." + widgetName + ".fenix"
 
         var defConfig = {};
         defConfig["subjects"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Subjects.json");
@@ -23,7 +32,6 @@
             this.config = {};
             $.extend(true, this.config, defConfig, config);
 
-            this.widgetName = "DSDEditor";
             this.$container;
             this.cols = [];
 
@@ -78,11 +86,6 @@
             this.DSDTable = new DSDTable();
             this.DSDTable.render(this.$cntDSDGrid);
             this.DSDTable.setColumns(this.cols);
-
-
-            $('#btnColsEditDone').on('click', function () {
-                me.ColsEditDone();
-            });
 
             this.doML();
 
@@ -141,7 +144,6 @@
         DSDEditor.prototype.getCodelists = function () {
             return this.colEditor.getCodelists();
         }
-
         //END Render - creation
 
 
@@ -149,15 +151,10 @@
         DSDEditor.prototype.setColumns = function (columns) {
             this.cols = columns;
             this.DSDTable.setColumns(this.cols);
-
-            /*var val = new DSDColumnValidator();
-            var valRes = val.validateColumns(this.cols);
-            this.DSDTable.showValidationResults(valRes);*/
-            this.validate();
-
+            this.DSDTable.showValidationResults(this.validate());
         }
         DSDEditor.prototype.getColumns = function () {
-            //VALIDATE
+            this.DSDTable.showValidationResults(this.validate());
             return this.cols;
         }
 
@@ -174,41 +171,12 @@
             newCol.id = "";
             this.colEditor.setColumn(newCol);
         }
-
         DSDEditor.prototype.ColumnAddDeleteEnabled = function (enabled) {
             this.DSDTable.ColumnAddDeleteEnabled(enabled);
         }
-
-        DSDEditor.prototype.validate = function (enabled) {
+        DSDEditor.prototype.validate = function () {
             var val = new DSDColumnValidator();
-            var valRes = val.validateColumns(this.cols);
-            this.DSDTable.showValidationResults(valRes);
-            return valRes;
-        }
-
-
-        //EVTS
-        DSDEditor.prototype.ColsEditDone = function () {
-            /* DSDEditor.prototype.validateDSD = function () {
-                 //validate the columns
-                 var val = new DSDColumnValidator();
-                 valRes = val.validateColumns(this.cols);
-                 return valRes();
-                 //this.showValidationResults(valRes);
- 
- 
-                 return valRes;
-             }*/
-            //Validate 
-            var validator = new DSDColumnValidator();
-            valRes = validator.validateColumns(this.cols);
-            /*if (valRes && valRes.length > 0) {
-                this.DSDTable.showValidationResults(valRes);
-            }
-            else*/
-                this.$container.trigger(evtColumnsEditDone, { payload: this.getColumns() });
-
-            // console.log(JSON.stringify(this.cols));
+            return val.validateColumns(this.cols);
         }
 
         DSDEditor.prototype.doML = function () {
@@ -218,6 +186,7 @@
         //END Multilang
 
         //AJAX
+        //TODO: move the ajax call elsewhere
         var ajaxGET = function (url, callB, errorMessage) {
             $.ajax({
                 url: url,

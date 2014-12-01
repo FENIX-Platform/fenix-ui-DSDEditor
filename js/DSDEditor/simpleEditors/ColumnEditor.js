@@ -1,4 +1,8 @@
-﻿define([
+﻿/*
+config format:
+{langs:['EN','FR']}
+*/
+define([
         'jquery',
         'jqxall',
         'fx-DSDEditor/js/DSDEditor/simpleEditors/MLTextEditor',
@@ -9,11 +13,15 @@
         'text!fx-DSDEditor/templates/DSDEditor/ColumnEditor.htm'
 ],
     function ($, jqx, MLTextEditor, DomainEditor, LimitedDDL, SubjectSelector, mlRes, columnEditorHTML) {
-        function ColumnEditor() {
+
+        var defConfig = {};
+
+        function ColumnEditor(config) {
+            this.config = {};
+            $.extend(true, this.config, defConfig, config);
             this.$container;
 
             this.colId = "";
-
             this.mlEditorTitle = new MLTextEditor();
             this.subjectSelector = new SubjectSelector();
             this.dataTypeSelector = new LimitedDDL();
@@ -22,16 +30,17 @@
             this.mlEditorSupplemental = new MLTextEditor();
         };
 
-        ColumnEditor.prototype.render = function (container) {
+        ColumnEditor.prototype.render = function (container, config) {
+            $.extend(true, this.config, config);
             this.$container = container;
             this.$container.html(columnEditorHTML);
-            this.mlEditorTitle.render(this.$container.find('#colEditTitle'));
+            this.mlEditorTitle.render(this.$container.find('#colEditTitle'), this.config);
             var $dataType = this.$container.find('#colEditDataType');
             this.dataTypeSelector.render($dataType);
             var $subject = this.$container.find('#colEditSubject');
             this.subjectSelector.render($subject);
             this.domainEditor.render(this.$container.find('#colEditDomain'));
-            this.mlEditorSupplemental.render(this.$container.find('#colEditSupplemental'));
+            this.mlEditorSupplemental.render(this.$container.find('#colEditSupplemental'), this.config);
             //Evts
             var me = this;
             $subject.on('changed.subjectSelector.fenix', function (evt, param) {
