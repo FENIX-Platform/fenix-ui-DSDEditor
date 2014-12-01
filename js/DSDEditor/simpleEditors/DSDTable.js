@@ -91,6 +91,7 @@
         DSDTable.prototype.createDSDGridCols = function () {
             var me = this;
             var toRet = [
+                { text: 'id', dataField: 'id', displayField: 'id', hidden: true },
                 {
                     text: mlRes['edit'], dataField: 'edit', width: '10%', columntype: 'button', cellsrenderer: function () {
                         return mlRes['edit'];
@@ -98,15 +99,14 @@
                         me.rowClicked(row, 'edit');
                     }
                 },
-                { text: 'id', dataField: 'id', displayField: 'id', hidden: true },
-                { text: mlRes['title'], dataField: 'MLTitle', width: '10%' },
-                { text: mlRes['subject'], dataField: 'subject', width: '10%' },
-                { text: mlRes['key'], dataField: 'key', columntype: 'checkbox', width: '10%' },
-                { text: mlRes['datatype'], dataField: 'dataType', width: '10%' },
-                { text: mlRes['domain'], dataField: 'tmp_domain', width: '10%' },
+                { text: mlRes['title'], dataField: 'MLTitle', width: '20%' },
+                { text: mlRes['subject'], dataField: 'subject', width: '11%' },
+                { text: mlRes['key'], dataField: 'key', columntype: 'checkbox', width: '7%' },
+                { text: mlRes['datatype'], dataField: 'dataType', width: '11%' },
+                { text: mlRes['domain'], dataField: 'tmp_domain', width: '11%' },
                 { text: mlRes['supplemental'], dataField: 'MLSupplemental', width: '20%' },
                 {
-                    text: mlRes['delete'], dataField: 'delete', columntype: 'button', width: '20%', cellsrenderer: function () {
+                    text: mlRes['delete'], dataField: 'delete', columntype: 'button', width: '10%', cellsrenderer: function () {
                         return mlRes['delete'];
                     }, buttonclick: function (row) {
                         me.rowClicked(row, 'delete');

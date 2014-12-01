@@ -18,15 +18,11 @@ define([
         conn.updateDSD(uid, version, dsd, datasource, contextSys, callB);
     }
 
-    function setColumns(cols) {
-        DSDEditor.setColumns(cols);
-    }
-    function getColumns() {
-        return DSDEditor.getColumns();
-    }
+    function setColumns(cols) { DSDEditor.setColumns(cols); }
 
-    function testMode()
-    {
+    function getColumns() { return DSDEditor.getColumns(); }
+
+    function testMode() {
         console.log("-- DSDEditor test mode active -- ");
         $('#btnColsEditDone').click(function () {
             DSDEditor.validate();
@@ -38,6 +34,6 @@ define([
         init: DSDEditor_starter,
         updateDSD: updateDSD,
         setColumns: setColumns,
-        getColumns:getColumns
+        getColumns: getColumns
     }
 });

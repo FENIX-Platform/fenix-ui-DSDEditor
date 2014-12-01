@@ -32,7 +32,6 @@ define([
             this.config = {};
             $.extend(true, this.config, defConfig, config);
 
-            this.widgetName = "DSDEditor";
             this.$container;
             this.cols = [];
 
@@ -87,11 +86,6 @@ define([
             this.DSDTable = new DSDTable();
             this.DSDTable.render(this.$cntDSDGrid);
             this.DSDTable.setColumns(this.cols);
-
-
-            /*$('#btnColsEditDone').on('click', function () {
-                me.ColsEditDone();
-            });*/
 
             this.doML();
 
@@ -150,7 +144,6 @@ define([
         DSDEditor.prototype.getCodelists = function () {
             return this.colEditor.getCodelists();
         }
-
         //END Render - creation
 
 
@@ -158,11 +151,7 @@ define([
         DSDEditor.prototype.setColumns = function (columns) {
             this.cols = columns;
             this.DSDTable.setColumns(this.cols);
-
-            /*var val = new DSDColumnValidator();
-            var valRes = val.validateColumns(this.cols);*/
             this.DSDTable.showValidationResults(this.validate());
-
         }
         DSDEditor.prototype.getColumns = function () {
             this.DSDTable.showValidationResults(this.validate());
@@ -197,6 +186,7 @@ define([
         //END Multilang
 
         //AJAX
+        //TODO: move the ajax call elsewhere
         var ajaxGET = function (url, callB, errorMessage) {
             $.ajax({
                 url: url,
