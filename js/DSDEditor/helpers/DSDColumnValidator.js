@@ -14,24 +14,22 @@ function () {
     var MSG_EMPTY_ID_CODELSIT = 'EmptyIdCodeList';
 
    DSDColumnValidator.prototype.validateColumns = function (cols) {
-
-        var toRet = [];
-
-        var colsValRes=this.validateStructure(cols, toRet);
-        
-        if (!cols)
-            return toRet;
-        for (i = 0; i < cols.length; i++) {
-            var colValRes = this.validateColumn(cols[i], toRet);
-
-            /*if (colValRes.length > 0)
-                toRet.push({ colId: cols[i].id, validationResults: colValRes });*/
-        }
-        return toRet;
+       var toRet = [];
+       var valStructure = this.validateStructure(cols);
+       
+       arrAppend(toRet, valStructure);
+       if (!cols)
+           return toRet;
+       for (var i = 0; i < cols.length; i++) {
+           var colValRes = this.validateColumn(cols[i]);
+           arrAppend(toRet, colValRes);
+       }
+       return toRet;
     }
 
-   DSDColumnValidator.prototype.validateStructure = function (cols, toRet)
-    {
+   DSDColumnValidator.prototype.validateStructure = function (cols)
+   {
+       var toRet = [];
         if (!cols) {
             toRet.push({ level: 'error', message: MSG_NULL_COLUMNS });
             return toRet;
@@ -55,18 +53,21 @@ function () {
             toRet.push({ level: 'error', message: MSG_AT_LEAST_ONE_KEY });
         /*if (valCount < 1)
             toRet.push({ level: 'error', message: MSG_AT_LEAST_ONE_VALUE });*/
+        return toRet;
     }
 
-    DSDColumnValidator.prototype.validateColumn = function (col, toRet) {
+   DSDColumnValidator.prototype.validateColumn = function (col) {
+       var toRet = [];
         if (!col) {
             toRet.push({ level: 'error', message: MSG_NULL_COLUMN });
             return toRet;
         }
-
         arrAppend(toRet, this.validateTitle(col.title));
         arrAppend(toRet, this.validateDimension(col));
         arrAppend(toRet, this.validateDatatype(col));
         arrAppend(toRet, this.validateDomain(col));
+
+        return toRet;
     }
 
     DSDColumnValidator.prototype.validateTitle = function (toVal) {
@@ -103,12 +104,20 @@ function () {
         }
     }
 
-    var arrAppend = function (arr1, arr2) {
+    var arrAppend = function (arr1, arrOrObj) {
+        if (!arrOrObj)
+            return;
+
         if (!arr1)
             arr1 = [];
-        if (!arr2)
-            return;
-        arr1.push(arr2);
+        if (arrOrObj instanceof Array) {
+            if (arrOrObj.length == 0)
+                return;
+            for (var i = 0; i < arrOrObj.length; i++)
+                arr1.push(arrOrObj[i]);
+        }
+        else
+            arr1.push(arrOrObj);
     }
 
     return DSDColumnValidator;
