@@ -13,7 +13,8 @@ define([
         DSDEditor = new DSDEditor(config);
         DSDEditor.render($(containerID), null, callB);
 
-        testMode();
+        if (config.testMode)
+            testMode();
     }
 
     function updateDSD(uid, version, dsd, datasource, contextSys, callB) {
