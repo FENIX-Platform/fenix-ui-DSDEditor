@@ -158,6 +158,7 @@ define([
 
         DSDEditor.prototype.reset = function () {
             //this.colAddDelEnabled = true;
+
             this.cols.length = 0;
             this.refreshColumns();
         }
