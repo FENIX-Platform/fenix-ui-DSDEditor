@@ -21,7 +21,6 @@ define([
     function ($, jqx, require, ColumnIDGenerator, ColumnEditor, DSDTable, DSDColumnValidator, mlRes, DSDEditHTML) {
 
         var widgetName = "DSDEditor";
-        // var evtColumnsEditDone = "columnEditDone." + widgetName + ".fenix"
 
         var defConfig = {};
         defConfig["subjects"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Subjects.json");
