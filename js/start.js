@@ -10,11 +10,13 @@ define([
 
     function init(containerID, config, callB) {
         this.config = config;
+        if (config && config.testMode)
+            testMode();
+
+
+
         DSDEditor = new DSDEditor(config);
         DSDEditor.render($(containerID), null, callB);
-
-        if (config.testMode)
-            testMode();
     }
 
     function updateDSD(uid, version, dsd, datasource, contextSys, callB) {
