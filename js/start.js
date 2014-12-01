@@ -12,11 +12,11 @@ define([
         this.config = config;
         DSDEditor = new DSDEditor(config);
         DSDEditor.render($(containerID), null, callB);
+
+        testMode();
     }
 
     function updateDSD(uid, version, dsd, datasource, contextSys, callB) {
-
-        console.log(this.config);
         var conn;
         if (this.config.servicesUrls)
             conn = new Connector(this.config.servicesUrls);
@@ -25,29 +25,25 @@ define([
         conn.updateDSD(uid, version, dsd, datasource, contextSys, callB);
     }
 
-    function setColumns(cols) {
-
+    function setColumns(cols) { DSDEditor.setColumns(cols); }
     function getColumns() { return DSDEditor.getColumns(); }
+    function validate() { return DSDEditor.validate(); }
 
     function testMode() {
         console.log("-- DSDEditor test mode active -- ");
         $('#btnColsEditDone').click(function () {
             DSDEditor.validate();
-        DSDEditor.setColumns(cols);
+            console.log(DSDEditor.getColumns());
+        });
     }
-    function getColumns() {
-        return DSDEditor.getColumns();
-    }
-    function validate()
-    {
-        return DSDEditor.validate();
-    }
+
+
 
     return {
         init: init,
         updateDSD: updateDSD,
         setColumns: setColumns,
         getColumns: getColumns,
-        validate:validate
+        validate: validate
     }
 });
