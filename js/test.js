@@ -7,6 +7,7 @@
     // better way to handle this, but I don't know what it is.
     setTimeout(function () {
         /*
+        
          @param: prefix of Components paths to reference them also in absolute mode
          @param: paths to override
          @param: callback function
