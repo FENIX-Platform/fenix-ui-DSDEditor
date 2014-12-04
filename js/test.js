@@ -16,9 +16,26 @@
             require([
                 'fx-DSDEditor/start'
             ], function (Editor) {
-                var config = { testMode: true };
+                
+                var cfg = {
+                    columnEditor: {
+                        //subjects: "urlToSubjectsJSON",
+                        //datatypes: "urlToDatatypesJSON",
+                        // codelists: "urlToCodelistsJSON"
+                        //codelists: "config/DSDEditor/CodelistsUAE.json"
+                    },
+                    MLEditor: {
+                        langs: ["EN", "RU"]
+                    },
+                    D3SConnector: {
+                        datasource: "CountrySTAT",
+                        contextSystem: "CountrySTAT"
+                    },
+                    testMode:true
+                };
+
                 var callB = null;
-                Editor.init("#mainContainer", config, callB);
+                Editor.init("#mainContainer", cfg, callB);
             });
         });
     }, 0);

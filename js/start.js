@@ -1,3 +1,23 @@
+/*
+config format:
+
+{
+    "columnEditor": {
+        "subjects": "urlToSubjectsJSON",
+        "datatypes": "urlToDatatypesJSON",
+        "codelists": "urlToCodelistsJSON"
+    },
+    "MLEditor": {
+        "langs": ["EN","FR"]
+    },
+    "D3SConnector": {
+        "datasource": "CountrySTAT",
+        "contextSystem": "CountrySTAT"
+    },
+    "testMode":true
+}
+
+*/
 define([
     'jquery',
     'fx-DSDEditor/js/DSDEditor/DSDEditor',
@@ -6,24 +26,30 @@ define([
     'domReady!'
 ], function ($, DSDEditor, Connector) {
 
-    this.config = {};
+    var defConfig = {
+        D3SConnector: {
+            "datasource": "CountrySTAT",
+            "contextSystem": "CountrySTAT"
+        }
+    };
+
+    var cfg = {};
 
     function init(containerID, config, callB) {
-        this.config = config;
-        if (config && config.testMode)
+        $.extend(true, cfg, defConfig, config);
+        if (this.config && cfg.testMode)
             testMode();
-
-        DSDEditor = new DSDEditor(config);
+        DSDEditor = new DSDEditor(cfg);
         DSDEditor.render($(containerID), null, callB);
     }
 
-    function updateDSD(uid, version, dsd, datasource, contextSys, callB) {
+    function updateDSD(uid, version, dsd, callB) {
         var conn;
         if (this.config.servicesUrls)
-            conn = new Connector(this.config.servicesUrls);
+            conn = new Connector(cfg.servicesUrls);
         else
             conn = new Connector();
-        conn.updateDSD(uid, version, dsd, datasource, contextSys, callB);
+        conn.updateDSD(uid, version, dsd, cfg.D3SConnector.datasource, cfg.D3SConnector.contextSystem, callB);
     }
 
     function setColumns(cols) { DSDEditor.setColumns(cols); }

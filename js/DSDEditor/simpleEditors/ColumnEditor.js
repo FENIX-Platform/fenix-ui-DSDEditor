@@ -34,13 +34,13 @@ define([
             $.extend(true, this.config, config);
             this.$container = container;
             this.$container.html(columnEditorHTML);
-            this.mlEditorTitle.render(this.$container.find('#colEditTitle'), this.config);
+            this.mlEditorTitle.render(this.$container.find('#colEditTitle'), this.config.MLEditor);
             var $dataType = this.$container.find('#colEditDataType');
             this.dataTypeSelector.render($dataType);
             var $subject = this.$container.find('#colEditSubject');
             this.subjectSelector.render($subject);
             this.domainEditor.render(this.$container.find('#colEditDomain'));
-            this.mlEditorSupplemental.render(this.$container.find('#colEditSupplemental'), this.config);
+            this.mlEditorSupplemental.render(this.$container.find('#colEditSupplemental'), this.config.MLEditor);
             //Evts
             var me = this;
             $subject.on('changed.subjectSelector.fenix', function (evt, param) {

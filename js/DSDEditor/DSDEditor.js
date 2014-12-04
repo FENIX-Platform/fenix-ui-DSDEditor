@@ -1,13 +1,4 @@
-﻿/*
-config format:
-{
-subjects:'urlToSubjectsJSON'
-datatypes:'urlToDatatypesJSON'
-codelists:'urlToCodelistsJSON'
-langs:['EN','FR']
-}
-*/
-define([
+﻿define([
         'jquery',
         'jqxall',
         'require',
@@ -22,10 +13,10 @@ define([
 
         var widgetName = "DSDEditor";
 
-        var defConfig = {};
-        defConfig["subjects"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Subjects.json");
-        defConfig["datatypes"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Datatypes.json");
-        defConfig["codelists"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Codelists.json");
+        var defConfig = { columnEditor: {}};
+        defConfig.columnEditor["subjects"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Subjects.json");
+        defConfig.columnEditor["datatypes"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Datatypes.json");
+        defConfig.columnEditor["codelists"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Codelists.json");
 
         var DSDEditor = function (config) {
             this.config = {};
@@ -49,7 +40,7 @@ define([
             this.$container.html(DSDEditHTML);
             this.$cntColEdit = this.$container.find('#cntColEdit');
 
-            this.colEditor = new ColumnEditor();
+            this.colEditor = new ColumnEditor(this.config);
             this.colEditor.render(this.$cntColEdit);
 
             var me = this;
@@ -89,15 +80,15 @@ define([
             this.doML();
 
             var me = this;
-            var subjErr = "Cannot find subjects definition at " + this.config.subjects;
-            var datatypeErr = "Cannot find datatypes definition at " + this.config.datatypes;
-            var codelistsErr = "Cannot find codelists definition at " + this.config.codelists;
+            var subjErr = "Cannot find subjects definition at " + this.config.columnEditor.subjects;
+            var datatypeErr = "Cannot find datatypes definition at " + this.config.columnEditor.datatypes;
+            var codelistsErr = "Cannot find codelists definition at " + this.config.columnEditor.codelists;
 
-            ajaxGET(me.config.subjects, function (data) {
+            ajaxGET(me.config.columnEditor.subjects, function (data) {
                 me.setSubjects(data);
-                ajaxGET(me.config.datatypes, function (data) {
+                ajaxGET(me.config.columnEditor.datatypes, function (data) {
                     me.setDataTypes(data);
-                    ajaxGET(me.config.codelists, function (data) {
+                    ajaxGET(me.config.columnEditor.codelists, function (data) {
                         me.setCodelists(data);
                         if (callB) callB();
                     }, codelistsErr);
