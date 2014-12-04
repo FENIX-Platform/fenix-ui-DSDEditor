@@ -13,10 +13,8 @@ config format:
     "D3SConnector": {
         "datasource": "CountrySTAT",
         "contextSystem": "CountrySTAT"
-    },
-    "testMode":true
+    }
 }
-
 */
 define([
     'jquery',
@@ -55,16 +53,6 @@ define([
     function setColumns(cols) { DSDEditor.setColumns(cols); }
     function getColumns() { return DSDEditor.getColumns(); }
     function validate() { return DSDEditor.validate(); }
-
-    function testMode() {
-        console.log("-- DSDEditor test mode active -- ");
-        $('#btnColsEditDone').click(function () {
-            DSDEditor.validate();
-            console.log(DSDEditor.getColumns());
-        });
-    }
-
-
 
     return {
         init: init,

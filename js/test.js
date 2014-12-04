@@ -30,12 +30,19 @@
                     D3SConnector: {
                         datasource: "CountrySTAT",
                         contextSystem: "CountrySTAT"
-                    },
-                    testMode:true
+                    }
                 };
 
                 var callB = null;
                 Editor.init("#mainContainer", cfg, callB);
+
+
+                //TEST 
+                console.log("-- DSDEditor test mode active -- ");
+                $('#btnColsEditDone').click(function () {
+                    Editor.validate();
+                    console.log(Editor.getColumns());
+                });
             });
         });
     }, 0);
