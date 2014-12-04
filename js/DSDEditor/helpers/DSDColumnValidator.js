@@ -46,13 +46,13 @@ function () {
             if (cols[i].key)
                 keyCount++;
             
-            if (cols[i].subject && (cols[i].subject == 'value'))
+            if (cols[i].subject && cols[i].subject == 'value')
                 valCount++;
         }
         if (keyCount<1)
             toRet.push({ level: 'error', message: MSG_AT_LEAST_ONE_KEY });
-        /*if (valCount < 1)
-            toRet.push({ level: 'error', message: MSG_AT_LEAST_ONE_VALUE });*/
+        if (valCount < 1)
+            toRet.push({ level: 'error', message: MSG_AT_LEAST_ONE_VALUE });
         return toRet;
     }
 

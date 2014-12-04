@@ -13,8 +13,6 @@ define([
         if (config && config.testMode)
             testMode();
 
-
-
         DSDEditor = new DSDEditor(config);
         DSDEditor.render($(containerID), null, callB);
     }
