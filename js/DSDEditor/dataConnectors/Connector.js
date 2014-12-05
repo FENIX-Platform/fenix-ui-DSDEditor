@@ -23,7 +23,6 @@ define(['jquery'],
         }
 
         Connector.prototype.ajaxPUT_PATCH = function (url, JSONtoSend, method, callB) {
-            console.log(JSONtoSend);
             $.ajax({
                 contentType: "application/json",
                 url: url,
