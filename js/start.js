@@ -39,15 +39,13 @@ define([
 
     function init(containerID, config, callB) {
         $.extend(true, cfg, defConfig, config);
-        if (this.config && cfg.testMode)
-            testMode();
         DSDEditor = new DSDEditor(cfg);
         DSDEditor.render($(containerID), null, callB);
     }
 
     function updateDSD(uid, version, dsd, callB) {
         var conn;
-        if (this.config.D3SConnector)
+        if (cfg.D3SConnector)
             conn = new Connector(cfg.D3SConnector);
         else
             conn = new Connector();

@@ -10,7 +10,9 @@ define([
             metadataUrl: "http://exldvsdmxreg1.ext.fao.org:7788/v2/msd/resources/metadata",
             dsdUrl: "http://exldvsdmxreg1.ext.fao.org:7788/v2/msd/resources/dsd",
             dataUrl: "http://exldvsdmxreg1.ext.fao.org:7788/v2/msd/resources",
-			codelistUrl: "http://faostat3.fao.org:7799/v2/msd/resources/data"
+            codelistUrl: "http://faostat3.fao.org:7799/v2/msd/resources/data",
+            contextSystem: "CountrySTAT",
+            datasource:"CountrySTAT"
         };
 
         var Connector_D3S = function (config) {
