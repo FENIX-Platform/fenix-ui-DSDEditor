@@ -12,7 +12,11 @@ config format:
     },
     "D3SConnector": {
         "datasource": "CountrySTAT",
-        "contextSystem": "CountrySTAT"
+        "contextSystem": "CountrySTAT",
+        "metadataUrl": "http://exldvsdmxreg1.ext.fao.org:7788/v2/msd/resources/metadata",
+        "dsdUrl": "http://exldvsdmxreg1.ext.fao.org:7788/v2/msd/resources/dsd",
+        "dataUrl": "http://exldvsdmxreg1.ext.fao.org:7788/v2/msd/resources",
+        "codelistUrl": "http://faostat3.fao.org:7799/v2/msd/resources/data"
     }
 }
 */
@@ -43,11 +47,11 @@ define([
 
     function updateDSD(uid, version, dsd, callB) {
         var conn;
-        if (this.config.servicesUrls)
-            conn = new Connector(cfg.servicesUrls);
+        if (this.config.D3SConnector)
+            conn = new Connector(cfg.D3SConnector);
         else
             conn = new Connector();
-        conn.updateDSD(uid, version, dsd, cfg.D3SConnector.datasource, cfg.D3SConnector.contextSystem, callB);
+        conn.updateDSD(uid, version, dsd, callB);
     }
 
     function setColumns(cols) { DSDEditor.setColumns(cols); }
