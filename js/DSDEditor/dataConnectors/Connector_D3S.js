@@ -42,11 +42,11 @@ define([
                 throw new Error("DSD to update cannot be null");
             if (!this.config.datasource)
                 throw new Error("Datasource cannot be null");
-            if (!this.config.contextSys)
+            if (!this.config.contextSystem)
                 throw new Error("ContextSystem cannot be null");
 
             newDSD.datasource = this.config.datasource;
-            newDSD.contextSystem = this.config.contextSys;
+            newDSD.contextSystem = this.config.contextSystem;
 
             var me = this;
             this.getMetadata(uid, version, function (meta) {
