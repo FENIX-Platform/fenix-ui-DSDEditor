@@ -13,7 +13,7 @@
 
         var widgetName = "DSDEditor";
 
-        var defConfig = { columnEditor: {}};
+        var defConfig = { columnEditor: {} };
         defConfig.columnEditor["subjects"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Subjects.json");
         defConfig.columnEditor["datatypes"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Datatypes.json");
         defConfig.columnEditor["codelists"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Codelists.json");
@@ -133,6 +133,25 @@
         }
         DSDEditor.prototype.getCodelists = function () {
             return this.colEditor.getCodelists();
+        }
+        DSDEditor.prototype.isEditable = function (editable) {
+            if (typeof (editable) == 'undefined')
+                return this.DSDTable.isEditable();
+
+            var $divDSDGrid = this.$container.find('#divDSDGrid');
+            //TODO: assign classes to make the DSDTable bigger/smaller
+            if (editable) {
+                this.$container.find('#divColEdit').show();
+                $divDSDGrid.removeClass('col-md-12');
+                $divDSDGrid.addClass('col-md-8');
+            }
+            else {
+                this.$container.find('#divColEdit').hide();
+                $divDSDGrid.removeClass('col-md-8');
+                $divDSDGrid.addClass('col-md-12');
+            }
+
+            this.DSDTable.isEditable(editable);
         }
         //END Render - creation
 

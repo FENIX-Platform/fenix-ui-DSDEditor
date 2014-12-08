@@ -11,6 +11,7 @@
         var DSDTable = function (config) {
             this.$container;
             this.cols = [];
+            this.editEnabled = true;
         };
 
         //Render - creation
@@ -34,7 +35,7 @@
                 }
             });
             this.$container.on('initialized', function () {
-                me.ColumnAddDeleteEnabled(me.colAddDelEnabled);
+
             });
 
             this.doML();
@@ -100,10 +101,10 @@
                     }
                 },
                 { text: mlRes['title'], dataField: 'MLTitle', width: '20%' },
-                { text: mlRes['subject'], dataField: 'subject', width: '11%' },
-                { text: mlRes['key'], dataField: 'key', columntype: 'checkbox', width: '7%' },
-                { text: mlRes['datatype'], dataField: 'dataType', width: '11%' },
-                { text: mlRes['domain'], dataField: 'tmp_domain', width: '11%' },
+                { text: mlRes['subject'], dataField: 'subject', width: '10%' },
+                { text: mlRes['key'], dataField: 'key', columntype: 'checkbox', width: '10%' },
+                { text: mlRes['datatype'], dataField: 'dataType', width: '10%' },
+                { text: mlRes['domain'], dataField: 'tmp_domain', width: '10%' },
                 { text: mlRes['supplemental'], dataField: 'MLSupplemental', width: '20%' },
                 {
                     text: mlRes['delete'], dataField: 'delete', columntype: 'button', width: '10%', cellsrenderer: function () {
@@ -127,6 +128,25 @@
                 var col = findColById(this.cols, colId);
                 this.$container.trigger(evtDeleteClicked, col);
             }
+        }
+
+        DSDTable.prototype.isEditable = function (editable) {
+            if (typeof (editable) == 'undefined')
+                return this.editEnabled;
+
+            var action = 'hidecolumn';
+            if (editable)
+            {
+                this.$container.jqxGrid('setcolumnproperty', 'MLTitle', 'width', '20%');
+                action = 'showcolumn';
+            }
+            else
+            {
+                this.$container.jqxGrid('setcolumnproperty', 'MLTitle', 'width', '40%');
+            }
+            this.$container.jqxGrid(action, 'edit');
+            this.$container.jqxGrid(action, 'delete');
+            this.editEnabled = editable;
         }
         //END Render - creation
 

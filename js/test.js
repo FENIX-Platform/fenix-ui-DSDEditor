@@ -43,6 +43,7 @@
                     Editor.validate();
                     console.log(Editor.getColumns());
                 });
+                $('#btnColsEditToggle').click(function () { Editor.isEditable(!Editor.isEditable()); });
             });
         });
     }, 0);

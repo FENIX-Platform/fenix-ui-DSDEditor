@@ -56,11 +56,19 @@ define([
     function getColumns() { return DSDEditor.getColumns(); }
     function validate() { return DSDEditor.validate(); }
 
+    function isEditable(editable) {
+        if (typeof (editable) == 'undefined')
+            return DSDEditor.isEditable();
+        else
+            DSDEditor.isEditable(editable);
+    }
+
     return {
         init: init,
         updateDSD: updateDSD,
         setColumns: setColumns,
         getColumns: getColumns,
-        validate: validate
+        validate: validate,
+        isEditable:isEditable
     }
 });
