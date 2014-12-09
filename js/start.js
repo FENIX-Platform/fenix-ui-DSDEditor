@@ -51,6 +51,14 @@ define([
             conn = new Connector();
         conn.updateDSD(uid, version, dsd, callB);
     }
+    function loadDSD(uid, version, callB) {
+        var conn;
+        if (cfg.D3SConnector)
+            conn = new Connector(cfg.D3SConnector);
+        else
+            conn = new Connector();
+        conn.getMetadata(uid, version, callB);
+    }
 
     function setColumns(cols) { DSDEditor.setColumns(cols); }
     function getColumns() { return DSDEditor.getColumns(); }
@@ -66,9 +74,10 @@ define([
     return {
         init: init,
         updateDSD: updateDSD,
+        loadDSD: loadDSD,
         setColumns: setColumns,
         getColumns: getColumns,
         validate: validate,
-        isEditable:isEditable
+        isEditable: isEditable
     }
 });
