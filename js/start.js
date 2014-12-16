@@ -39,8 +39,8 @@ define([
 
     function init(containerID, config, callB) {
         $.extend(true, cfg, defConfig, config);
-        DSDEditor = new DSDEditor(cfg);
-        DSDEditor.render($(containerID), null, callB);
+        this.DSDE = new DSDEditor(cfg);
+        this.DSDE.render($(containerID), null, callB);
     }
 
     function updateDSD(uid, version, dsd, callB) {
@@ -60,15 +60,15 @@ define([
         conn.getMetadata(uid, version, callB);
     }
 
-    function setColumns(cols) { DSDEditor.setColumns(cols); }
-    function getColumns() { return DSDEditor.getColumns(); }
-    function validate() { return DSDEditor.validate(); }
+    function setColumns(cols) { this.DSDE.setColumns(cols); }
+    function getColumns() { return this.DSDE.getColumns(); }
+    function validate() { return this.DSDE.validate(); }
 
     function isEditable(editable) {
         if (typeof (editable) == 'undefined')
-            return DSDEditor.isEditable();
+            return this.DSDE.isEditable();
         else
-            DSDEditor.isEditable(editable);
+            this.DSDE.isEditable(editable);
     }
 
     return {
