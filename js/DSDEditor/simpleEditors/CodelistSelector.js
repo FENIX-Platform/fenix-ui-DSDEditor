@@ -10,12 +10,14 @@
             this.$container;
             this.codelists;
             this.codelistsDDL = new LimitedDDL();
+            //this.limitCheckbox;
         };
 
         CodelistSelector.prototype.render = function (container) {
             this.$container = container;
             this.$container.html(codelistSelectorHTML);
             this.codelistsDDL.render(this.$container.find('#clSel_div_codelist'));
+            //this.limitCheckbox = $container.find();
             this.updateCodelistsDDL();
         }
 
@@ -73,6 +75,11 @@
                     {idCodeList: split[0]}
                 ]}
         }
+
+        //The limit checkbox
+        /*CodelistSelector.prototype.enableLimitCheckBox(enabled)
+        {
+        }*/
 
         return CodelistSelector;
     });

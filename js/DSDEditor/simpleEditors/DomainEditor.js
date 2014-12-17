@@ -2,12 +2,13 @@
 'jquery',
  'jqxall',
  'fx-DSDEditor/js/DSDEditor/simpleEditors/CodelistSelector',
- 'fx-DSDEditor/js/DSDEditor/simpleEditors/CodesSelectionEditor',
+ //'fx-DSDEditor/js/DSDEditor/simpleEditors/CodesSelectionEditor',
  'fx-DSDEditor/js/DSDEditor/simpleEditors/DatesRangeSelector',
  'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DomainEditor',
  'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/DomainEditor.htm'
 ],
-function ($, jqx, CodelistSelector, CodesSelectionEditor, DatesRangeSelector, mlRes, domainEditorHTML) {
+//function ($, jqx, CodelistSelector, CodesSelectionEditor, DatesRangeSelector, mlRes, domainEditorHTML) {
+function ($, jqx, CodelistSelector, DatesRangeSelector, mlRes, domainEditorHTML) {
 
     var DomainEditor = function () {
         this.$container;
