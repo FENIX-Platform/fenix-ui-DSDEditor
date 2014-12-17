@@ -16,7 +16,7 @@
             require([
                 'fx-DSDEditor/start'
             ], function (Editor) {
-                
+
                 var cfg = {
                     columnEditor: {
                         //subjects: "urlToSubjectsJSON",
@@ -41,7 +41,7 @@
                 console.log("-- DSDEditor test mode active -- ");
                 $('#btnColsEditDone').click(function () {
                     Editor.validate();
-                    console.log(Editor.getColumns());
+                    console.log(JSON.stringify(Editor.getColumns()));
                 });
                 $('#btnColsEditToggle').click(function () { Editor.isEditable(!Editor.isEditable()); });
             });
