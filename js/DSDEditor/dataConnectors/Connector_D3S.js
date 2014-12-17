@@ -14,7 +14,7 @@ define([
             getMetaAndDataUrl: "http://exldvsdmxreg1.ext.fao.org:7788/v2/msd/resources/uid/dan3?dsd=true",
             codelistUrl: "http://faostat3.fao.org:7799/v2/msd/resources/data",
             contextSystem: "CountrySTAT",
-            datasource:"CountrySTAT"
+            datasource:"D3S"
         };
 
         var Connector_D3S = function (config) {
