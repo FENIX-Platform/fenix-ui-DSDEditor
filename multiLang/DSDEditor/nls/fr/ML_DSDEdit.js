@@ -14,12 +14,14 @@
     "datatype": "Data typeFR",
     "supplemental": "SupplementalFR",
 
-    "nullColumns": "Columns cannot be empty",
-    "atLeast2Cols": "The dataset must have at least 2 columns",
-    "atLeastOneKey": "The dataset must have at least a Key",
-    "atLeastOneValue": "The dataset must have at least one value",
-    "nullColumn": "Column cannot be null",
-    "empty": "Is empty",
-    "DimensionDataTypeConflict": "Conflict detected between value and datatype defined for the value",
-    "EmptyIdCodeList": "The codelist's ID cannot be empty"
+    "select": "SelectFR...",
+
+    "nullColumns": "F Columns cannot be empty",
+    "atLeast2Cols": "F The dataset must have at least 2 columns",
+    "atLeastOneKey": "F The dataset must have at least a Key",
+    "atLeastOneValue": "F The dataset must have at least one value",
+    "nullColumn": "F Column cannot be null",
+    "empty": "F Is empty",
+    "DimensionDataTypeConflict": "F Conflict detected between value and datatype defined for the value",
+    "EmptyIdCodeList": "F The codelist's ID cannot be empty"
 });

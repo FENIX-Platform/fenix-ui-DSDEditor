@@ -1,5 +1,9 @@
-﻿define(['jquery', 'jqxall'],
-function ($, jqx) {
+﻿define([
+    'jquery',
+    'jqxall',
+    'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit'
+],
+function ($, jqx, mlRes) {
     var widgetName = 'subjectSelector';
     var evtSubjectChanged = "changed." + widgetName + ".fenix";
 
@@ -7,16 +11,17 @@ function ($, jqx) {
         this.$container;
         this.subjects;
 
-        this.lang='EN';
+        this.lang = 'EN';
         if (lang)
             this.lang = lang;
     };
 
     SubjectSelector.prototype.render = function (container, lang) {
+        console.log(mlRes);
         if (lang)
             this.lang = lang;
         this.$container = container;
-        this.$container.jqxDropDownList({ displayMember: 'text', valueMember: 'val', autoDropDownHeight: true });
+        this.$container.jqxDropDownList({ displayMember: 'text', valueMember: 'val', autoDropDownHeight: true, promptText: mlRes.select });
         this.updateDDL();
 
         var me = this;
@@ -31,9 +36,10 @@ function ($, jqx) {
         if (!this.subjects)
             return;
 
-        var DS = { localdata: this.subjects, datatype: 'array', datafields: [{ name: 'val', type: 'string' }, { name: 'text', type: 'string', map: 'text>' + this.lang}] };
+        var DS = { localdata: this.subjects, datatype: 'array', datafields: [{ name: 'val', type: 'string' }, { name: 'text', type: 'string', map: 'text>' + this.lang }] };
         var DA = new $.jqx.dataAdapter(DS);
-        this.$container.jqxDropDownList({ source: DA });
+        this.$container.jqxDropDownList({ source: DA, promptText: mlRes.select });
+
     }
 
     SubjectSelector.prototype.getSubjects = function ()

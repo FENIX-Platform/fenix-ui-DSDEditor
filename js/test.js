@@ -29,7 +29,7 @@
                     },
                     D3SConnector: {
                         //datasource: "CountrySTAT",
-                       // contextSystem: "CountrySTAT"
+                        // contextSystem: "CountrySTAT"
                     }
                 };
 
@@ -44,6 +44,20 @@
                     console.log(JSON.stringify(Editor.getColumns()));
                 });
                 $('#btnColsEditToggle').click(function () { Editor.isEditable(!Editor.isEditable()); });
+                //Lang
+                $('#btnEN').click(function () {
+                    var locale = localStorage.getItem('locale');
+                    if (!locale || locale != 'en')
+                        localStorage.setItem('locale', 'en');
+                    location.reload();
+                });
+                $('#btnFR').click(function () {
+                    var locale = localStorage.getItem('locale');
+                    if (!locale || locale != 'fr')
+                        localStorage.setItem('locale', 'fr');
+                    location.reload();
+                });
+                //END Lang
             });
         });
     }, 0);

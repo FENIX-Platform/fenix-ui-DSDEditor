@@ -1,5 +1,9 @@
-﻿define(['jquery', 'jqxall'],
-function ($, jqx) {
+﻿define([
+    'jquery',
+    'jqxall',
+    'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit'
+],
+function ($, jqx, mlRes) {
     var LimitedDDL = function (lang, autoselectOneItem) {
         this.$container;
         this.items;
@@ -17,7 +21,7 @@ function ($, jqx) {
         if (lang) this.lang = lang;
         if (autoselectOneItem) this.autoselectOneItem = autoselectOneItem;
         this.$container = container;
-        this.$container.jqxDropDownList({ displayMember: 'text', valueMember: 'val', autoDropDownHeight: true });
+        this.$container.jqxDropDownList({ displayMember: 'text', valueMember: 'val', autoDropDownHeight: true, promptText:mlRes.select });
         this.updateDDL();
     }
     LimitedDDL.prototype.setItems = function (items) {

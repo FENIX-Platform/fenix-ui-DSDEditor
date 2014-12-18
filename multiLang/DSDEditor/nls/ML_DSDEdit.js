@@ -15,6 +15,8 @@
         "datatype": "Data type",
         "supplemental": "Supplemental",
 
+        "select":"Select...",
+
         "nullColumns": "Columns cannot be empty",
         "atLeast2Cols": "The dataset must have at least 2 columns",
         "atLeastOneKey": "The dataset must have at least a Key",
