@@ -206,7 +206,7 @@
                     if (callB) callB(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    throw new Error("Cannot find DSD at " + url);
+                    throw new Error("Cannot find data at " + url);
                 }
             });
         }

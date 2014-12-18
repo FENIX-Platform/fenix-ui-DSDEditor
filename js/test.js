@@ -28,8 +28,8 @@
                         langs: ["EN", "RU"]
                     },
                     D3SConnector: {
-                        datasource: "CountrySTAT",
-                        contextSystem: "CountrySTAT"
+                        //datasource: "CountrySTAT",
+                       // contextSystem: "CountrySTAT"
                     }
                 };
 
