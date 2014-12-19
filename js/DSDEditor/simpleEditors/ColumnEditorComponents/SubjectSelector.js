@@ -17,7 +17,6 @@ function ($, jqx, mlRes) {
     };
 
     SubjectSelector.prototype.render = function (container, lang) {
-        console.log(mlRes);
         if (lang)
             this.lang = lang;
         this.$container = container;
