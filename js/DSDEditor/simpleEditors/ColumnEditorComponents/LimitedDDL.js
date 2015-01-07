@@ -1,5 +1,9 @@
 ﻿define(['jquery', 'jqxall'],
 function ($, jqx) {
+
+    var WIDGET_NAME = 'LimitedDDL';
+    var EVT_CHANGE = 'change.' + WIDGET_NAME + '.fenix';
+
     var LimitedDDL = function (lang, autoselectOneItem) {
         this.$container;
         this.items;
@@ -18,6 +22,22 @@ function ($, jqx) {
         if (autoselectOneItem) this.autoselectOneItem = autoselectOneItem;
         this.$container = container;
         this.$container.jqxDropDownList({ displayMember: 'text', valueMember: 'val', autoDropDownHeight: true });
+        var me = this;
+        this.$container.on('change', function (evt) {
+            var args = evt.args;
+            if (!args)
+                me.$container.trigger(EVT_CHANGE, null);
+            else {
+                var val = args.item.value;
+                //look for the selItem
+                for (var i = 0; i < me.items.length; i++)
+                    if (me.items[i].val == val) {
+                        me.$container.trigger(EVT_CHANGE, me.items[i].val);
+                        break;
+                    }
+            }
+        });
+
         this.updateDDL();
     }
     LimitedDDL.prototype.setItems = function (items) {

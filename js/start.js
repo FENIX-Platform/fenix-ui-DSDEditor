@@ -30,8 +30,6 @@ define([
 
     var defConfig = {
         D3SConnector: {
-            "datasource": "CountrySTAT",
-            "contextSystem": "CountrySTAT"
         }
     };
 

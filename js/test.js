@@ -44,6 +44,9 @@
                     console.log(JSON.stringify(Editor.getColumns()));
                 });
                 $('#btnColsEditToggle').click(function () { Editor.isEditable(!Editor.isEditable()); });
+
+                //Test
+                Editor.setColumns([{ "id": "CODE", "title": { "EN": "hh" }, "key": true, "dataType": "code", "domain": { "codes": [{ "idCodeList": "ECO_GAUL", "codes": [{ "code": "281" }] }] }, "subject": "item", "supplemental": null }, { "id": "YEAR", "title": { "EN": "time" }, "key": true, "dataType": "year", "domain": null, "subject": "time", "supplemental": null }, { "id": "NUMBER", "title": { "EN": "val" }, "key": false, "dataType": "number", "subject": "value", "supplemental": null }]);
             });
         });
     }, 0);
