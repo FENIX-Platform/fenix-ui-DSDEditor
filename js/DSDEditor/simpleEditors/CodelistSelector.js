@@ -99,17 +99,6 @@
 
         }
         CodelistSelector.prototype.getDomain = function () {
-            /*var selVal = this.codelistsDDL.getSelectedValue();
-            if (!selVal)
-                return null;
-            var toRet;
-            var split = selVal.split('|');
-
-            if (split[1])
-                toRet = { codes: [{ idCodeList: split[0], version: split[1] }] }
-            else
-                toRet = { codes: [{ idCodeList: split[0] }] }*/
-
             //Make it multielement
             var selCl = this.getSelectedCodelist();
             if (!selCl)

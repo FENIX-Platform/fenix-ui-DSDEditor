@@ -20,7 +20,7 @@ define([
         };*/
 
         var defConfig = {
-            baseAddress: "http://exldvsdmxreg1.ext.fao.org:7788/v2/msd",
+            baseAddress: "http://fenix.fao.org/d3s_dev/msd",
 
             metadataUrl: "resources/metadata",
             dsdUrl: "resources/dsd",
