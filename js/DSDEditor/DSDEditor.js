@@ -164,6 +164,11 @@
             this.DSDTable.showValidationResults(this.validate());
         }
         DSDEditor.prototype.getColumns = function () {
+            var valRes = this.validate();
+            if (valRes.length > 0) {
+                this.DSDTable.showValidationResults(valRes);
+                return false;
+            }
             return this.cols;
         }
 
@@ -186,7 +191,7 @@
         }
         DSDEditor.prototype.validate = function () {
             var valRes = new DSDColumnValidator().validateColumns(this.cols);
-            this.DSDTable.showValidationResults(valRes);
+            //this.DSDTable.showValidationResults(valRes);
             return valRes;
         }
 
