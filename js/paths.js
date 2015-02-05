@@ -3,70 +3,33 @@ var locale = localStorage.getItem('locale' || 'en-us');
 
 define(function() {
 
-    //Define it as string : string
-    //Explicit jquery path!  Don't use a prefix for it
-    var paths = {
 
-        'fx-DSDEditor/start' : './start',
-        "fx-DSDEditor/config": "../config",
-        "fx-DSDEditor/js": "../js",
-        "fx-DSDEditor/templates": "../templates",
-        "fx-DSDEditor/multiLang": "../multiLang",
-        "bootstrap": "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min",
-        'jquery': '../lib/jquery',
-        //'jqxall': "http://fenixapps.fao.org/repository/js/jqwidgets/3.1/jqx-light"
-        'jqxall': "../lib/jqxall"
+    var config = {
+
+        paths : {
+            'fx-DSDEditor/start' : './start',
+            "fx-DSDEditor/config": "../config",
+            "fx-DSDEditor/js": "../js",
+            "fx-DSDEditor/templates": "../templates",
+            "fx-DSDEditor/multiLang": "../multiLang",
+            "bootstrap": "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min",
+            'jquery': '{FENIX_CDN}/js/jquery/2.1.1/jquery.min',
+            'jqxall': "http://fenixapps.fao.org/repository/js/jqwidgets/3.1/jqx-all"
+            //'jqxall': "../lib/jqxall"
+
+        },
+
+        config: { i18n: { locale: locale } },
+        shim: {
+            "jqrangeslider": {
+                deps: ["jquery", "jqueryui"]
+            },
+            "bootstrap": {
+                deps: ["jquery"]
+            }
+        }
 
     };
 
-    var exports = {};
-
-    exports.initialize = function(baseUrl, overridePaths, callback) {
-
-        if(!overridePaths) {
-            overridePaths = {};
-        }
-
-        if(baseUrl && baseUrl[baseUrl.length - 1] != '/') {
-            baseUrl = baseUrl + '/';
-        }
-
-        var fullpaths = {};
-
-        for(var path in paths) {
-            // Don't add baseUrl to anything that looks like a full URL like 'http://...' or anything that begins with a forward slash
-            if(paths[path].match(/^(?:.*:\/\/|\/)/)) {
-                fullpaths[path] = paths[path];
-            }
-            else {
-                fullpaths[path] = baseUrl + paths[path];
-            }
-        }
-
-        var config = {
-            paths: fullpaths,
-            config: { i18n: { locale: locale } },
-            shim: {
-                "jqrangeslider": {
-                    deps: ["jquery", "jqueryui"]
-                },
-                "bootstrap": {
-                    deps: ["jquery"]
-                }
-            }
-        };
-
-        for(var pathName in overridePaths) {
-            config.paths[pathName] = overridePaths[pathName];
-        }
-
-        requirejs.config( config );
-
-        // Do anything else you need to do such as defining more functions for exports
-        if(callback) {
-            callback();
-        }
-    };
-
-    return exports;
+    return config;
 });

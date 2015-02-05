@@ -96,6 +96,7 @@
             }, subjErr);
 
             this.$cntDSDGrid.on("edit.DSDTable.fenix", function (evt, col) {
+
                 for (var i = 0; i < me.cols.length; i++) {
                     if (me.cols[i].id == col.id) {
                         me.colEditor.setColumn(me.cols[i]);

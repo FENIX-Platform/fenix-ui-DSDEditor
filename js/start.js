@@ -31,8 +31,7 @@ define([
     'jquery',
     'fx-DSDEditor/js/DSDEditor/DSDEditor',
     'fx-DSDEditor/js/DSDEditor/dataConnectors/Connector_D3S',
-    'bootstrap',
-    'domReady!'
+    'bootstrap'
 ], function ($, DSDEditor, Connector) {
 
     var defConfig = {
