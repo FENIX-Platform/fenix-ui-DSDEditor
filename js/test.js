@@ -29,7 +29,7 @@
                     },
                     D3SConnector: {
                         //datasource: "CountrySTAT",
-                       // contextSystem: "CountrySTAT"
+                        // contextSystem: "CountrySTAT"
                     }
                 };
 
@@ -47,6 +47,23 @@
 
                 //Test
                 Editor.setColumns([{ "id": "CODE", "title": { "EN": "hh" }, "key": true, "dataType": "code", "domain": { "codes": [{ "idCodeList": "ECO_GAUL", "codes": [{ "code": "281" }] }] }, "subject": "item", "supplemental": null }, { "id": "YEAR", "title": { "EN": "time" }, "key": true, "dataType": "year", "domain": null, "subject": "time", "supplemental": null }, { "id": "NUMBER", "title": { "EN": "val" }, "key": false, "dataType": "number", "subject": "value", "supplemental": null }]);
+
+                //Test buttons
+                $('#btnColsLoad').click(function () {
+                    //Editor.loadDSD();
+                });
+
+                $('#btnColsSave').click(function () {
+                    var valRes = Editor.validate();
+                    if (valRes == null || valRes.length == 0)
+                    {
+                        var cols = Editor.getColumns();
+                        var dsd = { "columns": cols };
+
+                        Editor.updateDSD("dan", null, dsd, null);
+                    }
+                    //Editor.saveDSD();
+                });
             });
         });
     }, 0);

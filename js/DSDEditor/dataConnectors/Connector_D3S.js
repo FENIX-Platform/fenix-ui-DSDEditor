@@ -94,7 +94,9 @@ define([
                 if (meta.dsd && meta.dsd.rid) {
                     newDSD.rid = meta.dsd.rid;
                     try {
-                        me.connector.ajaxPUT(me.config.dsdUrl, newDSD, callB);
+                        var addr = me.getCompletePath(me.config.dsdUrl);
+                        //me.connector.ajaxPUT(me.config.dsdUrl, newDSD, callB);
+                        me.connector.ajaxPUT(addr, newDSD, callB);
                     }
                     catch (ex) {
                         throw new Error("Cannot PUT dsd");
@@ -106,9 +108,13 @@ define([
                         toPatch.version = meta.version;
                     toPatch.dsd = newDSD;
                     try {
-                        me.connector.ajaxPATCH(me.config.metadataUrl, toPatch, callB);
+                        var addr = me.getCompletePath(me.config.metadataUrl);
+                        //me.connector.ajaxPATCH(me.config.metadataUrl, toPatch, callB);
+                        me.connector.ajaxPATCH(addr, toPatch, callB);
+                        //
                     }
                     catch (ex) {
+                        console.log(ex);
                         throw new Error("Cannot PATCH dsd");
                     }
                 }
