@@ -96,6 +96,7 @@
             }, subjErr);
 
             this.$cntDSDGrid.on("edit.DSDTable.fenix", function (evt, col) {
+
                 for (var i = 0; i < me.cols.length; i++) {
                     if (me.cols[i].id == col.id) {
                         me.colEditor.setColumn(me.cols[i]);
@@ -163,6 +164,11 @@
             this.DSDTable.showValidationResults(this.validate());
         }
         DSDEditor.prototype.getColumns = function () {
+            var valRes = this.validate();
+            if (valRes.length > 0) {
+                this.DSDTable.showValidationResults(valRes);
+                return false;
+            }
             return this.cols;
         }
 
@@ -185,7 +191,7 @@
         }
         DSDEditor.prototype.validate = function () {
             var valRes = new DSDColumnValidator().validateColumns(this.cols);
-            this.DSDTable.showValidationResults(valRes);
+            //this.DSDTable.showValidationResults(valRes);
             return valRes;
         }
 

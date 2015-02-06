@@ -2,13 +2,12 @@
 'jquery',
  'jqxall',
  'fx-DSDEditor/js/DSDEditor/simpleEditors/CodelistSelector',
- //'fx-DSDEditor/js/DSDEditor/simpleEditors/CodesSelectionEditor',
  'fx-DSDEditor/js/DSDEditor/simpleEditors/DatesRangeSelector',
+ 'fx-DSDEditor/js/DSDEditor/simpleEditors/customCodesSelection/CustomCodesSelection',
  'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DomainEditor',
  'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/DomainEditor.htm'
 ],
-//function ($, jqx, CodelistSelector, CodesSelectionEditor, DatesRangeSelector, mlRes, domainEditorHTML) {
-function ($, jqx, CodelistSelector, DatesRangeSelector, mlRes, domainEditorHTML) {
+function ($, jqx, CodelistSelector, DatesRangeSelector, CustomCodesSelection, mlRes, domainEditorHTML) {
 
     var DomainEditor = function () {
         this.$container;
@@ -22,13 +21,15 @@ function ($, jqx, CodelistSelector, DatesRangeSelector, mlRes, domainEditorHTML)
         this.cLists;
         this.codelistSelector;
         this.datesSelector;
+        this.customCodeSelector;
     };
 
     var MODES = {
         code: 'code',
         year: 'year',
         month: 'month',
-        date: 'date'
+        date: 'date',
+        customCode:'customCode'
     };
 
     DomainEditor.prototype.render = function (container) {
@@ -82,6 +83,11 @@ function ($, jqx, CodelistSelector, DatesRangeSelector, mlRes, domainEditorHTML)
                 this.datesSelector = new DatesRangeSelector();
                 this.datesSelector.render(this.$divDomainEditor);
                 this.datesSelector.setMode(mode);
+                break;
+            case MODES.customCode:
+                this.$divDomainEditor.show();
+                this.customCodeSelector = new CustomCodesSelection();
+                this.customCodeSelector.render(this.$divDomainEditor);
                 break;
             default:
                 this.$divNoDomain.show();

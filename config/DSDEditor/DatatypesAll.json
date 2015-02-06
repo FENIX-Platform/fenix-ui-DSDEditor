@@ -84,5 +84,54 @@
             "EN": "Time"
         },
 		"canBeDimension":true
+    },
+    {
+        "val": "periodDate",
+        "text": {
+            "EN": "Period - date"
+        },
+		"canBeDimension":true
+    },
+    {
+        "val": "periodMonth",
+        "text": {
+            "EN": "Period - month"
+        },
+		"canBeDimension":true
+    },
+    {
+        "val": "periodYear",
+        "text": {
+            "EN": "Period - year"
+        },
+		"canBeDimension":true
+    },
+    {
+        "val": "periodTime",
+        "text": {
+            "EN": "Period - time"
+        },
+		"canBeDimension":true
+    },
+    {
+        "val": "enumNumber",
+        "text": {
+            "EN": "Enumeration - number"
+        },
+		"canBeDimension":true
+    },
+    {
+        "val": "enumString",
+        "text": {
+            "EN": "Enumeration - string"
+        },
+		"canBeDimension":true
+    },
+    {
+        "val": "enumBool",
+        "text": {
+            "EN": "Enumeration - boolean"
+        },
+		"canBeDimension":true
     }
 ]
