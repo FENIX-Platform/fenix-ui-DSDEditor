@@ -174,9 +174,8 @@
 
         DSDEditor.prototype.reset = function () {
             //this.colAddDelEnabled = true;
-
-            this.cols.length = 0;
-            this.refreshColumns();
+            this.cols = [];
+            this.DSDTable.setColumns(this.cols);
         }
         DSDEditor.prototype.refreshColumns = function () {
             this.DSDTable.refreshColumns();

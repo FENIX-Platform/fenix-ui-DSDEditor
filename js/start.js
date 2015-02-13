@@ -75,6 +75,11 @@ define([
             this.DSDE.isEditable(editable);
     }
 
+    function reset()
+    {
+        this.DSDE.reset();
+    }
+
     return {
         init: init,
         updateDSD: updateDSD,
@@ -82,6 +87,7 @@ define([
         setColumns: setColumns,
         getColumns: getColumns,
         validate: validate,
-        isEditable: isEditable
+        isEditable: isEditable,
+        reset:reset
     }
 });
