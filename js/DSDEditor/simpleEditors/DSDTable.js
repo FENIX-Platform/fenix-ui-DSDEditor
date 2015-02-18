@@ -94,11 +94,20 @@
             var toRet = [
                 { text: 'id', dataField: 'id', displayField: 'id', hidden: true },
                 {
-                    text: mlRes['edit'], dataField: 'edit', width: '10%', columntype: 'button', cellsrenderer: function () {
-                        return mlRes['edit'];
-                    }, buttonclick: function (row) {
-                        me.rowClicked(row, 'edit');
-                    }
+                    /*text: '', dataField: 'err', width: '4%', cellsrenderer: function (row, datafield, value) {
+                        if (value)
+                            return '<img style="margin-left: 5px;" height="60" width="50" src="../../images/' + value + '"/>';
+                        return '';
+                    }*/
+                    text: '', dataField: 'err', width: '4%', cellclassname: function (row, column, value, data) {
+                        if (value == 'e')
+                            return 'fx-dsdedit-errIcon';
+                        else return '';
+                        /*if (value)
+                            return 'red';
+                        return '';*/
+                    },
+                    cellsrenderer: function (row, datafield, value) { return ''; }
                 },
                 { text: mlRes['title'], dataField: 'MLTitle', width: '20%' },
                 { text: mlRes['subject'], dataField: 'subject', width: '10%' },
@@ -107,7 +116,14 @@
                 { text: mlRes['domain'], dataField: 'tmp_domain', width: '10%' },
                 { text: mlRes['supplemental'], dataField: 'MLSupplemental', width: '20%' },
                 {
-                    text: mlRes['delete'], dataField: 'delete', columntype: 'button', width: '10%', cellsrenderer: function () {
+                    text: mlRes['edit'], dataField: 'edit', width: '8%', columntype: 'button', cellsrenderer: function () {
+                        return mlRes['edit'];
+                    }, buttonclick: function (row) {
+                        me.rowClicked(row, 'edit');
+                    }
+                },
+                {
+                    text: mlRes['delete'], dataField: 'delete', columntype: 'button', width: '8%', cellsrenderer: function () {
                         return mlRes['delete'];
                     }, buttonclick: function (row) {
                         me.rowClicked(row, 'delete');
@@ -135,13 +151,11 @@
                 return this.editEnabled;
 
             var action = 'hidecolumn';
-            if (editable)
-            {
+            if (editable) {
                 this.$container.jqxGrid('setcolumnproperty', 'MLTitle', 'width', '20%');
                 action = 'showcolumn';
             }
-            else
-            {
+            else {
                 this.$container.jqxGrid('setcolumnproperty', 'MLTitle', 'width', '40%');
             }
             this.$container.jqxGrid(action, 'edit');
@@ -164,6 +178,18 @@
             var errMsg = " ";
             for (var i = 0; i < valRes.length; i++) {
                 /*
+                UNCOMMENT THIS WHEN A WORKING CLASS IS ASSIGNED TO THE CELL
+                */
+                /*if (valRes[i].colId) {//has a col ID (the error is in a column)
+                    var rIdx = getRowIndexByID(rows, valRes[i].colId);
+                    this.$container.jqxGrid('setcellvalue', rIdx, "err", 'e');
+                }*/
+
+
+                /*
+
+                OR
+
                 UNCOMMENT THIS WHEN THE ERROR COLOR IS WORKING AGAIN
                 if (valRes[i].colId) {
                     var rIdx = getRowIndexByID(rows, valRes[i].colId);

@@ -510,3 +510,9 @@ PUT THIS AFTER BOOTSTRAP */
 .MLTextEditor_table td {
     padding:2px !important;
 }
+
+
+/*Dan: added to show an error icon*/
+.fx-dsdedit-errIcon {
+/*background-color:red;*/
+}
