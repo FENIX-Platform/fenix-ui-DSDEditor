@@ -104,6 +104,17 @@ function ($, jqx, rangeMonthsHTML, mlRes) {
         this.ignoreRangeEvents = false;
     }
 
+    RangeMonths.prototype.destroy = function () {
+        this.$mFrom.off('change');
+        this.$yFrom.off('change');
+        this.$mTo.off('change');
+        this.$yTo.off('change');
+        this.$mFrom.jqxNumberInput('destroy');
+        this.$yFrom.jqxNumberInput('destroy');
+        this.$mTo.jqxNumberInput('destroy');
+        this.$yTo.jqxNumberInput('destroy');
+    }
+
     RangeMonths.prototype.doMl = function () {
         this.$container.find('#tdMonthFrom').html(mlRes.from);
         this.$container.find('#tdMonthTo').html(mlRes.to);

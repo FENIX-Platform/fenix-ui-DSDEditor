@@ -31,7 +31,7 @@ function ($, jqx, RangeYears, RangeMonths, RangeDates, datesRangeSelectorHTML) {
 
         var me = this;
         this.$chkLimit = this.$container.find('#datesRangeChkLimit');
-        this.$chkLimit.change(function () {
+        this.$chkLimit.on('change', function () {
             if (me.$chkLimit.prop('checked'))
                 me.$datesRangeSelector.show();
             else
@@ -78,6 +78,11 @@ function ($, jqx, RangeYears, RangeMonths, RangeDates, datesRangeSelectorHTML) {
         if (!this.$chkLimit.prop('checked'))
             return null;
         return this.rangeSelector.getRange();
+    }
+    DatesRangeSelector.prototype.destroy = function () {
+        this.$chkLimit.off('change');
+        if (this.rangeSelector)
+            this.rangeSelector.destroy();
     }
 
     return DatesRangeSelector;

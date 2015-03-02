@@ -28,10 +28,10 @@ function ($, CustomCodesSelectionHTML, mlRes, jqx) {
         this.$container.html(CustomCodesSelectionHTML);
 
         var me = this;
-        this.$container.find('#btnCodeAdd').click(function () { me.addToList(); });
-        this.$container.find('#btnCodeSelOk').click(function () { me.editOk(); });
-        this.$container.find('#btnCodeCanc').click(function () { me.editCanc(); });
-        this.$container.find('#btnCodeDel').click(function () { me.editDel(); });
+        this.$container.find('#btnCodeAdd').on('click',function () { me.addToList(); });
+        this.$container.find('#btnCodeSelOk').on('click', function () { me.editOk(); });
+        this.$container.find('#btnCodeCanc').on('click', function () { me.editCanc(); });
+        this.$container.find('#btnCodeDel').on('click', function () { me.editDel(); });
         this.$txtCode = this.$container.find('#codeToAdd');
         this.$txtString = this.$container.find('#txtToAdd');
         this.$lstCodes = this.$container.find('#codesList');
@@ -155,6 +155,14 @@ function ($, CustomCodesSelectionHTML, mlRes, jqx) {
             return;
         for (var i = 0; i < vals.length; i++)
             this.addStringToList(vals[i].code, vals[i].label);
+    }
+    CustomCodesSelection.prototype.destroy = function () {
+        this.$container.find('#btnCodeAdd').off('click');
+        this.$container.find('#btnCodeSelOk').off('click');
+        this.$container.find('#btnCodeCanc').off('click');
+        this.$container.find('#btnCodeDel').off('click');
+        this.$lstCodes.off('select');
+        this.$lstCodes.jqxListBox('destroy');
     }
     CustomCodesSelection.prototype.doML = function () {
         this.$container.find('#btnCodeAdd').html(mlRes['add']);

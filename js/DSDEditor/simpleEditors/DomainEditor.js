@@ -29,7 +29,7 @@ function ($, jqx, CodelistSelector, DatesRangeSelector, CustomCodesSelection, ml
         year: 'year',
         month: 'month',
         date: 'date',
-        customCode:'customCode'
+        customCode: 'customCode'
     };
 
     DomainEditor.prototype.render = function (container) {
@@ -56,7 +56,6 @@ function ($, jqx, CodelistSelector, DatesRangeSelector, CustomCodesSelection, ml
             this.codelistSelector.setCodelists(this.cLists);
     }
     DomainEditor.prototype.getCodelists = function () { return this.cLists; }
-
 
     DomainEditor.prototype.setMode = function (mode) {
         this.mode = mode;
@@ -131,6 +130,15 @@ function ($, jqx, CodelistSelector, DatesRangeSelector, CustomCodesSelection, ml
     DomainEditor.prototype.doML = function () {
         this.$container.find('#domEdit_noDatatype').html(mlRes.selectADataType);
         this.$container.find('#domEdit_noDomain').html(mlRes.noLimitForThisDataType);
+    }
+
+    DomainEditor.prototype.destroy = function () {
+        if (this.codelistSelector)
+            this.codelistSelector.destroy();
+        if (this.datesSelector)
+            this.datesSelector.destroy();
+        if (this.customCodeSelector)
+            this.customCodeSelector.destroy();
     }
 
     return DomainEditor;

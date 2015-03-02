@@ -66,6 +66,12 @@ function ($, jqx, rangeDatesHTML, mlRes) {
             if (f > t)
                 this.$to.jqxCalendar('setDate', f);
     }
+    RangeDates.prototype.destroy = function () {
+        this.$from.off('change');
+        this.$to.off('change');
+        this.$from.jqxCalendar('destroy');
+        this.$to.jqxCalendar('destroy');
+    }
 
     var dateToD3SDate = function (date) {
         var m = date.getMonth() + 1;

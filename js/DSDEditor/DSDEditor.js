@@ -44,7 +44,7 @@
             this.colEditor.render(this.$cntColEdit);
 
             var me = this;
-            this.$container.find('#bntColEditOk').click(function () {
+            this.$container.find('#bntColEditOk').on('click',function () {
                 var newCol = me.colEditor.getColumn();
 
                 var val = new DSDColumnValidator();
@@ -67,7 +67,7 @@
                     me.DSDTable.setColumns(me.cols);
                 }
             });
-            this.$container.find('#bntColReset').click(function () {
+            this.$container.find('#bntColReset').on('click', function () {
                 me.colEditor.reset();
             });
 
@@ -79,7 +79,6 @@
 
             this.doML();
 
-            var me = this;
             var subjErr = "Cannot find subjects definition at " + this.config.columnEditor.subjects;
             var datatypeErr = "Cannot find datatypes definition at " + this.config.columnEditor.datatypes;
             var codelistsErr = "Cannot find codelists definition at " + this.config.columnEditor.codelists;
@@ -96,7 +95,6 @@
             }, subjErr);
 
             this.$cntDSDGrid.on("edit.DSDTable.fenix", function (evt, col) {
-
                 for (var i = 0; i < me.cols.length; i++) {
                     if (me.cols[i].id == col.id) {
                         me.colEditor.setColumn(me.cols[i]);
@@ -199,6 +197,17 @@
             this.$container.find('#bntColReset').html(mlRes.reset);
         }
         //END Multilang
+
+        DSDEditor.prototype.destroy = function () {
+            this.$container.find('#bntColEditOk').off('click');
+            this.$container.find('#bntColReset').off('click');
+            this.$cntDSDGrid.off("edit.DSDTable.fenix");
+            this.$cntDSDGrid.off("delete.DSDTable.fenix");
+
+            this.colEditor.destroy();
+            this.DSDTable.destroy();
+        }
+
 
         //AJAX
         //TODO: move the ajax call elsewhere

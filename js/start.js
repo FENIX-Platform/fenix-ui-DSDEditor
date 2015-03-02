@@ -75,10 +75,8 @@ define([
             this.DSDE.isEditable(editable);
     }
 
-    function reset()
-    {
-        this.DSDE.reset();
-    }
+    function reset() { this.DSDE.reset(); }
+    function destroy() { this.DSDE.destroy(); }
 
     return {
         init: init,
@@ -88,6 +86,7 @@ define([
         getColumns: getColumns,
         validate: validate,
         isEditable: isEditable,
-        reset:reset
+        reset: reset,
+        destroy: destroy
     }
 });

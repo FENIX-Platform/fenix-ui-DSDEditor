@@ -61,6 +61,10 @@ function ($, jqx, mlRes) {
         else
             this.$container.jqxDropDownList('clearSelection');
     }
+    SubjectSelector.prototype.destroy = function () {
+        this.$container.off('change');
+        this.$container.jqxDropDownList('destroy');
+    }
 
     var getSubjectByVal = function (val, subjs) {
         if (!val)

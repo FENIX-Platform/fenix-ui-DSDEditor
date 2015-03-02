@@ -64,6 +64,12 @@ function ($, jqx, rangeYearsHTML, mlRes) {
             else
                 this.$from.jqxNumberInput({ value: t });
     }
+    RangeYears.prototype.destroy = function () {
+        this.$from.off('change');
+        this.$to.off('change');
+        this.$from.jqxNumberInput('destroy');
+        this.$to.jqxNumberInput('destroy');
+    }
 
     RangeYears.prototype.doMl = function () {
         this.$container.find('#tdYearFrom').html(mlRes.from);

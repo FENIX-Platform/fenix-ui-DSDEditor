@@ -200,6 +200,16 @@ define([
                 this.domainEditor.setCodelistSubject(null);
         }
 
+        ColumnEditor.prototype.destroy = function () {
+
+            $subject.off('changed.subjectSelector.fenix');
+            $dataType.off('change');
+
+            this.dataTypeSelector.destroy();
+            this.subjectSelector.destroy();
+            this.domainEditor.destroy();
+        }
+
         //Multilang
         ColumnEditor.prototype.doML = function () {
             this.$container.find('#lTD_Title').html(mlRes.title);

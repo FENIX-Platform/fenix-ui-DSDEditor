@@ -95,6 +95,11 @@ function ($, jqx) {
     LimitedDDL.prototype.clearSelection = function () {
         this.$container.jqxDropDownList('clearSelection');
     }
+    LimitedDDL.prototype.destroy = function () {
+        this.$container.off('change');
+        this.$container.jqxDropDownList('destroy');
+    }
+
     var filterItems = function (src, dest, limit) {
         if (!dest)
             dest = [];

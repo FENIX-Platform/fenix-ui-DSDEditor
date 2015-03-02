@@ -155,5 +155,11 @@
             this.codesSelector.checkCodes(codes);
         }
 
+        CodelistSelector.prototype.destroy = function () {
+            this.codelistsDDL.destroy();
+            this.$container.find('#clSel_div_codelist').off('change.LimitedDDL.fenix');
+            this.$limitCheckbox.off('change');
+        }
+
         return CodelistSelector;
     });

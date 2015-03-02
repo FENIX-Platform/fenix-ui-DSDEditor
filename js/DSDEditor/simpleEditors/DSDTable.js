@@ -1,7 +1,7 @@
 ﻿define([
         'jquery',
         'jqxall',
-       'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit'
+        'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit'
 ],
     function ($, jqx, mlRes) {
         var widgetName = 'DSDTable';
@@ -34,9 +34,7 @@
                     //me.validateDSD();
                 }
             });
-            this.$container.on('initialized', function () {
-
-            });
+            //this.$container.on('initialized', function () {});
 
             this.doML();
         }
@@ -278,6 +276,9 @@
                 this.$container.jqxGrid('showcolumn', 'delete');
             else
                 this.$container.jqxGrid('hidecolumn', 'delete');
+        }
+        DSDTable.prototype.destroy = function () {
+            this.$container.jqxGrid('destroy');
         }
 
         //Helpers
