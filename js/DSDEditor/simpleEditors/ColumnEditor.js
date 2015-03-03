@@ -37,7 +37,7 @@ define([
             this.mlEditorTitle.render(this.$container.find('#colEditTitle'), this.config.MLEditor);
             var $dataType = this.$container.find('#colEditDataType');
             this.dataTypeSelector.render($dataType);
-            var $subject = this.$container.find('#colEditSubject');
+            $subject = this.$container.find('#colEditSubject');
             this.subjectSelector.render($subject);
             this.domainEditor.render(this.$container.find('#colEditDomain'));
             this.mlEditorSupplemental.render(this.$container.find('#colEditSupplemental'), this.config.MLEditor);
@@ -202,8 +202,8 @@ define([
 
         ColumnEditor.prototype.destroy = function () {
 
-            $subject.off('changed.subjectSelector.fenix');
-            $dataType.off('change');
+            this.$container.find('#colEditSubject').off('changed.subjectSelector.fenix');
+            this.$container.find('#colEditDataType').off('change');
 
             this.dataTypeSelector.destroy();
             this.subjectSelector.destroy();
