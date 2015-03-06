@@ -95,7 +95,6 @@ define([
                     newDSD.rid = meta.dsd.rid;
                     try {
                         var addr = me.getCompletePath(me.config.dsdUrl);
-                        //me.connector.ajaxPUT(me.config.dsdUrl, newDSD, callB);
                         me.connector.ajaxPUT(addr, newDSD, callB);
                     }
                     catch (ex) {
