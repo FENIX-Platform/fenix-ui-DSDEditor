@@ -21,6 +21,18 @@
             var clSelDiv = this.$container.find('#clSel_div_codelist');
             this.codelistsDDL.render(clSelDiv);
             this.$limitCheckbox = this.$container.find('#clSel_chkLimit');
+
+
+
+            //DISABLE THE LIMIT CODELISTS UNTIL DB SIDE IS READY
+            this.$limitCheckbox.hide();
+            //DELETE THIS LINE AND COMPLETE THE CODE WHEN DB IS READY
+            //The interface should rebuild the user's choice when the DB sends the hierarchy informations back
+
+
+
+
+
             this.updateCodelistsDDL();
 
             //Attach events for the Limit codelist enable/disable
@@ -92,7 +104,7 @@
                     this.$limitCheckbox.prop('checked', true);
                     var me = this;
                     this.updateCodesList(function () { me.selectCodesInCodelist(domain.codes[0].codes); });
-                    
+
                 }
             }
 
