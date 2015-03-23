@@ -7,9 +7,10 @@
         'fx-DSDEditor/js/DSDEditor/simpleEditors/DSDTable',
         'fx-DSDEditor/js/DSDEditor/helpers/DSDColumnValidator',
         'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit',
-        'text!fx-DSDEditor/templates/DSDEditor/DSDEdit.htm'
+        'text!fx-DSDEditor/templates/DSDEditor/DSDEdit.htm',
+        'pnotify'
 ],
-    function ($, jqx, require, ColumnIDGenerator, ColumnEditor, DSDTable, DSDColumnValidator, mlRes, DSDEditHTML) {
+    function ($, jqx, require, ColumnIDGenerator, ColumnEditor, DSDTable, DSDColumnValidator, mlRes, DSDEditHTML, PNotify) {
 
         var widgetName = "DSDEditor";
 
@@ -44,12 +45,14 @@
             this.colEditor.render(this.$cntColEdit);
 
             var me = this;
-            this.$container.find('#bntColEditOk').on('click',function () {
+            this.$container.find('#bntColEditOk').on('click', function () {
                 var newCol = me.colEditor.getColumn();
 
                 var val = new DSDColumnValidator();
                 var valRes = val.validateColumn(newCol);
-                me.colEditor.showValidationResults(valRes);
+                me.showValidationResults(valRes);
+                //me.colEditor.showValidationResults(valRes);
+                
 
                 if (!valRes || valRes.length == 0) {
                     me.colEditor.reset();
@@ -159,12 +162,12 @@
         DSDEditor.prototype.setColumns = function (columns) {
             this.cols = columns;
             this.DSDTable.setColumns(this.cols);
-            this.DSDTable.showValidationResults(this.validate());
+            this.showValidationResults(this.validateColumns());
         }
         DSDEditor.prototype.getColumns = function () {
-            var valRes = this.validate();
-            if (valRes.length > 0) {
-                this.DSDTable.showValidationResults(valRes);
+            var valRes = this.validateColumns();
+            if (valRes  && valRes.length > 0) {
+                this.showValidationResults(valRes);
                 return false;
             }
             return this.cols;
@@ -186,10 +189,25 @@
         DSDEditor.prototype.ColumnAddDeleteEnabled = function (enabled) {
             this.DSDTable.ColumnAddDeleteEnabled(enabled);
         }
-        DSDEditor.prototype.validate = function () {
+        DSDEditor.prototype.validateColumns = function () {
             var valRes = new DSDColumnValidator().validateColumns(this.cols);
-            //this.DSDTable.showValidationResults(valRes);
             return valRes;
+        }
+        DSDEditor.prototype.showValidationResults = function (valRes) {
+            if (!valRes || valRes.length == 0)
+                return;
+            var errMsg = " ";
+            for (var i = 0; i < valRes.length; i++) {
+                if (!valRes[i].field)
+                    errMsg = errMsg + mlRes[valRes[i].message] + "\n";
+                else
+                    errMsg = errMsg + valRes[i].field + " " + mlRes[valRes[i].message] + "\n";
+            }
+            new PNotify({
+                title: '',
+                text: errMsg,
+                type: 'error'
+            });
         }
 
         DSDEditor.prototype.doML = function () {

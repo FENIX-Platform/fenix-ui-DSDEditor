@@ -163,7 +163,7 @@
         //END Render - creation
 
         //Validation
-        DSDTable.prototype.showValidationResults = function (valRes) {
+       /* DSDTable.prototype.showValidationResults = function (valRes) {
             this.resetValidationResults();
             if (!valRes)
                 return;
@@ -174,7 +174,10 @@
             var htmlRows = this.$container.find("div[role='row']");
 
             var errMsg = " ";
-            for (var i = 0; i < valRes.length; i++) {
+            for (var i = 0; i < valRes.length; i++) {*/
+
+
+
                 /*
                 UNCOMMENT THIS WHEN A WORKING CLASS IS ASSIGNED TO THE CELL
                 */
@@ -202,20 +205,24 @@
                     alert(mlRes[valRes[i].message]);
                 }*/
 
+
+
+        /*
                 if (!valRes[i].field)
                     errMsg = errMsg + mlRes[valRes[i].message] + "\n";
                 else
                     errMsg = errMsg + valRes[i].field + " " + mlRes[valRes[i].message] + "\n";
             }
-            alert(errMsg);
-        }
 
-        DSDTable.prototype.resetValidationResults = function () {
+            //alert(errMsg);
+        }*/
+
+        /*DSDTable.prototype.resetValidationResults = function () {
             var htmlRows = this.$container.find("div[role='row']");
             if (htmlRows)
                 for (var r = 0; r < htmlRows.length; r++)
                     changeRowBackgroundColor(htmlRows[r], "normal");
-        }
+        }*/
 
         var getRowIndexByID = function (rows, id) {
             if (!rows)
