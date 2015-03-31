@@ -49,6 +49,11 @@ define([
             $dataType.on('change', function (evt) {
                 me.dataTypeChanged(evt.args.item.value);
             });
+            //Bug? Sometimes the checkboxes are hidden and not replaced via CSS?
+            //Fix the CSS and remove the following line
+            $('#colEditKey').show();
+
+
             this.doML();
         }
 
