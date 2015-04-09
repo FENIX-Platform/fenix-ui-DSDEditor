@@ -77,12 +77,5 @@
             "EN": "Percentage"
         },
 		"canBeDimension":false
-    },
-    {
-        "val": "time",
-        "text": {
-            "EN": "Time"
-        },
-		"canBeDimension":true
     }
 ]
