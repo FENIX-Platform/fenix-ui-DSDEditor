@@ -52,7 +52,6 @@
                 var valRes = val.validateColumn(newCol);
                 me.showValidationResults(valRes);
                 //me.colEditor.showValidationResults(valRes);
-                
 
                 if (!valRes || valRes.length == 0) {
                     me.colEditor.reset();
@@ -67,6 +66,12 @@
                             if (me.cols[i].id == newCol.id)
                                 me.cols[i] = newCol;
                     }
+
+                    new PNotify({
+                        title: '',
+                        text: mlRes.updated,
+                        type: 'success'
+                    });
                     me.DSDTable.setColumns(me.cols);
                 }
             });
@@ -166,7 +171,7 @@
         }
         DSDEditor.prototype.getColumns = function () {
             var valRes = this.validateColumns();
-            if (valRes  && valRes.length > 0) {
+            if (valRes && valRes.length > 0) {
                 this.showValidationResults(valRes);
                 return false;
             }

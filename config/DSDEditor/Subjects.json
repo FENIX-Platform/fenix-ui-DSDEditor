@@ -13,9 +13,9 @@
         "dataTypes": [
             "code",
             "customCode",
-            "string",
+            "text",
             "label",
-            "boolean",
+            "bool",
             "enumeration"
         ],
         "codelistSubject": "item"
@@ -30,7 +30,7 @@
             "month",
             "year",
             "customCode",
-            "string",
+            "text",
             "label",
             "time",
             "period"
@@ -44,7 +44,7 @@
         "dataTypes": [
             "code",
             "customCode",
-            "string",
+            "text",
             "label",
             "enumeration"
         ],
@@ -58,7 +58,7 @@
         "dataTypes": [
             "code",
             "customCode",
-            "string",
+            "text",
             "label",
             "enumeration"
         ],
@@ -72,7 +72,7 @@
         "dataTypes": [
             "number",
             "percentage",
-            "string",
+            "text",
             "label"
         ]
     },

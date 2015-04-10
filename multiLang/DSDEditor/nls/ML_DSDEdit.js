@@ -6,6 +6,7 @@
         "done": "Done",
         "reset": "Reset",
         "delete": "Delete",
+        "updated":"Updated",
         "confirmDelete": "Delete?",
         "edit": "Edit",
         "title": "Title",

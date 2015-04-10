@@ -5,6 +5,7 @@
     "done": "DoneFR",
     "reset": "ResetFR",
     "delete": "DeleteFR",
+    "updated": "UpdatedFR",
     "confirmDelete": "DeleteFR?",
     "edit": "EditFR",
     "title": "TitleFR",

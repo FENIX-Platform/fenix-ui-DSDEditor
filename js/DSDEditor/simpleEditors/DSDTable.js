@@ -109,7 +109,14 @@
                 },
                 { text: mlRes['title'], dataField: 'MLTitle', width: '20%' },
                 { text: mlRes['subject'], dataField: 'subject', width: '10%' },
-                { text: mlRes['key'], dataField: 'key', columntype: 'checkbox', width: '10%' },
+                {
+                    text: mlRes['key'], dataField: 'key', columntype: 'checkbox', width: '10%', cellsrenderer: function (row, columnfield, value, defaulthtml, columnproperties) {
+                        if (value)
+                            return "Yes"
+                        else 
+                            return "No"
+                    }
+                },
                 { text: mlRes['datatype'], dataField: 'dataType', width: '10%' },
                 { text: mlRes['domain'], dataField: 'tmp_domain', width: '10%' },
                 { text: mlRes['supplemental'], dataField: 'MLSupplemental', width: '20%' },

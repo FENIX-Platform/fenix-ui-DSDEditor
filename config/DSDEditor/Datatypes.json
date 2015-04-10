@@ -16,13 +16,6 @@
 		"canBeDimension":true
     },
     {
-        "val": "customCode",
-        "text": {
-            "EN": "Custom code"
-        },
-		"canBeDimension":true
-    },
-    {
         "val": "date",
         "text": {
             "EN": "Date"
@@ -51,9 +44,9 @@
 		"canBeDimension":false
     },
     {
-        "val": "string",
+        "val": "text",
         "text": {
-            "EN": "String"
+            "EN": "Text"
         },
 		"canBeDimension":false
     },
@@ -65,11 +58,11 @@
 		"canBeDimension":false
     },
     {
-        "val": "boolean",
+        "val": "bool",
         "text": {
             "EN": "Boolean"
         },
-		"canBeDimension":true
+		"canBeDimension":false
     },
     {
         "val": "percentage",
