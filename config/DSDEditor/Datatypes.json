@@ -50,14 +50,7 @@
         },
 		"canBeDimension":false
     },
-    {
-        "val": "label",
-        "text": {
-            "EN": "Label"
-        },
-		"canBeDimension":false
-    },
-    {
+	{
         "val": "bool",
         "text": {
             "EN": "Boolean"
