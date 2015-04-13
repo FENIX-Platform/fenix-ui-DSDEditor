@@ -1,4 +1,6 @@
 ﻿define({
+    "yes": "YesFR",
+    "no": "NoFR",
     "ok": "OkFR",
     "cancel": "CancelFR",
     "add": "AddFR",

@@ -1,5 +1,7 @@
 ﻿define({
     "root": {
+        "yes": "Yes",
+        "no": "No",
         "ok": "Ok",
         "cancel": "Cancel",
         "add": "Add",
