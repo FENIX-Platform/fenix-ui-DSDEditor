@@ -62,7 +62,8 @@
             "label",
             "enumeration"
         ],
-        "codelistSubject": "flag"
+        "codelistSubject": "flag",
+        "canBeDimension": false
     },
     {
         "val": "value",
@@ -79,8 +80,11 @@
     {
         "val": "um",
         "text": "UM",
-        "dataTypes": ["code", "customCode"],
-        "codelistSubject":"um",
-		"canBeDimension":false
+        "dataTypes": [
+            "code",
+            "customCode"
+        ],
+        "codelistSubject": "um",
+        "canBeDimension": false
     }
 ]
