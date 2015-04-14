@@ -425,6 +425,9 @@ PUT THIS AFTER BOOTSTRAP */
 #DSDEditorContainer .obj-box {
   padding: 0; }
 
+#modalDataUploadPreview input[type="checkbox"], #divDataEditor input[type="checkbox"], #DSDEditorContainer input[type="checkbox"] {
+  display: inline; }
+
 #colEditTbl tbody td {
   padding: 10px;
   border: 0; }
@@ -492,27 +495,3 @@ PUT THIS AFTER BOOTSTRAP */
   .fx-dark-bg .fx-bullet-number {
     background-color: white !important;
     color: #666666 !important; }
-
-/*Added to make the Date picker samller*/
-.fx-dsdedit-tblDateFromTo table td {
-   /* width:100px;
-  padding:1px !important;
-    background-color:aqua;*/
-}
-
-#divRngFrom table{
-    }
-#divRngFrom table td {
-   /* padding:0px !important;
-    background-color:aqua;*/
-}
-
-.MLTextEditor_table td {
-    padding:2px !important;
-}
-
-
-/*Dan: added to show an error icon*/
-.fx-dsdedit-errIcon {
-/*background-color:red;*/
-}

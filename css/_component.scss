@@ -15,6 +15,13 @@
   }
 }
 
+#modalDataUploadPreview,#divDataEditor,#DSDEditorContainer{
+  input[type="checkbox"]{
+    display: inline;
+  }
+}
+
+
 
 #colEditTbl{
   tbody{

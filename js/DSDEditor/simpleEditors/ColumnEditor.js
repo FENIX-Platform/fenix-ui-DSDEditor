@@ -51,7 +51,7 @@ define([
             });
             //Bug? Sometimes the checkboxes are hidden and not replaced via CSS?
             //Fix the CSS and remove the following line
-            $('#colEditKey').show();
+            //$('#colEditKey').show();
 
 
             this.doML();
