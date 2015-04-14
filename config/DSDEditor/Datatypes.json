@@ -50,13 +50,6 @@
         },
 		"canBeDimension":false
     },
-	{
-        "val": "bool",
-        "text": {
-            "EN": "Boolean"
-        },
-		"canBeDimension":false
-    },
     {
         "val": "percentage",
         "text": {

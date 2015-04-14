@@ -80,6 +80,7 @@
         "val": "um",
         "text": "UM",
         "dataTypes": ["code", "customCode"],
-        "codelistSubject":"um"
+        "codelistSubject":"um",
+		"canBeDimension":false
     }
 ]

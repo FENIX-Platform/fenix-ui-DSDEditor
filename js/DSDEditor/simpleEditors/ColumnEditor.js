@@ -176,11 +176,18 @@ define([
             if (newDataType == 'code')
                 this.limitCodelists(subj);
 
+            var keyEnabled = true;
+            if (subj.canBeDimension === false)
+                keyEnabled = false;
+
             var dT = this.dataTypeSelector.getSelectedItem();
-            if (dT)
+            /*if (dT)
                 this.keyEnabled(dT.canBeDimension);
             else
-                this.keyEnabled(true);
+                this.keyEnabled(true);*/
+            if (dT && dT.canBeDimension === false)
+                keyEnabled = false;
+            this.keyEnabled(keyEnabled);
         }
 
         ColumnEditor.prototype.keyEnabled = function (enabled) {
