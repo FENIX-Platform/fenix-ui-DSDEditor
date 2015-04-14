@@ -422,12 +422,6 @@ PUT THIS AFTER BOOTSTRAP */
   background-color: orangered;
   color: white; }
 
-#DSDEditorContainer .obj-box {
-  padding: 0; }
-
-#modalDataUploadPreview input[type="checkbox"], #divDataEditor input[type="checkbox"], #DSDEditorContainer input[type="checkbox"] {
-  display: inline; }
-
 #colEditTbl tbody td {
   padding: 10px;
   border: 0; }
