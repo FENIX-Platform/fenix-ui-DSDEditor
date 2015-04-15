@@ -77,6 +77,7 @@ define([
 
     function reset() { this.DSDE.reset(); }
     function destroy() { this.DSDE.destroy(); }
+    function hasChanged() { return this.DSDE.hasChanged(); }
 
     return {
         init: init,
@@ -87,6 +88,7 @@ define([
         validate: validate,
         isEditable: isEditable,
         reset: reset,
-        destroy: destroy
+        destroy: destroy,
+        hasChanged: hasChanged
     }
 });

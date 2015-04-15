@@ -31,6 +31,8 @@
 
             this.$cntDSDGrid;
             this.DSDTable;
+
+            this._changed = false;
         };
 
         //Render - creation
@@ -72,6 +74,7 @@
                         text: mlRes.updated,
                         type: 'success'
                     });
+                    this._changed = true;
                     me.DSDTable.setColumns(me.cols);
                 }
             });
@@ -106,6 +109,7 @@
                 for (var i = 0; i < me.cols.length; i++) {
                     if (me.cols[i].id == col.id) {
                         me.colEditor.setColumn(me.cols[i]);
+                        this._changed = true;
                     }
                 }
             });
@@ -116,6 +120,7 @@
                         if (me.cols[i].id == col.id) {
                             me.cols.splice(i, 1);
                             me.DSDTable.setColumns(me.cols);
+                            this._changed = true;
                         }
                     }
                 }
@@ -182,6 +187,7 @@
             //this.colAddDelEnabled = true;
             this.cols = [];
             this.DSDTable.setColumns(this.cols);
+            this._changed = false;
         }
         DSDEditor.prototype.refreshColumns = function () {
             this.DSDTable.refreshColumns();
@@ -213,6 +219,10 @@
                 text: errMsg,
                 type: 'error'
             });
+        }
+
+        DSDEditor.prototype.hasChanged = function () {
+            return this.colEditor.hasChanged() || this._changed;
         }
 
         DSDEditor.prototype.doML = function () {

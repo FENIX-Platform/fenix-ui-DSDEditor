@@ -28,6 +28,8 @@ define([
             this.$dimension;
             this.domainEditor = new DomainEditor();
             this.mlEditorSupplemental = new MLTextEditor();
+
+            this.changed = false;
         };
 
         ColumnEditor.prototype.render = function (container, config) {
@@ -49,9 +51,13 @@ define([
             $dataType.on('change', function (evt) {
                 me.dataTypeChanged(evt.args.item.value);
             });
-            //Bug? Sometimes the checkboxes are hidden and not replaced via CSS?
-            //Fix the CSS and remove the following line
-            //$('#colEditKey').show();
+
+            this.$container.find('#colEditSupplemental').on('keyup', function () {
+                me.changed = true;
+            });
+            this.$container.find('#colEditTitle').on('keyup', function () {
+                me.changed = true;
+            });
 
 
             this.doML();
@@ -91,6 +97,8 @@ define([
             this.mlEditorSupplemental.reset();
             this.resetValidationResults();
             this.validationActive = true;
+
+            this.changed = false;
         }
 
         ColumnEditor.prototype.setColumn = function (col) {
@@ -166,8 +174,10 @@ define([
 
         //Evts
         ColumnEditor.prototype.subjectChanged = function (newSubj) {
+            this.keyEnabled(this._enableDisableKey(newSubj, null));
             this.limitDataTypes(newSubj);
             this.limitCodelists(newSubj);
+            this.changed = true;
         }
 
         ColumnEditor.prototype.dataTypeChanged = function (newDataType) {
@@ -175,19 +185,17 @@ define([
             var subj = this.subjectSelector.getSelectedSubject();
             if (newDataType == 'code')
                 this.limitCodelists(subj);
-
-            var keyEnabled = true;
-            if (subj.canBeDimension === false)
-                keyEnabled = false;
-
             var dT = this.dataTypeSelector.getSelectedItem();
-            /*if (dT)
-                this.keyEnabled(dT.canBeDimension);
-            else
-                this.keyEnabled(true);*/
+            this.keyEnabled(this._enableDisableKey(subj, dT));
+            this.changed = true;
+        }
+        ColumnEditor.prototype._enableDisableKey = function (subj, dT) {
+            var kEnabled = true;
+            if (subj && subj.canBeDimension === false)
+                kEnabled = false;
             if (dT && dT.canBeDimension === false)
-                keyEnabled = false;
-            this.keyEnabled(keyEnabled);
+                kEnabled = false;
+            return kEnabled;
         }
 
         ColumnEditor.prototype.keyEnabled = function (enabled) {
@@ -213,14 +221,17 @@ define([
         }
 
         ColumnEditor.prototype.destroy = function () {
-
             this.$container.find('#colEditSubject').off('changed.subjectSelector.fenix');
             this.$container.find('#colEditDataType').off('change');
+            this.$container.find('#colEditSupplemental').off('keyup');
+            this.$container.find('#colEditTitle').off('keyup');
 
             this.dataTypeSelector.destroy();
             this.subjectSelector.destroy();
             this.domainEditor.destroy();
         }
+
+        ColumnEditor.prototype.hasChanged = function () { return this.changed; }
 
         //Multilang
         ColumnEditor.prototype.doML = function () {
