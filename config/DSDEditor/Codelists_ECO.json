@@ -1,0 +1,58 @@
+﻿[
+    {
+        "val": "ECO_GAUL",
+        "text": {
+            "EN": "ECO GAUL"
+        },
+        "subject": "geo"
+    },
+    {
+        "val": "ECO_Elements",
+        "text": {
+            "EN": "ECO Elements"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "ECO_FLAG",
+        "text": {
+            "EN": "ECO FLAG"
+        },
+        "subject": "flag"
+    },
+    {
+        "val": "ECO_DOMAINS",
+        "text": {
+            "EN": "ECO DOMAINS"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "ECO_Commodity",
+        "text": {
+            "EN": "ECO Commodity"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "ECO_AgeRange",
+        "text": {
+            "EN": "ECO AgeRange"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "HS|2012",
+        "text": {
+            "EN": "HS 2012"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "ECO_UM",
+        "text": {
+            "EN": "ECO UM"
+        },
+        "subject": "um"
+    }
+]
