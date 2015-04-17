@@ -97,7 +97,6 @@ define([
             this.mlEditorSupplemental.reset();
             this.resetValidationResults();
             this.validationActive = true;
-
             this.changed = false;
         }
 

@@ -53,7 +53,6 @@
                 var val = new DSDColumnValidator();
                 var valRes = val.validateColumn(newCol);
                 me.showValidationResults(valRes);
-                //me.colEditor.showValidationResults(valRes);
 
                 if (!valRes || valRes.length == 0) {
                     me.colEditor.reset();
@@ -79,7 +78,8 @@
                 }
             });
             this.$container.find('#bntColReset').on('click', function () {
-                me.colEditor.reset();
+                if (confirm(mlRes.areYouSure))
+                    me.colEditor.reset();
             });
 
 

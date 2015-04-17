@@ -12,24 +12,27 @@ function () {
     var MSG_EMPTY = 'empty';
     var MSG_DIMENSION_DATATYPE_CONFLICT = 'DimensionDataTypeConflict';
     var MSG_EMPTY_ID_CODELSIT = 'EmptyIdCodeList';
+    var MSG_AT_LEAST_ONE_VALUE = 'duplicateColumnIDs';
+    var MSG_DUPLICATE_SUBJECT = 'duplicateSubject';
 
-   DSDColumnValidator.prototype.validateColumns = function (cols) {
-       var toRet = [];
-       var valStructure = this.validateStructure(cols);
-       
-       arrAppend(toRet, valStructure);
-       if (!cols)
-           return toRet;
-       for (var i = 0; i < cols.length; i++) {
-           var colValRes = this.validateColumn(cols[i]);
-           arrAppend(toRet, colValRes);
-       }
-       return toRet;
+    DSDColumnValidator.prototype.validateColumns = function (cols) {
+        var toRet = [];
+        var valStructure = this.validateStructure(cols);
+        var duplicateSubj = this.checkDuplicateSubject(cols);
+
+        arrAppend(toRet, valStructure);
+        arrAppend(toRet, duplicateSubj);
+        if (!cols)
+            return toRet;
+        for (var i = 0; i < cols.length; i++) {
+            var colValRes = this.validateColumn(cols[i]);
+            arrAppend(toRet, colValRes);
+        }
+        return toRet;
     }
 
-   DSDColumnValidator.prototype.validateStructure = function (cols)
-   {
-       var toRet = [];
+    DSDColumnValidator.prototype.validateStructure = function (cols) {
+        var toRet = [];
         if (!cols) {
             toRet.push({ level: 'error', message: MSG_NULL_COLUMNS });
             return toRet;
@@ -38,26 +41,49 @@ function () {
             toRet.push({ level: 'error', message: MSG_AT_LEAST_2_COLS });
             return toRet;
         }
+
+        for (var i = 0; i < cols.length - 1; i++) {
+            for (var j = i + 1; j < cols.length; j++) {
+                if (cols[i].id == cols[j].id)
+                    toRet.push({ level: 'error', message: MSG_DUPLICATE_IDS });
+            }
+        }
+
+
         //At least a key and a value?
-        var keyCount=0;
-        var valCount=0;
-        for (var i = 0; i < cols.length; i++)
-        {
+        var keyCount = 0;
+        var valCount = 0;
+        for (i = 0; i < cols.length; i++) {
             if (cols[i].key)
                 keyCount++;
-            
+
             if (cols[i].subject && cols[i].subject == 'value')
                 valCount++;
         }
-        if (keyCount<1)
+        if (keyCount < 1)
             toRet.push({ level: 'error', message: MSG_AT_LEAST_ONE_KEY });
         if (valCount < 1)
             toRet.push({ level: 'error', message: MSG_AT_LEAST_ONE_VALUE });
         return toRet;
     }
 
-   DSDColumnValidator.prototype.validateColumn = function (col) {
-       var toRet = [];
+    DSDColumnValidator.prototype.checkDuplicateSubject = function (cols) {
+        var toRet = [];
+        if (!cols)
+            return null;
+        for (var i = 0; i < cols.length - 1; i++) {
+            for (var j = i + 1; j < cols.length; j++) {
+                if (cols[i].subject == cols[j].subject) {
+                    toRet.push({ level: 'error', message: MSG_DUPLICATE_SUBJECT });
+                    return toRet;
+                }
+            }
+        }
+        return null;
+    }
+
+    DSDColumnValidator.prototype.validateColumn = function (col) {
+        var toRet = [];
         if (!col) {
             toRet.push({ level: 'error', message: MSG_NULL_COLUMN });
             return toRet;
@@ -81,7 +107,7 @@ function () {
                 if (toVal.dataType == 'number' || toVal.dataType == 'string' || toVal.dataType == 'label' || toVal.dataType == 'boolean' || toVal.dataType == 'percentage' || toVal.dataType == 'period')
                     return { field: 'dimension', level: 'error', message: MSG_DIMENSION_DATATYPE_CONFLICT };
         }
-        
+
 
         return null;
     }
