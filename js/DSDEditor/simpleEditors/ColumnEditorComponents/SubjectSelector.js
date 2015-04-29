@@ -1,22 +1,29 @@
-﻿define(['jquery', 'jqxall'],
-function ($, jqx) {
-    var SubjectSelector = function () {
-        this.widgetName = 'subjectSelector';
+﻿define([
+    'jquery',
+    'jqxall',
+    'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit'
+],
+function ($, jqx, mlRes) {
+    var widgetName = 'subjectSelector';
+    var evtSubjectChanged = "changed." + widgetName + ".fenix";
+
+    var SubjectSelector = function (lang) {
         this.$container;
         this.subjects;
 
         this.lang = 'EN';
+        if (lang)
+            this.lang = lang;
     };
 
     SubjectSelector.prototype.render = function (container, lang) {
         if (lang)
             this.lang = lang;
         this.$container = container;
-        this.$container.jqxDropDownList({ displayMember: 'text', valueMember: 'val', autoDropDownHeight: true });
+        this.$container.jqxDropDownList({ displayMember: 'text', valueMember: 'val', autoDropDownHeight: true, promptText: mlRes.select });
         this.updateDDL();
 
         var me = this;
-
         this.$container.on('change', function (evt) { me.subjectChanged(evt.args.item.value); });
     }
 
@@ -25,14 +32,13 @@ function ($, jqx) {
         this.updateDDL();
     }
     SubjectSelector.prototype.updateDDL = function () {
-        if (!this.$container)
-            return;
         if (!this.subjects)
             return;
 
-        var DS = { localdata: this.subjects, datatype: 'array', datafields: [{ name: 'val', type: 'string' }, { name: 'text', type: 'string', map: 'text>' + this.lang}] };
+        var DS = { localdata: this.subjects, datatype: 'array', datafields: [{ name: 'val', type: 'string' }, { name: 'text', type: 'string', map: 'text>' + this.lang }] };
         var DA = new $.jqx.dataAdapter(DS);
-        this.$container.jqxDropDownList({ source: DA });
+        this.$container.jqxDropDownList({ source: DA, promptText: mlRes.select });
+
     }
 
     SubjectSelector.prototype.getSubjects = function ()
@@ -40,12 +46,12 @@ function ($, jqx) {
 
     SubjectSelector.prototype.subjectChanged = function (val) {
         var subj = getSubjectByVal(val, this.subjects);
-        this.$container.trigger("changed." + this.widgetName + ".fenix", subj);
+        this.$container.trigger(evtSubjectChanged, subj);
     }
 
     SubjectSelector.prototype.getSelectedSubject = function () {
         if (!this.$container.jqxDropDownList('getSelectedItem'))
-            return getSubjectByVal(null, this.subjects);
+            return null;
         var val = this.$container.jqxDropDownList('getSelectedItem').value;
         return getSubjectByVal(val, this.subjects);
     }
@@ -54,6 +60,10 @@ function ($, jqx) {
             this.$container.jqxDropDownList('val', val);
         else
             this.$container.jqxDropDownList('clearSelection');
+    }
+    SubjectSelector.prototype.destroy = function () {
+        this.$container.off('change');
+        this.$container.jqxDropDownList('destroy');
     }
 
     var getSubjectByVal = function (val, subjs) {

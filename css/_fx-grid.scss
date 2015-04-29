@@ -76,6 +76,14 @@
 }
 
 
+#contentcntDSDGrid{
+  .jqx-grid-cell{
+    margin: 0;
+    overflow: hidden;
+  }
+}
+
+
 
 .jqx-grid-selectionarea-fenix {
   border-color: #e6e6e6;

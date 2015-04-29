@@ -1,30 +1,79 @@
 ﻿[
     {
-        "val": "HS|2007",
+        "val": "UNECA_ISO-3",
         "text": {
-            "EN": "HS 2007"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "HS|2012",
-        "text": {
-            "EN": "HS 2012"
-        },
-        "subject": "item"
-    },
-    {
-        "val": "GAUL|2014",
-        "text": {
-            "EN": "Gaul 2014"
+            "EN": "UNECA ISO-3"
         },
         "subject": "geo"
     },
     {
-        "val": "CS_Flags|1.0",
+        "val": "UNECA_AgeRange",
         "text": {
-            "EN": "Flags"
+            "EN": "UNECA AgeRange"
         },
-        "subject": "flag"
+        "subject": "item"
+    },
+    {
+        "val": "UNECA_Domains_Indicator",
+        "text": {
+            "EN": "UNECA Domains Indicator"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "UNECA_EnergySource",
+        "text": {
+            "EN": "UNECA EnergySource"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "UNECA_Gender",
+        "text": {
+            "EN": "UNECA Gender"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "UNECA_Levels",
+        "text": {
+            "EN": "UNECA Levels"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "UNECA_Producer",
+        "text": {
+            "EN": "UNECA Producer"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "UNECA_Products",
+        "text": {
+            "EN": "UNECA Products"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "UNECA_Residence",
+        "text": {
+            "EN": "UNECA Residence"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "UNECA_Sectors",
+        "text": {
+            "EN": "UNECA Sectors"
+        },
+        "subject": "item"
+    },
+    {
+        "val": "UNECA_UnitOfMeasure",
+        "text": {
+            "EN": "UNECA Unit Of Measure"
+        },
+        "subject": "um"
     }
 ]

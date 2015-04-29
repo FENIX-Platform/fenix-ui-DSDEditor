@@ -1,11 +1,11 @@
 ﻿[
-{
+    {
         "val": "",
         "text": {
             "EN": "Undefined"
         }
     },
-	{
+    {
         "val": "item",
         "text": {
             "EN": "Item"
@@ -13,9 +13,9 @@
         "dataTypes": [
             "code",
             "customCode",
-            "string",
+            "text",
             "label",
-            "boolean",
+            "bool",
             "enumeration"
         ],
         "codelistSubject": "item"
@@ -30,7 +30,7 @@
             "month",
             "year",
             "customCode",
-            "string",
+            "text",
             "label",
             "time",
             "period"
@@ -44,7 +44,7 @@
         "dataTypes": [
             "code",
             "customCode",
-            "string",
+            "text",
             "label",
             "enumeration"
         ],
@@ -58,11 +58,12 @@
         "dataTypes": [
             "code",
             "customCode",
-            "string",
+            "text",
             "label",
             "enumeration"
         ],
-        "codelistSubject": "flag"
+        "codelistSubject": "flag",
+        "canBeDimension": false
     },
     {
         "val": "value",
@@ -72,8 +73,18 @@
         "dataTypes": [
             "number",
             "percentage",
-            "string",
+            "text",
             "label"
         ]
+    },
+    {
+        "val": "um",
+        "text": "UM",
+        "dataTypes": [
+            "code",
+            "customCode"
+        ],
+        "codelistSubject": "um",
+        "canBeDimension": false
     }
 ]

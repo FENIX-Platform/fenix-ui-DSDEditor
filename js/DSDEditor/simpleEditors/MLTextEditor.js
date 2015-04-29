@@ -1,79 +1,69 @@
-﻿define(['jqxall'],
-function (jqx) {
-    function MLTextEditor() {
-        this.$container;
-        this.defLangs = ['EN', 'FR'];
+﻿/*
+config format:
+{langs:['EN','FR']}
+*/
+define([
+    'jquery',
+    'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/MLTextEditor.htm'
+],
+    function ($, MLTextEditorHTML) {
 
-        this.lCodeColWidth = 30;
-    };
+        var defConfig = { langs: ['EN', 'FR'] };
 
+        function MLTextEditor(config) {
+            this.config = {};
+            $.extend(true, this.config, defConfig, config);
+            this.$container;
+            this.txtFields = [];
+        };
 
-    MLTextEditor.prototype.render = function (container) {
-        this.$container = container;
-        createGrid(this.$container, this.defLangs);
-    }
+        MLTextEditor.prototype.render = function (container, config) {
+            $.extend(true, this.config, config);
 
-    MLTextEditor.prototype.setLanguages = function (langs) {
-        createGrid(this.$container, langs);
-    }
+            for (var i = 0; i < this.config.langs.length; i++)
+                this.config.langs[i] = this.config.langs[i].toUpperCase();
 
-    MLTextEditor.prototype.setWidth = function (width) {
-        this.$container.jqxGrid({ width: width });
-    }
-
-    var createGrid = function (cnt, langs) {
-        var labelsData = [];
-        for (var i = 0; i < langs.length; i++)
-            labelsData.push({ lCode: langs[i], label: '' });
-
-        var dSource = { localdata: labelsData, datatype: "array", datafields: [{ name: 'lCode', type: 'string' }, { name: 'label', type: 'string'}] };
-        var dAdapter = new $.jqx.dataAdapter(dSource);
-
-        cnt.jqxGrid({ editable: true, source: dAdapter,
-            columns: [{ text: 'code', datafield: 'lCode', editable: false, width:30 },
-            { text: 'label', datafield: 'label', editable: true}],
-            showheader: false, autoheight: true
-        });
-        cnt.jqxGrid('setcolumnproperty', 'lCode', 'width', 30);
-    }
-
-    MLTextEditor.prototype.reset = function () {
-        var rows = this.$container.jqxGrid('getrows');
-        for (var r = 0; r < rows.length; r++)
-            this.$container.jqxGrid('updaterow', r, { lCode: rows[r].lCode, label: '' });
-    }
-    MLTextEditor.prototype.setLabels = function (labels) {
-        this.reset();
-
-        if (!labels)
-            return;
-
-        for (var lCode in labels) {
-            var idx = this.getRowIndexByCode(lCode);
-            if (idx == -1) {
-                try {
-                    this.$container.jqxGrid('addrow', null, { lCode: lCode, label: labels[lCode] });
-                } catch (e) { }
-            }
-            else { this.$container.jqxGrid('updaterow', idx, { lCode: lCode, label: labels[lCode] }); }
+            this.$container = container;
+            this.$container.html(MLTextEditorHTML);
+            this.createGrid();
         }
-    }
-    MLTextEditor.prototype.getRowIndexByCode = function (code) {
-        var rows = this.$container.jqxGrid('getrows');
-        for (var i = 0; i < rows.length; i++)
-            if (rows[i].lCode == code)
-                return i;
-        return -1;
-    }
 
-    MLTextEditor.prototype.getLabels = function () {
-        var toRet = {};
-        var rows = this.$container.jqxGrid('getrows');
-        for (var i = 0; i < rows.length; i++)
-            if (rows[i].label.trim() != "")
-                toRet[rows[i].lCode] = rows[i].label;
-        return toRet;
-    }
+        MLTextEditor.prototype.reset = function () {
+            for (var i = 0; i < this.txtFields.length; i++)
+                this.txtFields[i].txtArea.val("");
+        }
+        MLTextEditor.prototype.setLabels = function (labels) {
+            this.reset();
+            for (var i = 0; i < this.txtFields.length; i++) {
+                if (this.txtFields[i].code in labels)
+                    this.txtFields[i].txtArea.val(labels[this.txtFields[i].code]);
+            }
+        }
+        MLTextEditor.prototype.getLabels = function () {
+            var toRet = {};
+            for (var i = 0; i < this.txtFields.length; i++) {
+                var val = this.txtFields[i].txtArea.val().trim();
+                if (val != "")
+                    toRet[this.txtFields[i].code] = val;
+            }
+            if ($.isEmptyObject(toRet))
+                return null;
+            return toRet;
+        }
 
-    return MLTextEditor;
-});
+        //Grid creation
+        MLTextEditor.prototype.createGrid = function () {
+            this.txtFields = [];
+            var idPrefix = 'MLTextEditor_';
+            var $tbody = this.$container.find('tbody');
+            for (var i = 0; i < this.config.langs.length; i++) {
+                var $row = $('<tr><td>' + this.config.langs[i] + '</td><td>' + '<input type="text" name="' + idPrefix + this.config.langs[i] + '" value=""' + '</td></tr>');
+                $tbody.append($row);
+                txtArea = $row.find('input[name=' + idPrefix + this.config.langs[i] + ']');
+                this.txtFields.push({ code: this.config.langs[i], txtArea: txtArea });
+            }
+        }
+        //END Grid creation
+        return MLTextEditor;
+    }
+);

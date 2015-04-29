@@ -1,55 +1,48 @@
-﻿//276 Lines
-
+﻿/*
+config format:
+{langs:['EN','FR']}
+*/
 define([
         'jquery',
-//'i18n!nls/ML_DSDEdit',
         'jqxall',
-        'js/DSDEditor/simpleEditors/MLTextEditor',
-        'js/DSDEditor/simpleEditors/DomainEditor',
-        'js/DSDEditor/simpleEditors/ColumnEditorComponents/LimitedDDL',
-        'js/DSDEditor/simpleEditors/ColumnEditorComponents/SubjectSelector',
-        'text!templates/DSDEditor/ColumnEditor.htm'
-    ],
-    function ($, jqx, MLTextEditor, DomainEditor, LimitedDDL, SubjectSelector, columnEditorHTML) {
-        function ColumnEditor() {
+        'fx-DSDEditor/js/DSDEditor/simpleEditors/MLTextEditor',
+        'fx-DSDEditor/js/DSDEditor/simpleEditors/DomainEditor',
+        'fx-DSDEditor/js/DSDEditor/simpleEditors/ColumnEditorComponents/LimitedDDL',
+        'fx-DSDEditor/js/DSDEditor/simpleEditors/ColumnEditorComponents/SubjectSelector',
+        'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit',
+        'text!fx-DSDEditor/templates/DSDEditor/ColumnEditor.htm'
+],
+    function ($, jqx, MLTextEditor, DomainEditor, LimitedDDL, SubjectSelector, mlRes, columnEditorHTML) {
+
+        var defConfig = {};
+
+        function ColumnEditor(config) {
+            this.config = {};
+            $.extend(true, this.config, defConfig, config);
             this.$container;
 
             this.colId = "";
-
             this.mlEditorTitle = new MLTextEditor();
             this.subjectSelector = new SubjectSelector();
-
             this.dataTypeSelector = new LimitedDDL();
-
             this.$dimension;
-
             this.domainEditor = new DomainEditor();
             this.mlEditorSupplemental = new MLTextEditor();
 
-            //Link here
+            this.changed = false;
         };
 
-        ColumnEditor.prototype.render = function (container) {
+        ColumnEditor.prototype.render = function (container, config) {
+            $.extend(true, this.config, config);
             this.$container = container;
             this.$container.html(columnEditorHTML);
-            this.mlEditorTitle.render(this.$container.find('#colEditTitle'));
-            this.mlEditorTitle.setWidth(350);
-
+            this.mlEditorTitle.render(this.$container.find('#colEditTitle'), this.config.MLEditor);
             var $dataType = this.$container.find('#colEditDataType');
             this.dataTypeSelector.render($dataType);
-            var $subject = this.$container.find('#colEditSubject');
+            $subject = this.$container.find('#colEditSubject');
             this.subjectSelector.render($subject);
-
-
             this.domainEditor.render(this.$container.find('#colEditDomain'));
-
-            this.mlEditorSupplemental.render(this.$container.find('#colEditSupplemental'));
-            this.mlEditorSupplemental.setWidth(350);
-
-            //Link here
-
-            //this.doML();
-
+            this.mlEditorSupplemental.render(this.$container.find('#colEditSupplemental'), this.config.MLEditor);
             //Evts
             var me = this;
             $subject.on('changed.subjectSelector.fenix', function (evt, param) {
@@ -58,6 +51,16 @@ define([
             $dataType.on('change', function (evt) {
                 me.dataTypeChanged(evt.args.item.value);
             });
+
+            this.$container.find('#colEditSupplemental').on('keyup', function () {
+                me.changed = true;
+            });
+            this.$container.find('#colEditTitle').on('keyup', function () {
+                me.changed = true;
+            });
+
+
+            this.doML();
         }
 
         ColumnEditor.prototype.setSubjects = function (subjects) {
@@ -81,24 +84,20 @@ define([
             return this.domainEditor.getCodelsits();
         }
 
-        ColumnEditor.prototype.setCodelists = function (codelists) {
-            this.domainEditor.setCodelists(codelists);
-        }
-
         ColumnEditor.prototype.reset = function () {
             this.validationActive = false;
             this.colId = "";
             this.mlEditorTitle.reset();
-            this.dimensionEnabled(true);
+            this.keyEnabled(true);
             $('#colEditKey').prop('checked', false);
             this.dataTypeSelector.clearSelection();
             this.dataTypeSelector.limitItems(null);
             this.subjectSelector.setSelectedValue('');
             this.domainEditor.reset();
             this.mlEditorSupplemental.reset();
-            //Link here
             this.resetValidationResults();
             this.validationActive = true;
+            this.changed = false;
         }
 
         ColumnEditor.prototype.setColumn = function (col) {
@@ -118,7 +117,6 @@ define([
                 $('#colEditKey').prop('checked', col.key);
             if (col.supplemental)
                 this.mlEditorSupplemental.setLabels(col.supplemental);
-            //Link here
             this.validationActive = true;
         }
         ColumnEditor.prototype.getColumn = function () {
@@ -128,11 +126,9 @@ define([
             toRet.key = $('#colEditKey').is(':checked');
             toRet.dataType = this.dataTypeSelector.getSelectedValue();
             toRet.domain = this.domainEditor.getDomain();
-
-            if (this.subjectSelector.getSelectedSubject())
-                toRet.subject = this.subjectSelector.getSelectedSubject().val;
-            else
-                toRet.subject = null;
+            var subj = this.subjectSelector.getSelectedSubject();
+            if (subj)
+                toRet.subject = subj.val;
 
             toRet.supplemental = this.mlEditorSupplemental.getLabels();
             if ($.isEmptyObject(toRet.supplemental))
@@ -149,25 +145,25 @@ define([
                 for (var i = 0; i < valRes.length; i++) {
                     switch (valRes[i].field) {
                         case 'title':
-                            this.$container.find('#lTD_Title').css('background-color', '#f00');
+                            this.$container.find('#lTD_Title').addClass("fx-red-cell");
                             break;
                         case 'dimension':
-                            this.$container.find('#lTD_Dimension').css('background-color', '#f00');
+                            this.$container.find('#lTD_Dimension').addClass("fx-red-cell");
                             break;
                         case 'dataType':
-                            this.$container.find('#lTD_DataType').css('background-color', '#f00');
+                            this.$container.find('#lTD_DataType').addClass("fx-red-cell");
                             break;
                         case 'domain':
-                            this.$container.find('#lTD_Domain').css('background-color', '#f00');
+                            this.$container.find('#lTD_Domain').addClass("fx-red-cell");
                     }
                 }
         }
 
         ColumnEditor.prototype.resetValidationResults = function () {
-            this.$container.find('#lTD_Title').css('background-color', '');
-            this.$container.find('#lTD_Dimension').css('background-color', '');
-            this.$container.find('#lTD_DataType').css('background-color', '');
-            this.$container.find('#lTD_Domain').css('background-color', '');
+            this.$container.find('#lTD_Title').removeClass("fx-red-cell");
+            this.$container.find('#lTD_Dimension').removeClass("fx-red-cell");
+            this.$container.find('#lTD_DataType').removeClass("fx-red-cell");
+            this.$container.find('#lTD_Domain').removeClass("fx-red-cell");
         }
 
         ColumnEditor.prototype.setDomain = function (dataType, domain) {
@@ -176,25 +172,32 @@ define([
         }
 
         //Evts
-        ColumnEditor.prototype.dimensionChanged = function () {
+        ColumnEditor.prototype.subjectChanged = function (newSubj) {
+            this.keyEnabled(this._enableDisableKey(newSubj, null));
+            this.limitDataTypes(newSubj);
+            this.limitCodelists(newSubj);
+            this.changed = true;
         }
+
         ColumnEditor.prototype.dataTypeChanged = function (newDataType) {
             this.domainEditor.setMode(newDataType);
             var subj = this.subjectSelector.getSelectedSubject();
             if (newDataType == 'code')
                 this.limitCodelists(subj);
-
             var dT = this.dataTypeSelector.getSelectedItem();
-            if (dT)
-                this.dimensionEnabled(dT.canBeDimension);
-            else
-                this.dimensionEnabled(true);
+            this.keyEnabled(this._enableDisableKey(subj, dT));
+            this.changed = true;
         }
-        ColumnEditor.prototype.subjectChanged = function (newSubj) {
-            this.limitDataTypes(newSubj);
-            this.limitCodelists(newSubj);
+        ColumnEditor.prototype._enableDisableKey = function (subj, dT) {
+            var kEnabled = true;
+            if (subj && subj.canBeDimension === false)
+                kEnabled = false;
+            if (dT && dT.canBeDimension === false)
+                kEnabled = false;
+            return kEnabled;
         }
-        ColumnEditor.prototype.dimensionEnabled = function (enabled) {
+
+        ColumnEditor.prototype.keyEnabled = function (enabled) {
             if (enabled)
                 $('#colEditKey').removeAttr('disabled');
             else {
@@ -216,15 +219,28 @@ define([
                 this.domainEditor.setCodelistSubject(null);
         }
 
+        ColumnEditor.prototype.destroy = function () {
+            this.$container.find('#colEditSubject').off('changed.subjectSelector.fenix');
+            this.$container.find('#colEditDataType').off('change');
+            this.$container.find('#colEditSupplemental').off('keyup');
+            this.$container.find('#colEditTitle').off('keyup');
+
+            this.dataTypeSelector.destroy();
+            this.subjectSelector.destroy();
+            this.domainEditor.destroy();
+        }
+
+        ColumnEditor.prototype.hasChanged = function () { return this.changed; }
+
         //Multilang
-        /*ColumnEditor.prototype.doML = function () {
-         this.$container.find('#lTD_Title').html(mlRes.title);
-         this.$container.find('#lTD_Subject').html(mlRes.subject);
-         this.$container.find('#lTD_DataType').html(mlRes.datatype);
-         this.$container.find('#lTD_Domain').html(mlRes.domain);
-         this.$container.find('#lTD_key').html(mlRes.key);
-         this.$container.find('#lTD_Supplemental').html(mlRes.supplemental);
-         }*/
+        ColumnEditor.prototype.doML = function () {
+            this.$container.find('#lTD_Title').html(mlRes.title);
+            this.$container.find('#lTD_Subject').html(mlRes.subject);
+            this.$container.find('#lTD_DataType').html(mlRes.datatype);
+            this.$container.find('#lTD_Domain').html(mlRes.domain);
+            this.$container.find('#lTD_key').html(mlRes.key);
+            this.$container.find('#lTD_Supplemental').html(mlRes.supplemental);
+        }
         //END Multilang
 
         return ColumnEditor;

@@ -1,48 +1,58 @@
 ﻿define([
         'jquery',
         'jqxall',
-        'i18n!multiLang/DSDEditor/nls/ML_DSDEdit',
-        'js/DSDEditor/helpers/ColumnIDGenerator',
-        'js/DSDEditor/simpleEditors/ColumnEditor',
-        'js/DSDEditor/helpers/DSDColumnValidator',
-        'text!templates/DSDEditor/DSDEdit.htm'
-    ],
-    function ($, jqx, mlRes, ColumnIDGenerator, ColumnEditor, DSDColumnValidator, DSDEditHTML) {
-        var DSDEditor = function () {
-            this.widgetName = "DSDEditor";
+        'require',
+        'fx-DSDEditor/js/DSDEditor/helpers/ColumnIDGenerator',
+        'fx-DSDEditor/js/DSDEditor/simpleEditors/ColumnEditor',
+        'fx-DSDEditor/js/DSDEditor/simpleEditors/DSDTable',
+        'fx-DSDEditor/js/DSDEditor/helpers/DSDColumnValidator',
+        'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit',
+        'text!fx-DSDEditor/templates/DSDEditor/DSDEdit.htm',
+        'pnotify'
+],
+    function ($, jqx, require, ColumnIDGenerator, ColumnEditor, DSDTable, DSDColumnValidator, mlRes, DSDEditHTML, PNotify) {
+
+        var widgetName = "DSDEditor";
+
+        var defConfig = { columnEditor: {} };
+        defConfig.columnEditor["subjects"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Subjects.json");
+        defConfig.columnEditor["datatypes"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Datatypes.json");
+        defConfig.columnEditor["codelists"] = require.toUrl("fx-DSDEditor/config/DSDEditor/Codelists.json");
+
+        var DSDEditor = function (config) {
+            this.config = {};
+            $.extend(true, this.config, defConfig, config);
+
             this.$container;
-            this.$DSDGrid;
             this.cols = [];
 
+            this.$cntColEdit;
             this.colEditor;
 
-            this.colAddDelEnabled = true;
+            this.$cntDSDGrid;
+            this.DSDTable;
 
-            this.$divDSDGrid;
-            this.$divColEdit;
+            this._changed = false;
         };
 
         //Render - creation
-        DSDEditor.prototype.render = function (container, callB) {
+        DSDEditor.prototype.render = function (container, config, callB) {
+            $.extend(true, this.config, config);
 
             this.$container = container;
             this.$container.html(DSDEditHTML);
-            this.$divDSDGrid = this.$container.find('#divDSDGrid');
-            this.$divColEdit = this.$container.find('#divColEdit');
+            this.$cntColEdit = this.$container.find('#cntColEdit');
 
-
-            this.colEditor = new ColumnEditor();
-            this.$container.find('#divColEdit').show();
-            this.colEditor.render(this.$container.find('#cntColEdit'));
-            //this.$container.find('#divColEdit').hide();
+            this.colEditor = new ColumnEditor(this.config);
+            this.colEditor.render(this.$cntColEdit);
 
             var me = this;
-            this.$container.find('#bntColEditOk').click(function () {
+            this.$container.find('#bntColEditOk').on('click', function () {
                 var newCol = me.colEditor.getColumn();
 
                 var val = new DSDColumnValidator();
                 var valRes = val.validateColumn(newCol);
-                me.colEditor.showValidationResults(valRes);
+                me.showValidationResults(valRes);
 
                 if (!valRes || valRes.length == 0) {
                     me.colEditor.reset();
@@ -53,66 +63,68 @@
                         me.cols[me.cols.length - 1].id = idGen.generate(me.cols, me.cols.length - 1);
                     }
                     else {
-                        var colIdx = findColIndexById(me.cols, newCol.id);
-                        //if (colIdx==-1)
-                        me.cols[colIdx] = newCol;
+                        for (var i = 0; i < me.cols.length; i++)
+                            if (me.cols[i].id == newCol.id)
+                                me.cols[i] = newCol;
                     }
-                    me.refreshColumns();
+
+                    new PNotify({
+                        title: '',
+                        text: mlRes.updated,
+                        type: 'success'
+                    });
+                    this._changed = true;
+                    me.DSDTable.setColumns(me.cols);
                 }
             });
-            this.$container.find('#bntColEditCanc').click(function () {
-                me.switchVisibility();
-            });
-            this.$container.find('#bntColReset').click(function () {
-                me.colEditor.reset();
+            this.$container.find('#bntColReset').on('click', function () {
+                if (confirm(mlRes.areYouSure))
+                    me.colEditor.reset();
             });
 
 
-            this.$DSDGrid = this.$container.find('#cntDSDGrid');
-            this.dataSource = createDSDGridDataSource(this.cols);
-            this.dataAdapter = createDSDGridDataAdapter(this.dataSource, this.cols);
-
-            var w = this.$container.width();
-
-            this.$DSDGrid.jqxGrid({
-                source: this.dataAdapter,
-                theme: 'fenix',
-                editable: false,
-                autorowheight: true,
-                autoheight: true,
-
-
-                columns: this.createDSDGridCols(),
-                width: '100%',
-                //height: '100%',
-                rendered: function () {
-                    me.validateDSD();
-                }
-            });
-            this.$DSDGrid.on('initialized', function () {
-                me.ColumnAddDeleteEnabled(me.colAddDelEnabled);
-            });
-
-            this.$container.find('#DSDEdit_btnAddCol').click(function () {
-                me.newColumn();
-            });
-            this.$container.find('#btnColsEditDone').click(function () {
-                me.ColsEditDone();
-            });
+            this.$cntDSDGrid = this.$container.find('#cntDSDGrid');
+            this.DSDTable = new DSDTable();
+            this.DSDTable.render(this.$cntDSDGrid);
+            this.DSDTable.setColumns(this.cols);
 
             this.doML();
-//        this.$DSDGrid.jqxGrid('autoresizecolumns');
-        }
 
-        DSDEditor.prototype.switchVisibility = function () {
-            if (this.$divDSDGrid.is(':visible')) {
-                this.$divDSDGrid.hide();
-                this.$divColEdit.show();
-            }
-            else {
-                this.$divDSDGrid.show();
-                this.$divColEdit.hide();
-            }
+            var subjErr = "Cannot find subjects definition at " + this.config.columnEditor.subjects;
+            var datatypeErr = "Cannot find datatypes definition at " + this.config.columnEditor.datatypes;
+            var codelistsErr = "Cannot find codelists definition at " + this.config.columnEditor.codelists;
+
+            ajaxGET(me.config.columnEditor.subjects, function (data) {
+                me.setSubjects(data);
+                ajaxGET(me.config.columnEditor.datatypes, function (data) {
+                    me.setDataTypes(data);
+                    ajaxGET(me.config.columnEditor.codelists, function (data) {
+                        me.setCodelists(data);
+                        if (callB) callB();
+                    }, codelistsErr);
+                }, datatypeErr);
+            }, subjErr);
+
+            this.$cntDSDGrid.on("edit.DSDTable.fenix", function (evt, col) {
+                for (var i = 0; i < me.cols.length; i++) {
+                    if (me.cols[i].id == col.id) {
+                        me.colEditor.setColumn(me.cols[i]);
+                        this._changed = true;
+                    }
+                }
+            });
+
+            this.$cntDSDGrid.on("delete.DSDTable.fenix", function (evt, col) {
+                if (confirm(mlRes.confirmDelete)) {
+                    for (var i = 0; i < me.cols.length; i++) {
+                        if (me.cols[i].id == col.id) {
+                            me.cols.splice(i, 1);
+                            me.DSDTable.setColumns(me.cols);
+                            this._changed = true;
+                        }
+                    }
+                }
+            });
         }
 
         DSDEditor.prototype.setSubjects = function (subjects) {
@@ -134,267 +146,117 @@
         DSDEditor.prototype.getCodelists = function () {
             return this.colEditor.getCodelists();
         }
+        DSDEditor.prototype.isEditable = function (editable) {
+            if (typeof (editable) == 'undefined')
+                return this.DSDTable.isEditable();
 
-        var createDSDGridDataSource = function (data) {
-            var toRet = { localdata: data };
-            toRet.datafields = [
-                { name: 'id', type: 'string' },
-                { name: 'MLTitle', type: 'string' },
-                { name: 'subject', type: 'string' },
-                { name: 'key', type: 'bool' },
-                { name: 'dataType', type: 'string' },
-                { name: 'tmp_domain', type: 'string' },
-                { name: 'MLSupplemental', type: 'string' }
-            ];
-            return toRet;
-        }
-
-        var createDSDGridDataAdapter = function (datasource, cols) {
-            var toRet = new $.jqx.dataAdapter(datasource,
-                { beforeLoadComplete: function (rec) {
-                    for (var i = 0; i < rec.length; i++) {
-                        var col = findColById(cols, rec[i].id);
-                        if (col) {
-                            rec[i].MLTitle = mlLabelToString(col.title);
-
-                            //TODO: Handle multiple codes elements
-                            if (col.domain) {
-                                if (col.domain.codes && col.domain.codes[0])
-                                    rec[i].tmp_domain = col.domain.codes[0].idCodelist + " " + col.domain.codes[0].version;
-                                else if (col.domain.period)
-                                    rec[i].tmp_domain = periodToString(col.domain.period);
-                            } else
-                                rec[i].tmp_domain = "";
-
-                            rec[i].MLSupplemental = mlLabelToString(col.supplemental);
-                        }
-                        else {
-                            rec[i].MLTitle = "";
-                            rec[i].MLSupplemental = "";
-                            rec[i].tmp_domain = "";
-                        }
-                    }
-                    return rec;
-                }
-                });
-
-            return toRet;
-        }
-
-        DSDEditor.prototype.createDSDGridCols = function () {
-            var me = this;
-            var toRet = [
-                { text: mlRes['edit'], dataField: 'edit', width: '10%', columntype: 'button', cellsrenderer: function () {
-                    return mlRes['edit'];
-                }, buttonclick: function (row) {
-                    me.rowClicked(row, 'edit');
-                } },
-                { text: 'id', dataField: 'id', displayField: 'id', hidden: true  },
-                { text: mlRes['title'], dataField: 'MLTitle', width: '10%' },
-                { text: mlRes['subject'], dataField: 'subject', width: '10%' },
-                { text: mlRes['key'], dataField: 'key', columntype: 'checkbox', width: '10%' },
-                { text: mlRes['datatype'], dataField: 'dataType', width: '10%' },
-                { text: mlRes['domain'], dataField: 'tmp_domain', width: '10%'},
-                { text: mlRes['supplemental'], dataField: 'MLSupplemental', width: '20%' },
-                { text: mlRes['delete'], dataField: 'delete', columntype: 'button', width: '20%', cellsrenderer: function () {
-                    return mlRes['delete'];
-                }, buttonclick: function (row) {
-                    me.rowClicked(row, 'delete');
-                } }
-                //{ text: 'Link' }
-                //{ text: 'Transposed' };
-                //{ text: 'Virtual' };
-            ];
-
-            return toRet;
-        }
-        DSDEditor.prototype.rowClicked = function (rowIdx, action) {
-            var row = this.$DSDGrid.jqxGrid('getRows')[rowIdx];
-            var colId = row.id;
-            if (action == 'edit') {
-                var col = findColById(this.cols, colId);
-                this.colEditor.setColumn(col);
-                //this.switchVisibility();
+            var $divDSDGrid = this.$container.find('#divDSDGrid');
+            //TODO: assign classes to make the DSDTable bigger/smaller
+            if (editable) {
+                this.$container.find('#divColEdit').show();
+                $divDSDGrid.removeClass('col-md-12');
+                $divDSDGrid.addClass('col-md-8');
             }
-            else if (action == 'delete') {
-                var res = confirm("Delete");
-                if (res) {
-                    var colIdx = findColIndexById(this.cols, colId);
-                    if (colIdx != -1) {
-                        this.cols.splice(colIdx, 1);
-                        this.refreshColumns();
-                    }
-                }
+            else {
+                this.$container.find('#divColEdit').hide();
+                $divDSDGrid.removeClass('col-md-8');
+                $divDSDGrid.addClass('col-md-12');
             }
-        }
 
+            this.DSDTable.isEditable(editable);
+        }
         //END Render - creation
-
-        //Validation
-        DSDEditor.prototype.validateDSD = function () {
-            //validate the columns
-            var val = new DSDColumnValidator();
-            var cols = this.getColumns();
-            var valRes;
-            if (cols)
-                valRes = val.validateColumns(cols);
-            this.showValidationResults(valRes);
-
-            return valRes;
-
-            //Validate the whole DSD
-        }
-
-        DSDEditor.prototype.showValidationResults = function (valRes) {
-            this.resetValidationResults();
-            if (!valRes)
-                return;
-            if (valRes.length == 0)
-                return;
-
-            var rows = this.$DSDGrid.jqxGrid('getdisplayrows');
-            var htmlRows = this.$DSDGrid.find("div[role='row']");
-            for (var i = 0; i < valRes.length; i++) {
-                var rIdx = getRowIndexByID(rows, valRes[i].colId);
-                if (rIdx != -1)
-                    changeRowBackgroundColor(htmlRows[rIdx], "Red");
-            }
-        }
-        DSDEditor.prototype.resetValidationResults = function () {
-            var htmlRows = this.$DSDGrid.find("div[role='row']");
-            if (htmlRows)
-                for (var r = 0; r < htmlRows.length; r++)
-                    changeRowBackgroundColor(htmlRows[r], "");
-        }
-
-        var getRowIndexByID = function (rows, id) {
-            if (!rows)
-                return -1;
-            for (var i = 0; i < rows.length; i++)
-                if (rows[i].id == id)
-                    return i;
-            return -1;
-        }
-
-        function changeRowBackgroundColor(htmlRow, color) {
-            var tds = $(htmlRow).find("div[role='gridcell']");
-            for (var i = 0; i < tds.length; i++)
-                changeCellBackgroundColor(tds[i], color);
-        }
-
-        function changeCellBackgroundColorByColId(htmlRow, colId, color) {
-            var index = $tblValues.jqxGrid('getcolumnindex', colId);
-            var tds = $(htmlRow).find("div[role='gridcell']");
-            changeCellBackgroundColor(tds[index], color);
-        }
-
-        function changeCellBackgroundColor(htmlCell, color) {
-            $(htmlCell).css("background-color", color);
-        }
-
-        //END Validation
 
 
         //Get/Set cols
         DSDEditor.prototype.setColumns = function (columns) {
-            this.cols.length = 0;
-            if (columns)
-                for (var i = 0; i < columns.length; i++)
-                    this.cols.push(columns[i]);
-            this.refreshColumns();
+            this.cols = columns;
+            this.DSDTable.setColumns(this.cols);
+            this.showValidationResults(this.validateColumns());
         }
         DSDEditor.prototype.getColumns = function () {
-            //VALIDATE
+            var valRes = this.validateColumns();
+            if (valRes && valRes.length > 0) {
+                this.showValidationResults(valRes);
+                return false;
+            }
             return this.cols;
         }
 
         DSDEditor.prototype.reset = function () {
-            this.colAddDelEnabled = true;
-            this.cols.length = 0;
-            this.refreshColumns();
+            //this.colAddDelEnabled = true;
+            this.cols = [];
+            this.DSDTable.setColumns(this.cols);
+            this._changed = false;
         }
         DSDEditor.prototype.refreshColumns = function () {
-            this.$DSDGrid.jqxGrid({ source: this.dataAdapter });
+            this.DSDTable.refreshColumns();
         }
         DSDEditor.prototype.newColumn = function () {
             var newCol = {};
             newCol.id = "";
             this.colEditor.setColumn(newCol);
-            //this.switchVisibility();
         }
-
         DSDEditor.prototype.ColumnAddDeleteEnabled = function (enabled) {
-            this.colAddDelEnabled = enabled;
-            if (enabled) {
-                this.$container.find('#DSDEdit_btnAddCol').show();
-                this.$DSDGrid.jqxGrid('showcolumn', 'delete');
-            }
-            else {
-                this.$container.find('#DSDEdit_btnAddCol').hide();
-                this.$DSDGrid.jqxGrid('hidecolumn', 'delete');
-            }
+            this.DSDTable.ColumnAddDeleteEnabled(enabled);
         }
-
-
-        //EVTS
-        DSDEditor.prototype.ColsEditDone = function () {
-            var valRes = this.validateDSD();
-            if (valRes && valRes.length > 0)
+        DSDEditor.prototype.validateColumns = function () {
+            var valRes = new DSDColumnValidator().validateColumns(this.cols);
+            return valRes;
+        }
+        DSDEditor.prototype.showValidationResults = function (valRes) {
+            if (!valRes || valRes.length == 0)
                 return;
-            else
-                this.$container.trigger("columnEditDone." + this.widgetName + ".fenix");
-        }
-
-        //Helpers
-        var findColById = function (cols, id) {
-            var idx = findColIndexById(cols, id)
-            if (idx == -1)
-                return null;
-            return cols[idx];
-        }
-        var findColIndexById = function (cols, id) {
-            if (!cols)
-                return -1;
-            for (var i = 0; i < cols.length; i++)
-                if (cols[i].id == id)
-                    return i;
-            return -1;
-        }
-
-        var mlLabelToString = function (mlLabel) {
-            if (!mlLabel)
-                return "";
-            var toRet = "";
-            for (l in mlLabel)
-                toRet += l + ": " + mlLabel[l] + "</br>";
-            toRet = toRet.substring(0, toRet.length - ("</br>").length);
-            return toRet;
-        }
-        var periodToString = function (p) {
-            //LOCALIZE!
-            var toRet;
-            switch (p.from.length) {
-                case 8:
-                    toRet = p.from.substring(6, 8) + "/" + p.from.substring(4, 6) + "/" + p.from.substring(0, 4) + " - " + p.to.substring(6, 8) + "/" + p.to.substring(4, 6) + "/" + p.to.substring(0, 4);
-                    break;
-                case 6:
-                    toRet = p.from.substring(4, 6) + "/" + p.from.substring(0, 4) + " - " + p.to.substring(4, 6) + "/" + p.to.substring(0, 4);
-                    break;
-                case 4:
-                    toRet = p.from + " - " + p.to;
-                    break;
+            var errMsg = " ";
+            for (var i = 0; i < valRes.length; i++) {
+                if (!valRes[i].field)
+                    errMsg = errMsg + mlRes[valRes[i].message] + "\n";
+                else
+                    errMsg = errMsg + valRes[i].field + " " + mlRes[valRes[i].message] + "\n";
             }
-            return toRet;
+            new PNotify({
+                title: '',
+                text: errMsg,
+                type: 'error'
+            });
+        }
+
+        DSDEditor.prototype.hasChanged = function () {
+            return this.colEditor.hasChanged() || this._changed;
         }
 
         DSDEditor.prototype.doML = function () {
-            this.$container.find('#DSDEdit_btnAddCol').html(mlRes.add);
-            this.$container.find('#btnColsEditDone').html(mlRes.done);
-
-            this.$divColEdit.find('#bntColEditOk').html(mlRes.add);
-            this.$divColEdit.find('#bntColEditCanc').html(mlRes.cancel);
+            this.$container.find('#bntColEditOk').html(mlRes.ok);
+            this.$container.find('#bntColReset').html(mlRes.reset);
         }
         //END Multilang
+
+        DSDEditor.prototype.destroy = function () {
+            this.$container.find('#bntColEditOk').off('click');
+            this.$container.find('#bntColReset').off('click');
+            this.$cntDSDGrid.off("edit.DSDTable.fenix");
+            this.$cntDSDGrid.off("delete.DSDTable.fenix");
+
+            this.colEditor.destroy();
+            this.DSDTable.destroy();
+        }
+
+
+        //AJAX
+        //TODO: move the ajax call elsewhere
+        var ajaxGET = function (url, callB, errorMessage) {
+            $.ajax({
+                url: url,
+                crossDomain: true,
+                dataType: 'json',
+                success: function (data) {
+                    if (callB) callB(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    throw new Error("Cannot find data at " + url);
+                }
+            });
+        }
 
         return DSDEditor;
     });

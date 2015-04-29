@@ -1,7 +1,7 @@
 ﻿define([
 'jquery',
  'jqxall',
-  'text!templates/DSDEditor/simpleEditors/CodesSelectionEditor.htm'
+  'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/CodesSelectionEditor.htm'
   ],
 function ($, jqx, CodesSelectionEditorHTML) {
     var CodesSelectionEditor = function () {

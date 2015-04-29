@@ -1,31 +1,39 @@
 ﻿define([
 'jquery',
  'jqxall',
- 'text!templates/DSDEditor/simpleEditors/datesRange/RangeYears.htm'
-  ],
-function ($, jqx, rangeYearsHTML) {
-    var RangeYears = function () {
+ 'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/datesRange/RangeYears.htm',
+ 'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DomainEditor'
+],
+function ($, jqx, rangeYearsHTML, mlRes) {
+    var defConfig = { yMin: 0, yMax: 3000 };
+
+    var RangeYears = function (config) {
         this.$container;
         this.$from;
         this.$to;
-        this.yMin = 1000;
-        this.yMax = 3000;
+
+        this.config = {};
+        $.extend(true, this.config, defConfig, config);
     };
 
-    RangeYears.prototype.render = function (container) {
+    RangeYears.prototype.render = function (container, config) {
+        $.extend(true, this.config, config);
+
         this.$container = container;
         this.$container.html(rangeYearsHTML);
 
         this.$from = this.$container.find('#divRngYearsFrom');
         this.$to = this.$container.find('#divRngYearsTo');
 
-        this.$from.jqxNumberInput({ width: 40, min: this.yMin, max: this.yMax, decimalDigits: 0, digits: 4, groupSeparator: '', promptChar: ' ' });
-        this.$to.jqxNumberInput({ width: 40, min: this.yMin, max: this.yMax, decimalDigits: 0, digits: 4, groupSeparator: '', promptChar: ' ' });
+        this.$from.jqxNumberInput({ width: 40, min: this.config.yMin, max: this.config.yMax, decimalDigits: 0, digits: 4, groupSeparator: '', promptChar: ' ' });
+        this.$to.jqxNumberInput({ width: 40, min: this.config.yMin, max: this.config.yMax, decimalDigits: 0, digits: 4, groupSeparator: '', promptChar: ' ' });
         this.reset();
 
         var me = this;
         this.$from.on('change', function () { me.checkFromTo('f'); });
         this.$to.on('change', function () { me.checkFromTo('t'); });
+
+        this.doMl();
     }
     RangeYears.prototype.reset = function () {
         var Y = new Date().getFullYear();
@@ -38,15 +46,8 @@ function ($, jqx, rangeYearsHTML) {
         if (!rng)
             return;
 
-        var f = rng.from;
-        var t = rng.to;
-        if (f.length > 4)
-            f = f.substring(0, 4);
-        if (t.length > 4)
-            t = t.substring(0, 4);
-
-        this.$from.jqxNumberInput({ value: f });
-        this.$to.jqxNumberInput({ value: t });
+        this.$from.jqxNumberInput({ value: rng.from });
+        this.$to.jqxNumberInput({ value: rng.to });
     }
 
     RangeYears.prototype.getRange = function () {
@@ -62,6 +63,17 @@ function ($, jqx, rangeYearsHTML) {
                 this.$to.jqxNumberInput({ value: f });
             else
                 this.$from.jqxNumberInput({ value: t });
+    }
+    RangeYears.prototype.destroy = function () {
+        this.$from.off('change');
+        this.$to.off('change');
+        this.$from.jqxNumberInput('destroy');
+        this.$to.jqxNumberInput('destroy');
+    }
+
+    RangeYears.prototype.doMl = function () {
+        this.$container.find('#tdYearFrom').html(mlRes.from);
+        this.$container.find('#tdYearTo').html(mlRes.to);
     }
 
     return RangeYears;

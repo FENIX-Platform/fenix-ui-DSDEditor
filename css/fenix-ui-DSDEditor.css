@@ -9,38 +9,9 @@ PUT THIS AFTER BOOTSTRAP */
 /* Animations */
 /* Fenix UI  DSD Editor  CSS - Colors */
 /* Fenix Colors */
-/* Typography */
-a {
-  color: #666666; }
-  a:hover {
-    color: #35a6dc !important;
-    -webkit-transition: all 0.3s ease 0s;
-    -moz-transition: all 0.3s ease 0s;
-    -ms-transition: all 0.3s ease 0s;
-    -o-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s; }
-
+/* Specials */
+/* Fenix Typography */
 /*  FENIX COMMONS */
-body {
-  color: #666666;
-  font: normal normal 300 14px/normal "Roboto Condensed"; }
-
-/* Reset Jqwidget content font */
-.jqx-widget, .jqx-widget-content, .jqx-fill-state-normal {
-  font: normal normal 300 14px/normal "Roboto Condensed"; }
-
-h1, h2, h3 {
-  font-family: Roboto;
-  color: #35a6dc;
-  font-weight: 100;
-  color: #0076ff; }
-
-#colEditTbl tbody td {
-  padding: 10px;
-  border: 0; }
-#colEditTbl tbody #colEditTitle > div {
-  border: 1px solid #c7c7c7 !important; }
-
 /* FENIX GRID STYLE - Versione 0.1.0 */
 .jqx-grid-column-header, .jqx-grid-columngroup-header {
   font-weight: 300; }
@@ -105,6 +76,10 @@ h1, h2, h3 {
   -moz-background-clip: padding;
   background-clip: padding-box;
   -webkit-background-clip: padding-box; }
+
+#contentcntDSDGrid .jqx-grid-cell {
+  margin: 0;
+  overflow: hidden; }
 
 .jqx-grid-selectionarea-fenix {
   border-color: #e6e6e6;
@@ -434,3 +409,83 @@ h1, h2, h3 {
 
 .jqx-widget .jqx-grid-cell, .jqx-widget .jqx-grid-column-header, .jqx-widget .jqx-grid-group-cell {
   border-color: #eaeaea; }
+
+/* Fenix Data Editor Component */
+.fx-validation {
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s; }
+
+.fx-red-cell {
+  background-color: orangered;
+  color: white; }
+
+#colEditTbl tbody td {
+  padding: 10px;
+  border: 0; }
+#colEditTbl tbody #colEditTitle > div {
+  border: 1px solid #c7c7c7 !important; }
+
+.contentcolEditTitle {
+  width: 100%; }
+
+.fx-bootstrap-equalheight-container {
+  overflow: hidden; }
+
+.fx-bootstrap-equalheight-column {
+  margin-bottom: -100%;
+  padding-bottom: 100%; }
+
+#cntDSDGrid {
+  margin-bottom: 35px; }
+
+#mainContainer {
+  padding: 0 20px; }
+  #mainContainer > .row {
+    margin: 0 -21px; }
+
+#mainContainer.obj-box {
+  overflow: hidden; }
+
+.fx-dsdedit-addcolumn-btn button {
+  margin-bottom: 35px;
+  margin-right: 8px; }
+
+.fx-dark-bg {
+  background-color: #666666;
+  color: white !important; }
+  .fx-dark-bg * {
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent; }
+  .fx-dark-bg .jqx-widget-header-fenix, .fx-dark-bg .jqx-grid-fenix .jqx-widget-header-fenix {
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent; }
+  .fx-dark-bg *:hover {
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent; }
+  .fx-dark-bg .jqx-widget-header-fenix:hover, .fx-dark-bg .jqx-grid-fenix:hover .jqx-widget-header-fenix:hover {
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent; }
+  .fx-dark-bg .jqx-fill-state-hover-fenix, .fx-dark-bg .jqx-widget-fenix .jqx-grid-cell-hover-fenix {
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent; }
+  .fx-dark-bg .jqx-fill-state-pressed-fenix, .fx-dark-bg .jqx-widget-fenix .jqx-grid-cell-selected-fenix {
+    color: white !important;
+    background-color: transparent !important;
+    border-color: white !important;
+    background: transparent; }
+  .fx-dark-bg .fx-bullet-number {
+    background-color: white !important;
+    color: #666666 !important; }
