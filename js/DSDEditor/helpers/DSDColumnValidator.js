@@ -102,13 +102,11 @@ function () {
         return null;
     }
     DSDColumnValidator.prototype.validateDimension = function (toVal) {
-        if (toVal.dimension) {
+        if (toVal.key) {
             if (toVal.dataType)
                 if (toVal.dataType == 'number' || toVal.dataType == 'string' || toVal.dataType == 'label' || toVal.dataType == 'boolean' || toVal.dataType == 'percentage' || toVal.dataType == 'period')
                     return { field: 'dimension', level: 'error', message: MSG_DIMENSION_DATATYPE_CONFLICT };
         }
-
-
         return null;
     }
     DSDColumnValidator.prototype.validateDatatype = function (toVal) {

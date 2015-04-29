@@ -2,10 +2,12 @@
         'jquery',
         'fx-DSDEditor/js/DSDEditor/simpleEditors/codesSelection/TreeSelector',
         'text!fx-DSDEditor/templates/DSDEditor/simpleEditors/codesSelection/codesSelection.html',
-        'fx-DSDEditor/js/DSDEditor/dataConnectors/Connector_D3S',
+        //'fx-DSDEditor/js/DSDEditor/dataConnectors/Connector_D3S',
         'fx-DSDEditor/js/DSDEditor/helpers/MLUtils'
 ],
-    function ($, TreeSel, CodelistSelectorHTML, Connector, MLUtils) {
+    //function ($, TreeSel, CodelistSelectorHTML, Connector, MLUtils) {
+    //CONNECTOR REMOVED, fix this when the server is ready to handle the codelists limitations
+    function ($, TreeSel, CodelistSelectorHTML, MLUtils, Connector) {
         var defConfig = {};
 
         var CodesSelector = function (config) {
