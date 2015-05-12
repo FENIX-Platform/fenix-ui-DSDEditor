@@ -73,8 +73,7 @@ function () {
             return null;
         for (var i = 0; i < cols.length - 1; i++) {
             for (var j = i + 1; j < cols.length; j++) {
-                //null?
-                if (cols[i] && cols[j])
+                if (cols[i].subject && cols[j].subject)
                     if (cols[i].subject == cols[j].subject) {
                         toRet.push({ level: 'error', message: MSG_DUPLICATE_SUBJECT });
                         return toRet;
