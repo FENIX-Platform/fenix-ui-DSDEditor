@@ -11,7 +11,6 @@
         'pnotify'
 ],
     function ($, jqx, require, ColumnIDGenerator, ColumnEditor, DSDTable, DSDColumnValidator, mlRes, DSDEditHTML, PNotify) {
-
         var widgetName = "DSDEditor";
 
         var defConfig = {
