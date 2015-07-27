@@ -1,0 +1,99 @@
+﻿{
+    "dimension": [
+        {
+            "subject": "item",
+            "datatypes": [
+                "code",
+                "customCode"
+            ]
+        },
+        {
+            "subject": "time",
+            "datatypes": [
+                "year",
+                "month",
+                "date"
+            ]
+        },
+        {
+            "subject": "geo",
+            "datatypes": [
+                "code",
+                "customCode"
+            ]
+        }
+    ],
+    "value": [
+        {
+            "subject": "value",
+            "datatypes": [
+                "number",
+                "percentage",
+                "text"
+            ]
+        }
+    ],
+    "other": [
+        {
+            "subject": "item",
+            "datatypes": [
+                "code",
+                "customCode",
+                "text"
+            ]
+        },
+        {
+            "subject": "time",
+            "datatypes": [
+                "year",
+                "month",
+                "date",
+                "text"
+            ]
+        },
+        {
+            "subject": "geo",
+            "datatypes": [
+                "code",
+                "customCode",
+                "text"
+            ]
+        },
+        {
+            "subject": "flag",
+            "datatypes": [
+                "code",
+                "customCode",
+                "text"
+            ]
+        },
+        {
+            "subject": "value",
+            "datatypes": [
+                "number",
+                "percentage",
+                "text"
+            ]
+        },
+        {
+            "subject": "um",
+            "datatypes": [
+                "code",
+                "customCode",
+                "text"
+            ]
+        },
+        {
+            "subject": "undefined",
+            "datatypes": [
+                "customCode",
+                "number",
+                "percentage",
+                "year",
+                "month",
+                "date",
+                "text"
+            ]
+        }
+    ]
+}

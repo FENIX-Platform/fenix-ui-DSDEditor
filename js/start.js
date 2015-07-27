@@ -1,17 +1,3 @@
-/*
-config format:
-
-{
-    "columnEditor": {
-        "subjects": "urlToSubjectsJSON",
-        "datatypes": "urlToDatatypesJSON",
-        "codelists": "urlToCodelistsJSON"
-    },
-    "MLEditor": {
-        "langs": ["EN","FR"]
-    },
-}
-*/
 define([
     'jquery',
     'fx-DSDEditor/js/DSDEditor/DSDEditor',
@@ -29,15 +15,12 @@ define([
         this.DSDE.render($(containerID), cfg, callB);
     }
 
-    function setColumns(cols) { this.DSDE.setColumns(cols); }
-    function getColumns() { return this.DSDE.getColumns(); }
+    function set(cols) { this.DSDE.set(cols); }
+    function get() { return this.DSDE.get(); }
     function validate() { return this.DSDE.validate(); }
 
-    function isEditable(editable) {
-        if (typeof (editable) == 'undefined')
-            return this.DSDE.isEditable();
-        else
-            this.DSDE.isEditable(editable);
+    function editable(editable) {
+        this.DSDE.editable(editable);
     }
 
     function reset() { this.DSDE.reset(); }
@@ -46,10 +29,10 @@ define([
 
     return {
         init: init,
-        setColumns: setColumns,
-        getColumns: getColumns,
+        set: set,
+        get: get,
         validate: validate,
-        isEditable: isEditable,
+        editable: editable,
         reset: reset,
         destroy: destroy,
         hasChanged: hasChanged
