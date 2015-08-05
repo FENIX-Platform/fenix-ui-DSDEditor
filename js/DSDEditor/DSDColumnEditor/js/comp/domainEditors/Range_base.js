@@ -37,7 +37,6 @@
             this.$from = this.$container.find(h.idFrom);
             this.$to = this.$container.find(h.idTo);
 
-            //this.$yFrom.datetimepicker({ locale: 'en' });
             this.$from.datetimepicker({ viewMode: 'years', locale: 'en', format: "YYYY" });
             this.$to.datetimepicker({ viewMode: 'years', locale: 'en', format: "YYYY" });
 
