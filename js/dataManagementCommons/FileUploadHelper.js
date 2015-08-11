@@ -22,14 +22,13 @@ function ($) {
 
     FileUploadHelper.prototype.render = function (fileInputId) {
         this.initUploadInput(fileInputId);
-    }
+    };
 
     FileUploadHelper.prototype.reset = function () {
         this.$uploadInput.val('');
-    }
+    };
 
     FileUploadHelper.prototype.initUploadInput = function (inputId) {
-        //this.$uploadInput = this.$container.find(inputId);
         this.$uploadInput = $(inputId);
         var me = this;
 
@@ -61,11 +60,11 @@ function ($) {
             }
             return false;
         });
-    }
+    };
 
     FileUploadHelper.prototype.destroy = function () {
         this.$uploadInput.off('change');
-    }
+    };
 
     return FileUploadHelper;
 });

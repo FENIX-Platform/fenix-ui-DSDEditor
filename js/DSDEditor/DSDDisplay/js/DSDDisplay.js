@@ -1,10 +1,11 @@
 ﻿define(['jquery',
     'text!fx-DSDEditor/js/DSDEditor/DSDDisplay/html/DSDDisplay.html',
     'fx-DSDEditor/js/DSDEditor/DSDDisplay/js/comp/AddColButton',
-    'fx-DSDEditor/js/DSDEditor/DSDDisplay/js/comp/ColsDisplay'
+    'fx-DSDEditor/js/DSDEditor/DSDDisplay/js/comp/ColsDisplay',
+    'i18n!fx-DSDEditor/js/DSDEditor/DSDDisplay/multiLang/nls/ML_DSDDisplay'
 ],
 
-    function ($, DSDDisplayHTML, AddColButton, ColsDisplay) {
+    function ($, DSDDisplayHTML, AddColButton, ColsDisplay, MLRes) {
         var defConfig = {};
         var h = {
             idTDAddDim: '#tdAddDim',
@@ -45,20 +46,20 @@
             this.addColBtnOther.render(this.$tdAddOther);
 
             this.addColBtnDim.set({
-                title: 'Dimensions',
-                help: "Dimensions are necessary to identify your measure.<br/>Ex. Year and product, area and type of crop...",
+                title: MLRes.dimension,
+                help:MLRes.helpDim,
                 evtId: 'addDim',
                 headerClass:'bg-dim'
             });
             this.addColBtnVal.set({
-                title: 'Value',
-                help: "Add your measure here.<br />Ex. Quantity, value...",
+                title: MLRes.value,
+                help: MLRes.helpVal,
                 evtId: 'addVal',
                 headerClass: 'bg-val'
             });
             this.addColBtnOther.set({
-                title: 'Other',
-                help: "Add additional informations to your measure here.<br />Ex. flags, notes...",
+                title: MLRes.other,
+                help: MLRes.helpOther,
                 evtId: 'addOther',
                 headerClass: 'bg-other'
             });
