@@ -249,10 +249,16 @@
                 }
             }
         };
+        DSDColumnEditor.prototype.changed = function () {
+            //console.log(this.mlTitle.changed() || this.mlSupplemental.changed() || this.domainEditor.changed() || this.dynRadioSubj.changed() || this.dynRadioDataType.changed());
+            return this.mlTitle.changed() || this.mlSupplemental.changed() || this.domainEditor.changed() || this.dynRadioSubj.changed() || this.dynRadioDataType.changed();
+        };
 
         DSDColumnEditor.prototype.destroy = function () {
             this._unbindEvents();
             this._detachValidator();
+            this.mlTitle.destroy();
+            this.mlSupplemental.destroy();
             this.domainEditor.destroy();
             this.dynRadioSubj.destroy();
             this.dynRadioDataType.destroy();

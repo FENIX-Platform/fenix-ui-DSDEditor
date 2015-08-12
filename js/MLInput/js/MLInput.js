@@ -18,6 +18,8 @@
 
             this.$tblMLInput = null;
             this.txt = [];
+
+            this._changed = false;
         };
 
         MLInput.prototype.render = function (cnt, config) {
@@ -28,6 +30,7 @@
             this.$tblMLInput = this.$container.find(h.idTblMLInput);
 
             this._create(this.config.langs);
+            this.bindEvents();
         };
 
         MLInput.prototype._create = function (lCodes) {
@@ -76,6 +79,7 @@
             for (var i = 0; i < this.txt.length; i++) {
                 this.txt[i].val('');
             }
+            this._changed = false;
         };
         MLInput.prototype.isEmpty = function () {
             var v = this.get();
@@ -83,5 +87,22 @@
                 return true;
             return false;
         };
+        MLInput.prototype.bindEvents = function () {
+            if (!this.txt)
+                return;
+            var me = this;
+            for (var i = 0; i < this.txt.length; i++) {
+                this.txt[i].on('keyup', function () { me._changed = true;})
+            }
+        };
+        MLInput.prototype.unbindEvents = function () {
+            if (!this.txt)
+                return;
+            for (var i = 0; i < this.txt.length; i++) {
+                this.txt[i].off('keyup');
+            }
+        };
+        MLInput.prototype.changed = function () { return this._changed; };
+        MLInput.prototype.destroy = function () { this.unbindEvents()};
         return MLInput;
     })

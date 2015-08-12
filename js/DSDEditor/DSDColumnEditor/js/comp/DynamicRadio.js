@@ -21,6 +21,7 @@
             this.groupName = null;
             this.radioSettings;
             this.$radioGroup;
+            this._changed = false;
         };
 
         DynamicRadio.prototype.render = function (cnt, config) {
@@ -82,17 +83,23 @@
             if (!this.$radioGroup)
                 return;
             this.$radioGroup.removeAttr('checked');
+            this._changed = false;
         };
         DynamicRadio.prototype._bindEvents = function () {
             var me = this;
             $(this.$radioGroup.on('change', function () {
                 var v = me.$container.find('input[name=' + me.groupName + ']:checked').val();
                 amplify.publish(evts.radioChanged, v, me.groupName);
+                me._changed = true;
             }));
         };
         DynamicRadio.prototype._unbindEvents = function () {
             if (this.$radioGroup)
                 this.$radioGroup.off('change');
+        };
+
+        DynamicRadio.prototype.changed = function () {
+            return this._changed;
         };
 
         DynamicRadio.prototype.destroy = function () {

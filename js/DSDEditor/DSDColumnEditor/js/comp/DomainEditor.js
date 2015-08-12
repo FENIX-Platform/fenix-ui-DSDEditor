@@ -1,4 +1,6 @@
-﻿define(['jquery',
+﻿//TODO: the changed function must be done
+
+define(['jquery',
     'text!fx-DSDEditor/js/DSDEditor/DSDColumnEditor/html/comp/DomainEditor.html',
     'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/comp/domainEditors/CodelistSelector',
     //'components/DSDEditor/DSDColumnEditor/js/comp/domainEditors/DatesRange',
@@ -33,6 +35,7 @@
             this.$divDomainEditor = null;
 
             this.codelistSelector = null;
+            this._changed = false;
         };
 
         DomainEditor.prototype.render = function (cnt, config) {
@@ -46,9 +49,11 @@
             this.$divNoDatatype.show();
             this.$divNoDomain.hide();
             this.$divDomainEditor.hide();
+            this._bindEvents();
         };
         DomainEditor.prototype.set = function (mode, subject, domain) {
             //this.reset();
+            this._changed = false;
             this.setMode(mode, subject);
             switch (this.mode) {
                 case MODES.code:
@@ -77,6 +82,7 @@
         };
         DomainEditor.prototype.reset = function () {
             this.setMode('');
+            this._changed = false;
         };
 
         DomainEditor.prototype.setMode = function (mode, subject) {
@@ -123,10 +129,14 @@
                     break;
             }
         }
+        DomainEditor.prototype._bindEvents = function () { };
+        DomainEditor.prototype._unbindEvents = function () { };
 
+        DomainEditor.prototype.changed = function () { return this._changed;};
         DomainEditor.prototype.destroy = function () {
             if (this.codelistSelector)
                 this.codelistSelector.destroy();
+            this._unbindEvents();
         };
 
         return DomainEditor;

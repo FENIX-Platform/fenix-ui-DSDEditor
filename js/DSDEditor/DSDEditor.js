@@ -9,10 +9,11 @@
     'fx-DSDEditor/js/dataManagementCommons/Notifications',
     'fx-d-m/config/config',
     'fx-d-m/config/config-default',
+    'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit',
     'amplify'
 ],
 
-    function ($, DSDEditorHTML, DSDDisplay, DSDColumnEditor, ColumnIDGenerator, Evts, ValidatorDSD, VErrors, Noti, C, CD) {
+    function ($, DSDEditorHTML, DSDDisplay, DSDColumnEditor, ColumnIDGenerator, Evts, ValidatorDSD, VErrors, Noti, C, CD, MLRes) {
         var defConfig = {};
         var htmlIDs = {
             divDSD: "#divDSD",
@@ -179,6 +180,12 @@
                 me.switchVisibility(htmlIDs.divDSD);
             });
             this.$container.find(htmlIDs.btnColEditorCancel).on('click', function () {
+                if (me.colEditor.changed())
+                {
+                    if (!confirm(MLRes['unsavedChanges']))
+                        return;
+                }
+
                 me.colEditor.reset();
                 me.switchVisibility(htmlIDs.divDSD);
             });
