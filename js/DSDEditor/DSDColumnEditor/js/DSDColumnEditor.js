@@ -2,6 +2,7 @@
     'text!fx-DSDEditor/js/DSDEditor/DSDColumnEditor/html/DSDColumnEditor.html',
     'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/comp/DynamicRadio',
     'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/comp/DomainEditor',
+    'i18n!fx-DSDEditor/js/DSDEditor/DSDColumnEditor/multiLang/nls/ML_DSDColumnEditor',
     'fx-DSDEditor/js/DSDEditor/DSDConfigs/js/ColumnEditorReader',
     'fx-DSDEditor/js/DSDEditor/DSDConfigs/js/SubjectReader',
     'fx-DSDEditor/js/DSDEditor/DSDConfigs/js/DatatypeReader',
@@ -13,7 +14,7 @@
     'validate',
     'amplify'
 ],
-    function ($, DSDColumnEditorHTML, DynamicRadio, DomainEditor, ColumnEditorReader, SubjectReader, DatatypeReader, MLInput, Evts, noti, ValidatorDSD, VErrors) {
+    function ($, DSDColumnEditorHTML, DynamicRadio, DomainEditor, mlRes, ColumnEditorReader, SubjectReader, DatatypeReader, MLInput, Evts, noti, ValidatorDSD, VErrors) {
         var defConfig = { inputLangs: ['EN', 'FR'] };
         var h = {
             txtTitle: "#txtTitle",
@@ -23,7 +24,13 @@
             trDataType: "#trDataType",
             tdDataType: "#tdDataType",
             tdDomain: '#tdDomainEditor',
-            tblColEditor: '#tblColEditor'
+            tblColEditor: '#tblColEditor',
+
+            lblTitle: '#lTitle',
+            lblSuppl: '#lSupplemental',
+            lblSubj: '#lSubject',
+            lblDataType: '#lDataType',
+            lblDomain: '#lDomain'
         };
         var EDITOR_TYPE = {
             dimension: 'dimension',
@@ -40,7 +47,7 @@
 
         function DSDColumnEditor(config) {
             this.config = {};
-            this.$container = null;
+            this.$cnt = null;
             $.extend(true, this.config, defConfig, config);
 
             this.$txtTitle;
@@ -66,20 +73,20 @@
 
         DSDColumnEditor.prototype.render = function (cnt, config) {
             $.extend(true, this.config, config);
-            this.$container = cnt;
-            this.$container.html(DSDColumnEditorHTML);
+            this.$cnt = cnt;
+            this.$cnt.html(DSDColumnEditorHTML);
 
-            this.$txtTitle = this.$container.find(h.txtTitle);
-            this.$txtSupplemental = this.$container.find(h.txtSupplemental);
+            this.$txtTitle = this.$cnt.find(h.txtTitle);
+            this.$txtSupplemental = this.$cnt.find(h.txtSupplemental);
 
-            var $trSubj = this.$container.find(h.trSubj);
-            var $tdSubj = this.$container.find(h.tdSubj);
-            var $tdDomain = this.$container.find(h.tdDomain);
+            var $trSubj = this.$cnt.find(h.trSubj);
+            var $tdSubj = this.$cnt.find(h.tdSubj);
+            var $tdDomain = this.$cnt.find(h.tdDomain);
             this.dynRadioSubj = new DynamicRadio();
             this.dynRadioSubj.render($tdSubj);
 
-            var $trDataType = this.$container.find(h.trDataType);
-            var $tdDataType = this.$container.find(h.tdDataType);
+            var $trDataType = this.$cnt.find(h.trDataType);
+            var $tdDataType = this.$cnt.find(h.tdDataType);
             this.dynRadioDataType = new DynamicRadio();
             this.dynRadioDataType.render($tdDataType);
 
@@ -92,6 +99,7 @@
 
             this._bindEvents();
             this._attachValidator();
+            this._doML();
         };
 
         DSDColumnEditor.prototype.newColumn = function () {
@@ -154,7 +162,7 @@
             this.domainEditor.reset();
         };
         DSDColumnEditor.prototype._subjectsVisible = function (visible) {
-            var $trSubj = this.$container.find(h.trSubj);
+            var $trSubj = this.$cnt.find(h.trSubj);
             if (visible)
                 $trSubj.show();
             else
@@ -208,7 +216,7 @@
         };
 
         DSDColumnEditor.prototype._attachValidator = function () {
-            var tblColEditor = this.$container.find(h.tblColEditor);
+            var tblColEditor = this.$cnt.find(h.tblColEditor);
             this.validator = tblColEditor.parsley();
         };
         DSDColumnEditor.prototype._detachValidator = function () {
@@ -225,33 +233,40 @@
             return false;
         };
         DSDColumnEditor.prototype.updateValidationUI = function (valRes) {
-            window.ParsleyUI.removeError(this.$container.find('#lTitle').parsley(), 'required', 'Title cannot be blank');
-            window.ParsleyUI.removeError(this.$container.find('#lSubject').parsley(), 'required', 'Subject cannot be empty');
-            window.ParsleyUI.removeError(this.$container.find('#lDataType').parsley(), 'required', 'Datatype cannot be empty');
-            window.ParsleyUI.removeError(this.$container.find('#lDomain').parsley(), 'required', 'Codelist cannot be empty');
+
+            window.ParsleyUI.removeError(this.$cnt.find('#lTitle').parsley(), 'required', mlRes[VErrors.TITLE_BLANK]);
+            window.ParsleyUI.removeError(this.$cnt.find('#lSubject').parsley(), 'required', mlRes[VErrors.SUBJECT_EMPTY]);
+            window.ParsleyUI.removeError(this.$cnt.find('#lDataType').parsley(), 'required', mlRes[VErrors.DATATYPE_EMPTY]);
+            window.ParsleyUI.removeError(this.$cnt.find('#lDomain').parsley(), 'required', mlRes[VErrors.CODELIST_EMPTY]);
 
             if (!valRes)
                 return;
             for (var i = 0; i < valRes.length; i++) {
                 switch (valRes[i].message) {
                     case VErrors.TITLE_BLANK:
-                        window.ParsleyUI.addError(this.$container.find('#lTitle').parsley(), 'required', 'Title cannot be blank');
+                        window.ParsleyUI.addError(this.$cnt.find('#lTitle').parsley(), 'required', mlRes[VErrors.TITLE_BLANK]);
                         break;
                     case VErrors.SUBJECT_EMPTY:
-                        window.ParsleyUI.addError(this.$container.find('#lSubject').parsley(), 'required', 'Subject cannot be empty');
+                        window.ParsleyUI.addError(this.$cnt.find('#lSubject').parsley(), 'required', mlRes[VErrors.SUBJECT_EMPTY]);
                         break;
                     case VErrors.DATATYPE_EMPTY:
-                        window.ParsleyUI.addError(this.$container.find('#lDataType').parsley(), 'required', 'Datatype cannot be empty');
+                        window.ParsleyUI.addError(this.$cnt.find('#lDataType').parsley(), 'required', mlRes[VErrors.DATATYPE_EMPTY]);
                         break;
                     case VErrors.CODELIST_EMPTY:
-                        window.ParsleyUI.addError(this.$container.find('#lDomain').parsley(), 'required', 'Codelist cannot be empty');
+                        window.ParsleyUI.addError(this.$cnt.find('#lDomain').parsley(), 'required', mlRes[VErrors.CODELIST_EMPTY]);
                         break;
                 }
             }
         };
         DSDColumnEditor.prototype.changed = function () {
-            //console.log(this.mlTitle.changed() || this.mlSupplemental.changed() || this.domainEditor.changed() || this.dynRadioSubj.changed() || this.dynRadioDataType.changed());
             return this.mlTitle.changed() || this.mlSupplemental.changed() || this.domainEditor.changed() || this.dynRadioSubj.changed() || this.dynRadioDataType.changed();
+        };
+        DSDColumnEditor.prototype._doML = function () {
+            this.$cnt.find(h.lblTitle).html(mlRes.title);
+            this.$cnt.find(h.lblSuppl).html(mlRes.supplemental);
+            this.$cnt.find(h.lblSubj).html(mlRes.subject);
+            this.$cnt.find(h.lblDataType).html(mlRes.dataType);
+            this.$cnt.find(h.lblDomain).html(mlRes.domain);
         };
 
         DSDColumnEditor.prototype.destroy = function () {
