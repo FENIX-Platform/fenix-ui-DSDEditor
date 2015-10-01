@@ -3,8 +3,7 @@
         {
             "subject": "item",
             "datatypes": [
-                "code",
-                "customCode"
+                "code"                
             ]
         },
         {
@@ -18,8 +17,14 @@
         {
             "subject": "geo",
             "datatypes": [
+                "code"
+            ]
+        },
+        {
+            "subject": "undefined",
+            "datatypes": [
                 "code",
-                "customCode"
+                "year"
             ]
         }
     ],

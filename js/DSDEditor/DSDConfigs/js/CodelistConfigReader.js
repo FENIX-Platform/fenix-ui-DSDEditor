@@ -25,7 +25,7 @@
         CodelistConfigReader.prototype.getFilteredCodelists = function (subject) {
             if (!this.codelists)
                 return null;
-            if (!subject)
+            if (!subject || subject=='undefined')
                 return this.codelists;
             var toRet = [];
 

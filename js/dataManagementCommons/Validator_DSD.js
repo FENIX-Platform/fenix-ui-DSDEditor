@@ -122,12 +122,16 @@
             if (!cols)
                 return null;
             for (var i = 0; i < cols.length - 1; i++) {
-                for (var j = i + 1; j < cols.length; j++) {
-                    if (cols[i].subject && cols[j].subject)
-                        if (cols[i].subject == cols[j].subject) {
-                            toRet.push({ level: eLevels.ERROR, message: VE.DUPLICATE_SUBJECTS });
-                            return toRet;
+                if (cols[i].subject != 'undefined') {
+                    for (var j = i + 1; j < cols.length; j++) {
+                        //   if (cols[i].subject && cols[j].subject) {
+                        if (cols[j].subject != 'undefined') {
+                            if (cols[i].subject == cols[j].subject) {
+                                toRet.push({ level: eLevels.ERROR, message: VE.DUPLICATE_SUBJECTS });
+                                return toRet;
+                            }
                         }
+                    }
                 }
             }
             return null;
