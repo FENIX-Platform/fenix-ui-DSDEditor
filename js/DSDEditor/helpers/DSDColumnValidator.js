@@ -12,7 +12,7 @@ function () {
     var MSG_EMPTY = 'empty';
     var MSG_DIMENSION_DATATYPE_CONFLICT = 'DimensionDataTypeConflict';
     var MSG_EMPTY_ID_CODELSIT = 'EmptyIdCodeList';
-    var MSG_AT_LEAST_ONE_VALUE = 'duplicateColumnIDs';
+    var MSG_DUPLICATE_IDS = 'duplicateColumnIDs';
     var MSG_DUPLICATE_SUBJECT = 'duplicateSubject';
 
     DSDColumnValidator.prototype.validateColumns = function (cols) {
@@ -41,11 +41,11 @@ function () {
             toRet.push({ level: 'error', message: MSG_AT_LEAST_2_COLS });
             return toRet;
         }
-
         for (var i = 0; i < cols.length - 1; i++) {
             for (var j = i + 1; j < cols.length; j++) {
-                if (cols[i].id == cols[j].id)
+                if (cols[i].id == cols[j].id) {                    
                     toRet.push({ level: 'error', message: MSG_DUPLICATE_IDS });
+                }
             }
         }
 
@@ -73,10 +73,11 @@ function () {
             return null;
         for (var i = 0; i < cols.length - 1; i++) {
             for (var j = i + 1; j < cols.length; j++) {
-                if (cols[i].subject == cols[j].subject) {
-                    toRet.push({ level: 'error', message: MSG_DUPLICATE_SUBJECT });
-                    return toRet;
-                }
+                if (cols[i].subject && cols[j].subject)
+                    if (cols[i].subject == cols[j].subject) {
+                        toRet.push({ level: 'error', message: MSG_DUPLICATE_SUBJECT });
+                        return toRet;
+                    }
             }
         }
         return null;

@@ -23,8 +23,8 @@
 
         "nullColumns": "Columns cannot be empty",
         "atLeast2Cols": "The dataset must have at least 2 columns",
-        "atLeastOneKey": "The dataset must have at least a Key",
-        "atLeastOneValue": "The dataset must have at least one value subject",
+        "atLeastOneKey": "The dataset must have at least one Key",
+        "atLeastOneValue": "The dataset must have at least one 'value' subject",
         "nullColumn": "Column cannot be null",
         "empty": "Is empty",
         "DimensionDataTypeConflict": "Conflict detected between value and datatype defined for the value",

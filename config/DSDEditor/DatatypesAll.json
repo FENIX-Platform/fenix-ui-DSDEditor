@@ -51,9 +51,9 @@
 		"canBeDimension":false
     },
     {
-        "val": "string",
+        "val": "text",
         "text": {
-            "EN": "String"
+            "EN": "Text"
         },
 		"canBeDimension":false
     },

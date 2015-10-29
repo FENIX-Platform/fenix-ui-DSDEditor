@@ -26,7 +26,7 @@ define([
     function init(containerID, config, callB) {
         $.extend(true, cfg, defConfig, config);
         this.DSDE = new DSDEditor(cfg);
-        this.DSDE.render($(containerID), null, callB);
+        this.DSDE.render($(containerID), cfg, callB);
     }
 
     function setColumns(cols) { this.DSDE.setColumns(cols); }
