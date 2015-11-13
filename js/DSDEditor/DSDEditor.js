@@ -44,28 +44,24 @@
             this.$divColEditor;
 
             this.dsd = {};
-            this.addDatasourceAndContextSys();
+            //this.addDatasourceAndContextSys();
 
             this.DSDDisplay;
             this.colEditor;
             this.changed = false;
         };
 
-        DSDEditor.prototype.addDatasourceAndContextSys = function () {
+        /*DSDEditor.prototype.addDatasourceAndContextSys = function () {
             this.dsd.datasources = this._getDatasources();
             this.dsd.contextSystem = this._getContextSys();
         };
 
         DSDEditor.prototype._getDatasources = function () {
-            var cfg = C.DSD_EDITOR_DATASOURCES;
-            var cfg_def = CD.DSD_EDITOR_DATASOURCES;
-            return cfg || cfg_def;
+            return C.DSD_EDITOR_DATASOURCES || CD.DSD_EDITOR_DATASOURCES;
         };
         DSDEditor.prototype._getContextSys = function () {
-            var cfg = C.DSD_EDITOR_CONTEXT_SYSTEM;
-            var cfg_def = CD.DSD_EDITOR_CONTEXT_SYSTEM;
-            return cfg || cfg_def;
-        };
+            return C.DSD_EDITOR_CONTEXT_SYSTEM || CD.DSD_EDITOR_CONTEXT_SYSTEM;
+        };*/
 
         DSDEditor.prototype.render = function (cnt, config, callB) {
             $.extend(true, this.config, config);
@@ -90,6 +86,7 @@
 
         DSDEditor.prototype.set = function (dsd) {
             this.dsd = dsd;
+            //this.addDatasourceAndContextSys();
             //Force DSD and contextSys?
             /*if (!this.dsd.contextSystem)
                 this.dsd.contextSystem = this._getContextSys();
@@ -99,6 +96,7 @@
         };
 
         DSDEditor.prototype.get = function () {
+            //console.log(this.dsd);
             return this.dsd;
         };
 
@@ -180,8 +178,7 @@
                 me.switchVisibility(htmlIDs.divDSD);
             });
             this.$container.find(htmlIDs.btnColEditorCancel).on('click', function () {
-                if (me.colEditor.changed())
-                {
+                if (me.colEditor.changed()) {
                     if (!confirm(MLRes['unsavedChanges']))
                         return;
                 }

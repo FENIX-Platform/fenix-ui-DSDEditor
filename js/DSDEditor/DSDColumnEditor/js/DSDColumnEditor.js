@@ -181,6 +181,7 @@
             toRet.title = this.mlTitle.get();
             toRet.supplemental = this.mlSupplemental.get();
             toRet.domain = this.domainEditor.get();
+
             return toRet;
         };
 
