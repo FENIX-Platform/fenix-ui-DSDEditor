@@ -51,18 +51,6 @@
             this.changed = false;
         };
 
-        /*DSDEditor.prototype.addDatasourceAndContextSys = function () {
-            this.dsd.datasources = this._getDatasources();
-            this.dsd.contextSystem = this._getContextSys();
-        };
-
-        DSDEditor.prototype._getDatasources = function () {
-            return C.DSD_EDITOR_DATASOURCES || CD.DSD_EDITOR_DATASOURCES;
-        };
-        DSDEditor.prototype._getContextSys = function () {
-            return C.DSD_EDITOR_CONTEXT_SYSTEM || CD.DSD_EDITOR_CONTEXT_SYSTEM;
-        };*/
-
         DSDEditor.prototype.render = function (cnt, config, callB) {
             $.extend(true, this.config, config);
             this.$container = cnt;
@@ -86,20 +74,12 @@
 
         DSDEditor.prototype.set = function (dsd) {
             this.dsd = dsd;
-            //this.addDatasourceAndContextSys();
-            //Force DSD and contextSys?
-            /*if (!this.dsd.contextSystem)
-                this.dsd.contextSystem = this._getContextSys();
-            if (!this.dsd.datasources)
-                this.dsd.datasources = this._getDatasources();*/
             this.updateDSDView();
         };
 
         DSDEditor.prototype.get = function () {
-            //console.log(this.dsd);
             return this.dsd;
         };
-
 
         DSDEditor.prototype.switchVisibility = function (divID) {
             if (divID == htmlIDs.divColEditor) {

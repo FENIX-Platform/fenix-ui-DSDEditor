@@ -3,7 +3,13 @@
         {
             "subject": "item",
             "datatypes": [
-                "code"                
+                "code"
+            ]
+        },
+        {
+            "subject": "indicator",
+            "datatypes": [
+                "code"
             ]
         },
         {
@@ -32,8 +38,7 @@
         {
             "subject": "value",
             "datatypes": [
-                "number",
-                "percentage",
+                "number",                
                 "text"
             ]
         }
@@ -43,7 +48,6 @@
             "subject": "item",
             "datatypes": [
                 "code",
-                "customCode",
                 "text"
             ]
         },
@@ -60,15 +64,13 @@
             "subject": "geo",
             "datatypes": [
                 "code",
-                "customCode",
                 "text"
             ]
         },
         {
             "subject": "flag",
             "datatypes": [
-                "code",
-                "customCode",
+                "code",                
                 "text"
             ]
         },
@@ -76,24 +78,20 @@
             "subject": "value",
             "datatypes": [
                 "number",
-                "percentage",
                 "text"
             ]
         },
         {
             "subject": "um",
             "datatypes": [
-                "code",
-                "customCode",
+                "code",                
                 "text"
             ]
         },
         {
             "subject": "undefined",
             "datatypes": [
-                "customCode",
                 "number",
-                "percentage",
                 "year",
                 "month",
                 "date",

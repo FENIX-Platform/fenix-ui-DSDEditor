@@ -13,6 +13,13 @@
         "codelistSubject": "item"
     },
     {
+        "value": "indicator",
+        "text": {
+            "EN": "Indicator"
+        },
+        "codelistSubject": "indicator"
+    },
+    {
         "value": "time",
         "text": {
             "EN": "Time"
