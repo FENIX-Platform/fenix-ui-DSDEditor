@@ -19,6 +19,51 @@
         },
         "codelistSubject": "indicator"
     },
+
+    {
+        "value": "gender",
+        "text": {
+            "EN": "Gender"
+        },
+        "codelistSubject": "gender"
+    },
+    {
+        "value": "residence",
+        "text": {
+            "EN": "Residence"
+        },
+        "codelistSubject": "residence"
+    },
+    {
+        "value": "food",
+        "text": {
+            "EN": "Food"
+        },
+        "codelistSubject": "food"
+    },
+    {
+        "value": "sector",
+        "text": {
+            "EN": "Sector"
+        },
+        "codelistSubject": "sector"
+    },
+    {
+        "value": "fieldManagement",
+        "text": {
+            "EN": "Field Management"
+        },
+        "codelistSubject": "fieldManagement"
+    },
+    {
+        "value": "agriculturalPopulation",
+        "text": {
+            "EN": "Agricultural Population"
+        },
+        "codelistSubject": "agriculturalPopulation"
+    },
+
+
     {
         "value": "time",
         "text": {

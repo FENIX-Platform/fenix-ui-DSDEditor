@@ -12,6 +12,57 @@
                 "code"
             ]
         },
+
+
+        {
+            "subject": "gender",
+            "datatypes": [
+                "code"
+            ]
+        },
+        {
+            "subject": "residence",
+            "datatypes": [
+                "code"
+            ]
+        },
+        {
+            "subject": "food",
+            "datatypes": [
+                "code"
+            ]
+        },
+        {
+            "subject": "sector",
+            "datatypes": [
+                "code"
+            ]
+        },
+        {
+            "subject": "fieldManagement",
+            "datatypes": [
+                "code"
+            ]
+        },
+        {
+            "subject": "agriculturalPopulation",
+            "datatypes": [
+                "code"
+            ]
+        },
+
+
+
+
+
+
+
+
+
+
+
+
+
         {
             "subject": "time",
             "datatypes": [
@@ -38,7 +89,7 @@
         {
             "subject": "value",
             "datatypes": [
-                "number",                
+                "number",
                 "text"
             ]
         }
@@ -70,7 +121,7 @@
         {
             "subject": "flag",
             "datatypes": [
-                "code",                
+                "code",
                 "text"
             ]
         },
@@ -84,7 +135,7 @@
         {
             "subject": "um",
             "datatypes": [
-                "code",                
+                "code",
                 "text"
             ]
         },
