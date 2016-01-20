@@ -1,9 +1,6 @@
 ﻿define(['jquery',
     'amplify'
-    //'text!fx-DataUpload/templates/DataUpload/FileUpload.htm',
-    //'i18n!fx-DataUpload/multiLang/DataUpload/nls/ML_DataUpload'
 ],
-//function ($, FileUploadHTML, mlRes) {
 function ($) {
     var widgetName = 'FileUploadHelper';
     var evtTextFileUploaded = 'textFileUploaded.' + widgetName + '.fenix';
@@ -22,11 +19,11 @@ function ($) {
 
     FileUploadHelper.prototype.render = function (fileInputId) {
         this.initUploadInput(fileInputId);
-    };
+    }
 
     FileUploadHelper.prototype.reset = function () {
         this.$uploadInput.val('');
-    };
+    }
 
     FileUploadHelper.prototype.initUploadInput = function (inputId) {
         this.$uploadInput = $(inputId);
@@ -60,11 +57,20 @@ function ($) {
             }
             return false;
         });
-    };
+    }
+
+    FileUploadHelper.prototype.enabled = function (isEnabled) {
+        if (isEnabled) {
+            this.$uploadInput.removeAttr('disabled');
+        }
+        else {
+            this.$uploadInput.attr('disabled', 'disabled');
+        }
+    }
 
     FileUploadHelper.prototype.destroy = function () {
         this.$uploadInput.off('change');
-    };
+    }
 
     return FileUploadHelper;
 });
