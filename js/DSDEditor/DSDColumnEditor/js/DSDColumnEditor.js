@@ -8,13 +8,12 @@
     'fx-DSDEditor/js/DSDEditor/DSDConfigs/js/DatatypeReader',
     'fx-DSDEditor/js/MLInput/js/MLInput',
     'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/Events',
-    'fx-DSDEditor/js/dataManagementCommons/Notifications',
-    'fx-DSDEditor/js/dataManagementCommons/Validator_DSD',
-    'fx-DSDEditor/js/dataManagementCommons/Validator_DSD_Errors',
+    'fx-DSDEditor/js/DSDEditor/validators/Validator_DSD',
+    'fx-DSDEditor/js/DSDEditor/validators/Validator_DSD_Errors',
     'validate',
     'amplify'
 ],
-    function ($, DSDColumnEditorHTML, DynamicRadio, DomainEditor, mlRes, ColumnEditorReader, SubjectReader, DatatypeReader, MLInput, Evts, noti, ValidatorDSD, VErrors) {
+    function ($, DSDColumnEditorHTML, DynamicRadio, DomainEditor, mlRes, ColumnEditorReader, SubjectReader, DatatypeReader, MLInput, Evts, ValidatorDSD, VErrors) {
         var defConfig = { inputLangs: ['EN', 'FR'] };
         var h = {
             txtTitle: "#txtTitle",
