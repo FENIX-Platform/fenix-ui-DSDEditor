@@ -1,262 +1,243 @@
-﻿define([
-        'jquery',
-        'jqxall',
-        'require',
-        'fx-DSDEditor/js/DSDEditor/helpers/ColumnIDGenerator',
-        'fx-DSDEditor/js/DSDEditor/simpleEditors/ColumnEditor',
-        'fx-DSDEditor/js/DSDEditor/simpleEditors/DSDTable',
-        'fx-DSDEditor/js/DSDEditor/helpers/DSDColumnValidator',
-        'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit',
-        'text!fx-DSDEditor/templates/DSDEditor/DSDEdit.htm',
-        'pnotify'
+﻿define(['jquery',
+    'text!fx-DSDEditor/js/DSDEditor/html/DSDEditor.html',
+    'fx-DSDEditor/js/DSDEditor/DSDDisplay/js/DSDDisplay',
+    'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/DSDColumnEditor',
+    'fx-DSDEditor/js/DSDEditor/ColumnIDGenerator',
+    'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/Events',
+    'fx-DSDEditor/js/DSDEditor/validators/Validator_DSD',
+    'fx-DSDEditor/js/DSDEditor/validators/Validator_DSD_Errors',
+    'fx-DataMngCommons/js/Notifications',
+    'fx-d-m/config/config',
+    'fx-d-m/config/config-default',
+    'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit',
+    'amplify'
 ],
-    function ($, jqx, require, ColumnIDGenerator, ColumnEditor, DSDTable, DSDColumnValidator, mlRes, DSDEditHTML, PNotify) {
-        var widgetName = "DSDEditor";
 
-        var defConfig = {
+    function ($, DSDEditorHTML, DSDDisplay, DSDColumnEditor, ColumnIDGenerator, Evts, ValidatorDSD, VErrors, Noti, C, CD, MLRes) {
+        var defConfig = {};
+        var htmlIDs = {
+            divDSD: "#divDSD",
+            divColEditor: "#divColEditor",
+            divColEditorCnt: "#divColEditorCnt",
+            btnAddDimension: '#btnAddDimension',
+            btnAddValue: '#btnAddValue',
+            btnAddOther: '#btnAddOther',
+            btnColEditorOk: '#btnColEditorOk',
+            btnColEditorCancel: '#btnColEditorCancel'
         };
-        defConfig.subjects = require.toUrl("fx-DSDEditor/config/DSDEditor/Subjects.json");
-        defConfig.datatypes = require.toUrl("fx-DSDEditor/config/DSDEditor/Datatypes.json");
-        defConfig.codelists = require.toUrl("fx-DSDEditor/config/DSDEditor/Codelists.json");
+        var colTypes = {
+            dimension: 'dimension',
+            value: 'value',
+            other: 'other'
+        };
+        var e = {
+            DSDEDITOR_TO_COLUMN_EDITOR: 'fx.DSDEditor.toColumnEditor',
+            DSDEDITOR_TO_COLUMN_SUMMARY: 'fx.DSDEditor.toColumnSummary'
+        };
 
-        var DSDEditor = function (config) {
+        function DSDEditor(config) {
             this.config = {};
+            this.$container = null;
             $.extend(true, this.config, defConfig, config);
 
-            this.$container;
-            this.cols = [];
+            this.$divDSDDisplay;
+            this.$divColEditor;
 
-            this.$cntColEdit;
+            this.dsd = {};
+            //this.addDatasourceAndContextSys();
+
+            this.DSDDisplay;
             this.colEditor;
-
-            this.$cntDSDGrid;
-            this.DSDTable;
-
-            this._changed = false;
+            this.changed = false;
         };
 
-        //Render - creation
-        DSDEditor.prototype.render = function (container, config, callB) {
+        DSDEditor.prototype.render = function (cnt, config, callB) {
             $.extend(true, this.config, config);
+            this.$container = cnt;
+            this.$container.html(DSDEditorHTML);
 
-            this.$container = container;
-            this.$container.html(DSDEditHTML);
-            this.$cntColEdit = this.$container.find('#cntColEdit');
+            this.$divDSDDisplay = this.$container.find(htmlIDs.divDSD);
+            this.$divColEditor = this.$container.find(htmlIDs.divColEditor);
 
-            this.colEditor = new ColumnEditor(this.config);
-            this.colEditor.render(this.$cntColEdit);
+            this.DSDDisplay = new DSDDisplay();
+            this.DSDDisplay.render(this.$divDSDDisplay);
 
-            var me = this;
-            this.$container.find('#bntColEditOk').on('click', function () {
-                var newCol = me.colEditor.getColumn();
+            this.colEditor = new DSDColumnEditor();
+            var divColEditorCnt = this.$container.find(htmlIDs.divColEditorCnt);
+            this.colEditor.render(divColEditorCnt);
+            this.$divColEditor.hide();
 
-                var val = new DSDColumnValidator();
-                var valRes = val.validateColumn(newCol);
-                me.showValidationResults(valRes);
+            this._bindEvents();
 
-                if (!valRes || valRes.length == 0) {
-                    me.colEditor.reset();
-                    if (newCol.id == "") {
-                        //CreateID
-                        me.cols.push(newCol);
-                        var idGen = new ColumnIDGenerator();
-                        me.cols[me.cols.length - 1].id = idGen.generate(me.cols, me.cols.length - 1);
-                    }
-                    else {
-                        for (var i = 0; i < me.cols.length; i++)
-                            if (me.cols[i].id == newCol.id)
-                                me.cols[i] = newCol;
-                    }
+            if (callB) callB();
+        };
 
-                    new PNotify({
-                        title: '',
-                        text: mlRes.updated,
-                        type: 'success'
-                    });
-                    this._changed = true;
-                    me.DSDTable.setColumns(me.cols);
-                }
-            });
-            this.$container.find('#bntColReset').on('click', function () {
-                if (confirm(mlRes.areYouSure))
-                    me.colEditor.reset();
-            });
+        DSDEditor.prototype.set = function (dsd) {
+            this.dsd = dsd;
+            this.updateDSDView();
+        };
 
+        DSDEditor.prototype.get = function () {
+            return this.dsd;
+        };
 
-            this.$cntDSDGrid = this.$container.find('#cntDSDGrid');
-            this.DSDTable = new DSDTable();
-            this.DSDTable.render(this.$cntDSDGrid);
-            this.DSDTable.setColumns(this.cols);
-
-            this.doML();
-
-            var subjErr = "Cannot find subjects definition at " + this.config.subjects;
-            var datatypeErr = "Cannot find datatypes definition at " + this.config.datatypes;
-            var codelistsErr = "Cannot find codelists definition at " + this.config.codelists;
-
-            ajaxGET(me.config.subjects, function (data) {
-                me.setSubjects(data);
-                ajaxGET(me.config.datatypes, function (data) {
-                    me.setDataTypes(data);
-                    ajaxGET(me.config.codelists, function (data) {
-                        me.setCodelists(data);
-                        if (callB) callB();
-                    }, codelistsErr);
-                }, datatypeErr);
-            }, subjErr);
-
-            this.$cntDSDGrid.on("edit.DSDTable.fenix", function (evt, col) {
-                for (var i = 0; i < me.cols.length; i++) {
-                    if (me.cols[i].id == col.id) {
-                        me.colEditor.setColumn(me.cols[i]);
-                        this._changed = true;
-                    }
-                }
-            });
-
-            this.$cntDSDGrid.on("delete.DSDTable.fenix", function (evt, col) {
-                if (confirm(mlRes.confirmDelete)) {
-                    for (var i = 0; i < me.cols.length; i++) {
-                        if (me.cols[i].id == col.id) {
-                            me.cols.splice(i, 1);
-                            me.DSDTable.setColumns(me.cols);
-                            this._changed = true;
-                        }
-                    }
-                }
-            });
-        }
-
-        DSDEditor.prototype.setSubjects = function (subjects) {
-            this.colEditor.setSubjects(subjects);
-        }
-        DSDEditor.prototype.setDataTypes = function (dataTypes) {
-            this.colEditor.setDataTypes(dataTypes);
-        }
-        DSDEditor.prototype.setCodelists = function (codelists) {
-            this.colEditor.setCodelists(codelists);
-        }
-
-        DSDEditor.prototype.getSubjects = function () {
-            return this.colEditor.getSubjects();
-        }
-        DSDEditor.prototype.getDataTypes = function () {
-            return this.colEditor.getDataTypes();
-        }
-        DSDEditor.prototype.getCodelists = function () {
-            return this.colEditor.getCodelists();
-        }
-        DSDEditor.prototype.isEditable = function (editable) {
-            if (typeof (editable) == 'undefined')
-                return this.DSDTable.isEditable();
-
-            var $divDSDGrid = this.$container.find('#divDSDGrid');
-            //TODO: assign classes to make the DSDTable bigger/smaller
-            if (editable) {
-                this.$container.find('#divColEdit').show();
-                $divDSDGrid.removeClass('col-md-12');
-                $divDSDGrid.addClass('col-md-8');
+        DSDEditor.prototype.switchVisibility = function (divID) {
+            if (divID == htmlIDs.divColEditor) {
+                this.$divDSDDisplay.hide();
+                this.$divColEditor.show();
+                amplify.publish(e.DSDEDITOR_TO_COLUMN_EDITOR);
             }
-            else {
-                this.$container.find('#divColEdit').hide();
-                $divDSDGrid.removeClass('col-md-8');
-                $divDSDGrid.addClass('col-md-12');
+            else if (divID == htmlIDs.divDSD) {
+                this.$divColEditor.hide();
+                this.$divDSDDisplay.show();
+                amplify.publish(e.DSDEDITOR_TO_COLUMN_SUMMARY);
+            }
+        };
+        DSDEditor.prototype.addColumn = function (colType) {
+            this.switchVisibility(htmlIDs.divColEditor);
+            this.colEditor.newColumn();
+            this.colEditor.setColumnEditorType(colType);
+        };
+        DSDEditor.prototype.editColumn = function (col) {
+            this.switchVisibility(htmlIDs.divColEditor);
+            this.colEditor.setColumn(col);
+        };
+        DSDEditor.prototype.colEditDone = function () {
+            var colToAdd = this.colEditor.getColumn();
+            if (!this.dsd.columns)
+                this.dsd.columns = [];
+
+            //create a new id
+            if (colToAdd.id == "") {
+                colToAdd.id = new ColumnIDGenerator().generate(this.dsd.columns, colToAdd);
             }
 
-            this.DSDTable.isEditable(editable);
-        }
-        //END Render - creation
+            var idx = getColumnIndexById(this.dsd.columns, colToAdd.id);
+            if (idx == -1)
+                this.dsd.columns.push(colToAdd);
+            else
+                this.dsd.columns[idx] = colToAdd;
 
+            this.updateDSDView();
+            this.changed = true;
+        };
 
-        //Get/Set cols
-        DSDEditor.prototype.setColumns = function (columns) {
-            this.cols = columns;
-            this.DSDTable.setColumns(this.cols);
-            this.showValidationResults(this.validateColumns());
-        }
-        DSDEditor.prototype.getColumns = function () {
-            var valRes = this.validateColumns();
-            if (valRes && valRes.length > 0) {
-                this.showValidationResults(valRes);
-                return false;
+        DSDEditor.prototype.updateDSDView = function () {
+            this.DSDDisplay.setCols(this.dsd.columns);
+        };
+
+        DSDEditor.prototype._colAddClick = function (evtId) {
+            if (evtId == 'addDim') {
+                this.addColumn(colTypes.dimension);
             }
-            return this.cols;
-        }
-
+            else if (evtId == 'addVal') {
+                this.addColumn(colTypes.value);
+            }
+            else if (evtId == 'addOther') {
+                this.addColumn(colTypes.other);
+            }
+        };
         DSDEditor.prototype.reset = function () {
-            //this.colAddDelEnabled = true;
-            this.cols = [];
-            this.DSDTable.setColumns(this.cols);
-            this._changed = false;
-        }
-        DSDEditor.prototype.refreshColumns = function () {
-            this.DSDTable.refreshColumns();
-        }
-        DSDEditor.prototype.newColumn = function () {
-            var newCol = {};
-            newCol.id = "";
-            this.colEditor.setColumn(newCol);
-        }
-        DSDEditor.prototype.ColumnAddDeleteEnabled = function (enabled) {
-            this.DSDTable.ColumnAddDeleteEnabled(enabled);
-        }
-        DSDEditor.prototype.validateColumns = function () {
-            var valRes = new DSDColumnValidator().validateColumns(this.cols);
-            return valRes;
-        }
-        DSDEditor.prototype.showValidationResults = function (valRes) {
-            if (!valRes || valRes.length == 0)
-                return;
-            var errMsg = " ";
-            for (var i = 0; i < valRes.length; i++) {
-                if (!valRes[i].field)
-                    errMsg = errMsg + mlRes[valRes[i].message] + "\n";
-                else
-                    errMsg = errMsg + valRes[i].field + " " + mlRes[valRes[i].message] + "\n";
-            }
-            new PNotify({
-                title: '',
-                text: errMsg,
-                type: 'error'
-            });
-        }
-
+            this.initDSD();
+            this.updateDSDView();
+            this.changed = false;
+        };
         DSDEditor.prototype.hasChanged = function () {
-            return this.colEditor.hasChanged() || this._changed;
-        }
+            return this.changed;
+        };
+        DSDEditor.prototype._bindEvents = function () {
+            var me = this;
+            amplify.subscribe(Evts.COLUMN_CLICK_ADD, this, me._colAddClick);
 
-        DSDEditor.prototype.doML = function () {
-            this.$container.find('#bntColEditOk').html(mlRes.ok);
-            this.$container.find('#bntColReset').html(mlRes.reset);
-        }
-        //END Multilang
-
-        DSDEditor.prototype.destroy = function () {
-            this.$container.find('#bntColEditOk').off('click');
-            this.$container.find('#bntColReset').off('click');
-            this.$cntDSDGrid.off("edit.DSDTable.fenix");
-            this.$cntDSDGrid.off("delete.DSDTable.fenix");
-
-            this.colEditor.destroy();
-            this.DSDTable.destroy();
-        }
-
-
-        //AJAX
-        //TODO: move the ajax call elsewhere
-        var ajaxGET = function (url, callB, errorMessage) {
-            $.ajax({
-                url: url,
-                crossDomain: true,
-                dataType: 'json',
-                success: function (data) {
-                    if (callB) callB(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    throw new Error("Cannot find data at " + url);
+            this.$container.find(htmlIDs.btnColEditorOk).on('click', function () {
+                var val = me.colEditor.validate();
+                if (!val) {
+                    return;
                 }
+                me.colEditDone();
+                me.switchVisibility(htmlIDs.divDSD);
             });
-        }
+            this.$container.find(htmlIDs.btnColEditorCancel).on('click', function () {
+                if (me.colEditor.changed()) {
+                    if (!confirm(MLRes['unsavedChanges']))
+                        return;
+                }
+
+                me.colEditor.reset();
+                me.switchVisibility(htmlIDs.divDSD);
+            });
+
+            amplify.subscribe(Evts.COLUMN_CLICK_EDIT, this, me._colDisplayEditClicked);
+            amplify.subscribe(Evts.COLUMN_CLICK_DELETE, this, me._colDisplayDeleteClicked);
+        };
+        DSDEditor.prototype._unbindEvents = function () {
+            amplify.unsubscribe(Evts.COLUMN_CLICK_ADD, this._colAddClick);
+            this.$container.find(htmlIDs.btnColEditorOk).off('click');
+            this.$container.find(htmlIDs.btnColEditorCancel).off('click');
+
+            amplify.unsubscribe(Evts.COLUMN_CLICK_EDIT, this._colDisplayEditClicked);
+            amplify.unsubscribe(Evts.COLUMN_CLICK_DELETE, this._colDisplayDeleteClicked);
+        };
+        DSDEditor.prototype.destroy = function () {
+            this._unbindEvents();
+            this.DSDDisplay.destroy();
+            this.colEditor.destroy();
+        };
+
+        DSDEditor.prototype._colDisplayEditClicked = function (colId) {
+            var toEdit = getColumnById(this.dsd.columns, colId);
+            this.editColumn(toEdit);
+        };
+        DSDEditor.prototype._colDisplayDeleteClicked = function (colId) {
+            if (!confirm("__DELETE?"))
+                return false;
+            var colIdx = getColumnIndexById(this.dsd.columns, colId);
+            if (colIdx != -1)
+                this.dsd.columns.splice(colIdx, 1);
+            this.updateDSDView();
+            this.changed = true;
+        };
+        DSDEditor.prototype.editable = function (editable) {
+            this.DSDDisplay.editable(editable);
+        };
+        //Validation
+        DSDEditor.prototype.validate = function () {
+            var val = new ValidatorDSD();
+            var valRes = val.validateColumns(this.get().columns);
+            this.updateValidationUI(valRes);
+            if (!valRes || valRes.length == 0)
+                return true;
+            return false;
+        };
+        DSDEditor.prototype.isValid = function () {
+            var val = new ValidatorDSD();
+            var valRes = val.validateColumns(this.get().columns);
+            if (!valRes || valRes.length == 0)
+                return true;
+            return false;
+        };
+        DSDEditor.prototype.updateValidationUI = function (valRes) {
+            if (!valRes)
+                return;
+            for (var i = 0; i < valRes.length; i++)
+                Noti.showError("Error", valRes[i].message);
+        };
+        //Utils
+        function getColumnIndexById(cols, id) {
+            if (!cols)
+                return -1;
+            for (var i = 0; i < cols.length; i++)
+                if (cols[i].id == id)
+                    return i;
+            return -1;
+        };
+        function getColumnById(cols, id) {
+            var idx = getColumnIndexById(cols, id);
+            if (idx == -1)
+                return null;
+            return cols[idx];
+        };
+
 
         return DSDEditor;
-    });
+    })

@@ -17,6 +17,7 @@
     "datatype": "Data typeFR",
     "supplemental": "SupplementalFR",
     "areYouSure": "Are you sure?FR",
+    "unsavedChanges": "Some changes are not saved, cancel anyway?",
 
     "select": "SelectFR...",
 

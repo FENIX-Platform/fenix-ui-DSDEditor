@@ -1,0 +1,79 @@
+﻿[
+    {
+        "value": "UNECA_ISO-3",
+        "text": {
+            "EN": "UNECA ISO-3"
+        },
+        "subject": "geo"
+    },
+    {
+        "value": "UNECA_AgeRange",
+        "text": {
+            "EN": "UNECA AgeRange"
+        },
+        "subject": "item"
+    },
+    {
+        "value": "UNECA_Domains_Indicator",
+        "text": {
+            "EN": "UNECA Domains Indicator"
+        },
+        "subject": "item"
+    },
+    {
+        "value": "UNECA_EnergySource",
+        "text": {
+            "EN": "UNECA EnergySource"
+        },
+        "subject": "item"
+    },
+    {
+        "value": "UNECA_Gender",
+        "text": {
+            "EN": "UNECA Gender"
+        },
+        "subject": "item"
+    },
+    {
+        "value": "UNECA_Levels",
+        "text": {
+            "EN": "UNECA Levels"
+        },
+        "subject": "item"
+    },
+    {
+        "value": "UNECA_Producer",
+        "text": {
+            "EN": "UNECA Producer"
+        },
+        "subject": "item"
+    },
+    {
+        "value": "UNECA_Products",
+        "text": {
+            "EN": "UNECA Products"
+        },
+        "subject": "item"
+    },
+    {
+        "value": "UNECA_Residence",
+        "text": {
+            "EN": "UNECA Residence"
+        },
+        "subject": "item"
+    },
+    {
+        "value": "UNECA_Sectors",
+        "text": {
+            "EN": "UNECA Sectors"
+        },
+        "subject": "item"
+    },
+    {
+        "value": "UNECA_UnitOfMeasure",
+        "text": {
+            "EN": "UNECA Unit Of Measure"
+        },
+        "subject": "um"
+    }
+]

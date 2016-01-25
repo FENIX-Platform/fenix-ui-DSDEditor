@@ -1,0 +1,52 @@
+﻿[
+    {
+        "value": "",
+        "text": {
+            "EN": " ",
+            "FR": " "
+        }
+    },
+    {
+        "value": "code",
+        "text": {
+            "EN": "Code",
+            "FR": "CodeFR"
+        }
+    },
+    {
+        "value": "date",
+        "text": {
+            "EN": "Date"
+        }
+    },
+    {
+        "value": "month",
+        "text": {
+            "EN": "Month"
+        }
+    },
+    {
+        "value": "year",
+        "text": {
+            "EN": "Year"
+        }
+    },
+    {
+        "value": "number",
+        "text": {
+            "EN": "Number"
+        }
+    },
+    {
+        "value": "text",
+        "text": {
+            "EN": "Text"
+        }
+    },
+    {
+        "value": "percentage",
+        "text": {
+            "EN": "Percentage"
+        }
+    }
+]
