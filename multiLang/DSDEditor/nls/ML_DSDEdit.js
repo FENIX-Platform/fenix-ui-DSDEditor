@@ -18,6 +18,7 @@
         "datatype": "Data type",
         "supplemental": "Supplemental",
         "areYouSure": "Are you sure?",
+        "unsavedChanges":"Some changes are not saved, cancel anyway?",
 
         "select": "Select...",
 

@@ -1,0 +1,48 @@
+﻿[
+    {
+        "value": "",
+        "text": {
+            "EN": "Undefined"
+        }
+    },
+    {
+        "value": "item",
+        "text": {
+            "EN": "Item"
+        },
+        "codelistSubject": "item"
+    },
+    {
+        "value": "time",
+        "text": {
+            "EN": "Time"
+        }
+    },
+    {
+        "value": "geo",
+        "text": {
+            "EN": "Geo"
+        },
+        "codelistSubject": "geo"
+    },
+    {
+        "value": "flag",
+        "text": {
+            "EN": "Flag"
+        },
+        "codelistSubject": "flag"
+    },
+    {
+        "value": "value",
+        "text": {
+            "EN": "Value"
+        }
+    },
+    {
+        "value": "um",
+        "text": {
+            "EN": "UM"
+        },
+        "codelistSubject": "um"
+    }
+]
