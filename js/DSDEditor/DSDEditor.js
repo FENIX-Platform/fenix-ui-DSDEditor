@@ -72,15 +72,17 @@
             if (callB) callB();
         };
 
+        //Sets the dsd
         DSDEditor.prototype.set = function (dsd) {
             this.dsd = dsd;
             this.updateDSDView();
         };
-
+        //gets the DSD
         DSDEditor.prototype.get = function () {
             return this.dsd;
         };
 
+        //switches the panels' visibility
         DSDEditor.prototype.switchVisibility = function (divID) {
             if (divID == htmlIDs.divColEditor) {
                 this.$divDSDDisplay.hide();
@@ -93,15 +95,18 @@
                 amplify.publish(e.DSDEDITOR_TO_COLUMN_SUMMARY);
             }
         };
+        //Add a new column->switch to col view, sets the view mode
         DSDEditor.prototype.addColumn = function (colType) {
             this.switchVisibility(htmlIDs.divColEditor);
             this.colEditor.newColumn();
             this.colEditor.setColumnEditorType(colType);
         };
+        //Edit a columns
         DSDEditor.prototype.editColumn = function (col) {
             this.switchVisibility(htmlIDs.divColEditor);
             this.colEditor.setColumn(col);
         };
+        //Called when the user has finished editing a columns
         DSDEditor.prototype.colEditDone = function () {
             var colToAdd = this.colEditor.getColumn();
             if (!this.dsd.columns)
@@ -121,7 +126,7 @@
             this.updateDSDView();
             this.changed = true;
         };
-
+        //Refreshes the DSD view
         DSDEditor.prototype.updateDSDView = function () {
             this.DSDDisplay.setCols(this.dsd.columns);
         };
@@ -183,11 +188,12 @@
             this.DSDDisplay.destroy();
             this.colEditor.destroy();
         };
-
+        //Edit col
         DSDEditor.prototype._colDisplayEditClicked = function (colId) {
             var toEdit = getColumnById(this.dsd.columns, colId);
             this.editColumn(toEdit);
         };
+        //Delete a column
         DSDEditor.prototype._colDisplayDeleteClicked = function (colId) {
             if (!confirm("__DELETE?"))
                 return false;
