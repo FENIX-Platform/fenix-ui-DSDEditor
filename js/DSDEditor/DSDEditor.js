@@ -122,9 +122,25 @@
                 this.dsd.columns.push(colToAdd);
             else
                 this.dsd.columns[idx] = colToAdd;
-
+            this._sortColumnsByType();
             this.updateDSDView();
             this.changed = true;
+        };
+        DSDEditor.prototype._sortColumnsByType = function () {
+            this.dsd.columns.sort(function (a, b) {
+                //both key, keep the order
+                if (a.key && b.key) return 0;
+                if (a.key) return -1; //a is key, a goes first
+                if (b.key) return 1;
+                //two value columns are not allowed at the moment, for the future...
+                if (a.subject == 'value' && b.subject == 'value')
+                    return 0;
+                if (a.subject == 'value')
+                    return -1;
+                if (b.subject == 'value')
+                    return 1;
+                return 0;
+            });
         };
         //Refreshes the DSD view
         DSDEditor.prototype.updateDSDView = function () {

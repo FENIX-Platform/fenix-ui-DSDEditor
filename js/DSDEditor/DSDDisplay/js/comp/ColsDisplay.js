@@ -192,8 +192,8 @@
                 this.$trEdit.hide();
         };
 
-        ColsDisplay.prototype._bindEvents = function () {};
-        ColsDisplay.prototype._unbindEvents = function () {};
+        ColsDisplay.prototype._bindEvents = function () { };
+        ColsDisplay.prototype._unbindEvents = function () { };
         ColsDisplay.prototype.destroy = function () {
             //this._unbindEvents();
             if (this.editBtns) {
