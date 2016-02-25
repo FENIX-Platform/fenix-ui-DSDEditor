@@ -100,6 +100,8 @@
             this.switchVisibility(htmlIDs.divColEditor);
             this.colEditor.newColumn();
             this.colEditor.setColumnEditorType(colType);
+
+            //this.colEditor.setEditMode({subject:false,domain:false,datatype:false});
         };
         //Edit a columns
         DSDEditor.prototype.editColumn = function (col) {
@@ -122,10 +124,12 @@
                 this.dsd.columns.push(colToAdd);
             else
                 this.dsd.columns[idx] = colToAdd;
+
             this._sortColumnsByType();
             this.updateDSDView();
             this.changed = true;
         };
+
         DSDEditor.prototype._sortColumnsByType = function () {
             this.dsd.columns.sort(function (a, b) {
                 //both key, keep the order
@@ -220,6 +224,10 @@
             this.changed = true;
         };
         DSDEditor.prototype.editable = function (editable) {
+            if (editable)
+                this.colEditor.setEditMode({ subject: true, domain: true, datatype: true });
+            else
+                this.colEditor.setEditMode({ subject: false, domain: false, datatype: false });
             this.DSDDisplay.editable(editable);
         };
         //Validation

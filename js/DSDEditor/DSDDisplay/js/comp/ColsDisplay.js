@@ -186,10 +186,14 @@
             this.editBtns = [];
         };
         ColsDisplay.prototype.editable = function (editable) {
-            if (editable)
+            if (this.editBtns) {
+                for (var i = 0; i < this.editBtns.length; i++)
+                    this.editBtns[i].deleteEnabled(editable);
+            }
+            /*if (editable)
                 this.$trEdit.show();
             else
-                this.$trEdit.hide();
+                this.$trEdit.hide();*/
         };
 
         ColsDisplay.prototype._bindEvents = function () { };
