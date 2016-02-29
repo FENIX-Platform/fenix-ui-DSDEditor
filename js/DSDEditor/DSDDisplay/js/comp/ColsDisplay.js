@@ -48,6 +48,7 @@
             this.$trDomain = null;
 
             this.editBtns = [];
+            this.editable;
         };
 
         ColsDisplay.prototype.render = function (cnt, config) {
@@ -110,6 +111,7 @@
                 var btn = new ColsDisplayBtns();
                 btn.render(td);
                 btn.setEventId(cols[i].id);
+                btn.deleteEnabled(this.editable);
                 this.editBtns.push(btn);
             }
         };
@@ -186,6 +188,7 @@
             this.editBtns = [];
         };
         ColsDisplay.prototype.editable = function (editable) {
+            this.editable = editable;
             if (this.editBtns) {
                 for (var i = 0; i < this.editBtns.length; i++)
                     this.editBtns[i].deleteEnabled(editable);
