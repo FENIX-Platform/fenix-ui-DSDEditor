@@ -12,8 +12,6 @@
                 "code"
             ]
         },
-
-
         {
             "subject": "gender",
             "datatypes": [
@@ -50,19 +48,6 @@
                 "code"
             ]
         },
-
-
-
-
-
-
-
-
-
-
-
-
-
         {
             "subject": "time",
             "datatypes": [
@@ -96,29 +81,6 @@
     ],
     "other": [
         {
-            "subject": "item",
-            "datatypes": [
-                "code",
-                "text"
-            ]
-        },
-        {
-            "subject": "time",
-            "datatypes": [
-                "year",
-                "month",
-                "date",
-                "text"
-            ]
-        },
-        {
-            "subject": "geo",
-            "datatypes": [
-                "code",
-                "text"
-            ]
-        },
-        {
             "subject": "flag",
             "datatypes": [
                 "code",
@@ -126,27 +88,9 @@
             ]
         },
         {
-            "subject": "value",
-            "datatypes": [
-                "number",
-                "text"
-            ]
-        },
-        {
             "subject": "um",
             "datatypes": [
-                "code",
-                "text"
-            ]
-        },
-        {
-            "subject": "undefined",
-            "datatypes": [
-                "number",
-                "year",
-                "month",
-                "date",
-                "text"
+                "code"
             ]
         }
     ]

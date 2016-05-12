@@ -69,9 +69,9 @@
         Validator_DSD.prototype.validateColumns = function (cols) {
             var toRet = [];
             var valStructure = validateStructure(cols);
-            var duplicateSubj = checkDuplicateSubject(cols);
+        //    var duplicateSubj = checkDuplicateSubject(cols);
             ArrConcat(toRet, valStructure);
-            ArrConcat(toRet, duplicateSubj);
+        //    ArrConcat(toRet, duplicateSubj);
             if (!cols)
                 return toRet;
             for (var i = 0; i < cols.length; i++) {
