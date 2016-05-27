@@ -14,7 +14,8 @@
     'amplify'
 ],
     function ($, DSDColumnEditorHTML, DynamicRadio, DomainEditor, mlRes, ColumnEditorReader, SubjectReader, DatatypeReader, MLInput, Evts, ValidatorDSD, VErrors) {
-        var defConfig = { inputLangs: ['EN', 'FR'] };
+        //var defConfig = { inputLangs: ['EN', 'FR'] };
+        var defConfig = { inputLangs: ['EN'] };
         var h = {
             txtTitle: "#txtTitle",
             txtSupplemental: '#txtSupplemental',
