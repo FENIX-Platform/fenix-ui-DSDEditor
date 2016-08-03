@@ -56,7 +56,13 @@
         },
         "codelistSubject": "agriculturalPopulation"
     },
-
+    {
+        "value": "census",
+        "text": {
+            "EN": "Census"
+        },
+        "codelistSubject": "census"
+    },
 
     {
         "value": "time",

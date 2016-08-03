@@ -49,6 +49,12 @@
             ]
         },
         {
+            "subject": "census",
+            "datatypes": [
+                "code"
+            ]
+        },
+        {
             "subject": "time",
             "datatypes": [
                 "year",
