@@ -6,7 +6,7 @@
     'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/Events',
     'fx-DSDEditor/js/DSDEditor/validators/Validator_DSD',
     'fx-DSDEditor/js/DSDEditor/validators/Validator_DSD_Errors',
-    'fx-DataMngCommons/js/Notifications',
+    'fx-d-m/lib/notifications',
     'fx-d-m/config/config',
     'fx-d-m/config/config-default',
     'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit',
