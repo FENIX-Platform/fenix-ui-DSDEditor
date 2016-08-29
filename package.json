@@ -1,0 +1,19 @@
+{
+  "name": "fenix-ui-DSDEditor",
+  "version": "1.1.0",
+  "description": "FENIX Data Structure Definition Editor",
+  "main": "src/js/start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FENIX-Platform/fenix-ui-DSDEditor.git"
+  },
+  "author": "FENIX team (http://fenix.fao.org/)",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/FENIX-Platform/fenix-ui-DSDEditor/issues"
+  },
+  "homepage": "https://github.com/FENIX-Platform/fenix-ui-DSDEditor#readme"
+}
