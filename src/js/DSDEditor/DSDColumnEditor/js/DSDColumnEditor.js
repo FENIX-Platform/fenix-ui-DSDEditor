@@ -10,7 +10,7 @@
     'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/Events',
     'fx-DSDEditor/js/DSDEditor/validators/Validator_DSD',
     'fx-DSDEditor/js/DSDEditor/validators/Validator_DSD_Errors',
-    'validate',
+    'parsleyjs',
     'amplify'
 ],
     function ($, DSDColumnEditorHTML, DynamicRadio, DomainEditor, mlRes, ColumnEditorReader, SubjectReader, DatatypeReader, MLInput, Evts, ValidatorDSD, VErrors) {

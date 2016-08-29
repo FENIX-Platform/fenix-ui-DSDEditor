@@ -1,4 +1,7 @@
-﻿define(['jquery',
+﻿if (typeof define !== 'function') {
+    var define = require('amdefine')(module);
+}
+define(['jquery',
     'text!fx-DSDEditor/js/DSDEditor/DSDConfigs/config/Subjects.json'
 ],
     function ($, Subjects) {

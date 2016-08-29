@@ -1,4 +1,6 @@
-/*global require*/
+if (typeof define !== 'function') {
+    var define = require('amdefine')(module);
+}
 // relative or absolute path of Components' main.js
 require([
     './paths'
