@@ -1,10 +1,9 @@
 ﻿define(['jquery',
     'text!fx-DSDEditor/js/DSDEditor/DSDColumnEditor/html/comp/domainEditors/Range_base.html',
-    'datetimepicker',
     'moment',
     'amplify'
 ],
-    function ($, RangeHTML, datetimepicker) {
+    function ($, RangeHTML) {
         var defConfig = {};
         var h = {
 

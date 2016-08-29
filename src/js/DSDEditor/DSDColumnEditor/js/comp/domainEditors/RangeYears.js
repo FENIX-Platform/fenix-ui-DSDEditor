@@ -2,7 +2,7 @@
     'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/comp/domainEditors/Range_base',
     'amplify'
 ],
-    function ($, rangeBase, datetimepicker) {
+    function ($, rangeBase) {
         var defConfig = {};
 
         function RangeYears(config) {
