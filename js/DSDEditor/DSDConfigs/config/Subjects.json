@@ -1,11 +1,5 @@
 ﻿[
     {
-        "value": "undefined",
-        "text": {
-            "EN": "Other"
-        }
-    },
-    {
         "value": "item",
         "text": {
             "EN": "Item"
@@ -58,11 +52,17 @@
     {
         "value": "agriculturalPopulation",
         "text": {
-            "EN": "Agricultural Population"
+            "EN": "Agricultural"
         },
         "codelistSubject": "agriculturalPopulation"
     },
-
+    {
+        "value": "census",
+        "text": {
+            "EN": "Census"
+        },
+        "codelistSubject": "census"
+    },
 
     {
         "value": "time",

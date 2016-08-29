@@ -14,7 +14,8 @@
     'amplify'
 ],
     function ($, DSDColumnEditorHTML, DynamicRadio, DomainEditor, mlRes, ColumnEditorReader, SubjectReader, DatatypeReader, MLInput, Evts, ValidatorDSD, VErrors) {
-        var defConfig = { inputLangs: ['EN', 'FR'] };
+        //var defConfig = { inputLangs: ['EN', 'FR'] };
+        var defConfig = { inputLangs: ['EN'] };
         var h = {
             txtTitle: "#txtTitle",
             txtSupplemental: '#txtSupplemental',
@@ -22,6 +23,7 @@
             tdSubj: '#tdSubj',
             trDataType: "#trDataType",
             tdDataType: "#tdDataType",
+            trDomain: '#trDomain',
             tdDomain: '#tdDomainEditor',
             tblColEditor: '#tblColEditor',
 
@@ -58,6 +60,8 @@
 
             this.editorType = "";
             this.colID = "";
+            //keep the values field, remove it when the column's distinct will be calculated by the server
+            this.valuesField = null; 
 
             this.domainEditor = new DomainEditor();
             this.columnEditorReader = new ColumnEditorReader();
@@ -68,6 +72,8 @@
             this.dynRadioDataType = null;
 
             this.validator = null;
+
+            this.editorsVisibilityCfg = { subject: true, domain: true, datatype: true };
         };
 
         DSDColumnEditor.prototype.render = function (cnt, config) {
@@ -78,13 +84,14 @@
             this.$txtTitle = this.$cnt.find(h.txtTitle);
             this.$txtSupplemental = this.$cnt.find(h.txtSupplemental);
 
-            var $trSubj = this.$cnt.find(h.trSubj);
+            this.$trSubj = this.$cnt.find(h.trSubj);
             var $tdSubj = this.$cnt.find(h.tdSubj);
+            this.$trDomain = this.$cnt.find(h.trDomain);
             var $tdDomain = this.$cnt.find(h.tdDomain);
             this.dynRadioSubj = new DynamicRadio();
             this.dynRadioSubj.render($tdSubj);
 
-            var $trDataType = this.$cnt.find(h.trDataType);
+            this.$trDataType = this.$cnt.find(h.trDataType);
             var $tdDataType = this.$cnt.find(h.tdDataType);
             this.dynRadioDataType = new DynamicRadio();
             this.dynRadioDataType.render($tdDataType);
@@ -99,6 +106,21 @@
             this._bindEvents();
             this._attachValidator();
             this._doML();
+        };
+
+        function showHide($elem, visible) {
+            if (typeof visible === 'undefined')
+                return;
+            if (visible)
+                $elem.show();
+            else
+                $elem.hide();
+        }
+        DSDColumnEditor.prototype.setEditMode = function (cfg) {
+            this.editorsVisibilityCfg = cfg;
+            showHide(this.$trSubj, cfg.subject);
+            showHide(this.$trDomain, cfg.domain);
+            showHide(this.$trDataType, cfg.datatype);
         };
 
         DSDColumnEditor.prototype.newColumn = function () {
@@ -152,6 +174,7 @@
         };
         DSDColumnEditor.prototype.reset = function () {
             this.colID = "";
+            this.valuesField = null;
             this.mlTitle.reset();
             this.mlSupplemental.reset();
             this.dynRadioSubj.reset();
@@ -161,16 +184,23 @@
             this.domainEditor.reset();
         };
         DSDColumnEditor.prototype._subjectsVisible = function (visible) {
-            var $trSubj = this.$cnt.find(h.trSubj);
+            //overridden by the component's config
+            if (typeof this.editorsVisibilityCfg.subject !== 'undefined')
+                if (!this.editorsVisibilityCfg.subject)
+                    return;
+
+            //var $trSubj = this.$cnt.find(h.trSubj);
             if (visible)
-                $trSubj.show();
+                this.$trSubj.show();
             else
-                $trSubj.hide();
+                this.$trSubj.hide();
         };
 
         DSDColumnEditor.prototype.getColumn = function () {
             var toRet = {};
             toRet.id = this.colID;
+            if (this.valuesField)
+                toRet.values = this.valuesField;
             if (this.editorType == EDITOR_TYPE.dimension)
                 toRet.key = true;
             else
@@ -187,6 +217,7 @@
         DSDColumnEditor.prototype.setColumn = function (toSet) {
             this.reset();
             this.colID = toSet.id;
+            this.valuesField = toSet.values;
             var type = EDITOR_TYPE.other;
             if (toSet.key)
                 type = EDITOR_TYPE.dimension;

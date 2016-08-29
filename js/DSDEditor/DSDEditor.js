@@ -6,7 +6,7 @@
     'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/Events',
     'fx-DSDEditor/js/DSDEditor/validators/Validator_DSD',
     'fx-DSDEditor/js/DSDEditor/validators/Validator_DSD_Errors',
-    'fx-DataMngCommons/js/Notifications',
+    'fx-d-m/lib/notifications',
     'fx-d-m/config/config',
     'fx-d-m/config/config-default',
     'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit',
@@ -72,15 +72,17 @@
             if (callB) callB();
         };
 
+        //Sets the dsd
         DSDEditor.prototype.set = function (dsd) {
             this.dsd = dsd;
             this.updateDSDView();
         };
-
+        //gets the DSD
         DSDEditor.prototype.get = function () {
             return this.dsd;
         };
 
+        //switches the panels' visibility
         DSDEditor.prototype.switchVisibility = function (divID) {
             if (divID == htmlIDs.divColEditor) {
                 this.$divDSDDisplay.hide();
@@ -93,15 +95,20 @@
                 amplify.publish(e.DSDEDITOR_TO_COLUMN_SUMMARY);
             }
         };
+        //Add a new column->switch to col view, sets the view mode
         DSDEditor.prototype.addColumn = function (colType) {
             this.switchVisibility(htmlIDs.divColEditor);
             this.colEditor.newColumn();
             this.colEditor.setColumnEditorType(colType);
+
+            //this.colEditor.setEditMode({subject:false,domain:false,datatype:false});
         };
+        //Edit a columns
         DSDEditor.prototype.editColumn = function (col) {
             this.switchVisibility(htmlIDs.divColEditor);
             this.colEditor.setColumn(col);
         };
+        //Called when the user has finished editing a columns
         DSDEditor.prototype.colEditDone = function () {
             var colToAdd = this.colEditor.getColumn();
             if (!this.dsd.columns)
@@ -118,10 +125,28 @@
             else
                 this.dsd.columns[idx] = colToAdd;
 
+            this._sortColumnsByType();
             this.updateDSDView();
             this.changed = true;
         };
 
+        DSDEditor.prototype._sortColumnsByType = function () {
+            this.dsd.columns.sort(function (a, b) {
+                //both key, keep the order
+                if (a.key && b.key) return 0;
+                if (a.key) return -1; //a is key, a goes first
+                if (b.key) return 1;
+                //two value columns are not allowed at the moment, for the future...
+                if (a.subject == 'value' && b.subject == 'value')
+                    return 0;
+                if (a.subject == 'value')
+                    return -1;
+                if (b.subject == 'value')
+                    return 1;
+                return 0;
+            });
+        };
+        //Refreshes the DSD view
         DSDEditor.prototype.updateDSDView = function () {
             this.DSDDisplay.setCols(this.dsd.columns);
         };
@@ -183,11 +208,12 @@
             this.DSDDisplay.destroy();
             this.colEditor.destroy();
         };
-
+        //Edit col
         DSDEditor.prototype._colDisplayEditClicked = function (colId) {
             var toEdit = getColumnById(this.dsd.columns, colId);
             this.editColumn(toEdit);
         };
+        //Delete a column
         DSDEditor.prototype._colDisplayDeleteClicked = function (colId) {
             if (!confirm("__DELETE?"))
                 return false;
@@ -198,6 +224,10 @@
             this.changed = true;
         };
         DSDEditor.prototype.editable = function (editable) {
+            if (editable)
+                this.colEditor.setEditMode({ subject: true, domain: true, datatype: true });
+            else
+                this.colEditor.setEditMode({ subject: false, domain: false, datatype: false });
             this.DSDDisplay.editable(editable);
         };
         //Validation

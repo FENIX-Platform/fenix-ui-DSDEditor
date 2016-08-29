@@ -1,5 +1,5 @@
 ﻿define(['jquery',
-    'fx-DataMngCommons/js/validators/Validator_DSD_Errors'],
+    'fx-DSDEditor/js/DSDEditor/validators/Validator_DSD_Errors'],
     function ($, VE) {
         var defConfig = {
             allowedKeyDataTypes: ['code', 'customCode', 'date', 'month', 'year']
@@ -69,9 +69,9 @@
         Validator_DSD.prototype.validateColumns = function (cols) {
             var toRet = [];
             var valStructure = validateStructure(cols);
-            var duplicateSubj = checkDuplicateSubject(cols);
+        //    var duplicateSubj = checkDuplicateSubject(cols);
             ArrConcat(toRet, valStructure);
-            ArrConcat(toRet, duplicateSubj);
+        //    ArrConcat(toRet, duplicateSubj);
             if (!cols)
                 return toRet;
             for (var i = 0; i < cols.length; i++) {

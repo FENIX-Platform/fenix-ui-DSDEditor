@@ -38,6 +38,15 @@
             this._bindEvents();
         };
 
+        ColsDisplayBtns.prototype.deleteEnabled = function (enabled) {
+            if (typeof enabled === 'undefined')
+                return;
+            if (enabled)
+                this.$btnDel.prop("disabled", false);
+            else
+                this.$btnDel.prop("disabled", true);
+        };
+
         ColsDisplayBtns.prototype.setEventId = function (evtId) {
             this.evtId = evtId;
         };

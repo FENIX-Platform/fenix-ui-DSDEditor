@@ -10,44 +10,19 @@
         "text": {
             "EN": "Item"
         },
-        "dataTypes": [
-            "code",
-            "customCode",
-            "text",
-            "label",
-            "bool",
-            "enumeration"
-        ],
         "codelistSubject": "item"
     },
     {
         "value": "time",
         "text": {
             "EN": "Time"
-        },
-        "dataTypes": [
-            "date",
-            "month",
-            "year",
-            "customCode",
-            "text",
-            "label",
-            "time",
-            "period"
-        ]
+        }
     },
     {
         "value": "geo",
         "text": {
             "EN": "Geo"
         },
-        "dataTypes": [
-            "code",
-            "customCode",
-            "text",
-            "label",
-            "enumeration"
-        ],
         "codelistSubject": "geo"
     },
     {
@@ -55,36 +30,19 @@
         "text": {
             "EN": "Flag"
         },
-        "dataTypes": [
-            "code",
-            "customCode",
-            "text",
-            "label",
-            "enumeration"
-        ],
-        "codelistSubject": "flag",
-        "canBeDimension": false
+        "codelistSubject": "flag"
     },
     {
         "value": "value",
         "text": {
             "EN": "Value"
-        },
-        "dataTypes": [
-            "number",
-            "percentage",
-            "text",
-            "label"
-        ]
+        }
     },
     {
         "value": "um",
-        "text": {"EN":"UM"},
-        "dataTypes": [
-            "code",
-            "customCode"
-        ],
-        "codelistSubject": "um",
-        "canBeDimension": false
+        "text": {
+            "EN": "UM"
+        },
+        "codelistSubject": "um"
     }
 ]
