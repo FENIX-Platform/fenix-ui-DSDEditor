@@ -9,7 +9,7 @@
     'fx-d-m/lib/notifications',
     'fx-d-m/config/config',
     'fx-d-m/config/config-default',
-    'i18n!fx-DSDEditor/multiLang/DSDEditor/nls/ML_DSDEdit',
+    'i18n!fx-DSDEditor/nls/labels',
     'amplify'
 ],
 

@@ -10,7 +10,7 @@ define(function () {
             "fx-DSDEditor/config": "../src/config",
             "fx-DSDEditor/js": "../src/js",
             "fx-DSDEditor/templates": "../templates",
-            "fx-DSDEditor/multiLang": "../src/multiLang",
+            "fx-DSDEditor/nls": "../src/nls",
             "bootstrap": "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min",
             'jquery': '{FENIX_CDN}/js/jquery/2.1.1/jquery.min',
             'text': '{FENIX_CDN}/js/requirejs/plugins/text/2.0.12/text',

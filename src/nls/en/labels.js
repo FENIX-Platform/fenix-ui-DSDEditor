@@ -1,5 +1,10 @@
-﻿define({
-    "root": {
+﻿/*global define*/
+define(function () {
+
+    'use strict';
+
+    return {
+
         "yes": "Yes",
         "no": "No",
         "ok": "Ok",
@@ -32,6 +37,6 @@
         "EmptyIdCodeList": "The codelist's ID cannot be empty",
         "duplicateColumnIDs": "The column's ID must be unique, check your column's IDs",
         "duplicateSubject": "Two columns cannot have the same subject, check your column's subjects"
-    },
-    "fr": true
+
+    }
 });
