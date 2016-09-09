@@ -1,5 +1,5 @@
 ﻿define(['jquery',
-    'text!fx-DSDEditor/js/DSDEditor/DSDConfigs/config/ColumnEditorCfg.json'
+    '../config/ColumnEditorCfg.json'
 ],
     function ($, ColumnEditorCfg) {
         var defConfig = {};

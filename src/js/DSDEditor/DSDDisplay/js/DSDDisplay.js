@@ -1,8 +1,8 @@
 ﻿define(['jquery',
-    'text!fx-DSDEditor/js/DSDEditor/DSDDisplay/html/DSDDisplay.html',
-    'fx-DSDEditor/js/DSDEditor/DSDDisplay/js/comp/AddColButton',
-    'fx-DSDEditor/js/DSDEditor/DSDDisplay/js/comp/ColsDisplay',
-    'i18n!fx-DSDEditor/js/DSDEditor/DSDDisplay/multiLang/nls/ML_DSDDisplay'
+    '../html/DSDDisplay.html',
+    'comp/AddColButton',
+    'comp/ColsDisplay',
+    '../multiLang/nls/ML_DSDDisplay'
 ],
 
     function ($, DSDDisplayHTML, AddColButton, ColsDisplay, MLRes) {

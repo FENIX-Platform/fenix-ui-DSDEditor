@@ -1,10 +1,17 @@
 {
   "name": "fenix-ui-DSDEditor",
-  "version": "1.1.0",
+  "version": "2.0.0-beta.0",
   "description": "FENIX Data Structure Definition Editor",
-  "main": "src/js/start.js",
+  "main": "dist/fenix-ui-DSDEditor.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test karma start ./karma.config.js",
+    "build": "NODE_ENV=production webpack --display-error-details",
+    "build:demo": "NODE_ENV=demo webpack --display-error-details",
+    "dev": "NODE_ENV=develop webpack-dev-server --display-error-details --progress --color --content-base dev  --inline --hot",
+    "w-test": "SET NODE_ENV=test&& karma start ./karma.config.js",
+    "w-build": "SET NODE_ENV=production&& webpack --display-error-details",
+    "w-build:demo": "SET NODE_ENV=demo&& webpack --display-error-details",
+    "w-dev": "SET NODE_ENV=develop&& webpack-dev-server --display-error-details --progress --color --content-base dev  --inline --hot"
   },
   "repository": {
     "type": "git",
@@ -17,6 +24,7 @@
   },
   "homepage": "https://github.com/FENIX-Platform/fenix-ui-DSDEditor#readme",
   "dependencies": {
+    "amplify-pubsub": "0.0.1",
     "bootstrap": "3.3.7",
     "eonasdan-bootstrap-datetimepicker": "4.17.42",
     "jquery": "3.1.0",

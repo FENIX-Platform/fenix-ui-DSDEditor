@@ -1,19 +1,19 @@
 ﻿define(['jquery',
-    'text!fx-DSDEditor/js/DSDEditor/DSDColumnEditor/html/DSDColumnEditor.html',
-    'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/comp/DynamicRadio',
-    'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/comp/DomainEditor',
-    'i18n!fx-DSDEditor/js/DSDEditor/DSDColumnEditor/multiLang/nls/ML_DSDColumnEditor',
-    'fx-DSDEditor/js/DSDEditor/DSDConfigs/js/ColumnEditorReader',
-    'fx-DSDEditor/js/DSDEditor/DSDConfigs/js/SubjectReader',
-    'fx-DSDEditor/js/DSDEditor/DSDConfigs/js/DatatypeReader',
+    '../html/DSDColumnEditor.html',
+    '/comp/DynamicRadio',
+    '/comp/DomainEditor',
+    '../multiLang/nls/ML_DSDColumnEditor',
+    '../../DSDConfigs/js/ColumnEditorReader',
+    '../../DSDConfigs/js/SubjectReader',
+    '../../DSDConfigs/js/DatatypeReader',
     'fx-DSDEditor/js/MLInput/js/MLInput',
-    'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/Events',
-    'fx-DSDEditor/js/DSDEditor/validators/Validator_DSD',
-    'fx-DSDEditor/js/DSDEditor/validators/Validator_DSD_Errors',
-    'parsleyjs',
-    'amplify'
+    './Events',
+    '../../DSDEditor/validators/Validator_DSD',
+    '../../DSDEditor/validators/Validator_DSD_Errors',
+    'amplify-pubsub',
+    'parsleyjs'
 ],
-    function ($, DSDColumnEditorHTML, DynamicRadio, DomainEditor, mlRes, ColumnEditorReader, SubjectReader, DatatypeReader, MLInput, Evts, ValidatorDSD, VErrors) {
+    function ($, DSDColumnEditorHTML, DynamicRadio, DomainEditor, mlRes, ColumnEditorReader, SubjectReader, DatatypeReader, MLInput, Evts, ValidatorDSD, VErrors, amplify) {
         //var defConfig = { inputLangs: ['EN', 'FR'] };
         var defConfig = { inputLangs: ['EN'] };
         var h = {

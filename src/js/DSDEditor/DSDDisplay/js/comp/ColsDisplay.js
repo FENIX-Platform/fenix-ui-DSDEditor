@@ -1,8 +1,8 @@
 ﻿define(['jquery',
-    'text!fx-DSDEditor/js/DSDEditor/DSDDisplay/html/comp/ColsDisplay.html',
-    'fx-DSDEditor/js/DSDEditor/DSDEditor_Utils',
-    'fx-DSDEditor/js/DSDEditor/DSDDisplay/js/comp/colsDisplay/ColsDisplayBtns',
-    'fx-DSDEditor/js/DSDEditor/DSDConfigs/js/CodelistConfigReader'
+    '../../html/comp/ColsDisplay.html',
+    '../../../DSDEditor_Utils',
+    'colsDisplay/ColsDisplayBtns',
+    '../js/CodelistConfigReader'
 ],
 
     function ($, ColsDisplayHTML, DSDEditor_Utils, ColsDisplayBtns, CodelistConfigReader) {

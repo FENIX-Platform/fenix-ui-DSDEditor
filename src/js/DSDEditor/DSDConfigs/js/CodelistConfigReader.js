@@ -1,6 +1,6 @@
 ﻿define(['jquery',
-    'fx-d-m/config/config',
-    'fx-d-m/config/config-default'
+    '../../../../config/config',
+    '../../../../config/config-default'
 ],
     function ($, C, DC) {
         var defConfig = {};

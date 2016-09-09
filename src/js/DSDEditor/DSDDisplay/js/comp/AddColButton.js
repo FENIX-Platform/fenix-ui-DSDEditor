@@ -1,10 +1,10 @@
 ﻿define(['jquery',
-    'text!fx-DSDEditor/js/DSDEditor/DSDDisplay/html/comp/AddColButton.html',
-    'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/Events',
-    'amplify'
+    '../html/comp/AddColButton.html',
+    '../../../DSDColumnEditor/js/Events',
+    'amplify-pubsub'
 ],
 
-    function ($, AddColButtonHTML, Evts) {
+    function ($, AddColButtonHTML, Evts, amplify) {
         var defConfig = {};
 
         var h = {

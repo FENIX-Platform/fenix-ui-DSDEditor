@@ -1,5 +1,5 @@
 ﻿define(['jquery',
-    'text!fx-DSDEditor/js/DSDEditor/DSDConfigs/config/Datatypes.json'
+    '../config/Datatypes.json'
 ],
     function ($, Datatypes) {
         var defConfig = {};

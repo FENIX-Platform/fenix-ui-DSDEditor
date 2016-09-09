@@ -1,10 +1,10 @@
 ﻿define(['jquery',
-    'text!fx-DSDEditor/js/DSDEditor/DSDColumnEditor/html/comp/domainEditors/CodelistSelector.html',
-    'fx-DSDEditor/js/DSDEditor/DSDConfigs/js/CodelistConfigReader',
-    'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/Events',
-    'amplify'
+    '../../../html/comp/domainEditors/CodelistSelector.html',
+    '../../../../DSDConfigs/js/CodelistConfigReader',
+    '../../Events',
+    'amplify-pubsub'
 ],
-    function ($, CodelistSelectorHTML, CodelistConfigReader, Evts) {
+    function ($, CodelistSelectorHTML, CodelistConfigReader, Evts, amplify) {
         var defConfig = {};
         var h = {
             idCodesDDL: '#clSelDDL',

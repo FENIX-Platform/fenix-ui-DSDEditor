@@ -1,8 +1,5 @@
-﻿if (typeof define !== 'function') {
-    var define = require('amdefine')(module);
-}
-define(['jquery',
-    'text!fx-DSDEditor/js/MLInput/html/MLInput.html'
+﻿define(['jquery',
+    '../../html/MLInput.html'
 ],
 
     function ($, MLInputHTML) {

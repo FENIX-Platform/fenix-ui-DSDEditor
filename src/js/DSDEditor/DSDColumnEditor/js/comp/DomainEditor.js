@@ -1,8 +1,8 @@
 ﻿//TODO: the changed function must be done
 
 define(['jquery',
-    'text!fx-DSDEditor/js/DSDEditor/DSDColumnEditor/html/comp/DomainEditor.html',
-    'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/comp/domainEditors/CodelistSelector',
+    '../../html/comp/DomainEditor.html',
+    '/domainEditors/CodelistSelector',
     //'components/DSDEditor/DSDColumnEditor/js/comp/domainEditors/DatesRange',
     'amplify'
 ],

@@ -1,5 +1,4 @@
-﻿define(['jquery',
-    'fx-DSDEditor/js/DSDEditor/validators/Validator_DSD_Errors'],
+﻿define(['jquery', './Validator_DSD_Errors'],
     function ($, VE) {
         var defConfig = {
             allowedKeyDataTypes: ['code', 'customCode', 'date', 'month', 'year']

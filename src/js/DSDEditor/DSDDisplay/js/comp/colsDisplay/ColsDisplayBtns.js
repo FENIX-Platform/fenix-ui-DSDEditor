@@ -1,10 +1,10 @@
 ﻿define(['jquery',
-    'text!fx-DSDEditor/js/DSDEditor/DSDDisplay/html/comp/colsDisplay/ColsDisplayBtns.html',
-    'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/Events',
-    'amplify'
+    '../../../DSDDisplay/html/comp/colsDisplay/ColsDisplayBtns.html',
+    '../../../DSDColumnEditor/js/Events',
+    'amplify-pubsub'
 ],
 
-    function ($, ColsDisplayBtnsHTML, Evts) {
+    function ($, ColsDisplayBtnsHTML, Evts, amplify) {
         var defConfig = {};
 
         var h = {

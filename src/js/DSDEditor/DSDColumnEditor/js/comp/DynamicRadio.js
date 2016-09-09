@@ -1,7 +1,7 @@
 ﻿define(['jquery',
-    'text!fx-DSDEditor/js/DSDEditor/DSDColumnEditor/html/comp/DynamicRadio.html',
-    'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/Events',
-    'amplify'
+    '../html/comp/DynamicRadio.html',
+    '../Events',
+    'amplify-pubsub'
 ],
     function ($, DynamicRadioHTML, Evts) {
         var defConfig = {};

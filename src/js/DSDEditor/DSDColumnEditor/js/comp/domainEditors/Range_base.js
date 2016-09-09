@@ -1,7 +1,6 @@
 ﻿define(['jquery',
-    'text!fx-DSDEditor/js/DSDEditor/DSDColumnEditor/html/comp/domainEditors/Range_base.html',
-    'moment',
-    'amplify'
+    '../../html/comp/domainEditors/Range_base.html',
+    'moment'
 ],
     function ($, RangeHTML) {
         var defConfig = {};

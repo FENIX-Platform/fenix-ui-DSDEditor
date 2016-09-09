@@ -1,19 +1,18 @@
 ﻿define(['jquery',
-    'text!fx-DSDEditor/js/DSDEditor/html/DSDEditor.html',
-    'fx-DSDEditor/js/DSDEditor/DSDDisplay/js/DSDDisplay',
-    'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/DSDColumnEditor',
-    'fx-DSDEditor/js/DSDEditor/ColumnIDGenerator',
-    'fx-DSDEditor/js/DSDEditor/DSDColumnEditor/js/Events',
-    'fx-DSDEditor/js/DSDEditor/validators/Validator_DSD',
-    'fx-DSDEditor/js/DSDEditor/validators/Validator_DSD_Errors',
-    'fx-d-m/lib/notifications',
-    'fx-d-m/config/config',
-    'fx-d-m/config/config-default',
-    'i18n!fx-DSDEditor/nls/labels',
-    'amplify'
+    '../html/DSDEditor.html',
+    '/DSDDisplay/js/DSDDisplay',
+    'DSDColumnEditor/js/DSDColumnEditor',
+    './ColumnIDGenerator',
+    '/DSDColumnEditor/js/Events',
+    '/validators/Validator_DSD',
+    '/validators/Validator_DSD_Errors',
+    '..config/config',
+    '..config/config-default',
+    '../nls/labels',
+    'amplify-pubsub'
 ],
 
-    function ($, DSDEditorHTML, DSDDisplay, DSDColumnEditor, ColumnIDGenerator, Evts, ValidatorDSD, VErrors, Noti, C, CD, MLRes) {
+    function ($, DSDEditorHTML, DSDDisplay, DSDColumnEditor, ColumnIDGenerator, Evts, ValidatorDSD, VErrors, C, CD, MLRes, amplify) {
         var defConfig = {};
         var htmlIDs = {
             divDSD: "#divDSD",
@@ -247,10 +246,11 @@
             return false;
         };
         DSDEditor.prototype.updateValidationUI = function (valRes) {
-            if (!valRes)
-                return;
+            if (!valRes)  return;
             for (var i = 0; i < valRes.length; i++)
-                Noti.showError("Error", valRes[i].message);
+                console.log(valRes[i].message);
+                // TODO: Add Notification in a Centralized Fashon
+                // Noti.showError("Error", valRes[i].message);
         };
         //Utils
         function getColumnIndexById(cols, id) {
