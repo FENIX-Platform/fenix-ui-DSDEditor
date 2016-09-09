@@ -2,11 +2,11 @@
 
 define(['jquery',
     '../../html/comp/DomainEditor.html',
-    '/domainEditors/CodelistSelector',
+    './domainEditors/CodelistSelector',
     //'components/DSDEditor/DSDColumnEditor/js/comp/domainEditors/DatesRange',
-    'amplify'
+    'amplify-pubsub'
 ],
-    function ($, DomainEditorHTML, CodelistSelector) {
+    function ($, DomainEditorHTML, CodelistSelector, amplify) {
         var defConfig = {};
         var h = {
             idNoDataType: '#domEdit_noDatatype',

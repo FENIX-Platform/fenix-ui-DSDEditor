@@ -1,9 +1,9 @@
 ﻿define(['jquery',
-    '../html/comp/DynamicRadio.html',
+    '../../html/comp/DynamicRadio.html',
     '../Events',
     'amplify-pubsub'
 ],
-    function ($, DynamicRadioHTML, Evts) {
+    function ($, DynamicRadioHTML, Evts, amplify) {
         var defConfig = {};
         var h = {
             idUID: '#txtUID',

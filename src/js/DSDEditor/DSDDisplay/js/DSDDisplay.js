@@ -1,7 +1,7 @@
 ﻿define(['jquery',
     '../html/DSDDisplay.html',
-    'comp/AddColButton',
-    'comp/ColsDisplay',
+    './comp/AddColButton',
+    './comp/ColsDisplay',
     '../multiLang/nls/ML_DSDDisplay'
 ],
 

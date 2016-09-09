@@ -1,5 +1,5 @@
 ﻿define(['jquery',
-    '../../html/MLInput.html'
+    '../html/MLInput.html'
 ],
 
     function ($, MLInputHTML) {

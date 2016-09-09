@@ -1,6 +1,6 @@
 ﻿define(['jquery',
-    '../../../DSDDisplay/html/comp/colsDisplay/ColsDisplayBtns.html',
-    '../../../DSDColumnEditor/js/Events',
+    '../../../html/comp/colsDisplay/ColsDisplayBtns.html',
+    '../../../../DSDColumnEditor/js/Events',
     'amplify-pubsub'
 ],
 
