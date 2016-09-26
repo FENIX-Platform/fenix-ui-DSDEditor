@@ -254,47 +254,48 @@
         };
 
         DSDColumnEditor.prototype._attachValidator = function () {
+            log.info("DSDColumnEditor.prototype._attachValidator")
             var tblColEditor = this.$cnt.find(h.tblColEditor);
-            this.validator = tblColEditor.parsley().on('form:validate', function(){
-                alert("validating");
-            });
+            this.validator = tblColEditor.parsley();
         };
         DSDColumnEditor.prototype._detachValidator = function () {
+            log.info("DSDColumnEditor.prototype._detachValidator")
             this.validator.destroy();
         };
 
         DSDColumnEditor.prototype.validate = function () {
+            log.info("DSDColumnEditor.prototype.validate")
+
             val = new ValidatorDSD();
             var valRes = val.validateColumn(this.getColumn());
             this.updateValidationUI(valRes);
 
             if (!valRes || valRes.length == 0) return true;
+
             return false;
         };
         DSDColumnEditor.prototype.updateValidationUI = function (valRes) {
+            log.info("DSDColumnEditor.prototype.updateValidationUI", this.validator, valRes)
 
-            //TODO: Remove this window.ParsleyUI, for God's Sake!
+            this.$cnt.find('#lTitle').parsley().reset();
+            this.$cnt.find('#lSubject').parsley().reset();
+            this.$cnt.find('#lDataType').parsley().reset();
+            this.$cnt.find('#lDomain').parsley().reset();
 
-            window.ParsleyUI.removeError(this.$cnt.find('#lTitle').parsley(), 'required', mlRes[this.lang][VErrors.TITLE_BLANK]);
-            window.ParsleyUI.removeError(this.$cnt.find('#lSubject').parsley(), 'required', mlRes[this.lang][VErrors.SUBJECT_EMPTY]);
-            window.ParsleyUI.removeError(this.$cnt.find('#lDataType').parsley(), 'required', mlRes[this.lang][VErrors.DATATYPE_EMPTY]);
-            window.ParsleyUI.removeError(this.$cnt.find('#lDomain').parsley(), 'required', mlRes[this.lang][VErrors.CODELIST_EMPTY]);
-
-            if (!valRes)
-                return;
+            if (!valRes) return;
             for (var i = 0; i < valRes.length; i++) {
                 switch (valRes[i].message) {
                     case VErrors.TITLE_BLANK:
-                        window.ParsleyUI.addError(this.$cnt.find('#lTitle').parsley(), 'required', mlRes[this.lang][VErrors.TITLE_BLANK]);
+                        this.$cnt.find('#lTitle').parsley().addError('TITLE_BLANK', {message: mlRes[this.lang][VErrors.TITLE_BLANK], assert: 'required', updateClass: true });
                         break;
                     case VErrors.SUBJECT_EMPTY:
-                        window.ParsleyUI.addError(this.$cnt.find('#lSubject').parsley(), 'required', mlRes[this.lang][VErrors.SUBJECT_EMPTY]);
+                        this.$cnt.find('#lSubject').parsley().addError('SUBJECT_EMPTY', {message: mlRes[this.lang][VErrors.SUBJECT_EMPTY], assert: 'required' });
                         break;
                     case VErrors.DATATYPE_EMPTY:
-                        window.ParsleyUI.addError(this.$cnt.find('#lDataType').parsley(), 'required', mlRes[this.lang][VErrors.DATATYPE_EMPTY]);
+                        this.$cnt.find('#lDataType').parsley().addError('DATATYPE_EMPTY', {message: mlRes[this.lang][VErrors.DATATYPE_EMPTY], assert: 'required' });
                         break;
                     case VErrors.CODELIST_EMPTY:
-                        window.ParsleyUI.addError(this.$cnt.find('#lDomain').parsley(), 'required', mlRes[this.lang][VErrors.CODELIST_EMPTY]);
+                        this.$cnt.find('#lDomain').parsley().addError('CODELIST_EMPTY', {message: mlRes[this.lang][VErrors.CODELIST_EMPTY], assert: 'required' });
                         break;
                 }
             }
@@ -303,7 +304,6 @@
             return this.mlTitle.changed() || this.mlSupplemental.changed() || this.domainEditor.changed() || this.dynRadioSubj.changed() || this.dynRadioDataType.changed();
         };
         DSDColumnEditor.prototype._doML = function () {
-            log.info("doML");
             this.$cnt.find(h.lblTitle).html(mlRes[this.lang]['title']);
             this.$cnt.find(h.lblSuppl).html(mlRes[this.lang]['supplemental']);
             this.$cnt.find(h.lblSubj).html(mlRes[this.lang]['subject']);

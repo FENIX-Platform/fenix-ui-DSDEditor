@@ -1,7 +1,8 @@
 ﻿define([
     'jquery',
+    'loglevel',
     './Validator_DSD_Errors'
-    ],function ($, VE) {
+    ],function ($, log, VE) {
         var defConfig = {
             allowedKeyDataTypes: ['code', 'customCode', 'date', 'month', 'year']
         };
@@ -9,6 +10,7 @@
             ERROR: 'error'
         };
         function Validator_DSD(config) {
+            log.info("Validator_DSD")
             this.config = {};
             $.extend(true, this.config, defConfig, config);
         };
