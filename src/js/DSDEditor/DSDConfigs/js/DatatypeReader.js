@@ -7,7 +7,7 @@
         function DatatypeReader(config) {
             this.config = {};
             $.extend(true, this.config, defConfig, config);
-            this.datatypes = JSON.parse(Datatypes);
+            this.datatypes = Datatypes;
         };
 
         DatatypeReader.prototype.getDatatypes = function () {

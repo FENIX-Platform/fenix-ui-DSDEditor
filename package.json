@@ -27,7 +27,11 @@
     "amplify-pubsub": "0.0.1",
     "bootstrap": "3.3.7",
     "eonasdan-bootstrap-datetimepicker": "4.17.42",
+    "handlebars-loader": "^1.4.0",
+    "html-loader": "^0.4.4",
     "jquery": "3.1.0",
+    "json-loader": "^0.5.4",
+    "loglevel": "^1.4.1",
     "moment": "2.14.1",
     "parsleyjs": "2.4.4",
     "pnotify": "3.0.0"

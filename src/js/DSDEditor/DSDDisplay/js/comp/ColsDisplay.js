@@ -41,6 +41,8 @@
             this.$container = null;
             $.extend(true, this.config, defConfig, config);
 
+            console.log("ColsDisplay", this.config);
+
             this.$trHead = null;
             this.$trEdit = null;
             this.$trSubj = null;
@@ -108,7 +110,7 @@
             for (i = 0; i < cols.length; i++) {
                 var toFind = '#' + idPart + "" + cols[i].id;
                 var td = this.$trEdit.find(toFind);
-                var btn = new ColsDisplayBtns();
+                var btn = new ColsDisplayBtns(this.config);
                 btn.render(td);
                 btn.setEventId(cols[i].id);
                 btn.deleteEnabled(this.editable);

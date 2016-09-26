@@ -1,12 +1,9 @@
 define([
     'jquery',
-    './DSDEditor/DSDEditor',
-    'bootstrap'
+    './DSDEditor/DSDEditor'
 ], function ($, DSDEditor) {
 
-    var defConfig = {
-    };
-
+    var defConfig = {};
     var cfg = {};
 
     function init(containerID, config, callB) {

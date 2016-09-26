@@ -36,6 +36,8 @@ define(['jquery',
 
             this.codelistSelector = null;
             this._changed = false;
+
+            console.log("DomainEditor", this.config)
         };
 
         DomainEditor.prototype.render = function (cnt, config) {
@@ -106,7 +108,7 @@ define(['jquery',
                     break;
                 case MODES.code:
                     this.$divDomainEditor.show();
-                    this.codelistSelector = new CodelistSelector();
+                    this.codelistSelector = new CodelistSelector(this.config);
                     this.codelistSelector.render(this.$divDomainEditor);
                     this.codelistSelector.setSubject(subject);
                     //this.codelistSelector.setCodelists(this.cLists);

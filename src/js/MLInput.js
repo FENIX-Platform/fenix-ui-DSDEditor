@@ -1,8 +1,8 @@
-﻿define(['jquery',
+﻿define([
+    'loglevel',
+    'jquery',
     '../html/MLInput.html'
-],
-
-    function ($, MLInputHTML) {
+], function (log, $, MLInputHTML) {
         var defConfig = { langs: ["EN"] };
         var line = '<tr><td>%lCode%</td><td><input type="text" id="%idlCode%" class="form-control" /></td></tr>';
         var idlCode = "mlTD_";
@@ -34,6 +34,7 @@
         };
 
         MLInput.prototype._create = function (lCodes) {
+
             if (!lCodes)
                 return "";
             var toAdd = "";
@@ -52,6 +53,7 @@
         }
 
         MLInput.prototype.set = function (val) {
+
             this.reset();
             if (!val)
                 return;
@@ -88,6 +90,7 @@
             return false;
         };
         MLInput.prototype.bindEvents = function () {
+            log.info("bindEvents");
             if (!this.txt)
                 return;
             var me = this;

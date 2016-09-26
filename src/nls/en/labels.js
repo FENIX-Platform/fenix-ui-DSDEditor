@@ -36,7 +36,23 @@ define(function () {
         "DimensionDataTypeConflict": "Conflict detected between value and datatype defined for the value",
         "EmptyIdCodeList": "The codelist's ID cannot be empty",
         "duplicateColumnIDs": "The column's ID must be unique, check your column's IDs",
-        "duplicateSubject": "Two columns cannot have the same subject, check your column's subjects"
+        "duplicateSubject": "Two columns cannot have the same subject, check your column's subjects",
+
+
+        "dataType": "Data type",
+
+        "titleBlank": "Title cannot be blank",
+        "subjectEmpty": "Subject cannot be empty",
+        "dataTypeEmpty": "Datatype cannot be empty",
+        "codelistEmpty": "Codelist cannot be empty",
+
+        "dimension": "Dimension",
+        "value": "Value",
+        "other": "Other",
+        "helpDim": "You need at least one dimension, dimensions are used to define your measure.<br/>Ex. Year, product, area...",
+        "helpVal": "You need exactly one measure. It is usually a number.<br/>Ex. Quantity, value...",
+        "helpOther": "Add additional informations attached to your measure.<br/>Ex. measurement unit, flags, notes..."
+
 
     }
 });

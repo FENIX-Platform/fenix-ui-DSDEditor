@@ -1,8 +1,9 @@
 ﻿define(['jquery',
+    'loglevel',
     '../html/DSDColumnEditor.html',
     './comp/DynamicRadio',
     './comp/DomainEditor',
-    '../multiLang/nls/ML_DSDColumnEditor',
+    '../../../../nls/labels',
     '../../DSDConfigs/js/ColumnEditorReader',
     '../../DSDConfigs/js/SubjectReader',
     '../../DSDConfigs/js/DatatypeReader',
@@ -13,8 +14,9 @@
     'amplify-pubsub',
     'parsleyjs'
 ],
-    function ($, DSDColumnEditorHTML, DynamicRadio, DomainEditor, mlRes, ColumnEditorReader, SubjectReader, DatatypeReader, MLInput, Evts, ValidatorDSD, VErrors, amplify) {
+    function ($, log, DSDColumnEditorHTML, DynamicRadio, DomainEditor, mlRes, ColumnEditorReader, SubjectReader, DatatypeReader, MLInput, Evts, ValidatorDSD, VErrors, amplify) {
         //var defConfig = { inputLangs: ['EN', 'FR'] };
+
         var defConfig = { inputLangs: ['EN'] };
         var h = {
             txtTitle: "#txtTitle",
@@ -49,7 +51,10 @@
         function DSDColumnEditor(config) {
             this.config = {};
             this.$cnt = null;
-            $.extend(true, this.config, defConfig, config);
+            $.extend(true, this.config, config, defConfig);
+
+            this.lang = this.config.inputLangs[0] || defConfig.inputLangs[0];
+            this.lang = this.lang.toLowerCase();
 
             this.$txtTitle;
             this.$txtSupplemental;
@@ -63,7 +68,7 @@
             //keep the values field, remove it when the column's distinct will be calculated by the server
             this.valuesField = null; 
 
-            this.domainEditor = new DomainEditor();
+            this.domainEditor = new DomainEditor(this.config);
             this.columnEditorReader = new ColumnEditorReader();
             this.subjectReader = new SubjectReader();
             this.datatypeReader = new DatatypeReader();
@@ -74,6 +79,8 @@
             this.validator = null;
 
             this.editorsVisibilityCfg = { subject: true, domain: true, datatype: true };
+
+            console.log('DSDColumnEditor', this.config);
         };
 
         DSDColumnEditor.prototype.render = function (cnt, config) {
@@ -265,26 +272,26 @@
         };
         DSDColumnEditor.prototype.updateValidationUI = function (valRes) {
 
-            window.ParsleyUI.removeError(this.$cnt.find('#lTitle').parsley(), 'required', mlRes[VErrors.TITLE_BLANK]);
-            window.ParsleyUI.removeError(this.$cnt.find('#lSubject').parsley(), 'required', mlRes[VErrors.SUBJECT_EMPTY]);
-            window.ParsleyUI.removeError(this.$cnt.find('#lDataType').parsley(), 'required', mlRes[VErrors.DATATYPE_EMPTY]);
-            window.ParsleyUI.removeError(this.$cnt.find('#lDomain').parsley(), 'required', mlRes[VErrors.CODELIST_EMPTY]);
+            window.ParsleyUI.removeError(this.$cnt.find('#lTitle').parsley(), 'required', mlRes[this.lang][VErrors.TITLE_BLANK]);
+            window.ParsleyUI.removeError(this.$cnt.find('#lSubject').parsley(), 'required', mlRes[this.lang][VErrors.SUBJECT_EMPTY]);
+            window.ParsleyUI.removeError(this.$cnt.find('#lDataType').parsley(), 'required', mlRes[this.lang][VErrors.DATATYPE_EMPTY]);
+            window.ParsleyUI.removeError(this.$cnt.find('#lDomain').parsley(), 'required', mlRes[this.lang][VErrors.CODELIST_EMPTY]);
 
             if (!valRes)
                 return;
             for (var i = 0; i < valRes.length; i++) {
                 switch (valRes[i].message) {
                     case VErrors.TITLE_BLANK:
-                        window.ParsleyUI.addError(this.$cnt.find('#lTitle').parsley(), 'required', mlRes[VErrors.TITLE_BLANK]);
+                        window.ParsleyUI.addError(this.$cnt.find('#lTitle').parsley(), 'required', mlRes[this.lang][VErrors.TITLE_BLANK]);
                         break;
                     case VErrors.SUBJECT_EMPTY:
-                        window.ParsleyUI.addError(this.$cnt.find('#lSubject').parsley(), 'required', mlRes[VErrors.SUBJECT_EMPTY]);
+                        window.ParsleyUI.addError(this.$cnt.find('#lSubject').parsley(), 'required', mlRes[this.lang][VErrors.SUBJECT_EMPTY]);
                         break;
                     case VErrors.DATATYPE_EMPTY:
-                        window.ParsleyUI.addError(this.$cnt.find('#lDataType').parsley(), 'required', mlRes[VErrors.DATATYPE_EMPTY]);
+                        window.ParsleyUI.addError(this.$cnt.find('#lDataType').parsley(), 'required', mlRes[this.lang][VErrors.DATATYPE_EMPTY]);
                         break;
                     case VErrors.CODELIST_EMPTY:
-                        window.ParsleyUI.addError(this.$cnt.find('#lDomain').parsley(), 'required', mlRes[VErrors.CODELIST_EMPTY]);
+                        window.ParsleyUI.addError(this.$cnt.find('#lDomain').parsley(), 'required', mlRes[this.lang][VErrors.CODELIST_EMPTY]);
                         break;
                 }
             }
@@ -293,11 +300,12 @@
             return this.mlTitle.changed() || this.mlSupplemental.changed() || this.domainEditor.changed() || this.dynRadioSubj.changed() || this.dynRadioDataType.changed();
         };
         DSDColumnEditor.prototype._doML = function () {
-            this.$cnt.find(h.lblTitle).html(mlRes.title);
-            this.$cnt.find(h.lblSuppl).html(mlRes.supplemental);
-            this.$cnt.find(h.lblSubj).html(mlRes.subject);
-            this.$cnt.find(h.lblDataType).html(mlRes.dataType);
-            this.$cnt.find(h.lblDomain).html(mlRes.domain);
+            log.info("doML");
+            this.$cnt.find(h.lblTitle).html(mlRes[this.lang]['title']);
+            this.$cnt.find(h.lblSuppl).html(mlRes[this.lang]['supplemental']);
+            this.$cnt.find(h.lblSubj).html(mlRes[this.lang]['subject']);
+            this.$cnt.find(h.lblDataType).html(mlRes[this.lang]['dataType']);
+            this.$cnt.find(h.lblDomain).html(mlRes[this.lang]['domain']);
         };
 
         DSDColumnEditor.prototype.destroy = function () {

@@ -7,7 +7,7 @@
         function ColumnEditorReader(config) {
             this.config = {};
             $.extend(true, this.config, defConfig, config);
-            this.columnECfg = JSON.parse(ColumnEditorCfg);
+            this.columnECfg = ColumnEditorCfg;
         };
 
         ColumnEditorReader.prototype.getColumnEditorCfg = function () {

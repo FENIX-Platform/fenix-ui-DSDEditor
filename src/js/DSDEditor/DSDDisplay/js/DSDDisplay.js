@@ -20,15 +20,17 @@
             this.$container = null;
             $.extend(true, this.config, defConfig, config);
 
+            console.log("DSDDisplay", this.config);
+
             this.$tdAddDim = null;
             this.$tdAddVal = null;
             this.$tdAddOther = null;
             this.$colsDisplay = null;
 
-            this.addColBtnDim = new AddColButton();
-            this.addColBtnVal = new AddColButton();
-            this.addColBtnOther = new AddColButton();
-            this.colsDisplay = new ColsDisplay();
+            this.addColBtnDim = new AddColButton(this.config);
+            this.addColBtnVal = new AddColButton(this.config);
+            this.addColBtnOther = new AddColButton(this.config);
+            this.colsDisplay = new ColsDisplay(this.config);
         };
 
         DSDDisplay.prototype.render = function (cnt, config) {

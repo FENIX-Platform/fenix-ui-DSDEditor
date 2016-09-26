@@ -9,13 +9,9 @@
             this.config = {};
             $.extend(true, this.config, defConfig, config);
 
-            var clPath = C.DSD_EDITOR_CODELISTS || DC.DSD_EDITOR_CODELISTS
-            this.codelists = null;
-            var me = this;
-            $.getJSON(clPath, function (data) {
-                me.codelists = data;
-                if (callB) callB();
-            });
+            this.codelists = this.config.DSD_EDITOR_CODELISTS;
+
+            if (callB) callB();
         };
 
         CodelistConfigReader.prototype.getCodelists = function () {

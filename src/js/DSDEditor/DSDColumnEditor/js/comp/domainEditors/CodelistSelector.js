@@ -18,12 +18,14 @@
         function CodelistSelector(config) {
             this.config = {};
             this.$container = null;
-            $.extend(true, this.config, defConfig, config);
+            $.extend(true, this.config, config, defConfig);
 
             this.clReader = null;
             this.tmpVal = "";
             this.tmpSubj = "";
             this.loaded = false;
+
+            console.log("CodelistSelector", this.config);
         };
 
         CodelistSelector.prototype.render = function (cnt, config) {
@@ -36,7 +38,7 @@
             this._bindEvents();
 
             var me = this;
-            this.clReader = new CodelistConfigReader(null, function () { me._clLoaded(); });
+            this.clReader = new CodelistConfigReader(this.config, function () { me._clLoaded(); });
         };
 
         CodelistSelector.prototype._clLoaded = function () {

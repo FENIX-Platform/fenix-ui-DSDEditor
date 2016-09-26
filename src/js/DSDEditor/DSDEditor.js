@@ -1,4 +1,5 @@
 ﻿define(['jquery',
+    'loglevel',
     './html/DSDEditor.html',
     './DSDDisplay/js/DSDDisplay',
     './DSDColumnEditor/js/DSDColumnEditor',
@@ -12,7 +13,7 @@
     'amplify-pubsub'
 ],
 
-    function ($, DSDEditorHTML, DSDDisplay, DSDColumnEditor, ColumnIDGenerator, Evts, ValidatorDSD, VErrors, C, CD, MLRes, amplify) {
+    function ($, log, DSDEditorHTML, DSDDisplay, DSDColumnEditor, ColumnIDGenerator, Evts, ValidatorDSD, VErrors, C, CD, MLRes, amplify) {
         var defConfig = {};
         var htmlIDs = {
             divDSD: "#divDSD",
@@ -39,6 +40,8 @@
             this.$container = null;
             $.extend(true, this.config, defConfig, config);
 
+            this.lang = this.config.lang.toLowerCase();
+
             this.$divDSDDisplay;
             this.$divColEditor;
 
@@ -58,15 +61,17 @@
             this.$divDSDDisplay = this.$container.find(htmlIDs.divDSD);
             this.$divColEditor = this.$container.find(htmlIDs.divColEditor);
 
-            this.DSDDisplay = new DSDDisplay();
+            this.DSDDisplay = new DSDDisplay(this.config);
             this.DSDDisplay.render(this.$divDSDDisplay);
 
-            this.colEditor = new DSDColumnEditor();
+            this.colEditor = new DSDColumnEditor(this.config);
             var divColEditorCnt = this.$container.find(htmlIDs.divColEditorCnt);
             this.colEditor.render(divColEditorCnt);
             this.$divColEditor.hide();
 
             this._bindEvents();
+
+            log.info("DSDEditor init with ",this.config);
 
             if (callB) callB();
         };
@@ -183,7 +188,7 @@
             });
             this.$container.find(htmlIDs.btnColEditorCancel).on('click', function () {
                 if (me.colEditor.changed()) {
-                    if (!confirm(MLRes['unsavedChanges']))
+                    if (!confirm(MLRes[me.lang]['unsavedChanges']))
                         return;
                 }
 

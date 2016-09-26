@@ -7,7 +7,7 @@
         function SubjectReader(config) {
             this.config = {};
             $.extend(true, this.config, defConfig, config);
-            this.subjs = JSON.parse(Subjects);
+            this.subjs = Subjects;
         };
 
         SubjectReader.prototype.getSubjects = function () {

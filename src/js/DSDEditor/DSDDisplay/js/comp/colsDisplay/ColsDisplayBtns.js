@@ -25,6 +25,8 @@
             this.$btnEdit = null;
             this.$btnDel = null;
             this.evtId = "";
+
+            console.log('ColsDisplayBtns',this.config);
         };
 
         ColsDisplayBtns.prototype.render = function (cnt, config) {
