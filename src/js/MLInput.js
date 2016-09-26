@@ -90,7 +90,6 @@
             return false;
         };
         MLInput.prototype.bindEvents = function () {
-            log.info("bindEvents");
             if (!this.txt)
                 return;
             var me = this;

@@ -152,7 +152,7 @@
         };
         //Refreshes the DSD view
         DSDEditor.prototype.updateDSDView = function () {
-            this.DSDDisplay.setCols(this.dsd.columns);
+            this.DSDDisplay.setCols(this.dsd);
         };
 
         DSDEditor.prototype._colAddClick = function (evtId) {
@@ -253,7 +253,7 @@
         DSDEditor.prototype.updateValidationUI = function (valRes) {
             if (!valRes)  return;
             for (var i = 0; i < valRes.length; i++)
-                console.log(valRes[i].message);
+                log.warn(valRes[i].message);
                 // TODO: Add Notification in a Centralized Fashon
                 // Noti.showError("Error", valRes[i].message);
         };

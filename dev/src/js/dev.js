@@ -28,10 +28,28 @@
         log.info('DSD Editor Dev - Launched');
         console.log(DSDEditor)
 
+        $('#btnColsEditDone').click(function () {
+            DSDEditor.validate();
+            $('#DSDOutput').html(JSON.stringify(DSDEditor.get()));
+        });
+
+        $('#btnColsEditToggle').click(function () {
+            DSDEditor.editable(!DSDEditor.editable());
+        });
+
+        //Test
+
+
+        //Test buttons
+        $('#btnColsLoad').click(function () {
+            console.log("btnColsLoad");
+            DSDEditor.set([{ "id": "CODE", "title": { "EN": "hh" }, "key": true, "dataType": "code", "domain": { "codes": [{ "idCodeList": "ECO_GAUL", "codes": [{ "code": "281" }] }] }, "subject": "item", "supplemental": null }, { "id": "YEAR", "title": { "EN": "time" }, "key": true, "dataType": "year", "domain": null, "subject": "time", "supplemental": null }, { "id": "NUMBER", "title": { "EN": "val" }, "key": false, "dataType": "number", "subject": "value", "supplemental": null }]);
+        });
+
+
     };
     DSDEditor.init("#standard", cfg, callB);
 
-    console.log(DSDEditor.validate());
 
 /*
 

@@ -88,11 +88,11 @@
             this.colsDisplay.destroy();
         };
         DSDDisplay.prototype.editable = function (editable) {
+
             this.colsDisplay.editable(editable);
             if (editable) {
                 this.$container.find(h.idTblAddCol).show();
-            }
-            else {
+            } else {
                 this.$container.find(h.idTblAddCol).hide();
             }
         };
