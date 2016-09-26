@@ -41,8 +41,6 @@
             this.$container = null;
             $.extend(true, this.config, defConfig, config);
 
-            console.log("ColsDisplay", this.config);
-
             this.$trHead = null;
             this.$trEdit = null;
             this.$trSubj = null;

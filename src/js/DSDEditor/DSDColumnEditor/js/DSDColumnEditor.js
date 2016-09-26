@@ -80,7 +80,6 @@
 
             this.editorsVisibilityCfg = { subject: true, domain: true, datatype: true };
 
-            console.log('DSDColumnEditor', this.config);
         };
 
         DSDColumnEditor.prototype.render = function (cnt, config) {
@@ -113,6 +112,7 @@
             this._bindEvents();
             this._attachValidator();
             this._doML();
+
         };
 
         function showHide($elem, visible) {
@@ -255,7 +255,9 @@
 
         DSDColumnEditor.prototype._attachValidator = function () {
             var tblColEditor = this.$cnt.find(h.tblColEditor);
-            this.validator = tblColEditor.parsley();
+            this.validator = tblColEditor.parsley().on('form:validate', function(){
+                alert("validating");
+            });
         };
         DSDColumnEditor.prototype._detachValidator = function () {
             this.validator.destroy();
@@ -266,11 +268,12 @@
             var valRes = val.validateColumn(this.getColumn());
             this.updateValidationUI(valRes);
 
-            if (!valRes || valRes.length == 0)
-                return true;
+            if (!valRes || valRes.length == 0) return true;
             return false;
         };
         DSDColumnEditor.prototype.updateValidationUI = function (valRes) {
+
+            //TODO: Remove this window.ParsleyUI, for God's Sake!
 
             window.ParsleyUI.removeError(this.$cnt.find('#lTitle').parsley(), 'required', mlRes[this.lang][VErrors.TITLE_BLANK]);
             window.ParsleyUI.removeError(this.$cnt.find('#lSubject').parsley(), 'required', mlRes[this.lang][VErrors.SUBJECT_EMPTY]);
