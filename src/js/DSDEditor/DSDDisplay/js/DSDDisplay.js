@@ -2,7 +2,7 @@
     '../html/DSDDisplay.html',
     './comp/AddColButton',
     './comp/ColsDisplay',
-    '../multiLang/nls/ML_DSDDisplay'
+    '../../../../nls/labels'
 ],
 
     function ($, DSDDisplayHTML, AddColButton, ColsDisplay, MLRes) {
@@ -20,17 +20,18 @@
             this.$container = null;
             $.extend(true, this.config, defConfig, config);
 
-            console.log("DSDDisplay", this.config);
-
             this.$tdAddDim = null;
             this.$tdAddVal = null;
             this.$tdAddOther = null;
             this.$colsDisplay = null;
 
+            this.lang = this.config.lang.toLowerCase();
+
             this.addColBtnDim = new AddColButton(this.config);
             this.addColBtnVal = new AddColButton(this.config);
             this.addColBtnOther = new AddColButton(this.config);
             this.colsDisplay = new ColsDisplay(this.config);
+
         };
 
         DSDDisplay.prototype.render = function (cnt, config) {
@@ -48,20 +49,20 @@
             this.addColBtnOther.render(this.$tdAddOther);
 
             this.addColBtnDim.set({
-                title: MLRes.dimension,
-                help:MLRes.helpDim,
+                title: MLRes[this.lang]['dimension'],
+                help: MLRes[this.lang]['helpDim'],
                 evtId: 'addDim',
                 headerClass:'bg-dim'
             });
             this.addColBtnVal.set({
-                title: MLRes.value,
-                help: MLRes.helpVal,
+                title: MLRes[this.lang]['value'],
+                help: MLRes[this.lang]['helpVal'],
                 evtId: 'addVal',
                 headerClass: 'bg-val'
             });
             this.addColBtnOther.set({
-                title: MLRes.other,
-                help: MLRes.helpOther,
+                title: MLRes[this.lang]['other'],
+                help: MLRes[this.lang]['helpOther'],
                 evtId: 'addOther',
                 headerClass: 'bg-other'
             });

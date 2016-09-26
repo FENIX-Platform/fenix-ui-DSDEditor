@@ -28,6 +28,7 @@
             this.$btnAddColTitle = null;
             this.$btnAdd = null;
             this.$tdAddColButton_help = null;
+
         };
 
         AddColButton.prototype.render = function (cnt, config) {
@@ -41,7 +42,8 @@
 
             this._bindEvents();
         };
-        AddColButton.prototype.set = function (vals) {            
+        AddColButton.prototype.set = function (vals) {
+
             if (!vals)
                 return;
             if (vals.title)

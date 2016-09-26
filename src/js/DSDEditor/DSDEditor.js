@@ -219,7 +219,7 @@
         };
         //Delete a column
         DSDEditor.prototype._colDisplayDeleteClicked = function (colId) {
-            if (!confirm("__DELETE?"))
+            if (!confirm(MLRes[this.lang]['areYouSure']))
                 return false;
             var colIdx = getColumnIndexById(this.dsd.columns, colId);
             if (colIdx != -1)
