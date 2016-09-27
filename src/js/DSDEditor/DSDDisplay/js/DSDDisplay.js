@@ -87,13 +87,25 @@
             this.addColBtnOther.destroy();
             this.colsDisplay.destroy();
         };
-        DSDDisplay.prototype.editable = function (editable) {
+        DSDDisplay.prototype.isEditable = function (editable) {
+            if (typeof (editable) == 'boolean') {
+                console.log("colsDisplay " + typeof (this.colsDisplay.editable));
+                if (editable) {
+                    if (typeof (this.colsDisplay) == 'function') this.colsDisplay.editable(editable);
+                    this.$container.find(h.idTblAddCol).hide();
+                } else {
+                    this.$container.find(h.idTblAddCol).show();
+                }
+                return editable;
+            }
+            /*
             this.colsDisplay.editable(editable);
             if (editable) {
                 this.$container.find(h.idTblAddCol).show();
             } else {
                 this.$container.find(h.idTblAddCol).hide();
             }
+            */
         };
 
         return DSDDisplay;

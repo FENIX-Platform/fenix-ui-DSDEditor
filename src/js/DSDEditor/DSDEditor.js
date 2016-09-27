@@ -232,12 +232,7 @@
                 this.colEditor.setEditMode({ subject: true, domain: true, datatype: true });
             else
                 this.colEditor.setEditMode({ subject: false, domain: false, datatype: false });
-
-            if (typeof (editable) != 'undefined')
-                this.DSDDisplay.editable(editable);
-            else
-                return this.DSDDisplay.editable();
-
+            this.DSDDisplay.isEditable(editable);
         };
         //Validation
         DSDEditor.prototype.validate = function () {
