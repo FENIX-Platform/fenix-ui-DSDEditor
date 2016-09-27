@@ -88,13 +88,14 @@
             this.colsDisplay.destroy();
         };
         DSDDisplay.prototype.isEditable = function (editable) {
+            // return a boolean if the dsd is editable
             if (typeof (editable) == 'boolean') {
                 console.log("colsDisplay " + typeof (this.colsDisplay.editable));
                 if (editable) {
-                    if (typeof (this.colsDisplay) == 'function') this.colsDisplay.editable(editable);
-                    this.$container.find(h.idTblAddCol).hide();
-                } else {
                     this.$container.find(h.idTblAddCol).show();
+                   // if (typeof (this.colsDisplay) == 'function') this.colsDisplay.editable(editable);
+                } else {
+                    this.$container.find(h.idTblAddCol).hide();
                 }
                 return editable;
             }

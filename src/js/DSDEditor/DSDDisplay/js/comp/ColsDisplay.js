@@ -194,6 +194,7 @@
                 for (var i = 0; i < this.editBtns.length; i++)
                     this.editBtns[i].deleteEnabled(editable);
             }
+            return editable;
             /*if (editable)
                 this.$trEdit.show();
             else
