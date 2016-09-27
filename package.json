@@ -1,6 +1,6 @@
 {
   "name": "fenix-ui-DSDEditor",
-  "version": "2.0.0-beta.0",
+  "version": "2.0.0-beta.1",
   "description": "FENIX Data Structure Definition Editor",
   "main": "dist/fenix-ui-DSDEditor.min.js",
   "scripts": {
@@ -24,32 +24,32 @@
   },
   "homepage": "https://github.com/FENIX-Platform/fenix-ui-DSDEditor#readme",
   "dependencies": {
-    "amplify-pubsub": "0.0.1",
-    "bootstrap": "3.3.7",
-    "eonasdan-bootstrap-datetimepicker": "4.17.42",
+    "amplify-pubsub": "^0.0.1",
+    "bootstrap": "^3.3.7",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.42",
     "handlebars-loader": "^1.4.0",
     "html-loader": "^0.4.4",
-    "jquery": "3.1.0",
+    "jquery": "^3.1.0",
     "json-loader": "^0.5.4",
     "loglevel": "^1.4.1",
-    "moment": "2.14.1",
-    "parsleyjs": "2.4.4",
-    "pnotify": "3.0.0"
+    "moment": "^2.14.1",
+    "parsleyjs": "^2.4.4",
+    "pnotify": "^3.0.0"
   },
   "devDependencies": {
-    "chai": "3.5.0",
-    "clean-webpack-plugin": "0.1.10",
-    "jshint": "2.9.3",
-    "jshint-loader": "0.8.3",
-    "karma": "1.2.0",
-    "karma-chai": "0.1.0",
-    "karma-chrome-launcher": "2.0.0",
-    "karma-coverage": "1.1.1",
-    "karma-firefox-launcher": "1.0.0",
-    "karma-mocha": "1.1.1",
-    "karma-webpack": "1.8.0",
-    "mocha": "3.0.2",
-    "webpack": "1.13.2",
-    "webpack-dev-server": "1.15.0"
+    "chai": "^3.5.0",
+    "clean-webpack-plugin": "^0.1.10",
+    "jshint": "^2.9.3",
+    "jshint-loader": "^0.8.3",
+    "karma": "^1.2.0",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-mocha": "^1.1.1",
+    "karma-webpack": "^1.8.0",
+    "mocha": "^3.0.2",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.15.0"
   }
 }

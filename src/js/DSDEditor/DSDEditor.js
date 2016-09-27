@@ -115,19 +115,19 @@
         //Called when the user has finished editing a columns
         DSDEditor.prototype.colEditDone = function () {
             var colToAdd = this.colEditor.getColumn();
-            if (!this.dsd.columns)
-                this.dsd.columns = [];
+            if (!this.dsd)
+                this.dsd = [];
 
             //create a new id
             if (colToAdd.id == "") {
-                colToAdd.id = new ColumnIDGenerator().generate(this.dsd.columns, colToAdd);
+                colToAdd.id = new ColumnIDGenerator().generate(this.dsd, colToAdd);
             }
 
-            var idx = getColumnIndexById(this.dsd.columns, colToAdd.id);
+            var idx = getColumnIndexById(this.dsd, colToAdd.id);
             if (idx == -1)
-                this.dsd.columns.push(colToAdd);
+                this.dsd.push(colToAdd);
             else
-                this.dsd.columns[idx] = colToAdd;
+                this.dsd[idx] = colToAdd;
 
             this._sortColumnsByType();
             this.updateDSDView();
@@ -135,7 +135,7 @@
         };
 
         DSDEditor.prototype._sortColumnsByType = function () {
-            this.dsd.columns.sort(function (a, b) {
+            this.dsd.sort(function (a, b) {
                 //both key, keep the order
                 if (a.key && b.key) return 0;
                 if (a.key) return -1; //a is key, a goes first
@@ -214,20 +214,19 @@
         };
         //Edit col
         DSDEditor.prototype._colDisplayEditClicked = function (colId) {
-            var toEdit = getColumnById(this.dsd.columns, colId);
+            var toEdit = getColumnById(this.dsd, colId);
             this.editColumn(toEdit);
         };
         //Delete a column
         DSDEditor.prototype._colDisplayDeleteClicked = function (colId) {
-            if (!confirm(MLRes[this.lang]['areYouSure']))
-                return false;
-            var colIdx = getColumnIndexById(this.dsd.columns, colId);
-            if (colIdx != -1)
-                this.dsd.columns.splice(colIdx, 1);
+            if (!confirm(MLRes[this.lang]['areYouSure'])) return false;
+            var colIdx = getColumnIndexById(this.dsd, colId);
+            if (colIdx != -1) this.dsd.splice(colIdx, 1);
             this.updateDSDView();
             this.changed = true;
         };
         DSDEditor.prototype.editable = function (editable) {
+            console.log("DSDEditor.editable");
             if (editable)
                 this.colEditor.setEditMode({ subject: true, domain: true, datatype: true });
             else
@@ -237,7 +236,7 @@
         //Validation
         DSDEditor.prototype.validate = function () {
             var val = new ValidatorDSD();
-            var valRes = val.validateColumns(this.get().columns);
+            var valRes = val.validateColumns(this.get());
             this.updateValidationUI(valRes);
             if (!valRes || valRes.length == 0)
                 return true;
@@ -245,7 +244,7 @@
         };
         DSDEditor.prototype.isValid = function () {
             var val = new ValidatorDSD();
-            var valRes = val.validateColumns(this.get().columns);
+            var valRes = val.validateColumns(this.get());
             if (!valRes || valRes.length == 0)
                 return true;
             return false;

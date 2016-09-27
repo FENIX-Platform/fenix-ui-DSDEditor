@@ -4,7 +4,7 @@
     './comp/DynamicRadio',
     './comp/DomainEditor',
     '../../../../nls/labels',
-    '../../DSDConfigs/js/ColumnEditorReader',
+        '../../DSDConfigs/js/ColumnEditorReader',
     '../../DSDConfigs/js/SubjectReader',
     '../../DSDConfigs/js/DatatypeReader',
     '../../../MLInput',
@@ -112,7 +112,6 @@
             this._bindEvents();
             this._attachValidator();
             this._doML();
-
         };
 
         function showHide($elem, visible) {

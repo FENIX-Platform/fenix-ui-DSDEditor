@@ -7,7 +7,7 @@
 
         function CodelistConfigReader(config, callB) {
             this.config = {};
-            $.extend(true, this.config, defConfig, config);
+            $.extend(true, this.config, config, defConfig);
 
             this.codelists = this.config.DSD_EDITOR_CODELISTS;
 

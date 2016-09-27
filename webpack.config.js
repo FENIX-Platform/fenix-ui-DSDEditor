@@ -21,7 +21,6 @@ module.exports = {
         root: Path.resolve(__dirname),
         alias: {
             handlebars: 'handlebars/dist/handlebars.min.js',
-            Validator: 'parsleyjs/dist/parsley.js',
             jquery: Path.join(__dirname, 'node_modules/jquery/dist/jquery.js') //needed by eonasdan-bootstrap-datetimepicker
         }
     },

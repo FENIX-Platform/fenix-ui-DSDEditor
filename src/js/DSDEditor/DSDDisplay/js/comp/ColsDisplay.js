@@ -41,6 +41,8 @@
             this.$container = null;
             $.extend(true, this.config, defConfig, config);
 
+            console.log("ColsDisplay", this.config);
+
             this.$trHead = null;
             this.$trEdit = null;
             this.$trSubj = null;
@@ -124,17 +126,17 @@
             var domain = _html.colDomain;
             var suppl = _html.colSuppl;
             for (var i = 0; i < cols.length; i++) {
-                subj += createColTD(cols[i], 'subject', this.config.lang);
-                dT += createColTD(cols[i], 'dataType', this.config.lang);
-                domain += createColTD(cols[i], 'domain', this.config.lang);
-                suppl += createColTD(cols[i], 'supplemental', this.config.lang);
+                subj += this._createColTD(cols[i], 'subject', this.config.lang);
+                dT += this._createColTD(cols[i], 'dataType', this.config.lang);
+                domain += this._createColTD(cols[i], 'domain', this.config.lang);
+                suppl += this._createColTD(cols[i], 'supplemental', this.config.lang);
             }
             this.$trSubj.html(subj);
             this.$trDataType.html(dT);
             this.$trDomain.html(domain);
             this.$trSuppl.html(suppl);
         };
-        function createColTD(col, field, lang) {
+        ColsDisplay.prototype._createColTD = function (col, field, lang) {
             var toRet = _html.colTD;
             switch (field) {
                 case 'subject':
@@ -151,7 +153,7 @@
                     break;
                 case 'domain':
                     if (col.domain)
-                        toRet = toRet.replace('%cnt%', _domainToString(col.domain, lang));
+                        toRet = toRet.replace('%cnt%', this._domainToString(col.domain, lang));
                     else
                         toRet = toRet.replace('%cnt%', '');
                     break;
@@ -164,17 +166,16 @@
             }
             return toRet;
         };
-        function _domainToString(domain, lang) {
+        ColsDisplay.prototype._domainToString = function(domain, lang) {
             //Make it multielement
             if (domain.codes && domain.codes[0]) {
                 //Read the config reater just once!
                 var clId = domain.codes[0].idCodeList;
                 if (domain.codes[0].version)
-                    clId += " - " + domain.codes[0].version;
-                var clCfg = new CodelistConfigReader();
+                    clId += "|" + domain.codes[0].version;
+                var clCfg = new CodelistConfigReader(this.config);
                 var cl = clCfg.getCodelist(clId);
-                if (!cl)
-                    return "";
+                if (!cl) return "";
                 return cl.text[lang];
             }
             return "";
