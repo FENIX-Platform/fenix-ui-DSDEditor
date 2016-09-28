@@ -89,8 +89,10 @@
         };
         DSDDisplay.prototype.isEditable = function (editable) {
             // return a boolean if the dsd is editable
-            if (typeof (editable) == 'boolean') {
-                console.log("colsDisplay " + typeof (this.colsDisplay.editable));
+            //console.log ((typeof (editable) === 'boolean'))
+            if (typeof (editable) === 'boolean') {
+                //console.log("colsDisplay " + typeof (this.colsDisplay.editable));
+                if (typeof (this.colsDisplay.editable) === 'function') this.colsDisplay.editable(editable);
                 if (editable) {
                     this.$container.find(h.idTblAddCol).show();
                    // if (typeof (this.colsDisplay) == 'function') this.colsDisplay.editable(editable);
