@@ -25,7 +25,7 @@
             this.tmpSubj = "";
             this.loaded = false;
 
-            console.log("CodelistSelector", this.config);
+            //console.log("CodelistSelector", this.config);
         };
 
         CodelistSelector.prototype.render = function (cnt, config) {

@@ -40,7 +40,7 @@
         };
 
         ColsDisplayBtns.prototype.deleteEnabled = function (enabled) {
-            console.log("ColsDisplayBtns.prototype.deleteEnabled ", enabled)
+            //console.log("ColsDisplayBtns.prototype.deleteEnabled ", enabled)
             if (typeof enabled === 'undefined')
                 return;
             if (enabled)

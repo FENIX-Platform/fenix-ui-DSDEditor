@@ -37,7 +37,7 @@ define(['jquery',
             this.codelistSelector = null;
             this._changed = false;
 
-            console.log("DomainEditor", this.config)
+            //console.log("DomainEditor", this.config)
         };
 
         DomainEditor.prototype.render = function (cnt, config) {

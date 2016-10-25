@@ -45,7 +45,7 @@
             this.$divDSDDisplay;
             this.$divColEditor;
 
-            this.dsd = {};
+            this.dsd = [];
             //this.addDatasourceAndContextSys();
 
             this.DSDDisplay;
@@ -78,6 +78,7 @@
 
         //Sets the dsd
         DSDEditor.prototype.set = function (dsd) {
+            log.info('DSD Set', dsd);
             this.dsd = dsd;
             this.updateDSDView();
         };
@@ -124,6 +125,9 @@
             }
 
             var idx = getColumnIndexById(this.dsd, colToAdd.id);
+
+            log.info(idx, this.dsd, typeof (this.dsd), colToAdd);
+
             if (idx == -1)
                 this.dsd.push(colToAdd);
             else
@@ -180,9 +184,7 @@
 
             this.$container.find(htmlIDs.btnColEditorOk).on('click', function () {
                 var val = me.colEditor.validate();
-                if (!val) {
-                    return;
-                }
+                if (!val) return;
                 me.colEditDone();
                 me.switchVisibility(htmlIDs.divDSD);
             });
@@ -226,7 +228,7 @@
             this.changed = true;
         };
         DSDEditor.prototype.editable = function (editable) {
-            console.log("DSDEditor.editable");
+            //console.log("DSDEditor.editable");
             if (editable)
                 this.colEditor.setEditMode({ subject: true, domain: true, datatype: true });
             else

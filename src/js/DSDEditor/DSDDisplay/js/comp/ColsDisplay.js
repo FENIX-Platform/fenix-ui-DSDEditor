@@ -41,7 +41,7 @@
             this.$container = null;
             $.extend(true, this.config, defConfig, config);
 
-            console.log("ColsDisplay", this.config);
+            //console.log("ColsDisplay", this.config);
 
             this.$trHead = null;
             this.$trEdit = null;
@@ -97,7 +97,7 @@
             return toRet;
         }
         ColsDisplay.prototype._createEditRow = function (cols) {
-            console.log("ColsDisplay :"+this.editable);
+            //console.log("ColsDisplay :"+this.editable);
             if (!cols)
                 return;
             var toSet = _html.colTD_empty;
@@ -190,7 +190,7 @@
             this.editBtns = [];
         };
         ColsDisplay.prototype.editable = function (editable) {
-            console.log("ColsDisplay.prototype.editable", editable);
+            //console.log("ColsDisplay.prototype.editable", editable);
             this.editable = editable;
             if (this.editBtns) {
                 for (var i = 0; i < this.editBtns.length; i++)
