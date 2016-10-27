@@ -3,6 +3,7 @@ var distFolderPath = "dist",
     devFolderPath = "dev",
     webpack = require('webpack'),
     packageJson = require("./package.json"),
+    ExtractTextPlugin = require("extract-text-webpack-plugin"),
     CleanWebpackPlugin = require('clean-webpack-plugin'),
     Path = require('path'),
     dependencies = Object.keys(packageJson.dependencies);
@@ -28,7 +29,12 @@ module.exports = {
     externals: isProduction(dependencies, undefined),
 
     module: {
+
         loaders: [
+            isProduction(
+                {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader")},
+                {test: /\.css$/, loader: "style-loader!css-loader"}
+            ),
             {test: /\.hbs$/, loader: "handlebars-loader"},
             {test: /\.json$/, loader: "json-loader"},
             {test: /\.html$/, loader: "html-loader" },
@@ -38,6 +44,7 @@ module.exports = {
 
     plugins: clearArray([
         isDemo(undefined, new CleanWebpackPlugin([distFolderPath])),
+        isProduction(new ExtractTextPlugin(packageJson.name + '.min.css')),
         isProduction(new webpack.optimize.UglifyJsPlugin({
             compress: {warnings: false},
             output: {comments: false}

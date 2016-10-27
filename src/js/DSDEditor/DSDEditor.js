@@ -58,6 +58,8 @@
             this.$container = cnt;
             this.$container.html(DSDEditorHTML);
 
+            require('../../css/fenix-ui-DSDEditor.css');
+
             this.$divDSDDisplay = this.$container.find(htmlIDs.divDSD);
             this.$divColEditor = this.$container.find(htmlIDs.divColEditor);
 
