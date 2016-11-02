@@ -1,5 +1,5 @@
 ﻿define(['jquery',
-    '../html/DSDDisplay.html',
+    '../html/DSDDisplay.hbs',
     './comp/AddColButton',
     './comp/ColsDisplay',
     '../../../../nls/labels'

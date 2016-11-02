@@ -1,5 +1,5 @@
 ﻿define(['jquery',
-    '../../html/comp/AddColButton.html',
+    '../../html/comp/AddColButton.hbs',
     '../../../DSDColumnEditor/js/Events',
     'amplify-pubsub'
 ],

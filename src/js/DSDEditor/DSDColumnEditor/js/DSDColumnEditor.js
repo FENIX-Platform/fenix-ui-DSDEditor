@@ -1,6 +1,6 @@
 ﻿define(['jquery',
     'loglevel',
-    '../html/DSDColumnEditor.html',
+    '../html/DSDColumnEditor.hbs',
     './comp/DynamicRadio',
     './comp/DomainEditor',
     '../../../../nls/labels',

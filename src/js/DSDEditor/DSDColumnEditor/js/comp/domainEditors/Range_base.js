@@ -1,5 +1,5 @@
 ﻿define(['jquery',
-    '../../html/comp/domainEditors/Range_base.html',
+    '../../html/comp/domainEditors/Range_base.hbs',
     'moment'
 ],
     function ($, RangeHTML) {

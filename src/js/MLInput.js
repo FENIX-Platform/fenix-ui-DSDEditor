@@ -1,7 +1,7 @@
 ﻿define([
     'loglevel',
     'jquery',
-    '../html/MLInput.html'
+    '../html/MLInput.hbs'
 ], function (log, $, MLInputHTML) {
         var defConfig = { langs: ["EN"] };
         var line = '<tr><td>%lCode%</td><td><input type="text" id="%idlCode%" class="form-control" /></td></tr>';

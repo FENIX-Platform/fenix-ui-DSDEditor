@@ -1,6 +1,6 @@
 ﻿define(['jquery',
     'loglevel',
-    './html/DSDEditor.html',
+    './html/DSDEditor.hbs',
     './DSDDisplay/js/DSDDisplay',
     './DSDColumnEditor/js/DSDColumnEditor',
     './ColumnIDGenerator',

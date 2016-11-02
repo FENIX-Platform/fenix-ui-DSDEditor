@@ -1,5 +1,5 @@
 ﻿define(['jquery',
-    '../../html/comp/ColsDisplay.html',
+    '../../html/comp/ColsDisplay.hbs',
     '../../../DSDEditor_Utils',
     './colsDisplay/ColsDisplayBtns',
     '../../../DSDConfigs/js/CodelistConfigReader'

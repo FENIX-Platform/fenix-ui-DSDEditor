@@ -1,5 +1,5 @@
 ﻿define(['jquery',
-    '../../../html/comp/domainEditors/CodelistSelector.html',
+    '../../../html/comp/domainEditors/CodelistSelector.hbs',
     '../../../../DSDConfigs/js/CodelistConfigReader',
     '../../Events',
     'amplify-pubsub'

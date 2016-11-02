@@ -1,5 +1,5 @@
 ﻿define(['jquery',
-    '../../html/comp/DynamicRadio.html',
+    '../../html/comp/DynamicRadio.hbs',
     '../Events',
     'amplify-pubsub'
 ],

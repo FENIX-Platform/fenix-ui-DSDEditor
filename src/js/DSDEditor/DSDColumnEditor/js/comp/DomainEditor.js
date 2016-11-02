@@ -1,7 +1,7 @@
 ﻿//TODO: the changed function must be done
 
 define(['jquery',
-    '../../html/comp/DomainEditor.html',
+    '../../html/comp/DomainEditor.hbs',
     './domainEditors/CodelistSelector',
     //'components/DSDEditor/DSDColumnEditor/js/comp/domainEditors/DatesRange',
     'amplify-pubsub'

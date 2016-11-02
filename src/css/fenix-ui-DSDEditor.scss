@@ -1,3 +1,55 @@
+/* FENIX DSD Editor */
+
+@import 'utils/fx-functions';
+@import 'utils/fx-mixins';
+@import 'utils/fx-utils';
+
+@import 'themes/fx-bootstrap-queries';
+@import 'themes/fx-variables';
+
+
+@import 'base/fx-buttons';
+@import 'base/fx-fonts-import';
+@import 'base/fx-icons';
+@import 'base/fx-radio-checkbox';
+@import 'base/fx-typography';
+
+@import 'base/fx-preload';
+
+
+// Standard Fenix Theme
+
+$fx-secondary-color: desaturate( $fx-cool-blue, 50% );
+
+.fx-text-primary-color{
+  color: $fx-cool-blue;
+}
+
+.fx-background-color-primary-color{
+  background-color: $fx-cool-blue;
+}
+
+
+.fx-button-primary-color {
+  color: white;
+  border-color: darken($fx-cool-blue, 10%);
+  background-color: $fx-cool-blue;
+
+  &:hover {
+    color: white;
+    border-color: darken($fx-cool-blue, 10%);
+    background-color: darken($fx-cool-blue, 5%);
+  }
+
+  &:focus {
+    color: white;
+    border-color: darken($fx-cool-blue, 20%);
+    background-color: darken($fx-cool-blue, 15%);
+  }
+
+}
+
+/////
 
 .form-group {
   position: relative;
