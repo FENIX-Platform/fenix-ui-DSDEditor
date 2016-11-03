@@ -28,6 +28,9 @@
         log.info('DSD Editor Dev - Launched');
         console.log(DSDEditor)
 
+        //Bootstrap
+        require('bootstrap/dist/css/bootstrap.css');
+
         $('#btnColsEditDone').click(function () {
             DSDEditor.validate();
             $('#DSDOutput').html(JSON.stringify(DSDEditor.get()));
