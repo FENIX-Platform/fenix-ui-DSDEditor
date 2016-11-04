@@ -48,7 +48,7 @@
 
         var createRadio = function (group, radioSetting, checkedValue) {
             var radioId = createRadioId(group, radioSetting.value);
-            var $toRet = $(DynamicRadioHTML);
+            var $toRet = $('<span><input type="radio" name="" value="" style="display:none" /><label></label></span>');
             $toRet.find('label').text(radioSetting.text);
             $toRet.find('label').attr('for', radioId);
             $toRet.find('input').val(radioSetting.value);
