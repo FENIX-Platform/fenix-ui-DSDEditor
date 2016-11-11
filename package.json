@@ -1,6 +1,6 @@
 {
   "name": "fenix-ui-DSDEditor",
-  "version": "2.0.0-beta.15",
+  "version": "2.0.0-beta.16",
   "description": "FENIX Data Structure Definition Editor",
   "main": "dist/fenix-ui-DSDEditor.min.js",
   "scripts": {
@@ -33,10 +33,11 @@
     "loglevel": "^1.4.1",
     "moment": "^2.14.1",
     "parsleyjs": "^2.4.4",
-    "pnotify": "^3.0.0"
+    "pnotify": "^3.0.0",
+    "bootstrap": "^3.3.7"
   },
   "devDependencies": {
-    "bootstrap": "^3.3.7",
+
     "chai": "^3.5.0",
     "clean-webpack-plugin": "^0.1.10",
     "css-loader": "^0.25.0",
