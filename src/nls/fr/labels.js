@@ -38,19 +38,22 @@ define(function () {
         "duplicateColumnIDs": "L'identifiant de la colonne doit être unique, s'il vous plaît vérifiez les identifiants des vos colonnes",
         "duplicateSubject": "Deux colonnes ne peuvent pas avoir le même sujet, s'il vous plaît vérifier les sujets des vos colonnes",
 
-        "dataType": "[FR] Data type",
+        "dataType": "Type de données",
 
-        "titleBlank": "[FR] Title cannot be blank",
-        "subjectEmpty": "[FR] Subject cannot be empty",
-        "dataTypeEmpty": "[FR] Datatype cannot be empty",
-        "codelistEmpty": "[FR] Codelist cannot be empty",
+        "titleBlank": "Le titre ne peut pas être vide",
+        "subjectEmpty": "Le sujet ne peut pas être vide",
+        "dataTypeEmpty": "Le type de données ne peut pas être vide",
+        "codelistEmpty": "La liste de codes ne peut pas être vide",
 
-        "dimension": "[FR] Dimension",
-        "value": "[FR] Value",
-        "other": "[FR] Other",
-        "helpDim": "[FR] You need at least one dimension, dimensions are used to define your measure.<br/>Ex. Year, product, area...",
-        "helpVal": "[FR] You need exactly one measure. It is usually a number.<br/>Ex. Quantity, value...",
-        "helpOther": "[FR] Add additional informations attached to your measure.<br/>Ex. measurement unit, flags, notes..."
+        "dimension": "Dimension",
+        "value": "Valeur",
+        "other": "Autre",
+        "helpDim": "Vous avez besoin d'au moins une dimension, les dimensions sont utilisées pour définir votre mesure.<br/>Ex. Année, produit, surface...",
+        "helpVal": "Il vous faut exactement une mesure. C'est habituellement un nombre.<br/>Ex. Quantité, valeur...",
+        "helpOther": "Ajouter des informations supplémentaires associées à votre mesure.<br/>Unité de mesure, notes...",
+
+        "domEdit_noDatatype" : "Sélectionnez un type de données",
+        "domEdit_noDomain" : "Aucune limite pour ce type de données"
 
 
     }

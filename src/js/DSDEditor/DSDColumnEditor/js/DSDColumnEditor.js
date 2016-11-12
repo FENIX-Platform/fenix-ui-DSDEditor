@@ -17,7 +17,7 @@
     function ($, log, DSDColumnEditorHTML, DynamicRadio, DomainEditor, mlRes, ColumnEditorReader, SubjectReader, DatatypeReader, MLInput, Evts, ValidatorDSD, VErrors, amplify) {
         //var defConfig = { inputLangs: ['EN', 'FR'] };
 
-        var defConfig = { inputLangs: ['EN'] };
+        var defConfig = { inputLangs: ['EN','FR'] };
         var h = {
             txtTitle: "#txtTitle",
             txtSupplemental: '#txtSupplemental',
@@ -53,7 +53,9 @@
             this.$cnt = null;
             $.extend(true, this.config, config, defConfig);
 
-            this.lang = this.config.inputLangs[0] || defConfig.inputLangs[0];
+            this.langs = this.config.inputLangs || defConfig.inputLangs;
+
+            this.lang = this.config.lang || defConfig.inputLangs[0];
             this.lang = this.lang.toLowerCase();
 
             this.$txtTitle;

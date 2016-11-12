@@ -51,7 +51,10 @@ define(function () {
         "other": "Other",
         "helpDim": "You need at least one dimension, dimensions are used to define your measure.<br/>Ex. Year, product, area...",
         "helpVal": "You need exactly one measure. It is usually a number.<br/>Ex. Quantity, value...",
-        "helpOther": "Add additional informations attached to your measure.<br/>Ex. measurement unit, flags, notes..."
+        "helpOther": "Add additional informations attached to your measure.<br/>Ex. measurement unit, flags, notes...",
+
+        "domEdit_noDatatype" : "Select a data type",
+        "domEdit_noDomain" : "No limit for this data type"
 
 
     }

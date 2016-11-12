@@ -3,10 +3,11 @@
 define(['jquery',
     '../../html/comp/DomainEditor.hbs',
     './domainEditors/CodelistSelector',
+    '../../../../../nls/labels',
     //'components/DSDEditor/DSDColumnEditor/js/comp/domainEditors/DatesRange',
     'amplify-pubsub'
 ],
-    function ($, DomainEditorHTML, CodelistSelector, amplify) {
+    function ($, DomainEditorHTML, CodelistSelector, mlRes, amplify) {
         var defConfig = {};
         var h = {
             idNoDataType: '#domEdit_noDatatype',
@@ -37,7 +38,8 @@ define(['jquery',
             this.codelistSelector = null;
             this._changed = false;
 
-            //console.log("DomainEditor", this.config)
+            this.lang = this.config.lang.toLowerCase();
+
         };
 
         DomainEditor.prototype.render = function (cnt, config) {
@@ -52,6 +54,7 @@ define(['jquery',
             this.$divNoDomain.hide();
             this.$divDomainEditor.hide();
             this._bindEvents();
+            this._doML();
         };
         DomainEditor.prototype.set = function (mode, subject, domain) {
             //this.reset();
@@ -141,5 +144,10 @@ define(['jquery',
             this._unbindEvents();
         };
 
-        return DomainEditor;
-    })
+        DomainEditor.prototype._doML = function () {
+            this.$container.find(h.idNoDataType).html(mlRes[this.lang]['domEdit_noDatatype']);
+            this.$container.find(h.idNoDomain).html(mlRes[this.lang]['domEdit_noDomain']);
+        };
+
+            return DomainEditor;
+    });

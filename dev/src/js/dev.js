@@ -13,14 +13,14 @@
             // codelists: "urlToCodelistsJSON"
             codelists: "../config/dev_codelists.json"
         },
-        MLEditor: {
+        inputLangs: {
             langs: ["EN", "FR"]
         },
         D3SConnector: {
             //datasource: "CountrySTAT",
             // contextSystem: "CountrySTAT"
         },
-        lang: "EN",
+        lang: "FR",
         DSD_EDITOR_CODELISTS : DSDCodelists
     };
 
