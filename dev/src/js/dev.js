@@ -37,7 +37,10 @@
         });
 
         $('#btnColsEditToggle').click(function () {
-            DSDEditor.editable(false);
+            console.log(DSDEditor);
+            DSDEditor.destroy();
+            console.log(DSDEditor);
+            //DSDEditor.editable(false);
         });
 
         //Test

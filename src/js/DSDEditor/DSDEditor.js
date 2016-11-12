@@ -173,7 +173,8 @@
             }
         };
         DSDEditor.prototype.reset = function () {
-            this.initDSD();
+            //this.initDSD(); << Webpack: it doesn't work.
+            this.set([]);
             this.updateDSDView();
             this.changed = false;
         };
