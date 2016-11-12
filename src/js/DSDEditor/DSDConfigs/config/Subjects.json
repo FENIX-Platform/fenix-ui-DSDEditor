@@ -2,14 +2,16 @@
     {
         "value": "item",
         "text": {
-            "EN": "Item"
+            "EN": "Item",
+            "FR": "Article"
         },
         "codelistSubject": "item"
     },
     {
         "value": "indicator",
         "text": {
-            "EN": "Indicator"
+            "EN": "Indicator",
+            "FR": "Indicateur"
         },
         "codelistSubject": "indicator"
     },
@@ -17,49 +19,56 @@
     {
         "value": "gender",
         "text": {
-            "EN": "Gender"
+            "EN": "Gender",
+            "FR": "Genre"
         },
         "codelistSubject": "gender"
     },
     {
         "value": "residence",
         "text": {
-            "EN": "Residence"
+            "EN": "Residence",
+            "FR": "Résidence"
         },
         "codelistSubject": "residence"
     },
     {
         "value": "food",
         "text": {
-            "EN": "Food"
+            "EN": "Food",
+            "FR": "Aliments"
         },
         "codelistSubject": "food"
     },
     {
         "value": "sector",
         "text": {
-            "EN": "Sector"
+            "EN": "Sector",
+            "FR": "Secteur"
         },
         "codelistSubject": "sector"
     },
     {
         "value": "fieldManagement",
         "text": {
-            "EN": "Field Management"
+            "EN": "Field Management",
+            "FR": "Gestion du Terrain"
         },
         "codelistSubject": "fieldManagement"
     },
     {
         "value": "agriculturalPopulation",
         "text": {
-            "EN": "Agricultural"
+            "EN": "Agricultural",
+            "FR": "Agricole"
         },
         "codelistSubject": "agriculturalPopulation"
     },
     {
         "value": "census",
         "text": {
-            "EN": "Census"
+            "EN": "Census",
+            "FR": "Census"
         },
         "codelistSubject": "census"
     },
@@ -67,33 +76,38 @@
     {
         "value": "time",
         "text": {
-            "EN": "Time"
+            "EN": "Time",
+            "FR": "[FR] Time"
         }
     },
     {
         "value": "geo",
         "text": {
-            "EN": "Geo"
+            "EN": "Geo",
+            "FR": "Geo"
         },
         "codelistSubject": "geo"
     },
     {
         "value": "flag",
         "text": {
-            "EN": "Flag"
+            "EN": "Flag",
+            "FR": "[FR] Flag"
         },
         "codelistSubject": "flag"
     },
     {
         "value": "value",
         "text": {
-            "EN": "Value"
+            "EN": "Value",
+            "FR": "Valeur"
         }
     },
     {
         "value": "um",
         "text": {
-            "EN": "UM"
+            "EN": "UM",
+            "FR": "Unité de mesure"
         },
         "codelistSubject": "um"
     }

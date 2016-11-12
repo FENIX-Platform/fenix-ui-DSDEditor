@@ -11,49 +11,55 @@
         "val": "code",
         "text": {
             "EN": "Code",
-            "FR": "CodeFR"
+            "FR": "Code"
         },
 		"canBeDimension":true
     },
     {
         "val": "date",
         "text": {
-            "EN": "Date"
+            "EN": "Date",
+            "FR": "Date"
         },
 		"canBeDimension":true
     },
     {
         "val": "month",
         "text": {
-            "EN": "Month"
+            "EN": "Month",
+            "FR": "Mois"
         },
 		"canBeDimension":true
     },
     {
         "val": "year",
         "text": {
-            "EN": "Year"
+            "EN": "Year",
+            "FR": "Année"
         },
 		"canBeDimension":true
     },
     {
         "val": "number",
         "text": {
-            "EN": "Number"
+            "EN": "Number",
+            "FR": "Nombre"
         },
 		"canBeDimension":false
     },
     {
         "val": "text",
         "text": {
-            "EN": "Text"
+            "EN": "Text",
+            "FR": "Texte"
         },
 		"canBeDimension":false
     },
     {
         "val": "percentage",
         "text": {
-            "EN": "Percentage"
+            "EN": "Percentage",
+            "FR": "Pourcentage"
         },
 		"canBeDimension":false
     }

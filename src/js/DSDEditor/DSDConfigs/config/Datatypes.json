@@ -10,50 +10,56 @@
         "value": "code",
         "text": {
             "EN": "Code",
-            "FR": "CodeFR"
+            "FR": "Code"
         }
     },
 	{
         "value": "customCode",
         "text": {
             "EN": "Custom code",
-            "FR": "Custom code"
+            "FR": "Code personnalisé"
         }
     },
     {
         "value": "date",
         "text": {
-            "EN": "Date"
+            "EN": "Date",
+            "FR": "Date"
         }
     },
     {
         "value": "month",
         "text": {
-            "EN": "Month"
+            "EN": "Month",
+            "FR": "Mois"
         }
     },
     {
         "value": "year",
         "text": {
-            "EN": "Year"
+            "EN": "Year",
+            "FR": "Année"
         }
     },
     {
         "value": "number",
         "text": {
-            "EN": "Number"
+            "EN": "Number",
+            "FR": "Nombre"
         }
     },
     {
         "value": "text",
         "text": {
-            "EN": "Text"
+            "EN": "Text",
+            "FR": "Texte"
         }
     },
     {
         "value": "percentage",
         "text": {
-            "EN": "Percentage"
+            "EN": "Percentage",
+            "FR": "Pourcentage"
         }
     }
 ]

@@ -154,8 +154,9 @@
 
             var s = this.subjectReader.getFilteredSubjects(subj);
             var s2 = [];
+
             for (var i = 0; i < s.length; i++) {
-                s2.push({ value: s[i].value, text: s[i].text.EN });
+                s2.push({ value: s[i].value, text: s[i].text[this.lang.toUpperCase()] });
             }
             var checked = null;
             if (s2.length == 1) {
@@ -176,7 +177,7 @@
             var dts2 = this.datatypeReader.getFilteredDatatypes(dts);
             var dts3 = [];
             for (var i = 0; i < dts2.length; i++) {
-                dts3.push({ value: dts2[i].value, text: dts2[i].text.EN });
+                dts3.push({ value: dts2[i].value, text: dts2[i].text[this.lang.toUpperCase()] });
             }
             this.dynRadioDataType.setRadios(RADIOGROUP_ID.DTYPE, dts3, '');
         };

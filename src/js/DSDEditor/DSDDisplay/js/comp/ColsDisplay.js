@@ -2,10 +2,11 @@
     '../../html/comp/ColsDisplay.hbs',
     '../../../DSDEditor_Utils',
     './colsDisplay/ColsDisplayBtns',
-    '../../../DSDConfigs/js/CodelistConfigReader'
+    '../../../DSDConfigs/js/CodelistConfigReader',
+    '../../../../../nls/labels',
 ],
 
-    function ($, ColsDisplayHTML, DSDEditor_Utils, ColsDisplayBtns, CodelistConfigReader) {
+    function ($, ColsDisplayHTML, DSDEditor_Utils, ColsDisplayBtns, CodelistConfigReader, MLRes) {
         var defConfig = {
             lang: "EN"
         };
@@ -41,7 +42,7 @@
             this.$container = null;
             $.extend(true, this.config, defConfig, config);
 
-            //console.log("ColsDisplay", this.config);
+            this.lang = this.config.lang.toLowerCase();
 
             this.$trHead = null;
             this.$trEdit = null;
@@ -66,7 +67,17 @@
             this.$trSuppl = this.$container.find(h.idTrSuppl);
 
             this._bindEvents();
+            this._doML();
         };
+
+        ColsDisplay.prototype._doML = function () {
+            _html.colSubj = '<td class="text-muted">'+MLRes[this.lang]['subject']+'</td>';
+            _html.colDataType =  '<td class="text-muted">'+MLRes[this.lang]['datatype']+'</td>';
+            _html.colDomain =   '<td class="text-muted">'+MLRes[this.lang]['domain']+'</td>';
+            _html.colSuppl =  '<td class="text-muted">'+MLRes[this.lang]['supplemental']+'</td>';
+        };
+
+
         ColsDisplay.prototype.set = function (cols) {
             this.reset();
             if (!cols)

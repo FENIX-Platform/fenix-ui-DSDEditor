@@ -11,126 +11,144 @@
         "val": "code",
         "text": {
             "EN": "Code",
-            "FR": "CodeFR"
+            "FR": "Code"
         },
 		"canBeDimension":true
     },
     {
         "val": "customCode",
         "text": {
-            "EN": "Custom code"
+            "EN": "Custom code",
+            "FR": "Code personnalisé"
         },
 		"canBeDimension":true
     },
     {
         "val": "date",
         "text": {
-            "EN": "Date"
+            "EN": "Date",
+            "FR": "Date"
         },
 		"canBeDimension":true
     },
     {
         "val": "month",
         "text": {
-            "EN": "Month"
+            "EN": "Month",
+            "FR": "Mois"
         },
 		"canBeDimension":true
     },
     {
         "val": "year",
         "text": {
-            "EN": "Year"
+            "EN": "Year",
+            "FR": "Année"
+
         },
 		"canBeDimension":true
     },
     {
         "val": "number",
         "text": {
-            "EN": "Number"
+            "EN": "Number",
+            "FR": "Nombre"
         },
 		"canBeDimension":false
     },
     {
         "val": "text",
         "text": {
-            "EN": "Text"
+            "EN": "Text",
+            "FR": "Texte"
         },
 		"canBeDimension":false
     },
     {
         "val": "label",
         "text": {
-            "EN": "Label"
+            "EN": "Label",
+            "FR": "Étiquette"
         },
 		"canBeDimension":false
     },
     {
         "val": "boolean",
         "text": {
-            "EN": "Boolean"
+            "EN": "Boolean",
+            "FR": "Booléen"
         },
 		"canBeDimension":true
     },
     {
         "val": "percentage",
         "text": {
-            "EN": "Percentage"
+            "EN": "Percentage",
+            "FR": "Pourcentage"
         },
 		"canBeDimension":false
     },
     {
         "val": "time",
         "text": {
-            "EN": "Time"
+            "EN": "Time",
+            "FR": "TimeFR"
         },
 		"canBeDimension":true
     },
     {
         "val": "periodDate",
         "text": {
-            "EN": "Period - date"
+            "EN": "Period - date",
+            "FR": "Période - date"
         },
 		"canBeDimension":true
     },
     {
         "val": "periodMonth",
         "text": {
-            "EN": "Period - month"
+            "EN": "Period - month",
+            "FR": "Période - mois"
         },
 		"canBeDimension":true
     },
     {
         "val": "periodYear",
         "text": {
-            "EN": "Period - year"
+            "EN": "Period - year",
+            "FR": "Période - année"
         },
 		"canBeDimension":true
     },
     {
         "val": "periodTime",
         "text": {
-            "EN": "Period - time"
+            "EN": "Period - time",
+            "FR": "Période - timeFR"
         },
 		"canBeDimension":true
     },
     {
         "val": "enumNumber",
         "text": {
-            "EN": "Enumeration - number"
+            "EN": "Enumeration - number",
+            "FR": "Énumération - nombre"
         },
 		"canBeDimension":true
     },
     {
         "val": "enumString",
         "text": {
-            "EN": "Enumeration - string"
+            "EN": "Enumeration - string",
+            "FR": "Énumération - texte"
         },
 		"canBeDimension":true
     },
     {
         "val": "enumBool",
         "text": {
-            "EN": "Enumeration - boolean"
+            "EN": "Enumeration - boolean",
+            "FR": "Énumération - booléen"
         },
 		"canBeDimension":true
     }
