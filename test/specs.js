@@ -282,7 +282,7 @@ describe("DSDEditor", function () {
 
         done(); //async execution
     });
-    
+
 
 });
 

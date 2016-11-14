@@ -20,7 +20,7 @@
             //datasource: "CountrySTAT",
             // contextSystem: "CountrySTAT"
         },
-        lang: "FR",
+        lang: "EN",
         DSD_EDITOR_CODELISTS : DSDCodelists
     };
 

@@ -3,9 +3,9 @@ define(function () {
     'use strict';
     return {
 
-        LANG : "EN",
+        LANG : "en",
         LOCALE : "en_EN",
-        LANGFALLBACKORDER : ["EN", "FR", "ES", "AR", "PR"],
+        LANGFALLBACKORDER : ["en", "fr", "es", "ar", "fr"],
 
         SECONDARY_MENU: {
             url: 'fx-d-m/config/secondary_menu.json',

@@ -138,10 +138,10 @@
             var domain = _html.colDomain;
             var suppl = _html.colSuppl;
             for (var i = 0; i < cols.length; i++) {
-                subj += this._createColTD(cols[i], 'subject', this.config.lang);
-                dT += this._createColTD(cols[i], 'dataType', this.config.lang);
-                domain += this._createColTD(cols[i], 'domain', this.config.lang);
-                suppl += this._createColTD(cols[i], 'supplemental', this.config.lang);
+                subj += this._createColTD(cols[i], 'subject', this.lang.toUpperCase());
+                dT += this._createColTD(cols[i], 'dataType', this.lang.toUpperCase());
+                domain += this._createColTD(cols[i], 'domain', this.lang.toUpperCase());
+                suppl += this._createColTD(cols[i], 'supplemental', this.lang.toUpperCase());
             }
             this.$trSubj.html(subj);
             this.$trDataType.html(dT);
