@@ -77,7 +77,7 @@
         "value": "time",
         "text": {
             "EN": "Time",
-            "FR": "[FR] Time"
+            "FR": "Temps"
         }
     },
     {
@@ -92,7 +92,7 @@
         "value": "flag",
         "text": {
             "EN": "Flag",
-            "FR": "[FR] Flag"
+            "FR": "Signaler"
         },
         "codelistSubject": "flag"
     },
