@@ -92,7 +92,7 @@
         "value": "flag",
         "text": {
             "EN": "Flag",
-            "FR": "Signaler"
+            "FR": "Flag"
         },
         "codelistSubject": "flag"
     },
@@ -107,7 +107,7 @@
         "value": "um",
         "text": {
             "EN": "UM",
-            "FR": "Unité de mesure"
+            "FR": "Unité"
         },
         "codelistSubject": "um"
     }
