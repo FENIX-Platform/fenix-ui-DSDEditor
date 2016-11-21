@@ -1,4 +1,5 @@
 ﻿define(['jquery',
+    'loglevel',
     '../../html/comp/ColsDisplay.hbs',
     '../../../DSDEditor_Utils',
     './colsDisplay/ColsDisplayBtns',
@@ -6,7 +7,7 @@
     '../../../../../nls/labels',
 ],
 
-    function ($, ColsDisplayHTML, DSDEditor_Utils, ColsDisplayBtns, CodelistConfigReader, MLRes) {
+    function ($, log, ColsDisplayHTML, DSDEditor_Utils, ColsDisplayBtns, CodelistConfigReader, MLRes) {
         var defConfig = {
             lang: "EN"
         };
@@ -26,7 +27,7 @@
         var _html = {
             colTH_empty: '<th style="width:10%"></th>',
             colTD_empty: '<td></td>',
-            colTH: '<th class="%cl%">%cnt%</th>',
+            colTH: '<th style="cursor:move;" draggable="true" class="%cl%">%cnt%</th>',
             colTD_Edit: '<td><div id="%id%"></div></td>',
             colTD: '<td>%cnt%</td>',
             colSubj: '<td class="text-muted">Subject</td>',
@@ -44,6 +45,8 @@
 
             this.lang = this.config.lang.toLowerCase();
 
+            this.cols = null;
+
             this.$trHead = null;
             this.$trEdit = null;
             this.$trSubj = null;
@@ -52,6 +55,8 @@
 
             this.editBtns = [];
             this.editable;
+
+            log.info('ColsDisplay', this);
         };
 
         ColsDisplay.prototype.render = function (cnt, config) {
@@ -85,8 +90,10 @@
             this._createHeader(cols);
             this._createEditRow(cols);
             this._createRows(cols);
+            this.cols = cols;
         };
         ColsDisplay.prototype._createHeader = function (cols) {
+            log.info('_createHeader', cols);
             if (!cols)
                 return '';
             var toRet = _html.colTH_empty;
@@ -94,21 +101,75 @@
                 toRet += createColTH(cols[i]);
             }
             this.$trHead.html(toRet);
+            if (this.editable) this._bindHeaders();
         };
+
+        ColsDisplay.prototype._bindHeaders = function () {
+            var tds = this.$trHead.find('.dragHeader');
+            var me = this;
+            for (var i = 0; i < tds.length; i++) {
+                $(tds[i]).on('drop', function (event) { me.drop(event); });
+                $(tds[i]).on('dragover', me.allowDrop);
+                $(tds[i]).on('dragstart', me.drag);
+            }
+        };
+
+        ColsDisplay.prototype._removeBindHeaders = function () {
+            var tds = this.$trHead.find('.dragHeader');
+            for (var i = 0; i < tds.length; i++) {
+                $(tds[i]).off('drop');
+                $(tds[i]).off('dragover')
+                $(tds[i]).off('dragstart');
+            }
+        };
+
+        ColsDisplay.prototype.drag = function (ev) {
+            ev.originalEvent.dataTransfer.setData("cellNumber", ev.target.cellIndex);
+        };
+
+        ColsDisplay.prototype.allowDrop = function (ev) {
+            ev.preventDefault();
+        };
+
+        ColsDisplay.prototype.drop = function (ev) {
+            if (!this.editable) return;
+            ev.preventDefault();
+            var idxSource = ev.originalEvent.dataTransfer.getData("cellNumber") - 1,
+                idxTarget = ev.target.cellIndex - 1;
+                colSource = this.cols[idxSource].id.substring(0,5),
+                colTarget = this.cols[idxTarget].id.substring(0,5);
+
+            if (colSource == colTarget) {
+                log.info('before', this.cols);
+                var selection = this.cols;
+                var tmp = this.cols[idxTarget];
+                this.cols[idxTarget] = this.cols[idxSource];
+                this.cols[idxSource] = tmp;
+                log.info('after', selection);
+                log.info(this);
+                this.set(this.cols);
+            } else {
+                log.info('dropping not allowed here')
+            }
+
+        };
+
+
         function createColTH(col) {
+
             var w = 90 / col.length;
             var toRet = _html.colTH;
             toRet = toRet.replace('%cnt%', utils.MLStringToString(col.title, '<br/>'));
             if (col.key)
-                toRet = toRet.replace('%cl%', 'bg-dim');
+                toRet = toRet.replace('%cl%', 'dragHeader bg-dim');
             else if (col.subject == 'value')
-                toRet = toRet.replace('%cl%', 'bg-val');
+                toRet = toRet.replace('%cl%', 'dragHeader bg-val');
             else
-                toRet = toRet.replace('%cl%', 'bg-other');
+                toRet = toRet.replace('%cl%', 'dragHeader bg-other');
             return toRet;
         }
         ColsDisplay.prototype._createEditRow = function (cols) {
-            //console.log("ColsDisplay :"+this.editable);
+            //log.info("ColsDisplay :"+this.editable);
             if (!cols)
                 return;
             var toSet = _html.colTD_empty;
@@ -199,14 +260,16 @@
             this.$trDomain.html('');
             this.$trSuppl.html('');
             this.editBtns = [];
+            this._removeBindHeaders();
         };
         ColsDisplay.prototype.editable = function (editable) {
-            //console.log("ColsDisplay.prototype.editable", editable);
+            log.info("ColsDisplay.prototype.editable", editable);
             this.editable = editable;
             if (this.editBtns) {
                 for (var i = 0; i < this.editBtns.length; i++)
                     this.editBtns[i].deleteEnabled(editable);
             }
+            log.info("ColsDisplay.prototype.editable return> ", editable);
             return editable;
             /*if (editable)
                 this.$trEdit.show();
