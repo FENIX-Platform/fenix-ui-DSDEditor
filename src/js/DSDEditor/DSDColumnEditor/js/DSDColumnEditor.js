@@ -49,6 +49,7 @@
         };
 
         function DSDColumnEditor(config) {
+
             this.config = {};
             this.$cnt = null;
             $.extend(true, this.config, config, defConfig);

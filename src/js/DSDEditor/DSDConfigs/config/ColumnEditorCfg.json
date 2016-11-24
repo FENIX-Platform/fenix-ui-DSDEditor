@@ -89,8 +89,7 @@
         {
             "subject": "flag",
             "datatypes": [
-                "code",
-                "text"
+                "code"
             ]
         },
         {

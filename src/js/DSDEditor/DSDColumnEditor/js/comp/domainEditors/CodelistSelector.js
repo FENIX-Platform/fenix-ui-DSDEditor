@@ -25,8 +25,6 @@
             this.tmpSubj = "";
             this.loaded = false;
 
-            console.log(this.config.lang);
-
             //console.log("CodelistSelector", this.config);
         };
 
