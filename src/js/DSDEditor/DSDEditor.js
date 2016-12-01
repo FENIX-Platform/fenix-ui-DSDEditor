@@ -48,6 +48,9 @@
             this.dsd = [];
             //this.addDatasourceAndContextSys();
 
+            this.channels = {};
+
+
             this.DSDDisplay;
             this.colEditor;
             this.changed = false;
@@ -95,11 +98,13 @@
                 this.$divDSDDisplay.hide();
                 this.$divColEditor.show();
                 amplify.publish(e.DSDEDITOR_TO_COLUMN_EDITOR);
+                this._trigger("dsd:columneditor");
             }
             else if (divID == htmlIDs.divDSD) {
                 this.$divColEditor.hide();
                 this.$divDSDDisplay.show();
                 amplify.publish(e.DSDEDITOR_TO_COLUMN_SUMMARY);
+                this._trigger("dsd:columnsumary");
             }
         };
         //Add a new column->switch to col view, sets the view mode
@@ -261,6 +266,30 @@
                 // TODO: Add Notification in a Centralized Fashon
                 // Noti.showError("Error", valRes[i].message);
         };
+
+        DSDEditor.prototype._trigger = function (channel) {
+
+            if (!this.channels[channel]) {
+                return false;
+            }
+            var args = Array.prototype.slice.call(arguments, 1);
+            for (var i = 0, l = this.channels[channel].length; i < l; i++) {
+                var subscription = this.channels[channel][i];
+                subscription.callback.apply(subscription.context, args);
+            }
+
+            return this;
+        };
+
+        DSDEditor.prototype.on = function (channel, fn, context) {
+            var _context = context || this;
+            if (!this.channels[channel]) {
+                this.channels[channel] = [];
+            }
+            this.channels[channel].push({context: _context, callback: fn});
+            return this;
+        };
+
         //Utils
         function getColumnIndexById(cols, id) {
             if (!cols)

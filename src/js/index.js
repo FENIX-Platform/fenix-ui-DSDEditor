@@ -24,6 +24,10 @@ define([
     function destroy() { this.DSDE.destroy(); }
     function hasChanged() { return this.DSDE.hasChanged(); }
 
+    function on(channel, fn, context){
+        return this.DSDE.on(channel, fn, context);
+    }
+
     return {
         init: init,
         set: set,
@@ -32,6 +36,7 @@ define([
         editable: editable,
         reset: reset,
         destroy: destroy,
-        hasChanged: hasChanged
+        hasChanged: hasChanged,
+        on: on
     }
 });

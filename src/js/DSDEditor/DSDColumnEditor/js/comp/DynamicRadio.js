@@ -80,7 +80,6 @@
             amplify.publish(evts.radioChanged, toSet, this.groupName);
         };
         DynamicRadio.prototype.reset = function () {
-            console.log('reset called',this.$radioGroup)
             if (!this.$radioGroup)
                 return;
             this.$radioGroup.prop('checked',false);
