@@ -54,7 +54,13 @@ define(function () {
         "helpOther": "Add additional informations attached to your measure.<br/>Ex. measurement unit, flags, notes...",
 
         "domEdit_noDatatype" : "Select a data type",
-        "domEdit_noDomain" : "No limit for this data type"
+        "domEdit_noDomain" : "No limit for this data type",
+
+        "btnAdd" : "Add",
+        "btnEdit": "Edit",
+        "btnDel": "Delete",
+        "btnOK": "Save Column",
+        "btnCancel": "Cancel"
 
 
     }

@@ -53,7 +53,13 @@ define(function () {
         "helpOther": "Ajouter des informations supplémentaires associées à votre mesure.<br/>Unité de mesure, notes...",
 
         "domEdit_noDatatype" : "Sélectionnez un type de données",
-        "domEdit_noDomain" : "Aucune limite pour ce type de données"
+        "domEdit_noDomain" : "Aucune limite pour ce type de données",
+
+        "btnAdd" : "Add_FR",
+        "btnEdit": "Edit_FR",
+        "btnDel": "Delete_FR",
+        "btnOK": "Save Column_FR",
+        "btnCancel": "Cancel_FR"
 
 
     }
