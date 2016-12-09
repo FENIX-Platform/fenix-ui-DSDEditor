@@ -1,10 +1,11 @@
 ﻿define(['jquery',
     '../../html/comp/AddColButton.hbs',
     '../../../DSDColumnEditor/js/Events',
+    '../../../../../nls/labels',
     'amplify-pubsub'
 ],
 
-    function ($, AddColButtonHTML, Evts, amplify) {
+    function ($, AddColButtonHTML, Evts, labels, amplify) {
         var defConfig = {};
 
         var h = {
@@ -21,8 +22,8 @@
         function AddColButton(config) {
             this.config = {};
             this.$container = null;
-            $.extend(true, this.config, defConfig, config);
 
+            $.extend(true, this.config, defConfig, config);
             this.evtId = "";
 
             this.$btnAddColTitle = null;
@@ -34,7 +35,9 @@
         AddColButton.prototype.render = function (cnt, config) {
             $.extend(true, this.config, config);
             this.$container = cnt;
-            this.$container.html(AddColButtonHTML);
+            this.$container.html(AddColButtonHTML({
+                btnAdd : labels[this.config.lang.toLowerCase()]["btnAdd"]
+            }));
 
             this.$btnAddColTitle = this.$container.find(h.idBtnAddColTitle);
             this.$btnAdd = this.$container.find(h.idBtnAdd);

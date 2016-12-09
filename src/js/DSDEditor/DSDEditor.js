@@ -59,7 +59,10 @@
         DSDEditor.prototype.render = function (cnt, config, callB) {
             $.extend(true, this.config, config);
             this.$container = cnt;
-            this.$container.html(DSDEditorHTML);
+            this.$container.html(DSDEditorHTML({
+                btnOk: MLRes[this.lang.toLowerCase()]["btnOK"],
+                btnCancel: MLRes[this.lang.toLowerCase()]["btnCancel"]
+            }));
 
             require('../../css/fenix-ui-DSDEditor.css');
 

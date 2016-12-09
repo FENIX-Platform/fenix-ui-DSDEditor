@@ -30,7 +30,7 @@ define(function () {
         "nullColumns": "Columns cannot be empty",
         "atLeast2Cols": "The dataset must have at least 2 columns",
         "atLeastOneKey": "The dataset must have at least one Key",
-        "atLeastOneValue": "The dataset must have at least one 'value' subject",
+        "atLeastOneValue": "The dataset must have at least one 'value' column",
         "nullColumn": "Column cannot be null",
         "empty": "Is empty",
         "DimensionDataTypeConflict": "Conflict detected between value and datatype defined for the value",
@@ -49,16 +49,16 @@ define(function () {
         "dimension": "Dimension",
         "value": "Value",
         "other": "Other",
-        "helpDim": "You need at least one dimension, dimensions are used to define your measure.<br/>Ex. Year, product, area...",
-        "helpVal": "You need exactly one measure. It is usually a number.<br/>Ex. Quantity, value...",
-        "helpOther": "Add additional informations attached to your measure.<br/>Ex. measurement unit, flags, notes...",
+        "helpDim": "You need at least one dimension. Dimensions are used to define your data.<br/>Ex. Year, indicator, product...",
+        "helpVal": "You need exactly one value. It is usually a number.<br/>Ex. Value...",
+        "helpOther": "Add additional informations attached to your data.<br/>Ex. flag, unit of measurement",
 
         "domEdit_noDatatype" : "Select a data type",
         "domEdit_noDomain" : "No limit for this data type",
 
-        "btnAdd" : "Add",
-        "btnEdit": "Edit",
-        "btnDel": "Delete",
+        "btnAdd" : "Add a column",
+        "btnEdit": "Edit the column",
+        "btnDel": "Delete the column",
         "btnOK": "Save Column",
         "btnCancel": "Cancel"
 

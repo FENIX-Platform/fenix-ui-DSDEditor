@@ -1,10 +1,11 @@
 ﻿define(['jquery',
     '../../../html/comp/colsDisplay/ColsDisplayBtns.hbs',
     '../../../../DSDColumnEditor/js/Events',
+    '../../../../../../nls/labels',
     'amplify-pubsub'
 ],
 
-    function ($, ColsDisplayBtnsHTML, Evts, amplify) {
+    function ($, ColsDisplayBtnsHTML, Evts, labels, amplify) {
         var defConfig = {};
 
         var h = {
@@ -32,7 +33,10 @@
             $.extend(true, this.config, config);
 
             this.$container = cnt;
-            this.$container.html(ColsDisplayBtnsHTML);
+            this.$container.html(ColsDisplayBtnsHTML({
+                btnEdit : labels[this.config.lang.toLowerCase()]["btnEdit"],
+                btnDel: labels[this.config.lang.toLowerCase()]["btnDel"]
+            }));
             this.$btnEdit = this.$container.find(h.idBtnEdit);
             this.$btnDel = this.$container.find(h.idBtnDel);
 

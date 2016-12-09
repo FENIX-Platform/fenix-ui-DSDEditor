@@ -1,6 +1,6 @@
 {
   "name": "fenix-ui-DSDEditor",
-  "version": "2.0.0-beta.23",
+  "version": "2.0.0-beta.24",
   "description": "FENIX Data Structure Definition Editor",
   "main": "dist/fenix-ui-DSDEditor.min.js",
   "scripts": {
