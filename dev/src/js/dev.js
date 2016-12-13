@@ -8,10 +8,108 @@
    // console.log(DSDEditor);
     var cfg = {
         columnEditor: {
-            //subjects: "urlToSubjectsJSON",
-            //datatypes: "urlToDatatypesJSON",
-            // codelists: "urlToCodelistsJSON"
             codelists: "../config/dev_codelists.json"
+        },
+        columnEditorReader: {
+            "dimension": [
+                {
+                    "subject": "item",
+                    "datatypes": [
+                        "code"
+                    ]
+                },
+                {
+                    "subject": "indicator",
+                    "datatypes": [
+                        "code"
+                    ]
+                },
+                {
+                    "subject": "gender",
+                    "datatypes": [
+                        "code"
+                    ]
+                },
+                {
+                    "subject": "residence",
+                    "datatypes": [
+                        "code"
+                    ]
+                },
+                {
+                    "subject": "food",
+                    "datatypes": [
+                        "code"
+                    ]
+                },
+                {
+                    "subject": "sector",
+                    "datatypes": [
+                        "code"
+                    ]
+                },
+                {
+                    "subject": "fieldManagement",
+                    "datatypes": [
+                        "code"
+                    ]
+                },
+                {
+                    "subject": "agriculturalPopulation",
+                    "datatypes": [
+                        "code"
+                    ]
+                },
+                {
+                    "subject": "census",
+                    "datatypes": [
+                        "code"
+                    ]
+                },
+                {
+                    "subject": "time",
+                    "datatypes": [
+                        "year",
+                        "month",
+                        "date"
+                    ]
+                },
+                {
+                    "subject": "geo",
+                    "datatypes": [
+                        "code"
+                    ]
+                },
+                {
+                    "subject": "undefined",
+                    "datatypes": [
+                        "code",
+                        "year"
+                    ]
+                }
+            ],
+            "value": [
+                {
+                    "subject": "value",
+                    "datatypes": [
+                        "number"
+                    ]
+                }
+            ],
+            "other": [
+                {
+                    "subject": "flag",
+                    "datatypes": [
+                        "code"
+                    ]
+                },
+                {
+                    "subject": "um",
+                    "datatypes": [
+                        "code"
+                    ]
+                }
+            ]
         },
         inputLangs: {
             langs: ["EN", "FR"]
@@ -26,7 +124,6 @@
 
     var callB = function() {
         log.info('DSD Editor Dev - Launched');
-        console.log(DSDEditor)
 
         //Bootstrap
         require('bootstrap/dist/css/bootstrap.css');

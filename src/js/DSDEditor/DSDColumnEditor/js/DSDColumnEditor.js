@@ -72,7 +72,7 @@
             this.valuesField = null; 
 
             this.domainEditor = new DomainEditor(this.config);
-            this.columnEditorReader = new ColumnEditorReader();
+            this.columnEditorReader = new ColumnEditorReader(this.config.columnEditorReader);
             this.subjectReader = new SubjectReader();
             this.datatypeReader = new DatatypeReader();
 

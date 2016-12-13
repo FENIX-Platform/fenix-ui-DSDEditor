@@ -6,8 +6,10 @@
 
         function ColumnEditorReader(config) {
             this.config = {};
-            $.extend(true, this.config, defConfig, config);
-            this.columnECfg = ColumnEditorCfg;
+            this.columnECfg = {};
+            $.extend(true, this.config, defConfig);
+            $.extend(true, this.columnECfg, ColumnEditorCfg, config);
+            //this.columnECfg = ColumnEditorCfg;
         };
 
         ColumnEditorReader.prototype.getColumnEditorCfg = function () {
