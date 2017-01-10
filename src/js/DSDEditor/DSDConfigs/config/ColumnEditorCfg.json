@@ -80,8 +80,7 @@
         {
             "subject": "value",
             "datatypes": [
-                "number",
-                "text"
+                "number"
             ]
         }
     ],
