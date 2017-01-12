@@ -110,5 +110,13 @@
             "FR": "Unité"
         },
         "codelistSubject": "um"
+    },
+    {
+        "value": "other",
+        "text": {
+            "EN": "Other",
+            "FR": "Autre"
+        },
+        "codelistSubject": "other"
     }
 ]

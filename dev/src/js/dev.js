@@ -81,6 +81,12 @@
                     ]
                 },
                 {
+                    "subject": "other",
+                    "datatypes": [
+                        "code"
+                    ]
+                },
+                {
                     "subject": "undefined",
                     "datatypes": [
                         "code",

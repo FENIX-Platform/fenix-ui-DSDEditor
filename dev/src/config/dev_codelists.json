@@ -328,6 +328,14 @@
       "FR": "Taille de menage"
     },
     "subject": "census"
+  },
+  {
+    "value": "Size",
+    "text": {
+      "EN": "Size EN",
+      "FR": "Size FR"
+    },
+    "subject": "other"
   }
 
 ]
