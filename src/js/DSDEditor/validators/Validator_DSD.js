@@ -70,17 +70,19 @@
 
         //Validate all the columns and the structure (duplicate IDs, at least 2 cols...)
         Validator_DSD.prototype.validateColumns = function (cols) {
+            //console.log("validateColumns");
             var toRet = [];
-            var valStructure = validateStructure(cols);
-        //    var duplicateSubj = checkDuplicateSubject(cols);
+            var valStructure = this.validateStructure(cols);
+            var duplicateSubj = this.checkDuplicateSubject(cols);
             ArrConcat(toRet, valStructure);
-        //    ArrConcat(toRet, duplicateSubj);
+            ArrConcat(toRet, duplicateSubj);
             if (!cols)
                 return toRet;
             for (var i = 0; i < cols.length; i++) {
                 var colValRes = this.validateColumn(cols[i]);
                 ArrConcat(toRet, colValRes);
             }
+
             return toRet;
         };
 
@@ -121,6 +123,7 @@
         }
 
         function checkDuplicateSubject(cols) {
+            //console.log("checkDuplicateSubject", cols);
             var toRet = [];
             if (!cols)
                 return null;

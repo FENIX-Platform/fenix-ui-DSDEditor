@@ -264,10 +264,10 @@
         };
         DSDEditor.prototype.updateValidationUI = function (valRes) {
             if (!valRes)  return;
-            for (var i = 0; i < valRes.length; i++)
+            for (var i = 0; i < valRes.length; i++) {
                 log.warn(valRes[i].message);
-                // TODO: Add Notification in a Centralized Fashon
-                // Noti.showError("Error", valRes[i].message);
+                this._trigger("error:showerrormsg", MLRes[this.lang][valRes[i].message]);
+            }
         };
 
         DSDEditor.prototype._trigger = function (channel) {
