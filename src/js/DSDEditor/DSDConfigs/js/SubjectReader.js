@@ -6,8 +6,14 @@
 
         function SubjectReader(config) {
             this.config = {};
-            $.extend(true, this.config, defConfig, config);
-            this.subjs = Subjects;
+            this.subjs = {};
+            $.extend(true, this.config, defConfig);
+            this.subjs = config || Subjects;
+            console.log(this.subjs);
+
+            //this.config = {};
+            //$.extend(true, this.config, defConfig, config);
+            //this.subjs = Subjects;
         };
 
         SubjectReader.prototype.getSubjects = function () {

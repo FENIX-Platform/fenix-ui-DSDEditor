@@ -117,6 +117,128 @@
                 }
             ]
         },
+        subjects: [
+            {
+                "value": "item",
+                "text": {
+                    "EN": "Item",
+                    "FR": "Article"
+                },
+                "codelistSubject": "item"
+            },
+            {
+                "value": "indicator",
+                "text": {
+                    "EN": "Indicator",
+                    "FR": "Indicateur"
+                },
+                "codelistSubject": "indicator"
+            },
+
+            {
+                "value": "gender",
+                "text": {
+                    "EN": "Gender",
+                    "FR": "Genre"
+                },
+                "codelistSubject": "gender"
+            },
+            {
+                "value": "residence",
+                "text": {
+                    "EN": "Residence",
+                    "FR": "Résidence"
+                },
+                "codelistSubject": "residence"
+            },
+            {
+                "value": "food",
+                "text": {
+                    "EN": "Food",
+                    "FR": "Aliments"
+                },
+                "codelistSubject": "food"
+            },
+            {
+                "value": "sector",
+                "text": {
+                    "EN": "Sector",
+                    "FR": "Secteur"
+                },
+                "codelistSubject": "sector"
+            },
+            {
+                "value": "fieldManagement",
+                "text": {
+                    "EN": "Field Management",
+                    "FR": "Gestion du Terrain"
+                },
+                "codelistSubject": "fieldManagement"
+            },
+            {
+                "value": "agriculturalPopulation",
+                "text": {
+                    "EN": "Agricultural",
+                    "FR": "Agricole"
+                },
+                "codelistSubject": "agriculturalPopulation"
+            },
+            {
+                "value": "census",
+                "text": {
+                    "EN": "Census",
+                    "FR": "Census"
+                },
+                "codelistSubject": "census"
+            },
+
+            {
+                "value": "time",
+                "text": {
+                    "EN": "Time",
+                    "FR": "Temps"
+                }
+            },
+            {
+                "value": "geo",
+                "text": {
+                    "EN": "Geo",
+                    "FR": "Geo"
+                },
+                "codelistSubject": "geo"
+            },
+            {
+                "value": "flag",
+                "text": {
+                    "EN": "Flag",
+                    "FR": "Flag"
+                },
+                "codelistSubject": "flag"
+            },
+            {
+                "value": "value",
+                "text": {
+                    "EN": "Value",
+                    "FR": "Valeur"
+                }
+            },
+            {
+                "value": "um",
+                "text": {
+                    "EN": "UM",
+                    "FR": "Unité"
+                },
+                "codelistSubject": "um"
+            },
+            {
+                "value": "other",
+                "text": {
+                    "EN": "Other",
+                    "FR": "Autre"
+                },
+                "codelistSubject": "other"
+            }
+        ],
         inputLangs: {
             langs: ["EN", "FR"]
         },

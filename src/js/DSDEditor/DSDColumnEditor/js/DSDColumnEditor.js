@@ -73,7 +73,7 @@
 
             this.domainEditor = new DomainEditor(this.config);
             this.columnEditorReader = new ColumnEditorReader(this.config.columnEditorReader);
-            this.subjectReader = new SubjectReader();
+            this.subjectReader = new SubjectReader(this.config.subjects);
             this.datatypeReader = new DatatypeReader();
 
             this.dynRadioSubj = null;
