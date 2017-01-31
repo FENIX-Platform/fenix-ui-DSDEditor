@@ -33,16 +33,13 @@
             this.groupName = group;
             this.radioSettings = radioSettings;
             this.$container.html('');
-            if (!radioSettings)
-                return;
-            if (radioSettings.length == 0)
-                return;
+            if (!radioSettings) return;
+            if (radioSettings.length == 0) return;
             for (var i = 0; i < radioSettings.length; i++) {
                 this.$container.append(createRadio(group, radioSettings[i], checkedValue));
             }
 
             this.$radioGroup = this.$container.find('input[name=' + group + ']:radio');
-
             this._bindEvents();
         };
 
@@ -55,8 +52,7 @@
             $toRet.find('input').attr('name', group);
             $toRet.find('input').attr('id', radioId);
             $toRet.prop('required', true);
-            if (checkedValue && radioSetting.value == checkedValue)
-                $toRet.find('input').attr('checked', 'checked');
+            if (checkedValue && radioSetting.value == checkedValue) $toRet.find('input').attr('checked', 'checked');
             return $toRet;
         };
         var createRadioId = function (groupN, value) {
@@ -64,24 +60,20 @@
         };
 
         DynamicRadio.prototype.get = function () {
-            if (!this.$radioGroup)
-                return null;
-            if (!this.$radioGroup.filter(':checked'))
-                return null;
+            if (!this.$radioGroup) return null;
+            if (!this.$radioGroup.filter(':checked')) return null;
             return this.$radioGroup.filter(':checked').val();
         };
 
         DynamicRadio.prototype.set = function (toSet) {
             this.reset();
-            if (!toSet)
-                return;
+            if (!toSet) return;
             var r = this.$container.find("#" + createRadioId(this.groupName, toSet));
             r.prop('checked', true);
             amplify.publish(evts.radioChanged, toSet, this.groupName);
         };
         DynamicRadio.prototype.reset = function () {
-            if (!this.$radioGroup)
-                return;
+            if (!this.$radioGroup) return;
             this.$radioGroup.prop('checked',false);
             this._changed = false;
         };
@@ -94,8 +86,7 @@
             }));
         };
         DynamicRadio.prototype._unbindEvents = function () {
-            if (this.$radioGroup)
-                this.$radioGroup.off('change');
+            if (this.$radioGroup) this.$radioGroup.off('change');
         };
 
         DynamicRadio.prototype.changed = function () {

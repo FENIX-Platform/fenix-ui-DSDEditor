@@ -118,24 +118,28 @@
 
             //this.colEditor.setEditMode({subject:false,domain:false,datatype:false});
         };
+
         //Edit a columns
         DSDEditor.prototype.editColumn = function (col) {
             this.switchVisibility(htmlIDs.divColEditor);
             this.colEditor.setColumn(col);
         };
+
         //Called when the user has finished editing a columns
         DSDEditor.prototype.colEditDone = function () {
             var colToAdd = this.colEditor.getColumn();
-            if (!this.dsd)
-                this.dsd = [];
+            if (!this.dsd) this.dsd = [];
 
             //create a new id
             if (colToAdd.id == "") {
                 colToAdd.id = new ColumnIDGenerator().generate(this.dsd, colToAdd);
             }
+            // remove subject from freesubjects
+            if (colToAdd.subject == "freesubject") delete colToAdd.subject;
 
             var idx = getColumnIndexById(this.dsd, colToAdd.id);
 
+            console.log(colToAdd);
             log.info(idx, this.dsd, typeof (this.dsd), colToAdd);
 
             if (idx == -1)

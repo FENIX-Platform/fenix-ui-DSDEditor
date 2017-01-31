@@ -72,17 +72,15 @@
         Validator_DSD.prototype.validateColumns = function (cols) {
             //console.log("validateColumns");
             var toRet = [];
-            var valStructure = this.validateStructure(cols);
-            var duplicateSubj = this.checkDuplicateSubject(cols);
+            var valStructure = validateStructure(cols);
+            var duplicateSubj = checkDuplicateSubject(cols);
             ArrConcat(toRet, valStructure);
             ArrConcat(toRet, duplicateSubj);
-            if (!cols)
-                return toRet;
+            if (!cols) return toRet;
             for (var i = 0; i < cols.length; i++) {
                 var colValRes = this.validateColumn(cols[i]);
                 ArrConcat(toRet, colValRes);
             }
-
             return toRet;
         };
 
@@ -90,16 +88,19 @@
         function validateStructure(cols) {
             var toRet = [];
             if (!cols) {
+                console.log(VE.NULL_COLUMNS);
                 toRet.push({ level: eLevels.ERROR, message: VE.NULL_COLUMNS });
                 return toRet;
             }
             if (cols.length < 2) {
+                console.log(VE.AT_LEAST_2_COLS);
                 toRet.push({ level: eLevels.ERROR, message: VE.AT_LEAST_2_COLS });
                 return toRet;
             }
             for (var i = 0; i < cols.length - 1; i++) {
                 for (var j = i + 1; j < cols.length; j++) {
                     if (cols[i].id == cols[j].id) {
+                        console.log(VE.DUPLICATE_IDS);
                         toRet.push({ level: eLevels.ERROR, message: VE.DUPLICATE_IDS });
                     }
                 }
@@ -109,30 +110,31 @@
             var keyCount = 0;
             var valCount = 0;
             for (i = 0; i < cols.length; i++) {
-                if (cols[i].key)
-                    keyCount++;
-
-                if (cols[i].subject && cols[i].subject == 'value')
-                    valCount++;
+                if (cols[i].key) keyCount++;
+                if (cols[i].subject && cols[i].subject == 'value') valCount++;
             }
-            if (keyCount < 1)
-                toRet.push({ level: eLevels.ERROR, message: VE.AT_LEAST_1_KEY });
-            if (valCount < 1)
-                toRet.push({ level: eLevels.ERROR, message: VE.AT_LEAST_1_VALUE });
+            if (keyCount < 1) {
+                console.log(VE.AT_LEAST_1_KEY);
+                toRet.push({level: eLevels.ERROR, message: VE.AT_LEAST_1_KEY});
+            }
+            if (valCount < 1) {
+                console.log(VE.AT_LEAST_1_VALUE);
+                toRet.push({level: eLevels.ERROR, message: VE.AT_LEAST_1_VALUE});
+            }
             return toRet;
         }
 
         function checkDuplicateSubject(cols) {
             //console.log("checkDuplicateSubject", cols);
             var toRet = [];
-            if (!cols)
-                return null;
+            if (!cols) return null;
             for (var i = 0; i < cols.length - 1; i++) {
-                if (cols[i].subject != 'undefined') {
+                if (cols[i].subject != 'freesubject') {
                     for (var j = i + 1; j < cols.length; j++) {
                         //   if (cols[i].subject && cols[j].subject) {
-                        if (cols[j].subject != 'undefined') {
+                        if (cols[j].subject != 'freesubject') {
                             if (cols[i].subject == cols[j].subject) {
+                                console.log(VE.DUPLICATE_SUBJECTS);
                                 toRet.push({ level: eLevels.ERROR, message: VE.DUPLICATE_SUBJECTS });
                                 return toRet;
                             }

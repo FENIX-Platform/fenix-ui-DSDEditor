@@ -87,10 +87,9 @@
                     ]
                 },
                 {
-                    "subject": "undefined",
+                    "subject": "freesubject",
                     "datatypes": [
-                        "code",
-                        "year"
+                        "code"
                     ]
                 }
             ],
@@ -118,6 +117,14 @@
             ]
         },
         subjects: [
+            {
+                "value": "freesubject",
+                "text": {
+                    "EN": "Free Subject",
+                    "FR": "Free Subject"
+                },
+                "codelistSubject": "freesubject"
+            },
             {
                 "value": "item",
                 "text": {

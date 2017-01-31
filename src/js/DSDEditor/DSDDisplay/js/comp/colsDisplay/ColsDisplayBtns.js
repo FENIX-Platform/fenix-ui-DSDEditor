@@ -45,8 +45,7 @@
 
         ColsDisplayBtns.prototype.deleteEnabled = function (enabled) {
             //console.log("ColsDisplayBtns.prototype.deleteEnabled ", enabled)
-            if (typeof enabled === 'undefined')
-                return;
+            if (typeof enabled === 'undefined') return;
             if (enabled)
                 this.$btnDel.prop("disabled", false);
             else

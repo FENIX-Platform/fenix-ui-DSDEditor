@@ -14,24 +14,18 @@
             return this.datatypes;
         }
         DatatypeReader.prototype.getFilteredDatatypes = function (datatypeValues) {
-            if (!datatypeValues)
-                return null;
+            if (!datatypeValues) return null;
             var toRet = [];
             var toAdd;
             for (var i = 0; i < datatypeValues.length; i++) {
-                {
                     toAdd = this.getDatatype(datatypeValues[i]);
-                    if (toAdd)
-                        toRet.push(toAdd);
-                }
+                    if (toAdd) toRet.push(toAdd);
             }
             return toRet;
         };
         DatatypeReader.prototype.getDatatype = function (datatype) {
             for (var i = 0; i < this.datatypes.length; i++) {
-                if (this.datatypes[i].value == datatype) {
-                    return this.datatypes[i];
-                }
+                if (this.datatypes[i].value == datatype) return this.datatypes[i];
             }
             return null;
         }

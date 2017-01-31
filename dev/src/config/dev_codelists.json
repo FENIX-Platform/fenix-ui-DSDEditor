@@ -5,6 +5,22 @@
       "EN": "GAUL",
       "FR": "GAUL FR"
     },
+    "subject": "freesubject"
+  },
+  {
+    "value": "CPC|2.1",
+    "text": {
+      "EN": "CPC 2.1",
+      "FR": "CPC 2.1 FR"
+    },
+    "subject": "freesubject"
+  },
+  {
+    "value": "GAUL|2014",
+    "text": {
+      "EN": "GAUL",
+      "FR": "GAUL FR"
+    },
     "subject": "geo"
   },
   {

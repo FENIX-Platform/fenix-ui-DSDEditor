@@ -69,10 +69,9 @@
             ]
         },
         {
-            "subject": "undefined",
+            "subject": "freesubject",
             "datatypes": [
-                "code",
-                "year"
+                "code"
             ]
         }
     ],

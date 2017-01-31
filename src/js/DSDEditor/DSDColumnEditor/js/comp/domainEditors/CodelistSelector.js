@@ -16,6 +16,8 @@
         var lang = 'EN';
 
         function CodelistSelector(config) {
+
+
             this.config = {};
             this.$container = null;
             $.extend(true, this.config, config, defConfig);
@@ -53,6 +55,9 @@
         };
 
         CodelistSelector.prototype.setSubject = function (subj) {
+
+
+
             if (!this.loaded) {
                 this.tmpSubj = subj;
                 return;

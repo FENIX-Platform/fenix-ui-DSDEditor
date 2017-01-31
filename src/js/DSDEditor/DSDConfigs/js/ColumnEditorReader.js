@@ -16,8 +16,7 @@
             return this.columnECfg;
         };
         ColumnEditorReader.prototype.getColumnTypeSubjects = function (columnType) {
-            if (!this.columnECfg[columnType])
-                return null;
+            if (!this.columnECfg[columnType]) return null;
             var toRet = [];
             for (var i = 0; i < this.columnECfg[columnType].length; i++)
                 toRet.push(this.columnECfg[columnType][i].subject);
@@ -25,8 +24,7 @@
         };
 
         ColumnEditorReader.prototype.getSubjectDatatypes = function (columnType, subject) {
-            if (!this.columnECfg[columnType])
-                return null;
+            if (!this.columnECfg[columnType]) return null;
 
             for (var i = 0; i < this.columnECfg[columnType].length; i++) {
                 if (this.columnECfg[columnType][i].subject == subject) {

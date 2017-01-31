@@ -118,8 +118,7 @@
         };
 
         function showHide($elem, visible) {
-            if (typeof visible === 'undefined')
-                return;
+            if (typeof visible === 'undefined') return;
             if (visible)
                 $elem.show();
             else
@@ -159,6 +158,7 @@
             for (var i = 0; i < s.length; i++) {
                 s2.push({ value: s[i].value, text: s[i].text[this.lang.toUpperCase()] });
             }
+
             var checked = null;
             if (s2.length == 1) {
                 checked = s2[0].value;
@@ -171,6 +171,7 @@
             this.dynRadioSubj.setRadios(RADIOGROUP_ID.SUBJ, s2, checked);
             this.updateDataTypes(type, checked);
         };
+
         DSDColumnEditor.prototype.updateDataTypes = function (columnType, subject) {
             var dts = this.columnEditorReader.getSubjectDatatypes(columnType, subject);
             if (!dts)
@@ -182,6 +183,7 @@
             }
             this.dynRadioDataType.setRadios(RADIOGROUP_ID.DTYPE, dts3, '');
         };
+
         DSDColumnEditor.prototype.reset = function () {
             this.colID = "";
             this.valuesField = null;
@@ -193,11 +195,11 @@
             this.setColumnEditorType("");
             this.domainEditor.reset();
         };
+
         DSDColumnEditor.prototype._subjectsVisible = function (visible) {
             //overridden by the component's config
             if (typeof this.editorsVisibilityCfg.subject !== 'undefined')
-                if (!this.editorsVisibilityCfg.subject)
-                    return;
+                if (!this.editorsVisibilityCfg.subject) return;
 
             //var $trSubj = this.$cnt.find(h.trSubj);
             if (visible)
