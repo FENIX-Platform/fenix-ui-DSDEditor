@@ -139,7 +139,6 @@
 
             var idx = getColumnIndexById(this.dsd, colToAdd.id);
 
-            console.log(colToAdd);
             log.info(idx, this.dsd, typeof (this.dsd), colToAdd);
 
             if (idx == -1)

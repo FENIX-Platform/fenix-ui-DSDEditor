@@ -22,7 +22,6 @@
                 toRet.push({ level: eLevels.ERROR, message: VE.NULL_COLUMN });
                 return toRet;
             }
-
             ArrConcat(toRet, validateTitle(col.title));
             ArrConcat(toRet, validateDimension(col, this.config.allowedKeyDataTypes));
             ArrConcat(toRet, validateSubject(col));
@@ -48,10 +47,9 @@
             return { field: 'dimension', level: eLevels.ERROR, message: VE.DIMENSION_DATATYPE_ERROR };
         }
         function validateSubject(toVal) {
-            if (!toVal.key)
-                return null;
-            if (!toVal.subject)
-                return { field: 'subject', level: eLevels.ERROR, message: VE.SUBJECT_EMPTY };
+            if (!toVal.key) return null;
+            // .31 Subject can now be null
+            //if (!toVal.subject) return { field: 'subject', level: eLevels.ERROR, message: VE.SUBJECT_EMPTY };
         }
         function validateDatatype(toVal) {
             if (!toVal.dataType)
@@ -88,19 +86,16 @@
         function validateStructure(cols) {
             var toRet = [];
             if (!cols) {
-                console.log(VE.NULL_COLUMNS);
                 toRet.push({ level: eLevels.ERROR, message: VE.NULL_COLUMNS });
                 return toRet;
             }
             if (cols.length < 2) {
-                console.log(VE.AT_LEAST_2_COLS);
                 toRet.push({ level: eLevels.ERROR, message: VE.AT_LEAST_2_COLS });
                 return toRet;
             }
             for (var i = 0; i < cols.length - 1; i++) {
                 for (var j = i + 1; j < cols.length; j++) {
                     if (cols[i].id == cols[j].id) {
-                        console.log(VE.DUPLICATE_IDS);
                         toRet.push({ level: eLevels.ERROR, message: VE.DUPLICATE_IDS });
                     }
                 }
@@ -114,11 +109,9 @@
                 if (cols[i].subject && cols[i].subject == 'value') valCount++;
             }
             if (keyCount < 1) {
-                console.log(VE.AT_LEAST_1_KEY);
                 toRet.push({level: eLevels.ERROR, message: VE.AT_LEAST_1_KEY});
             }
             if (valCount < 1) {
-                console.log(VE.AT_LEAST_1_VALUE);
                 toRet.push({level: eLevels.ERROR, message: VE.AT_LEAST_1_VALUE});
             }
             return toRet;
@@ -134,7 +127,6 @@
                         //   if (cols[i].subject && cols[j].subject) {
                         if (cols[j].subject != 'freesubject') {
                             if (cols[i].subject == cols[j].subject) {
-                                console.log(VE.DUPLICATE_SUBJECTS);
                                 toRet.push({ level: eLevels.ERROR, message: VE.DUPLICATE_SUBJECTS });
                                 return toRet;
                             }
