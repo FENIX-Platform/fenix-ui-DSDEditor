@@ -22,6 +22,8 @@
             this.$container = null;
             $.extend(true, this.config, config, defConfig);
 
+            lang = this.config.lang || 'EN';
+
             this.clReader = null;
             this.tmpVal = "";
             this.tmpSubj = "";
@@ -67,8 +69,9 @@
             var selVal = this.$clDDl.val();
             this.$clDDl.find('option').remove();
 
-            if (!cl)
-                return;
+            if (!cl) return;
+
+            console.log('lang is : ' + lang);
 
             this.$clDDl.append($('<option>', { value: '', text: '' }));
             for (var i = 0; i < cl.length; i++) {
