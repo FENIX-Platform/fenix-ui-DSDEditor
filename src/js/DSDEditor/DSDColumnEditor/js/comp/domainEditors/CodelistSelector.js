@@ -22,7 +22,7 @@
             this.$container = null;
             $.extend(true, this.config, config, defConfig);
 
-            lang = this.config.lang || 'EN';
+            lang = this.config.lang.toUpperCase() || 'EN';
 
             this.clReader = null;
             this.tmpVal = "";
