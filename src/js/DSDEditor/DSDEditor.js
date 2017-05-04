@@ -134,6 +134,7 @@
             if (colToAdd.id == "") {
                 colToAdd.id = new ColumnIDGenerator().generate(this.dsd, colToAdd);
             }
+
             // remove subject from freesubjects
             if (colToAdd.subject == "freesubject") delete colToAdd.subject;
 
@@ -254,8 +255,7 @@
             var val = new ValidatorDSD();
             var valRes = val.validateColumns(this.get());
             this.updateValidationUI(valRes);
-            if (!valRes || valRes.length == 0)
-                return true;
+            if (!valRes || valRes.length == 0) return true;
             return false;
         };
         DSDEditor.prototype.isValid = function () {
@@ -268,7 +268,7 @@
         DSDEditor.prototype.updateValidationUI = function (valRes) {
             if (!valRes)  return;
             for (var i = 0; i < valRes.length; i++) {
-                log.warn(valRes[i].message);
+                log.warn(MLRes[this.lang][valRes[i].message]);
                 this._trigger("error:showerrormsg", MLRes[this.lang][valRes[i].message]);
             }
         };
@@ -305,6 +305,7 @@
                     return i;
             return -1;
         };
+
         function getColumnById(cols, id) {
             var idx = getColumnIndexById(cols, id);
             if (idx == -1)

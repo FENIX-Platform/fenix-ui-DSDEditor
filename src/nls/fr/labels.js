@@ -30,13 +30,13 @@ define(function () {
         "nullColumns": "Les colonnes ne peuvent pas être vides",
         "atLeast2Cols": "La base de données doit contenir au moins 2 colonnes",
         "atLeastOneKey": "La base de données doit contenir au moins une Clé",
-        "atLeastOneValue": "La base de données doit contenir au moins une colonne 'valeur'",
+        "atLeast1Value": "La base de données doit contenir au moins une colonne 'valeur'",
         "nullColumn": "La colonne ne peut pas être nulle",
         "empty": "Est vide",
         "DimensionDataTypeConflict": "Conflit détecté entre la valeur et le type de donnée défini pour la valeur",
         "EmptyIdCodeList": "L'identifiant de la codeliste ne peut pas être vide",
         "duplicateColumnIDs": "Les identifiants des colonnes doivent être uniques, veuillez vérifiez les identifiants des vos colonnes",
-        "duplicateSubject": "Deux colonnes ne peuvent pas avoir le même sujet, veuillez vérifier les sujets des vos colonnes",
+        "duplicateSubjects": "Deux colonnes ne peuvent pas avoir le même sujet, veuillez vérifier les sujets des vos colonnes",
 
         "dataType": "Type de données",
 

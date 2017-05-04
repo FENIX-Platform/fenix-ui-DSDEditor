@@ -71,8 +71,6 @@
 
             if (!cl) return;
 
-            console.log('lang is : ' + lang);
-
             this.$clDDl.append($('<option>', { value: '', text: '' }));
             for (var i = 0; i < cl.length; i++) {
                 this.$clDDl.append($('<option>', { value: cl[i].value, text: cl[i].text[lang] }));

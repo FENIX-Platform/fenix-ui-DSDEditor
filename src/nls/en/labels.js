@@ -30,13 +30,13 @@ define(function () {
         "nullColumns": "Columns cannot be empty",
         "atLeast2Cols": "The dataset must have at least 2 columns",
         "atLeastOneKey": "The dataset must have at least one Key",
-        "atLeastOneValue": "The dataset must have at least one 'value' column",
+        "atLeast1Value": "The dataset must have at least one 'value' column",
         "nullColumn": "Column cannot be null",
         "empty": "Is empty",
         "DimensionDataTypeConflict": "Conflict detected between value and datatype defined for the value",
         "EmptyIdCodeList": "The codelist's ID cannot be empty",
         "duplicateColumnIDs": "The column's ID must be unique, check your column's IDs",
-        "duplicateSubject": "Two columns cannot have the same subject, check your column's subjects",
+        "duplicateSubjects": "Two columns cannot have the same subject, check your column's subjects",
 
 
         "dataType": "Data type",

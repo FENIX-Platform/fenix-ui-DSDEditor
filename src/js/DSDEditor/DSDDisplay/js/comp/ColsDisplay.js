@@ -85,8 +85,7 @@
 
         ColsDisplay.prototype.set = function (cols) {
             this.reset();
-            if (!cols)
-                return;
+            if (!cols) return;
             this._createHeader(cols);
             this._createEditRow(cols);
             this._createRows(cols);
@@ -94,8 +93,7 @@
         };
         ColsDisplay.prototype._createHeader = function (cols) {
             log.info('_createHeader', cols);
-            if (!cols)
-                return '';
+            if (!cols) return '';
             var toRet = _html.colTH_empty;
             for (var i = 0; i < cols.length; i++) {
                 toRet += createColTH(cols[i]);
@@ -118,7 +116,7 @@
             var tds = this.$trHead.find('.dragHeader');
             for (var i = 0; i < tds.length; i++) {
                 $(tds[i]).off('drop');
-                $(tds[i]).off('dragover')
+                $(tds[i]).off('dragover');
                 $(tds[i]).off('dragstart');
             }
         };
@@ -213,10 +211,11 @@
             var toRet = _html.colTD;
             switch (field) {
                 case 'subject':
-                    if (col.subject)
+                    if (col.subject) {
                         toRet = toRet.replace('%cnt%', col.subject);
-                    else
-                        toRet = toRet.replace('%cnt%', '');
+                    } else {
+                        toRet = toRet.replace('%cnt%', 'freesubject');
+                    }
                     break;
                 case 'dataType':
                     if (col.dataType)

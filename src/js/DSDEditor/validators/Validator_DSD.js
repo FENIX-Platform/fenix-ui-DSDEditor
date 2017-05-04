@@ -118,14 +118,13 @@
         }
 
         function checkDuplicateSubject(cols) {
-            //console.log("checkDuplicateSubject", cols);
             var toRet = [];
             if (!cols) return null;
             for (var i = 0; i < cols.length - 1; i++) {
-                if (cols[i].subject != 'freesubject') {
+                if (typeof cols[i].subject != 'undefined') {
                     for (var j = i + 1; j < cols.length; j++) {
                         //   if (cols[i].subject && cols[j].subject) {
-                        if (cols[j].subject != 'freesubject') {
+                        if (typeof cols[j].subject != 'undefined') {
                             if (cols[i].subject == cols[j].subject) {
                                 toRet.push({ level: eLevels.ERROR, message: VE.DUPLICATE_SUBJECTS });
                                 return toRet;
