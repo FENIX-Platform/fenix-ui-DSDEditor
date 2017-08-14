@@ -89,7 +89,10 @@
                 {
                     "subject": "freesubject",
                     "datatypes": [
-                        "code"
+                        "code",
+                        "year",
+                        "month",
+                        "date"
                     ]
                 }
             ],
